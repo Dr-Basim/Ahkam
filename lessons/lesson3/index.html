@@ -786,7 +786,7 @@
                     </div>
 
                     {/* Navigation Buttons */}
-                    <div className="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-gray-200 sticky bottom-2 z-40">
+                    <div className="flex justify-between items-center bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-md border border-gray-200 sticky bottom-[80px] z-40">
                         <button 
                             type="button"
                             onClick={() => jumpToPrevious(currentIndex - 1)}
@@ -849,9 +849,13 @@
 
         const ReviewScreen = () => {
             const [flippedCards, setFlippedCards] = useState({});
+            const [openQs, setOpenQs] = useState({});
+            
             const toggleCard = (idx) => setFlippedCards(prev => ({...prev, [idx]: !prev[idx]}));
+            const toggleQ = (idx) => setOpenQs(prev => ({...prev, [idx]: !prev[idx]}));
+
             return (
-                <div className="p-4 md:p-8 max-w-7xl mx-auto animate-slide-up pb-20">
+                <div className="p-4 md:p-8 max-w-7xl mx-auto animate-slide-up pb-32">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-amiri font-bold text-navy mb-2">المراجعة الذكية</h2>
                         <p className="text-gray-600 text-lg">ثبت التعريفات والأحكام بالبطاقات والأسئلة التحليلية</p>
@@ -877,13 +881,36 @@
                     </div>
 
                     <h3 className="text-2xl font-bold text-navy mb-6 border-r-4 border-gold pr-3">ثانياً: الأسئلة المقالية ({ESSAY_QUESTIONS.length} أسئلة)</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {ESSAY_QUESTIONS.map((item, idx) => (
-                            <div key={idx} className="bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-sm hover:border-gold transition-colors">
-                                <h4 className="font-bold text-navy text-xl mb-4 flex gap-3"><span className="text-white bg-gold w-8 h-8 flex items-center justify-center rounded-full shrink-0 shadow-md">{idx+1}</span> {item.q}</h4>
-                                <p className="text-gray-800 bg-gray-50 p-4 rounded-xl text-lg leading-relaxed border border-gray-200">{item.a}</p>
-                            </div>
-                        ))}
+                    <div className="flex flex-col gap-4">
+                        {ESSAY_QUESTIONS.map((item, idx) => {
+                            const isOpen = openQs[idx];
+                            const isGold = idx % 2 === 0;
+                            const mainBg = isGold ? 'bg-gold' : 'bg-navy';
+                            const mainText = isGold ? 'text-navy' : 'text-white';
+                            const iconBg = isGold ? 'bg-navy text-gold' : 'bg-white text-navy';
+
+                            return (
+                                <div key={idx} className={`rounded-2xl border-2 shadow-sm transition-all duration-300 overflow-hidden ${isGold ? 'border-gold' : 'border-navy'}`}>
+                                    <button
+                                        onClick={() => toggleQ(idx)}
+                                        className={`w-full text-right p-5 flex items-center justify-between font-bold text-xl transition-colors ${mainBg} ${mainText} hover:opacity-90`}
+                                    >
+                                        <span className="flex items-center gap-4">
+                                            <span className={`w-8 h-8 flex items-center justify-center rounded-full shrink-0 shadow-md ${iconBg}`}>
+                                                {idx + 1}
+                                            </span>
+                                            <span>{item.q}</span>
+                                        </span>
+                                        <svg className={`w-6 h-6 transform transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    </button>
+                                    <div className={`transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                        <div className="p-6 bg-white text-navy text-lg leading-relaxed font-bold border-t border-gray-100">
+                                            {item.a}
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             );
@@ -959,7 +986,7 @@
             const hasAnsweredAll = Object.keys(selectedAnswers).length === QUIZ_QUESTIONS.length;
 
             return (
-                <div className="p-4 md:p-8 max-w-4xl mx-auto animate-fade-in pb-24 w-full">
+                <div className="p-4 md:p-8 max-w-4xl mx-auto animate-fade-in pb-32 w-full">
                     <div className="flex justify-between items-center mb-8 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
                         <div className="text-navy font-bold text-lg">السؤال {currentQ + 1} من {QUIZ_QUESTIONS.length}</div>
                         <div className="w-1/2 bg-gray-200 rounded-full h-3"><div className="bg-gold h-3 transition-all" style={{ width: `${((currentQ + 1) / QUIZ_QUESTIONS.length) * 100}%` }}></div></div>
@@ -974,7 +1001,7 @@
                             ))}
                         </div>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-md border border-gray-200 sticky bottom-[80px] z-40">
                         <button onClick={prevQ} disabled={currentQ === 0} className={`px-6 py-3 rounded-xl font-bold ${currentQ === 0 ? 'bg-gray-200 text-gray-400' : 'bg-white text-navy border border-navy hover:bg-gray-50'}`}>السابق</button>
                         {currentQ === QUIZ_QUESTIONS.length - 1 ? (
                             <button onClick={finishQuiz} disabled={!hasAnsweredAll} className={`px-8 py-3 rounded-xl font-bold shadow-md transition-all ${!hasAnsweredAll ? 'bg-gray-300 text-gray-500' : 'bg-gold text-navy hover:scale-105'}`}>إنهاء التقييم</button>
