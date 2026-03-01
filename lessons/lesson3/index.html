@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق فقه المعاملات | الدرس الثاني</title>
-
-    <!-- الخطوط العربية -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
+    <title>المحاضرة الثالثة - أحاديث الأحكام - أ.د. باسم القرافي</title>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
@@ -19,1040 +18,469 @@
                     colors: {
                         navy: '#16213e',
                         gold: '#e2b96f',
-                        creamy: '#faf8f3',
-                        trait1: '#f0fdf4',
-                        trait2: '#eff6ff',
-                        trait3: '#fdf2f8',
-                        trait4: '#fffbeb',
-                        trait5: '#f5f3ff',
-                        trait6: '#fdf4ff',
-                        trait7: '#ecfeff',
-                        trait8: '#fef2f2'
+                        cream: '#faf8f3',
+                        hlRed: '#ef4444',
+                        hlBlue: '#3b82f6',
+                        hlGold: '#b45309',
                     },
                     fontFamily: {
                         amiri: ['Amiri', 'serif'],
-                        tajawal: ['Tajawal', 'sans-serif']
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.5s ease-out',
-                        'slide-up': 'slideUp 0.5s ease-out',
-                        'bounce-slight': 'bounceSlight 2s infinite',
-                        'pulse-glow': 'pulseGlow 2s infinite'
-                    },
-                    keyframes: {
-                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-                        slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
-                        bounceSlight: { '0%, 100%': { transform: 'translateY(-5%)' }, '50%': { transform: 'translateY(0)' } },
-                        pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 15px rgba(226, 185, 111, 0.4)' },
-                            '50%': { boxShadow: '0 0 30px rgba(226, 185, 111, 0.8)' }
-                        }
+                        tajawal: ['Tajawal', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
 
-    <!-- React & ReactDOM -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- Custom CSS -->
     <style>
-        body { background-color: #faf8f3; font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
-        h1, h2, h3, h4, h5, h6, .verse-text { font-family: 'Amiri', serif; }
-        
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(226, 185, 111, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            background-color: #faf8f3;
+            background-image: url('https://www.transparenttextures.com/patterns/islamic-art.png');
+            background-attachment: fixed;
         }
-
-        .hl-red { color: #dc2626; font-weight: bold; }
-        .hl-blue { color: #2563eb; font-weight: bold; }
-        .hl-emerald { color: #059669; font-weight: bold; }
-        .hl-gold { color: #b4862b; font-weight: bold; }
-        .hl-mark { background-color: #fef08a; padding: 0 4px; border-radius: 4px; color: #16213e; font-weight: 600;}
-
-        .verse {
-            background: rgba(255, 255, 255, 0.7);
-            border-right: 4px solid #e2b96f;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0.5rem 1.5rem 1.5rem 0.5rem;
-            font-family: 'Amiri', serif;
-            font-size: 1.35rem;
-            line-height: 2.2;
+        .verse { 
+            text-align: center; 
+            font-family: 'Amiri', serif; 
+            font-size: 1.4rem; 
+            margin: 1.5rem 0; 
             color: #16213e;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            position: relative;
+            line-height: 2.2;
+            background: rgba(226, 185, 111, 0.1);
+            padding: 25px;
+            border-radius: 20px;
+            border-right: 8px solid #e2b96f;
+            box-shadow: inset 0 0 15px rgba(22, 33, 62, 0.05);
         }
-
-        /* الخريطة الذهنية الكبيرة الشاملة */
-        .mindmap-node { position: relative; padding: 1rem 1.5rem; border-radius: 9999px; background: linear-gradient(135deg, #16213e, #2a3d6b); color: white; font-weight: bold; text-align: center; z-index: 10; box-shadow: 0 4px 15px rgba(22, 33, 62, 0.4); border: 2px solid #e2b96f; }
-        .mindmap-child { background: white; color: #16213e; border: 2px solid #e2b96f; }
-
-        /* Select styling */
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2316213e%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-            background-repeat: no-repeat;
-            background-position: left 0.7rem top 50%;
-            background-size: 0.65rem auto;
-            padding-left: 2rem;
-        }
-
-        /* البطاقات القابلة للقلب */
-        .flip-card { perspective: 1000px; height: 260px; }
-        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
-        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; border: 2px solid rgba(226, 185, 111, 0.5); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);}
-        .flip-card-front { background: linear-gradient(135deg, #16213e, #2a3d6b); color: #faf8f3; }
-        .flip-card-back { background: #faf8f3; color: #16213e; transform: rotateY(180deg); overflow-y: auto; }
-
-        /* Scrollbars */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #e2b96f; border-radius: 3px; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(226, 185, 111, 0.3); }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .flip-card { perspective: 1000px; height: 280px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 24px; padding: 25px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); }
+        .flip-card-front { background: #16213e; color: #e2b96f; border: 2px solid #e2b96f; }
+        .flip-card-back { background: #e2b96f; color: #16213e; transform: rotateY(180deg); font-weight: 800; font-size: 1.1rem; }
+        
+        .hl-red { color: #ef4444; font-weight: 900; }
+        .hl-gold { color: #b45309; font-weight: 800; }
+        .hl-navy { color: #16213e; font-weight: 800; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #faf8f3; }
+        ::-webkit-scrollbar-thumb { background: #e2b96f; border-radius: 10px; }
     </style>
 </head>
-<body class="text-navy antialiased min-h-screen flex flex-col">
-    <div id="root" class="flex-grow flex flex-col"></div>
+<body>
+    <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect, useMemo, useCallback } = React;
 
-        // --- دوال مساعدة لرسم الخرائط الشجرية بحجم كبير وأسهم واضحة جداً ---
-        // 1. شجرة التفرع الأفقي (للمواضيع المتعددة الأقسام)
-        const renderTree = (rootText, childrenArray) => {
-            const numChildren = childrenArray.length;
-            const lineWidth = numChildren > 1 ? `${((numChildren - 1) / numChildren) * 100}%` : '0%';
-
-            return (
-                <div className="flex flex-col items-center mt-6 w-full max-w-4xl mx-auto">
-                    {/* العقدة الرئيسية */}
-                    <div className="bg-navy text-white px-8 py-3 rounded-full border-2 border-gold font-bold text-xl shadow-lg text-center z-10 w-11/12 md:w-auto min-w-[200px]">
-                        {rootText}
-                    </div>
-                    
-                    {/* الجذع */}
-                    <div className="w-1.5 h-8 bg-gold"></div>
-                    
-                    {/* الخط الأفقي الواصل بين الفروع */}
-                    {numChildren > 1 && (
-                        <div className="w-full relative flex justify-center">
-                            <div className="absolute top-0 h-1.5 bg-gold" style={{ width: lineWidth }}></div>
-                        </div>
-                    )}
-                    
-                    {/* الفروع مع الأسهم */}
-                    <div className={`flex justify-around w-full relative z-0 mt-0 gap-2 md:gap-6`}>
-                        {childrenArray.map((child, i) => (
-                            <div key={i} className="flex flex-col items-center flex-1">
-                                {numChildren > 1 && <div className="w-1.5 h-6 bg-gold"></div>}
-                                {/* سهم سفلي صريح */}
-                                <div className="text-gold -mt-3 mb-2 text-2xl drop-shadow-md">▼</div>
-                                {/* عقدة الفرع */}
-                                <div className="bg-white text-navy px-4 py-4 rounded-2xl border-b-4 border-gold shadow-md text-center w-full text-base md:text-lg font-bold leading-relaxed flex flex-col items-center justify-center min-h-[100px]">
-                                    {child}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            );
-        };
-
-        // 2. شجرة التفرع العمودي المتسلسل (للمواضيع ذات الخطوات المتتابعة)
-        const renderSequenceTree = (rootText, stepsArray) => {
-            return (
-                <div className="flex flex-col items-center mt-6 w-full max-w-md mx-auto">
-                    <div className="bg-navy text-white px-8 py-3 rounded-full border-2 border-gold font-bold text-xl shadow-lg text-center z-10 w-full">
-                        {rootText}
-                    </div>
-                    {stepsArray.map((step, idx) => (
-                        <React.Fragment key={idx}>
-                            <div className="w-1.5 h-8 bg-gold"></div>
-                            <div className="text-gold -mt-3 mb-2 text-3xl drop-shadow-md">▼</div>
-                            <div className={`px-6 py-4 rounded-2xl border-2 ${idx === stepsArray.length - 1 ? 'border-red-500 bg-red-50 text-red-700' : 'border-gold bg-white text-navy'} shadow-md text-center w-11/12 text-lg md:text-xl font-bold leading-relaxed`}>
-                                {step}
-                            </div>
-                        </React.Fragment>
-                    ))}
-                </div>
-            );
-        };
-
-        // --- البيانات التفاعلية (13 محطة تعليمية) ---
-        const TOPICS_DATA = [
-            {
-                id: 1, trait: "trait1", title: "البيع وقت الجمعة",
-                content: (
-                    <div>
-                        <p className="mb-4 text-lg">نهى الشارع الحكيم عن بعض البيوع إذا ترتب عليها تضييع لما هو أهم ؛ كأن تشغل عن أداء عبادة واجبة ، أو يترتب عليها إضرار بالآخرين . ومن هذه البيوع المنهي عنها :</p>
-                        <h3 className="text-xl font-bold mb-2 flex items-center"><span className="w-6 h-6 rounded-full bg-navy text-gold flex justify-center items-center ml-2 text-sm">١</span>البيع والشراء بعد الأذان الثاني يوم الجمعة .</h3>
-                        <p className="mb-2 text-lg">لا يصح البيع ولا الشراء ممن تلزمه صلاة الجمعة بعد الأذان الثاني ؛ لقوله تعالى :</p>
-                        <div className="verse text-emerald-800">﴿ يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِذَا نُودِىَ لِلصَّلَوٰةِ مِن يَوْمِ ٱلْجُمُعَةِ فَٱسْعَوْا۟ إِلَىٰ ذِكْرِ ٱللَّهِ وَذَرُوا۟ ٱلْبَيْعَ ﴾ [الجمعة : ٩]</div>
-                        <p className="text-lg"><span className="hl-red">فقد نهى الله تعالى عن البيع في هذا الوقت ، والنهي يقتضي التحريم ، وعدم صحة البيع .</span></p>
-                    </div>
-                ),
-                tree: renderTree("البيع وقت الجمعة", [
-                    <span>عقد البيع بعد الأذان الثاني<br/><span className="text-red-600 block mt-2 text-base">حكمه: محرم ولا يصح (لأنه يشغل عن عبادة واجبة)</span></span>
-                ]),
-                activity: {
-                    type: "fill-blank", question: "أكمل الفراغات بما يناسب الحكم الفقهي:",
-                    textParts: ["البيع بعد الأذان ", " يوم الجمعة يقتضي ", " وعدم ", " البيع."],
-                    blanks: [
-                        { id: 0, options: ["الأول", "الثاني"], correct: "الثاني" },
-                        { id: 1, options: ["الكراهة", "التحريم"], correct: "التحريم" },
-                        { id: 2, options: ["صحة", "اكتمال"], correct: "صحة" }
-                    ]
-                }
-            },
-            {
-                id: 2, trait: "trait2", title: "الإعانة على معصية",
-                content: (
-                    <div>
-                        <h3 className="text-xl font-bold mb-2 flex items-center"><span className="w-6 h-6 rounded-full bg-navy text-gold flex justify-center items-center ml-2 text-sm">٢</span>بيع الأشياء لمن يستعين بها على معصية الله .</h3>
-                        <p className="mb-2 text-lg">أو يستخدمها في المحرمات. فلا يصح بيع العصير لمن يتخذه خمراً ، ولا الأواني لمن يشرب بها الخمر ، ولا بيع السلاح في وقت الفتنة بين المسلمين . قال تعالى :</p>
-                        <div className="verse text-emerald-800">﴿ وَتَعَاوَنُوا۟ عَلَى ٱلْبِرِّ وَٱلتَّقْوَىٰ ۖ وَلَا تَعَاوَنُوا۟ عَلَى ٱلْإِثْمِ وَٱلْعُدْوَٰنِ ﴾ [المائدة : ٢]</div>
-                    </div>
-                ),
-                tree: renderTree("البيع للإعانة على معصية", [
-                    <span>بيع العصير لمصانع الخمر<br/><span className="text-red-600 block mt-2 text-base">محرم ولا يصح</span></span>,
-                    <span>بيع السلاح وقت الفتنة<br/><span className="text-red-600 block mt-2 text-base">محرم ولا يصح</span></span>
-                ]),
-                activity: {
-                    type: "matching", question: "اربط المثال بالحكم الفقهي:",
-                    pairs: [
-                        { term: "بيع العصير لمن يتخذه خمراً", def: "محرم ولا يصح لأنه إعانة على معصية." },
-                        { term: "دليل التحريم", def: "قوله تعالى (ولا تعاونوا على الإثم والعدوان)." }
-                    ]
-                }
-            },
-            {
-                id: 3, trait: "trait3", title: "التعدي على بيع وشراء الأخ",
-                content: (
-                    <div>
-                        <div className="mb-4">
-                            <h3 className="text-xl font-bold mb-2 flex items-center"><span className="w-6 h-6 rounded-full bg-navy text-gold flex justify-center items-center ml-2 text-sm">٣</span>بيع المسلم على بيع أخيه .</h3>
-                            <p className="mb-2 text-lg">مثاله أن يقول لمن اشترى شيئاً بعشرة : <span className="hl-mark">أنا أبيعك مثله بأرخص منه ، أو أبيعك أحسن منه بنفس الثمن</span> ؛ لحديث ابن عمر رضي الله عنهما : <span className="verse-text text-lg text-blue-900">(ولا يبع بعضكم على بيع بعض)</span></p>
-                        </div>
-                        <hr className="my-4 border-gold opacity-30"/>
-                        <div className="mb-4">
-                            <h3 className="text-xl font-bold mb-2 flex items-center"><span className="w-6 h-6 rounded-full bg-navy text-gold flex justify-center items-center ml-2 text-sm">٤</span>الشراء على الشراء .</h3>
-                            <p className="text-lg">مثاله : أن يقول لمن باع شيئاً : <span className="hl-mark">اِفْسَخ البيع ، وأنا أشتريه منك بأكثر</span> ، بعد أن اتفق البائع والمشتري على الثمن . وهذه الصورة داخلة في النهي الوارد في الحديث السابق .</p>
-                        </div>
-                    </div>
-                ),
-                tree: renderTree("التعدي على عقود الآخرين (محرم)", [
-                    <span>البيع على البيع<br/><span className="text-gray-500 font-normal block mt-1 text-base">أن يقول: افسخ وأنا أبيعك أرخص منه</span></span>,
-                    <span>الشراء على الشراء<br/><span className="text-gray-500 font-normal block mt-1 text-base">أن يقول: افسخ وأنا أشتريه منك بأكثر</span></span>
-                ]),
-                activity: {
-                    type: "matching", question: "ميّز بين الصورتين التاليتين:",
-                    pairs: [
-                        { term: "بيع المسلم على بيعه", def: "أن يقول للمشتري: أبيعك مثله بأرخص منه." },
-                        { term: "الشراء على الشراء", def: "أن يقول للبائع: افسخ البيع وأنا أشتريه منك بأكثر." }
-                    ]
-                }
-            },
-            {
-                id: 4, trait: "trait4", title: "بيع العينة",
-                content: (
-                    <div>
-                        <h3 className="text-xl font-bold mb-2 flex items-center"><span className="w-6 h-6 rounded-full bg-navy text-gold flex justify-center items-center ml-2 text-sm">٥</span>بيع العينة .</h3>
-                        <p className="mb-2 text-lg"><span className="hl-blue">وصورته :</span> أن يبيع شخص سلعةً لآخر بثمن معلوم إلى أجل ، ثم يشتريها منه البائع بثمن حاضر أقل ، وفي نهاية الأجل يدفع المشتري الثمن الأول . كأن يبيع أرضاً بـ ٥٠ ألفاً بعد سنة، ثم يشتريها منه بـ ٤٠ ألفاً نقداً.</p>
-                        <p className="mb-2 text-lg"><span className="hl-gold">وسميت عينة :</span> لأن المشتري يأخذ مكان السلعة عيناً ، أي : نقداً حاضراً .</p>
-                        <p className="mb-2 text-lg"><span className="hl-red">وحرم هذا البيع ، لأنه حيلة يتوصل بها إلى الربا .</span> لقوله ﷺ: <span className="verse-text text-lg text-blue-900">(إذا تبايعتم بالعينة ، وأخذتم أذناب البقر ، وتركتم الجهاد ، سلط الله عليكم ذلاً لا يرفعه حتى ترجعوا إلى دينكم)</span></p>
-                    </div>
-                ),
-                tree: renderSequenceTree("خطوات بيع العينة", [
-                    "١. يبيع سلعة لآخر بثمن مؤجل (مرتفع)",
-                    "٢. يشتريها نفس البائع نقداً بثمن (أقل)",
-                    "النتيجة: حيلة للربا، ولذلك هي (محرمة)"
-                ]),
-                activity: {
-                    type: "fill-blank", question: "أكمل تعريف وحكم بيع العينة:",
-                    textParts: ["بيع العينة هو حيلة للوصول إلى ", "، حيث يبيع سلعة بثمن ", " ثم يشتريها بثمن حاضر " , "."],
-                    blanks: [
-                        { id: 0, options: ["الخسارة", "الربا"], correct: "الربا" },
-                        { id: 1, options: ["مؤجل", "حاضر"], correct: "مؤجل" },
-                        { id: 2, options: ["أقل", "أكثر"], correct: "أقل" }
-                    ]
-                }
-            },
-            {
-                id: 5, trait: "trait5", title: "البيع قبل القبض",
-                content: (
-                    <div>
-                        <h3 className="text-xl font-bold mb-2 flex items-center"><span className="w-6 h-6 rounded-full bg-navy text-gold flex justify-center items-center ml-2 text-sm">٦</span>بيع المبيع قبل قبضه .</h3>
-                        <p className="mb-2 text-lg">مثاله : أن يشتري سلعة من شخص ، ثم يبيعها قبل أن يقبضها ويحوزها . عن أبي هريرة رضي الله عنه قال : قال رسول الله ﷺ : <span className="verse-text text-lg text-blue-900">(من ابتاع طعاماً فلا يبعه حتى يقبضه)</span>.</p>
-                        <p className="mb-2 text-lg">وعن زيد بن ثابت رضي الله عنه : <span className="verse-text text-lg">(أن رسول الله ﷺ نهى أن تباع السلع حيث تبتاع ، حتى يحوزها التجار إلى رحالهم)</span>.</p>
-                        <p className="text-lg hl-red">فلا يجوز لمن اشترى شيئاً أن يبيعه حتى يقبضه قبضاً تاماً .</p>
-                    </div>
-                ),
-                tree: renderSequenceTree("تسلسل البيع قبل القبض", [
-                    "١. المشتري يشتري سلعة",
-                    "٢. يقوم ببيعها لآخر قبل أن يحوزها أو يقبضها",
-                    "الحكم: محرم ولا يجوز لورود النهي"
-                ]),
-                activity: {
-                    type: "fill-blank", question: "اختر الكلمة الصحيحة لإكمال الحديث والقاعدة:",
-                    textParts: ["من ابتاع ", " فلا يبعه حتى ", " قبضاً تاماً ويحوزه إلى رحله."],
-                    blanks: [
-                        { id: 0, options: ["طعاماً", "وهماً"], correct: "طعاماً" },
-                        { id: 1, options: ["يبيعه", "يقبضه"], correct: "يقبضه" }
-                    ]
-                }
-            },
-            {
-                id: 6, trait: "trait6", title: "بيع الثمار قبل النضج",
-                content: (
-                    <div>
-                        <h3 className="text-xl font-bold mb-2 flex items-center"><span className="w-6 h-6 rounded-full bg-navy text-gold flex justify-center items-center ml-2 text-sm">٧</span>بيع الثمار قبل بدو صلاحها .</h3>
-                        <p className="mb-2 text-lg">لا يجوز بيع الثمرة قبل أن يبدو صلاحها ؛ <span className="hl-mark">خوفاً من تلفها أو حدوث عيب بها قبل أخذها</span> ، فعن أنس رضي الله عنه قال: قال رسول الله ﷺ: <span className="verse-text text-lg text-blue-900">(أرأيت إن منع الله الثمرة ، بم يأخذ أحدكم مال أخيه ؟)</span>.</p>
-                        <p className="mb-2 text-lg">وعن ابن عمر رضي الله عنهما: <span className="verse-text text-lg">(نهى رسول الله ﷺ عن بيع الثمار حتى يبدو صلاحها ، نهى البائع والمبتاع)</span>.</p>
-                        <p className="text-lg"><span className="hl-blue">ويعرف بدو صلاحها :</span> باحمرار ثمار النخيل أو اصفرارها ، وفي العنب أن يَسْوَد وتبدو الحلاوة فيه ، وفي الحب أن ييبس ويشتد ، ونحو ذلك .</p>
-                    </div>
-                ),
-                tree: renderTree("حكم بيع الثمار", [
-                    <span>قبل بدو الصلاح<br/><span className="text-red-600 block mt-1">محرم (خوفاً من التلف والنزاع)</span></span>,
-                    <span>بعد بدو الصلاح<br/><span className="text-emerald-600 block mt-1">جائز (بالاحمرار والاصفرار)</span></span>
-                ]),
-                activity: {
-                    type: "matching", question: "اربط بين الجملة وما يكملها:",
-                    pairs: [
-                        { term: "النهي عن بيع الثمار قبل نضجها", def: "خوفاً من تلفها أو حدوث عيب بها." },
-                        { term: "علامة بدو صلاح النخيل", def: "احمرارها أو اصفرارها." },
-                        { term: "علامة بدو صلاح العنب", def: "أن يسود وتبدو الحلاوة فيه." }
-                    ]
-                }
-            },
-            {
-                id: 7, trait: "trait7", title: "النَّجْش",
-                content: (
-                    <div>
-                        <h3 className="text-xl font-bold mb-2 flex items-center"><span className="w-6 h-6 rounded-full bg-navy text-gold flex justify-center items-center ml-2 text-sm">٨</span>النَّجْشُ .</h3>
-                        <p className="mb-2 text-lg"><span className="hl-blue">وهو :</span> أن يزيد شخص في ثمن السلعة المعروضة للبيع ، ولا يريد شراءها ، وإنما ليغر غيره بها ، ويرغبه فيها ، ويرفع سعرها .</p>
-                        <p className="text-lg">عن ابن عمر رضي الله عنهما : <span className="verse-text text-xl">(أن رسول الله ﷺ نهى عن النجش)</span>.</p>
-                    </div>
-                ),
-                tree: renderSequenceTree("آلية النَّجْش (المحرم)", [
-                    "شخص يزيد في ثمن السلعة المعروضة",
-                    "هو لا ينوي ولا يريد شراءها فعلياً",
-                    "الهدف: خداع وغرر المشتري الحقيقي برفع السعر"
-                ]),
-                activity: {
-                    type: "fill-blank", question: "أكمل الفراغات بتعريف النجش:",
-                    textParts: ["النجش هو أن يزيد شخص في ثمن السلعة وهو لا يريد ", "، وإنما هدفه أن ", " غيره ويرفع السعر."],
-                    blanks: [
-                        { id: 0, options: ["تأجيرها", "شراءها"], correct: "شراءها" },
-                        { id: 1, options: ["يغر ويخدع", "ينصح"], correct: "يغر ويخدع" }
-                    ]
-                }
-            },
-            {
-                id: 8, trait: "trait8", title: "الإقالة في البيع",
-                content: (
-                    <div>
-                        <h3 className="font-bold text-2xl mb-2 text-navy">الإقالة في البيع</h3>
-                        <p className="mb-4 text-lg"><span className="hl-blue">الإقالة :</span> رفع العقد الذي وقع بين المتعاقدين وفسخه برضاهما .</p>
-                        <p className="mb-4 text-lg">وتحصل بسبب ندم أحد العاقدين ، أو يتبين للمشتري أنه ليس محتاجاً للسلعة ، أو لم يستطع دفع ثمنها ، فيرجع كل من البائع والمشتري بما كان له <span className="hl-mark">من غير زيادة ولا نقص</span> .</p>
-                        <p className="mb-2 text-lg"><span className="hl-emerald">والإقالة مشروعة</span> ، وحث عليها رسول الله ﷺ بقوله : <span className="verse-text text-lg text-blue-900">(من أقال مسلماً بيعته أقال الله عثرته يوم القيامة)</span>.</p>
-                    </div>
-                ),
-                tree: renderTree("الإقالة", [
-                    <span>التعريف<br/><span className="text-gray-600 font-normal block mt-1 text-base">فسخ العقد برضا الطرفين بدون زيادة أو نقص</span></span>,
-                    <span>الحكم والفضل<br/><span className="text-emerald-600 block mt-1 text-base">مشروعة، ومن أقال أقال الله عثرته</span></span>
-                ]),
-                activity: {
-                    type: "matching", question: "صل المصطلح بمعناه الصحيح:",
-                    pairs: [
-                        { term: "الإقالة", def: "فسخ العقد برضاهما من غير زيادة ولا نقص." },
-                        { term: "فضل الإقالة", def: "من أقال مسلماً أقال الله عثرته." }
-                    ]
-                }
-            },
-            {
-                id: 9, trait: "trait1", title: "عقد المرابحة",
-                content: (
-                    <div>
-                        <h3 className="font-bold text-2xl mb-2 text-navy">عقد المرابحة</h3>
-                        <p className="mb-4 text-lg"><span className="hl-blue">المرابحة :</span> بيع السلعة بثمنها المعلوم بين المتعاقدين ، بربح معلوم بينهما .</p>
-                        <p className="mb-4 text-lg"><span className="hl-gold">مثالها :</span> يقول صاحب السلعة : رأس مالي فيها مائة ريال ، أبيعك إياها بالمائة ، وربح عشرة ريالات .</p>
-                        <p className="mb-2 text-lg hl-emerald">فالبيع على هذه الصورة صحيح ، إذا علم البائع والمشتري مقدار الثمن ، ومقدار الربح .</p>
-                        <p className="mt-4 text-lg">والحاجة ماسة إلى جوازه ؛ لأن بعض الناس لا يحسن الشراء ابتداءً ، فيعتمد على غيره في الشراء ، ويزيده ربحاً محدداً معلوماً بينهما .</p>
-                    </div>
-                ),
-                tree: renderTree("أركان المرابحة الصحيحة", [
-                    <span>علم الطرفين بـ (رأس المال)<br/><span className="text-gray-500 font-normal block mt-1 text-base">الثمن الأصلي للسلعة</span></span>,
-                    <span>علم الطرفين بـ (مقدار الربح)<br/><span className="text-gray-500 font-normal block mt-1 text-base">الزيادة المتفق عليها بوضوح</span></span>
-                ]),
-                activity: {
-                    type: "fill-blank", question: "أكمل تعريف شرط المرابحة:",
-                    textParts: ["المرابحة هي بيع السلعة بثمنها ", " بين المتعاقدين، بربح ", " بينهما."],
-                    blanks: [
-                        { id: 0, options: ["المعلوم", "المجهول"], correct: "المعلوم" },
-                        { id: 1, options: ["معلوم", "غير معلوم"], correct: "معلوم" }
-                    ]
-                }
-            },
-            {
-                id: 10, trait: "trait2", title: "البيع بالتقسيط",
-                content: (
-                    <div>
-                        <p className="mb-4 text-lg"><span className="hl-blue">هو :</span> بيع السلعة إلى أجل محدد ، يُقسط فيه الثمن أقساطاً متعددة ، كل قسط له أجل معلوم يدفعه المشتري . <span className="hl-emerald">وحكمه الجواز</span>.</p>
-                        <h4 className="text-xl font-bold mb-4 text-navy border-b-2 border-gold pb-2 inline-block">شروط صحة بيع التقسيط :</h4>
-                        <ul className="list-none space-y-4 text-lg">
-                            <li className="flex items-start"><span className="text-gold ml-2 font-bold">١-</span> أن تكون السلعة بحوزة البائع وتحت تصرفه عند العقد، <span className="hl-red">فإن باعه قبل أن يملكها فهو محرم</span>.</li>
-                            <li className="flex items-start"><span className="text-gold ml-2 font-bold">٢-</span> <span className="hl-red">لا يجوز</span> إلزام المشتري بدفع مبلغ زائد في حال تأخره عن دفع الأقساط (لأنه ربا).</li>
-                            <li className="flex items-start"><span className="text-gold ml-2 font-bold">٣-</span> <span className="hl-red">يحرم</span> على المشتري المليء المماطلة في السداد.</li>
-                            <li className="flex items-start"><span className="text-gold ml-2 font-bold">٤-</span> لا حق للبائع في الاحتفاظ بملكية المبيع بعد البيع ، ولكن <span className="hl-emerald">يجوز</span> له أن يشترط رهن المبيع لضمان حقه.</li>
-                        </ul>
-                    </div>
-                ),
-                tree: renderTree("البيع بالتقسيط وشروطه", [
-                    <span>التعريف والحكم<br/><span className="text-emerald-600 block mt-1 text-base">بيع مؤجل بأقساط (جائز)</span></span>,
-                    <span>الشروط الإلزامية<br/><span className="text-red-600 block mt-1 text-base">حيازة البائع للسلعة، عدم شرط غرامة التأخير (الربا)</span></span>
-                ]),
-                activity: {
-                    type: "matching", question: "طابق بين الحالة وحكمها في بيع التقسيط:",
-                    pairs: [
-                        { term: "إلزام المشتري بغرامة مالية إذا تأخر", def: "لا يجوز (لأنه ربا محرم)." },
-                        { term: "أن يبيع السلعة قبل أن يملكها", def: "محرم لقوله (لا تبع ما ليس عندك)." },
-                        { term: "اشتراط رهن المبيع لضمان الحق", def: "يجوز للبائع ذلك." }
-                    ]
-                }
-            },
-            {
-                id: 11, trait: "trait3", title: "الربا: تعريفه وأنواعه",
-                content: (
-                    <div>
-                        <p className="mb-2 text-lg"><span className="hl-blue">الربا شرعاً :</span> زيادة أحد البدلين المتجانسين من غير أن يقابل هذه الزيادة عوض . <span className="hl-red">وهو محرم ومن الكبائر</span>. قال تعالى : <span className="verse-text text-lg text-emerald-800">﴿ وَأَحَلَّ ٱللَّهُ ٱلْبَيْعَ وَحَرَّمَ ٱلرِّبَوٰا۟ ﴾</span></p>
-                        <hr className="my-4 border-gold opacity-30" />
-                        <h4 className="font-bold text-xl mb-2 text-navy">أنواع الربا :</h4>
-                        <div className="space-y-4">
-                            <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-200">
-                                <h5 className="font-bold text-lg text-navy mb-1">١. ربا الفضل :</h5>
-                                <p className="text-lg">الزيادة في أحد البدلين الربويين المتفقين جنساً (كبيع ١٠٠٠ صاع قمح بـ ١٢٠٠ صاع يداً بيد). <span className="hl-red">يحرم في ٦ أشياء: الذهب، الفضة، البر، الشعير، التمر، الملح</span>. وعلتها (الكيل والوزن).</p>
-                            </div>
-                            <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-200">
-                                <h5 className="font-bold text-lg text-navy mb-1">٢. ربا النسيئة :</h5>
-                                <p className="text-lg">الزيادة في أحد العوضين مقابل <span className="hl-mark">تأخير الدفع</span> في بيع جنسين اتفقا في علة ربا الفضل (وهو ربا الجاهلية والبنوك اليوم).</p>
-                            </div>
-                        </div>
-                    </div>
-                ),
-                tree: renderTree("الربا (محرم ومن الكبائر)", [
-                    <span>ربا الفضل<br/><span className="text-gray-600 block mt-1 text-base">الزيادة في نفس الجنس (يداً بيد)</span></span>,
-                    <span>ربا النسيئة<br/><span className="text-gray-600 block mt-1 text-base">الزيادة في العوض مقابل (الأجل والتأخير)</span></span>
-                ]),
-                activity: {
-                    type: "matching", question: "ميّز بين نوعي الربا:",
-                    pairs: [
-                        { term: "ربا الفضل", def: "الزيادة في أحد البدلين المتفقين جنساً في مجلس العقد." },
-                        { term: "ربا النسيئة", def: "الزيادة في العوض مقابل تأخير الدفع (الأجل)." }
-                    ]
-                }
-            },
-            {
-                id: 12, trait: "trait4", title: "صور وقواعد التبادل الربوي",
-                content: (
-                    <div>
-                        <div className="bg-white p-6 rounded-xl border-l-4 border-gold mb-6 shadow-sm text-lg">
-                            <h4 className="font-bold text-navy mb-4">قاعدة التبادل الربوي (في الأصناف الستة):</h4>
-                            <p className="mb-2"><span className="font-bold text-gold">١- إذا بيع الربوي بجنسه (ذهب بذهب):</span> <br/>يُشترط التساوي بالمقدار، والتقابض في المجلس قبل التفرق.</p>
-                            <p><span className="font-bold text-gold">٢- إذا بيع الربوي بغير جنسه (بر بشعير):</span> <br/>جاز التفاضل (الزيادة)، ويُشترط التقابض في المجلس فقط.</p>
-                        </div>
-                        <h4 className="font-bold text-xl mb-4 text-navy">تطبيقات:</h4>
-                        <ul className="space-y-2 text-lg">
-                            <li>- بيع ١٠٠ جرام ذهب بـ ١٠٠ جرام ذهب <span className="hl-red">بعد شهر</span>. ➔ (محرم، لعدم التقابض).</li>
-                            <li>- شراء كيلو شعير بكيلو بر في المجلس. ➔ (<span className="hl-emerald">جائز</span>).</li>
-                            <li>- بيع ١٠٠ دولار بـ ١١٠ دولارات. ➔ (<span className="hl-red">لا يجوز</span>).</li>
-                        </ul>
-                    </div>
-                ),
-                tree: renderTree("قاعدة مبادلة الأصناف الربوية", [
-                    <span>بيع الجنس بجنسه (ذهب بذهب)<br/><span className="text-gray-600 block mt-1 text-base">الشرط: التساوي + التقابض بالمجلس</span></span>,
-                    <span>بيع الجنس بغيره (بر بشعير)<br/><span className="text-gray-600 block mt-1 text-base">الشرط: التقابض فقط (يجوز التفاضل)</span></span>
-                ]),
-                activity: {
-                    type: "fill-blank", question: "اختر الحكم أو الشرط الصحيح:",
-                    textParts: ["عند بيع الذهب بالذهب يُشترط التساوي و", " في المجلس، أما بيع البر بالشعير فيجوز فيه ", " بشرط التقابض."],
-                    blanks: [
-                        { id: 0, options: ["التقابض", "التأجيل"], correct: "التقابض" },
-                        { id: 1, options: ["التفاضل (الزيادة)", "التأجيل"], correct: "التفاضل (الزيادة)" }
-                    ]
-                }
-            },
-            {
-                id: 13, trait: "trait5", title: "القرض وأحكامه",
-                content: (
-                    <div>
-                        <h4 className="font-bold text-xl mb-2 text-navy">القرض :</h4>
-                        <p className="mb-4 text-lg">دفع مال لمن ينتفع به ويَرُدُّ بدله . <span className="hl-emerald">وهو مشروع ومندوب</span> لقوله ﷺ: <span className="verse-text text-lg">(ما من مسلم يقرض مسلماً قرضاً مرتين إلا كان كصدقتها مرة)</span>.</p>
-                        
-                        <h4 className="font-bold text-xl mb-2 text-navy">شروط القرض :</h4>
-                        <ul className="list-disc list-inside space-y-2 text-lg">
-                            <li><span className="hl-red">لا يجوز</span> أن يشترط المقرض نفعاً أو زيادة، فقاعدة العلماء: <span className="hl-mark">كل قرض جرّ منفعة فهو ربا</span>.</li>
-                            <li>إذا رد المقترض الزيادة <span className="hl-emerald">بدون شرط مسبق</span> صح ذلك وهو من حسن القضاء.</li>
-                            <li>قروض البنوك التي تشترط فائدة محددة هي <span className="hl-red">ربا محرم</span> صريح.</li>
-                        </ul>
-                    </div>
-                ),
-                tree: renderTree("القرض وأحكامه", [
-                    <span>قرض بدون اشتراط زيادة<br/><span className="text-emerald-600 block mt-1 text-base">مشروع ومستحب (سد حاجة المسلم)</span></span>,
-                    <span>قرض بزيادة أو منفعة مشروطة<br/><span className="text-red-600 block mt-1 text-base">ربا محرم صريح (كل قرض جر نفعاً)</span></span>
-                ]),
-                activity: {
-                    type: "matching", question: "طابق بين الحالة وحكمها:",
-                    pairs: [
-                        { term: "قرض يشترط فيه المقرض نفعاً (كسكن دار المقترض)", def: "محرم لكونه ربا (كل قرض جر منفعة فهو ربا)." },
-                        { term: "رد المقترض مبلغاً أزيد أو أحسن بدون شرط", def: "صح ذلك وهو تبرع وحسن قضاء." }
-                    ]
-                }
+        // --- Helper: Shuffle Array ---
+        const shuffleArray = (array) => {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
-        ];
-
-        // بيانات المراجعة والتقييم (تمت مضاعفة البطاقات إلى 14 والأسئلة إلى 10 والاختبار إلى 20)
-        const FLASHCARDS = [
-            { front: "النجش (تعريف)", back: "أن يزيد شخص في ثمن السلعة المعروضة للبيع، ولا يريد شراءها، وإنما ليغر غيره بها ويرغبه فيها ويرفع سعرها." },
-            { front: "بيع العينة (تعريف)", back: "أن يبيع شخص سلعةً لآخر بثمن معلوم إلى أجل، ثم يشتريها منه البائع بثمن حاضر أقل." },
-            { front: "الإقالة (تعريف)", back: "رفع العقد الذي وقع بين المتعاقدين وفسخه برضاهما من غير زيادة ولا نقص." },
-            { front: "المرابحة (تعريف)", back: "بيع السلعة بثمنها المعلوم بين المتعاقدين، بربح محدد ومعلوم بينهما." },
-            { front: "ربا الفضل (تعريف)", back: "الزيادة في أحد البدلين الربويين المتفقين جنساً." },
-            { front: "ربا النسيئة (تعريف)", back: "الزيادة في أحد العوضين مقابل تأخير الدفع في بيع جنسين اتفقا في العلة." },
-            { front: "القرض (تعريف)", back: "دفع مال لمن ينتفع به ويَرُدُّ بدله." },
-            { front: "حكم الإقالة", back: "مشروعة ومستحبة، لقوله ﷺ: (من أقال مسلماً بيعته أقال الله عثرته)." },
-            { front: "حكم بيع التقسيط", back: "جائز، بشرط حيازة البائع للسلعة، وعدم إلزام المشتري بغرامة في حال التأخير." },
-            { front: "حكم بيع العينة", back: "محرم؛ لأنه حيلة يتوصل بها إلى الربا الصريح." },
-            { front: "حكم بيع الثمار قبل بدو صلاحها", back: "لا يجوز (محرم)؛ خوفاً من تلفها أو حدوث عيب بها قبل أخذها (منعاً للغرر والنزاع)." },
-            { front: "القاعدة الذهبية للقرض", back: "كل قرض جرّ منفعة مشروطة فهو ربا محرم." },
-            { front: "الأصناف الربوية الستة", back: "الذهب، الفضة، البر، الشعير، التمر، والملح." },
-            { front: "علة الربا في الأصناف الأربعة", back: "الكيل والوزن في (البر، الشعير، التمر، الملح)." }
-        ];
-
-        const ESSAY_QUESTIONS = [
-            { q: "لماذا نهى الإسلام عن البيع والشراء بعد الأذان الثاني يوم الجمعة؟", a: "لأن النهي يقتضي التحريم لقوله تعالى: (وذروا البيع)، وذلك حتى لا ينشغل المسلم عن أداء عبادة واجبة وهي صلاة الجمعة." },
-            { q: "ما هي الحكمة من تحريم بيع الثمار قبل بدو صلاحها؟", a: "خوفاً من تلفها أو حدوث عيب بها قبل أخذها، مما يؤدي إلى الخلاف والتنازع وأكل أموال الناس بالباطل." },
-            { q: "ما هما الشرطان الأساسيان لبيع الصنف الربوي بجنسه؟ (مثل بيع ذهب بذهب)", a: "1. التقابض من الطرفين في مجلس العقد يداً بيد قبل التفرق. 2. التساوي بينهما بالمعيار الشرعي وزناً أو كيلاً." },
-            { q: "ما حكم أن يرد المقترض للمقرض مبلغاً أحسن أو أكثر مما أخذ دون وجود شرط مسبق؟", a: "صح ذلك وهو جائز بل ومستحب، لأنه يُعتبر تبرعاً من المقترض وحسن قضاء، لقوله ﷺ: (خيار الناس أحسنهم قضاء)." },
-            { q: "اذكر صورة واضحة ومثالاً لتعدي المسلم (بالبيع) على بيع أخيه.", a: "مثاله: أن يقول لمن اشترى شيئاً بعشرة: أنا أبيعك مثله بأرخص منه، أو أبيعك أحسن منه بنفس الثمن، بعد أن تم الاتفاق." },
-            { q: "ما هي الحكمة الرئيسية من تحريم بيع العينة في الشريعة الإسلامية؟", a: "حُرم بيع العينة لأنه وسيلة وحيلة خفية يتوصل بها الطرفان للوقوع في الربا المحرم المباشر، ببيع آجل ثم شراء حاضر نقدي." },
-            { q: "ما هو الشرط الأساسي الذي يجب توفره في بيع السلعة المشتراة؟ وما الدليل؟", a: "الشرط أن يحوزها المشتري ويقبضها قبضاً تاماً قبل أن يبيعها. الدليل: قوله ﷺ (من ابتاع طعاماً فلا يبعه حتى يقبضه)." },
-            { q: "اذكر اثنين من أهم شروط صحة بيع التقسيط.", a: "1. أن تكون السلعة بحوزة البائع وتحت تصرفه أثناء العقد. 2. عدم اشتراط غرامة مالية على المشتري إذا تأخر في سداد الأقساط (لأنه ربا)." },
-            { q: "ما المقصود بربا النسيئة؟ واذكر مثالاً مبسطاً عليه.", a: "النسيئة هو الزيادة مقابل تأخير الدفع (الأجل). مثاله: بيع ألف صاع قمح بألف ومائتي صاع تدفع بعد سنة، أو اقتراض مال بفائدة متزايدة مع الزمن." },
-            { q: "ما حكم اقتراض مبلغ من البنك المالي مع اشتراط البنك أخذ فائدة محددة عند السداد؟ ولماذا؟", a: "هذا الفعل ربا محرم صريح باتفاق الفقهاء، وذلك تطبيقاً للقاعدة الشرعية القاطعة: (كل قرض جرّ منفعة فهو ربا)." }
-        ];
-
-        const QUIZ_QUESTIONS = [
-            { q: "حكم البيع والشراء لمن تلزمه صلاة الجمعة بعد الأذان الثاني:", options: ["مكروه", "مباح", "محرم ولا يصح", "مستحب"], answer: 2 },
-            { q: "أن يقول شخص لمن اشترى شيئاً: أنا أبيعك مثله بأرخص منه، هذا يسمى:", options: ["الشراء على الشراء", "بيع المسلم على بيع أخيه", "النجش", "بيع العينة"], answer: 1 },
-            { q: "أن يبيع شخص سلعة لآخر بثمن إلى أجل، ثم يشتريها منه نقداً بثمن أقل، يسمى:", options: ["بيع التقسيط", "المرابحة", "بيع العينة", "الإقالة"], answer: 2 },
-            { q: "حكم بيع العينة:", options: ["جائز", "محرم لأنه حيلة للربا", "مكروه", "مباح للحاجة"], answer: 1 },
-            { q: "حكم بيع السلعة المشتراة قبل قبضها وحيازتها التامة:", options: ["يجوز مطلقاً", "يجوز في الطعام فقط", "لا يجوز حتى يقبضها", "يجوز إن كان الثمن نقداً"], answer: 2 },
-            { q: "يعرف بدو صلاح ثمار النخيل بـ:", options: ["اكتمال نموها وزيادة حجمها", "احمرارها أو اصفرارها", "قطفها ووضعها في الصناديق", "تساقط بعضها على الأرض"], answer: 1 },
-            { q: "أن يزيد شخص في ثمن السلعة المعروضة ولا يريد شراءها بل ليغر غيره، يسمى:", options: ["المرابحة", "النجش", "العينة", "بيع المكره"], answer: 1 },
-            { q: "رفع العقد الذي وقع بين المتعاقدين وفسخه برضاهما من غير زيادة ولا نقص:", options: ["الإقالة", "الربا", "القرض", "النجش"], answer: 0 },
-            { q: "بيع السلعة بثمنها المعلوم بين المتعاقدين بربح معلوم ومحدد بينهما:", options: ["بيع التقسيط", "عقد المرابحة", "بيع العينة", "الإقالة"], answer: 1 },
-            { q: "من شروط بيع التقسيط الصحيحة:", options: ["إلزام المشتري بغرامة تأخير", "أن يشتري البائع السلعة بعد الاتفاق", "أن تكون السلعة بحوزة البائع عند العقد", "احتفاظ البائع بملكية المبيع بعد البيع كلياً"], answer: 2 },
-            { q: "الربا لغة يعني:", options: ["النقص والخسارة", "الزيادة والنمو", "المبادلة والمقايضة", "الأجل والتأخير"], answer: 1 },
-            { q: "عقوبة آكل الربا يوم القيامة كما نص القرآن الكريم:", options: ["يعمى بصره", "لا يقوم إلا كقيام المصروع", "يحشر مع فرعون", "لا يدخل الجنة أبداً"], answer: 1 },
-            { q: "الأشياء الستة التي حرم فيها ربا الفضل هي: الذهب، الفضة، البر، الشعير، التمر، و...", options: ["الأرز", "الزبيب", "الملح", "الذرة"], answer: 2 },
-            { q: "علة الربا في البر والشعير والتمر والملح عند الفقهاء هي:", options: ["الطعم والمذاق", "الاقتيات والادخار", "الكيل والوزن", "اللون والشكل"], answer: 2 },
-            { q: "الزيادة في أحد العوضين مقابل تأخير الدفع في بيع جنسين اتفقا في علة ربا الفضل، يسمى:", options: ["ربا الفضل", "ربا النسيئة", "بيع العينة", "القرض الحسن"], answer: 1 },
-            { q: "إذا بيع ذهب بذهب، يشترط في هذا العقد:", options: ["التقابض في المجلس فقط", "التساوي في الوزن فقط", "التقابض في المجلس والتساوي معاً", "لا يشترط شيء لكونه حراً"], answer: 2 },
-            { q: "إذا بيع بر بشعير (اختلف الجنس واتحدت العلة)، يشترط:", options: ["التقابض والتساوي", "التقابض قبل التفرق فقط ويجوز التفاضل", "التساوي فقط", "يجوز التأجيل والتفاضل معاً"], answer: 1 },
-            { q: "باع مائة درهم فضة بعشرة جنيهات ذهب، على أن يدفعها بعد سنة. ما الحكم الفقهي؟", options: ["يجوز مطلقاً", "لا يجوز لعدم التساوي", "لا يجوز لعدم التقابض يداً بيد في المجلس", "مكروه تنزيهاً"], answer: 2 },
-            { q: "قاعدة القرض المحرم التي أجمع عليها الفقهاء هي: كل قرض جرّ ...", options: ["خسارة", "منفعة مشروطة", "تأخيراً ومماطلة", "خصومة وعداوة"], answer: 1 },
-            { q: "إذا رد المقترض للمقرض زيادة مالية دون شرط مسبق أو قصد:", options: ["يحرم ذلك ويأثم", "صح ذلك وهو يعتبر من تبرع وحسن القضاء", "يجب إرجاع الزيادة للمقترض فوراً", "يفسد عقد القرض الأساسي"], answer: 1 }
-        ];
-
-        // --- المكونات (Components) ---
-        
-        const SVGIcons = {
-            Book: () => <svg className="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>,
-            Map: () => <svg className="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>,
-            Cards: () => <svg className="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>,
-            Quiz: () => <svg className="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>,
-            Check: () => <svg className="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-        };
-
-        const WelcomeScreen = ({ onStart }) => {
-            const [name, setName] = useState('');
-            const [section, setSection] = useState('');
-            const [error, setError] = useState('');
-
-            const handleStart = () => {
-                const nameParts = name.trim().split(/\s+/);
-                if (nameParts.length < 3) {
-                    setError('عذراً، يجب إدخال الاسم الثلاثي على الأقل.');
-                    return;
-                }
-                if (!section.trim()) {
-                    setError('عذراً، يجب إدخال رقم الشعبة.');
-                    return;
-                }
-                onStart(name, section);
-            };
-
-            return (
-                <div className="flex-grow flex items-center justify-center p-4 animate-fade-in bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]">
-                    <div className="glass-panel p-10 rounded-3xl max-w-xl w-full text-center relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gold opacity-20 rounded-bl-full"></div>
-                        <h1 className="text-4xl font-amiri font-bold text-navy mb-2 relative z-10">فقه المعاملات</h1>
-                        <h2 className="text-2xl text-gold mb-8 border-b border-gray-200 pb-4 inline-block relative z-10">الدرس الثاني: البيوع المحرمة والقرض</h2>
-                        <div className="space-y-6 relative z-10">
-                            <div>
-                                <input type="text" value={name} onChange={(e) => {setName(e.target.value); setError('');}} placeholder="أدخل اسمك الكامل هنا..." className="w-full p-4 rounded-xl border-2 border-gray-200 focus:border-gold focus:outline-none transition-colors text-center" />
-                            </div>
-                            <div>
-                                <input type="text" value={section} onChange={(e) => {setSection(e.target.value); setError('');}} placeholder="رقم الشعبة (مثال: YM2)" className="w-full p-4 rounded-xl border-2 border-gray-200 focus:border-gold focus:outline-none transition-colors text-center" />
-                            </div>
-                            {error && <p className="text-red-500 font-bold animate-pulse">{error}</p>}
-                            <button onClick={handleStart} className="w-full bg-navy text-white font-bold text-xl py-4 rounded-xl mt-4 hover:bg-gold hover:text-navy transition-colors duration-300 shadow-lg transform hover:scale-105">ابدأ رحلة التعلم</button>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        // Activity Component: Cloze Test (Fill in the blanks)
-        const FillBlankActivity = ({ activity, onPass }) => {
-            const [answers, setAnswers] = useState({});
-            const [isCorrect, setIsCorrect] = useState(false);
-
-            useEffect(() => {
-                const allCorrect = activity.blanks.every(b => answers[b.id] === b.correct);
-                setIsCorrect(allCorrect);
-                if(allCorrect) onPass();
-            }, [answers]);
-
-            return (
-                <div className="bg-white p-6 rounded-2xl border-2 border-emerald-500/30 shadow-md">
-                    <h4 className="font-bold text-navy mb-4 flex items-center gap-2">
-                        <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        {activity.question}
-                    </h4>
-                    <p className="text-xl leading-loose font-tajawal">
-                        {activity.textParts.map((part, idx) => (
-                            <React.Fragment key={idx}>
-                                {part}
-                                {idx < activity.blanks.length && (
-                                    <select 
-                                        className={`mx-2 p-1 px-4 rounded border-2 font-bold focus:outline-none transition-colors cursor-pointer
-                                            ${answers[idx] === activity.blanks[idx].correct ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-gray-300 bg-gray-50'}`}
-                                        onChange={(e) => setAnswers(prev => ({...prev, [idx]: e.target.value}))}
-                                        value={answers[idx] || ""}
-                                    >
-                                        <option value="" disabled>-- اختر --</option>
-                                        {activity.blanks[idx].options.sort().map((opt, i) => (
-                                            <option key={i} value={opt}>{opt}</option>
-                                        ))}
-                                    </select>
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </p>
-                    {isCorrect && <div className="mt-4 text-emerald-600 font-bold animate-pulse flex items-center gap-2"><SVGIcons.Check/> أحسنت! إجابة صحيحة. يمكنك الاستمرار.</div>}
-                </div>
-            );
-        };
-
-        // Activity Component: Matching (Dropdown definition select)
-        const MatchingActivity = ({ activity, onPass }) => {
-            const [answers, setAnswers] = useState({});
-            const [isCorrect, setIsCorrect] = useState(false);
-            const [options] = useState([...activity.pairs.map(p => p.def)].sort(() => Math.random() - 0.5));
-
-            useEffect(() => {
-                const allCorrect = activity.pairs.every((p, idx) => answers[idx] === p.def);
-                setIsCorrect(allCorrect);
-                if(allCorrect) onPass();
-            }, [answers]);
-
-            return (
-                <div className="bg-white p-6 rounded-2xl border-2 border-emerald-500/30 shadow-md">
-                    <h4 className="font-bold text-navy mb-4 flex items-center gap-2">
-                        <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                        {activity.question}
-                    </h4>
-                    <div className="space-y-4">
-                        {activity.pairs.map((pair, idx) => (
-                            <div key={idx} className="flex flex-col md:flex-row items-center gap-4 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                                <div className="w-full md:w-1/3 font-bold text-navy text-lg">{pair.term}</div>
-                                <div className="w-full md:w-2/3">
-                                    <select 
-                                        className={`w-full p-3 rounded border-2 font-tajawal focus:outline-none text-sm md:text-base cursor-pointer
-                                            ${answers[idx] === pair.def ? 'border-emerald-500 bg-emerald-50 text-emerald-800 font-bold' : 'border-gray-300'}`}
-                                        onChange={(e) => setAnswers(prev => ({...prev, [idx]: e.target.value}))}
-                                        value={answers[idx] || ""}
-                                    >
-                                        <option value="" disabled>-- اختر التعريف أو الحكم المطابق --</option>
-                                        {options.map((opt, i) => (
-                                            <option key={i} value={opt}>{opt}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    {isCorrect && <div className="mt-4 text-emerald-600 font-bold animate-pulse flex items-center gap-2"><SVGIcons.Check/> عمل رائع! الإجابات متطابقة تماماً.</div>}
-                </div>
-            );
-        };
-
-        const StepperContentScreen = ({ onComplete }) => {
-            const [currentIndex, setCurrentIndex] = useState(0);
-            const [activityPassed, setActivityPassed] = useState(false);
-            const topRef = useRef(null);
-
-            const topic = TOPICS_DATA[currentIndex];
-            const isLast = currentIndex === TOPICS_DATA.length - 1;
-
-            const handleNext = (e) => {
-                e.preventDefault();
-                if (isLast) {
-                    onComplete(); 
-                } else {
-                    setCurrentIndex(prev => prev + 1);
-                    setActivityPassed(false);
-                    if (topRef.current) topRef.current.scrollIntoView({ behavior: 'smooth' });
-                }
-            };
-
-            const jumpToPrevious = (idx) => {
-                if (idx < currentIndex) {
-                    setCurrentIndex(idx);
-                    setActivityPassed(false); 
-                    if (topRef.current) topRef.current.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-
-            return (
-                <div className="animate-fade-in pb-24 w-full max-w-5xl mx-auto mt-6 px-4" ref={topRef}>
-                    
-                    {/* Progress Bar - القابل للتمرير الأفقي */}
-                    <div className="mb-8 glass-panel p-4 rounded-2xl flex items-center gap-4 overflow-x-auto hide-scrollbar scroll-smooth">
-                        {TOPICS_DATA.map((t, idx) => (
-                            <div key={t.id} 
-                                 className="min-w-[50px] md:min-w-[65px] flex-shrink-0 flex flex-col items-center gap-2"
-                                 onClick={() => jumpToPrevious(idx)}
-                                 style={{ cursor: idx < currentIndex ? 'pointer' : 'default' }}
-                                 title={idx < currentIndex ? 'انقر للعودة لهذه المحطة' : ''}>
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-500
-                                    ${idx < currentIndex ? 'bg-emerald-500 text-white hover:scale-110 shadow-md' : idx === currentIndex ? 'bg-gold text-navy shadow-lg ring-4 ring-gold/30' : 'bg-gray-200 text-gray-400'}`}>
-                                    {idx < currentIndex ? '✓' : idx + 1}
-                                </div>
-                                <div className="text-[10px] md:text-xs text-center font-bold text-gray-500 w-full truncate px-1">
-                                    {t.title.split(' ')[0]} {t.title.split(' ')[1]}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Content Card */}
-                    <div className={`bg-${topic.trait} rounded-3xl shadow-lg border border-gray-100 overflow-hidden animate-slide-up mb-8`}>
-                        <div className="bg-navy text-white px-8 py-5 border-b-4 border-gold">
-                            <h2 className="text-3xl font-amiri font-bold">{topic.title}</h2>
-                        </div>
-                        
-                        <div className="p-8">
-                            <div className="mb-10 text-gray-800 leading-relaxed">
-                                {topic.content}
-                            </div>
-                            <hr className="border-gray-200 mb-8" />
-                            <div className="mb-10">
-                                <h3 className="text-xl font-bold text-navy mb-4 border-r-4 border-gold pr-2">التلخيص الشجري للموضوع:</h3>
-                                <div className="bg-white/50 p-6 rounded-2xl overflow-x-auto hide-scrollbar border border-gold/20">
-                                    {topic.tree}
-                                </div>
-                            </div>
-                            <hr className="border-gray-200 mb-8" />
-                            <div>
-                                <h3 className="text-xl font-bold text-navy mb-4 border-r-4 border-emerald-500 pr-2">تأكيد الفهم السريع للعبور:</h3>
-                                {topic.activity.type === "fill-blank" ? 
-                                    <FillBlankActivity key={`act-${topic.id}`} activity={topic.activity} onPass={() => setActivityPassed(true)} /> : 
-                                    <MatchingActivity key={`act-${topic.id}`} activity={topic.activity} onPass={() => setActivityPassed(true)} />
-                                }
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Navigation Buttons */}
-                    <div className="flex justify-between items-center bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-md border border-gray-200 sticky bottom-[80px] z-40">
-                        <button 
-                            type="button"
-                            onClick={() => jumpToPrevious(currentIndex - 1)}
-                            disabled={currentIndex === 0}
-                            className={`px-6 py-2 rounded-xl font-bold transition-colors ${currentIndex === 0 ? 'text-gray-400 cursor-not-allowed' : 'text-navy border border-navy hover:bg-gray-50'}`}
-                        >
-                            السابق
-                        </button>
-
-                        <button 
-                            type="button"
-                            onClick={handleNext}
-                            disabled={!activityPassed}
-                            className={`px-8 py-3 rounded-xl font-bold text-lg shadow-md transition-all duration-300 flex items-center gap-2
-                                ${activityPassed ? 'bg-navy text-white hover:bg-gold hover:text-navy hover:scale-105 animate-bounce-slight' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
-                        >
-                            {isLast ? 'إتمام المادة العلمية' : 'التالي'}
-                            {activityPassed && <svg className="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>}
-                        </button>
-                    </div>
-                </div>
-            );
-        };
-
-        const MindMapScreen = () => (
-            <div className="p-8 max-w-7xl mx-auto animate-fade-in pb-20">
-                <div className="text-center mb-12">
-                    <h2 className="text-4xl font-amiri font-bold text-navy mb-2">الخريطة البصرية الشاملة</h2>
-                    <p className="text-gray-600 text-lg">هيكلية مفاهيم الدرس الثاني كاملة</p>
-                </div>
-                <div className="relative flex flex-col items-center min-h-[500px] justify-start pt-10 overflow-x-auto hide-scrollbar">
-                    <div className="mindmap-node text-2xl px-10 py-5 animate-pulse-glow z-20 mb-20 shadow-xl whitespace-nowrap">فقه المعاملات<br/><span className="text-gold text-lg">البيوع المحرمة والقرض</span></div>
-                    <div className="absolute top-[100px] w-1 bg-gold h-[80px] z-10"></div>
-                    <div className="absolute top-[180px] w-full max-w-[800px] h-1 bg-gold z-10"></div>
-                    <div className="flex w-full max-w-[900px] justify-between relative z-20 gap-4 flex-nowrap min-w-[600px]">
-                        <div className="flex flex-col items-center relative w-1/4">
-                            <div className="absolute -top-[20px] w-1 h-[20px] bg-gold"></div>
-                            <div className="mindmap-node mindmap-child text-sm md:text-lg w-full mb-6">البيوع المنهي عنها</div>
-                            <div className="flex flex-col gap-2 w-full text-xs text-center"><div className="bg-trait1 p-2 rounded">وقت الجمعة</div><div className="bg-trait1 p-2 rounded">العينة</div><div className="bg-trait1 p-2 rounded">النجش</div></div>
-                        </div>
-                        <div className="flex flex-col items-center relative w-1/4">
-                            <div className="absolute -top-[20px] w-1 h-[20px] bg-gold"></div>
-                            <div className="mindmap-node mindmap-child text-sm md:text-lg w-full mb-6">عقود جائزة</div>
-                            <div className="flex flex-col gap-2 w-full text-xs text-center"><div className="bg-trait2 p-2 rounded">الإقالة</div><div className="bg-trait3 p-2 rounded">المرابحة</div><div className="bg-trait4 p-2 rounded">التقسيط</div></div>
-                        </div>
-                        <div className="flex flex-col items-center relative w-1/4">
-                            <div className="absolute -top-[20px] w-1 h-[20px] bg-gold"></div>
-                            <div className="mindmap-node mindmap-child text-sm md:text-lg w-full mb-6 text-red-700">الربا</div>
-                            <div className="flex flex-col gap-2 w-full text-xs text-center"><div className="bg-trait8 p-2 rounded text-red-700">محرم بالقرآن</div><div className="bg-trait8 p-2 rounded">ربا الفضل</div><div className="bg-trait8 p-2 rounded">ربا النسيئة</div></div>
-                        </div>
-                         <div className="flex flex-col items-center relative w-1/4">
-                            <div className="absolute -top-[20px] w-1 h-[20px] bg-gold"></div>
-                            <div className="mindmap-node mindmap-child text-sm md:text-lg w-full mb-6">القرض</div>
-                            <div className="flex flex-col gap-2 w-full text-xs text-center"><div className="bg-trait5 p-2 rounded">مشروع ومستحب</div><div className="bg-trait5 p-2 rounded font-bold text-red-600">بزيادة = ربا</div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-
-        const ReviewScreen = () => {
-            const [flippedCards, setFlippedCards] = useState({});
-            const [openQs, setOpenQs] = useState({});
-            
-            const toggleCard = (idx) => setFlippedCards(prev => ({...prev, [idx]: !prev[idx]}));
-            const toggleQ = (idx) => setOpenQs(prev => ({...prev, [idx]: !prev[idx]}));
-
-            return (
-                <div className="p-4 md:p-8 max-w-7xl mx-auto animate-slide-up pb-32">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl font-amiri font-bold text-navy mb-2">المراجعة الذكية</h2>
-                        <p className="text-gray-600 text-lg">ثبت التعريفات والأحكام بالبطاقات والأسئلة التحليلية</p>
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold text-navy mb-6 border-r-4 border-gold pr-3">أولاً: بطاقات التعريفات والأحكام ({FLASHCARDS.length} بطاقة)</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
-                        {FLASHCARDS.map((card, idx) => (
-                            <div key={idx} className={`flip-card cursor-pointer ${flippedCards[idx] ? 'flipped' : ''}`} onClick={() => toggleCard(idx)}>
-                                <div className="flip-card-inner">
-                                    <div className="flip-card-front text-center">
-                                        <div className="w-12 h-12 rounded-full border-2 border-gold flex items-center justify-center text-gold mb-3">
-                                            <SVGIcons.Cards />
-                                        </div>
-                                        <h4 className="text-xl md:text-2xl font-amiri font-bold leading-relaxed">{card.front}</h4>
-                                    </div>
-                                    <div className="flip-card-back p-5 text-base md:text-lg font-bold shadow-inner flex items-center justify-center leading-loose border-2 border-gold/30 text-center">
-                                        {card.back}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-navy mb-6 border-r-4 border-gold pr-3">ثانياً: الأسئلة المقالية ({ESSAY_QUESTIONS.length} أسئلة)</h3>
-                    <div className="flex flex-col gap-4">
-                        {ESSAY_QUESTIONS.map((item, idx) => {
-                            const isOpen = openQs[idx];
-                            const isGold = idx % 2 === 0;
-                            const mainBg = isGold ? 'bg-gold' : 'bg-navy';
-                            const mainText = isGold ? 'text-navy' : 'text-white';
-                            const iconBg = isGold ? 'bg-navy text-gold' : 'bg-white text-navy';
-
-                            return (
-                                <div key={idx} className={`rounded-2xl border-2 shadow-sm transition-all duration-300 overflow-hidden ${isGold ? 'border-gold' : 'border-navy'}`}>
-                                    <button
-                                        onClick={() => toggleQ(idx)}
-                                        className={`w-full text-right p-5 flex items-center justify-between font-bold text-xl transition-colors ${mainBg} ${mainText} hover:opacity-90`}
-                                    >
-                                        <span className="flex items-center gap-4">
-                                            <span className={`w-8 h-8 flex items-center justify-center rounded-full shrink-0 shadow-md ${iconBg}`}>
-                                                {idx + 1}
-                                            </span>
-                                            <span>{item.q}</span>
-                                        </span>
-                                        <svg className={`w-6 h-6 transform transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                                    </button>
-                                    <div className={`transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                        <div className="p-6 bg-white text-navy text-lg leading-relaxed font-bold border-t border-gray-100">
-                                            {item.a}
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            );
-        };
-
-        const QuizScreen = ({ studentData, startTime }) => {
-            const [currentQ, setCurrentQ] = useState(0);
-            const [selectedAnswers, setSelectedAnswers] = useState({});
-            const [isFinished, setIsFinished] = useState(false);
-            const [score, setScore] = useState(0);
-            const [timeSpent, setTimeSpent] = useState(0);
-            const [isSubmitting, setIsSubmitting] = useState(false);
-            const [submitMessage, setSubmitMessage] = useState('');
-
-            const handleSelect = (idx) => !isFinished && setSelectedAnswers(prev => ({...prev, [currentQ]: idx}));
-            const nextQ = () => currentQ < QUIZ_QUESTIONS.length - 1 && setCurrentQ(prev => prev + 1);
-            const prevQ = () => currentQ > 0 && setCurrentQ(prev => prev - 1);
-
-            const finishQuiz = async () => {
-                let s = 0;
-                QUIZ_QUESTIONS.forEach((q, idx) => { if (selectedAnswers[idx] === q.answer) s++; });
-                setScore(s);
-                const diffMins = Math.round((new Date() - startTime) / 60000) || 1;
-                setTimeSpent(diffMins);
-                setIsFinished(true);
-            };
-
-            const submitToGoogleForms = async () => {
-                setIsSubmitting(true);
-                setSubmitMessage('جاري إرسال النتيجة صمتاً...');
-                const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSe0zGzyfo7FfGHta0Ae-J5NYmFFCCLK4W2NdnG92dHH51IcBg/formResponse";
-                const formData = new FormData();
-                formData.append("entry.1186146438", "البيوع المحرمة ، والقرض");
-                formData.append("entry.598195891", studentData.name);
-                formData.append("entry.583802758", studentData.section);
-                formData.append("entry.2010697018", score.toString());
-                formData.append("entry.1329211307", timeSpent.toString());
-                try {
-                    await fetch(formUrl, { method: 'POST', mode: 'no-cors', body: formData });
-                    setIsSubmitting(false); setSubmitMessage('✅ تم حفظ النتيجة بنجاح في سجلات الأستاذ.');
-                } catch (error) {
-                    setIsSubmitting(false); setSubmitMessage('✅ تم الحفظ (نهاية الاتصال).');
-                }
-            };
-
-            if (isFinished) {
-                return (
-                    <div className="flex-grow flex items-center justify-center p-4 animate-fade-in">
-                        <div className="glass-panel p-10 rounded-3xl max-w-2xl w-full text-center">
-                            <h2 className="text-4xl font-amiri font-bold text-navy mb-6">نتيجة التقييم الشامل</h2>
-                            <div className="bg-white rounded-2xl p-8 mb-8 border-2 border-gold relative shadow-inner">
-                                <div className="text-7xl font-bold text-navy mb-4">{score} <span className="text-3xl text-gray-400">/ 20</span></div>
-                                <div className="text-2xl font-bold text-gold mb-4">
-                                    {score >= 18 ? "أداء مبهر وممتاز!" : score >= 14 ? "أداء جيد جداً!" : "تحتاج إلى مراجعة المادة مرة أخرى."}
-                                </div>
-                                <div className="flex justify-center gap-8 mt-6 text-gray-600 font-bold bg-gray-50 p-4 rounded-xl">
-                                    <p>الوقت: {timeSpent} دقائق</p><p>الطالب: {studentData.name}</p>
-                                </div>
-                            </div>
-                            {submitMessage ? (
-                                <div className="p-4 rounded-xl font-bold bg-green-100 text-green-800">{submitMessage}</div>
-                            ) : (
-                                <button onClick={submitToGoogleForms} disabled={isSubmitting} className="w-full bg-emerald-600 text-white font-bold text-xl py-4 rounded-xl hover:bg-emerald-700 shadow-lg flex justify-center items-center gap-2">
-                                    {isSubmitting ? 'جاري الإرسال...' : 'إنهاء وإرسال النتيجة للأستاذ'} {!isSubmitting && <SVGIcons.Check />}
-                                </button>
-                            )}
-                        </div>
-                    </div>
-                );
-            }
-
-            const q = QUIZ_QUESTIONS[currentQ];
-            const hasAnsweredAll = Object.keys(selectedAnswers).length === QUIZ_QUESTIONS.length;
-
-            return (
-                <div className="p-4 md:p-8 max-w-4xl mx-auto animate-fade-in pb-32 w-full">
-                    <div className="flex justify-between items-center mb-8 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-                        <div className="text-navy font-bold text-lg">السؤال {currentQ + 1} من {QUIZ_QUESTIONS.length}</div>
-                        <div className="w-1/2 bg-gray-200 rounded-full h-3"><div className="bg-gold h-3 transition-all" style={{ width: `${((currentQ + 1) / QUIZ_QUESTIONS.length) * 100}%` }}></div></div>
-                    </div>
-                    <div className="bg-white rounded-3xl p-8 shadow-lg border-t-4 border-navy mb-8 min-h-[300px]">
-                        <h3 className="text-2xl font-bold text-navy mb-8 leading-relaxed">{q.q}</h3>
-                        <div className="space-y-4">
-                            {q.options.map((opt, idx) => (
-                                <button key={idx} onClick={() => handleSelect(idx)} className={`w-full text-right p-5 rounded-xl text-lg transition-all border-2 ${selectedAnswers[currentQ] === idx ? 'bg-navy text-white border-navy shadow-md transform scale-[1.01]' : 'bg-gray-50 text-gray-700 hover:border-gold'}`}>
-                                    {opt}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="flex justify-between items-center bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-md border border-gray-200 sticky bottom-[80px] z-40">
-                        <button onClick={prevQ} disabled={currentQ === 0} className={`px-6 py-3 rounded-xl font-bold ${currentQ === 0 ? 'bg-gray-200 text-gray-400' : 'bg-white text-navy border border-navy hover:bg-gray-50'}`}>السابق</button>
-                        {currentQ === QUIZ_QUESTIONS.length - 1 ? (
-                            <button onClick={finishQuiz} disabled={!hasAnsweredAll} className={`px-8 py-3 rounded-xl font-bold shadow-md transition-all ${!hasAnsweredAll ? 'bg-gray-300 text-gray-500' : 'bg-gold text-navy hover:scale-105'}`}>إنهاء التقييم</button>
-                        ) : (
-                            <button onClick={nextQ} className="px-8 py-3 rounded-xl font-bold bg-navy text-white shadow-md hover:scale-105 transition-transform">التالي</button>
-                        )}
-                    </div>
-                </div>
-            );
+            return shuffled;
         };
 
         const App = () => {
-            const [screen, setScreen] = useState(1);
-            const [studentData, setStudentData] = useState(null);
-            const [startTime, setStartTime] = useState(null);
+            const [screen, setScreen] = useState('welcome');
+            const [user, setUser] = useState({ name: '', section: '', startTime: null });
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const [showModal, setShowModal] = useState(false);
+            const [modalImg, setModalImg] = useState('');
+            const [examAnswers, setExamAnswers] = useState(Array(20).fill(null));
+            const [finalQuestions, setFinalQuestions] = useState([]);
 
-            const handleStart = (name, section) => {
-                setStudentData({ name, section }); setStartTime(new Date()); setScreen(2);
+            // --- FULL DATA CONTENT ---
+            const lectureData = {
+                course: "أحاديث الأحكام ١",
+                lecture: "المحاضرة الثالثة: أحاديث من كتاب الطهارة",
+                professor: "د/ باسم القرافي",
+                topics: [
+                    {
+                        id: 1,
+                        title: "صفة غسل النبي ﷺ من الجنابة (الحديث 128)",
+                        hadith: "عَنْ عَائِشَةَ -رَضِيَ اللَّهُ عَنْهَا- قَالَتْ: «كَانَ رَسُولُ اللَّهِ ﷺ إِذَا اغْتَسَلَ مِنَ الْجَنَابَةِ يَبْدَأُ فَيَغْسِلُ يَدَيْهِ، ثُمَّ يُفْرِغُ بِيَمِينِهِ عَلَى شِمَالِهِ، فَيَغْسِلُ فَرْجَهُ، ثُمَّ يَتَوَضَّأُ، ثُمَّ يَأْخُذُ الْمَاءَ، فَيُدْخِلُ أَصَابِعَهُ فِي أُصُولِ الشَّعْرِ، ثُمَّ حَفَنَ عَلَى رَأْسِهِ ثَلَاثَ حَفَنَاتٍ، ثُمَّ أَفَاضَ عَلَى سَائِرِ جَسَدِهِ، ثُمَّ غَسَلَ رِجْلَيْهِ». مُتَّفَقٌ عَلَيْهِ.",
+                        image: "صفة غسل النبي.png",
+                        fullContent: [
+                            { h: "تصدير الحديث وبياناته", p: "تعد الأحاديث الواردة في صفة غسل الجنابة <span class='hl-gold'>أصلاً عظيماً</span> في باب الطهارة. نقلت أمهات المؤمنين تفاصيل العبادة بدقة. رواية ميمونة تزيد بياناً في غسل القدمين في مكان آخر بعد الفراغ." },
+                            { h: "مفهوم الغسل", p: "الغسل لغة: <span class='hl-red'>السيلان</span>. اصطلاحاً: <span class='hl-red'>تعميم البدن بالماء</span> بنية مخصوصة. الجنابة وصف يمنع من الصلاة." },
+                            { h: "الصفة الكاملة والمجزئة", p: "<span class='hl-navy'>المجزئة:</span> النية وتعميم البدن بالماء مع المضمضة والاستنشاق. <span class='hl-navy'>الكاملة:</span> البدء باليدين، ثم الفرج، ثم الوضوء الكامل، ثم تروية أصول الشعر بثلاث حفنات، ثم تعميم الجسد." },
+                            { h: "مسألة التمندل (استخدام المنشفة)", p: "الراجح هو <span class='hl-gold'>الإباحة</span>. رد النبي للمنديل لم يكن للتحريم بل لسبب عارض (عدم الحاجة أو إبقاء البركة). البديل هو <span class='hl-gold'>نفض الماء باليد</span>." }
+                        ],
+                        formative: [
+                            { id: 't1q1', type: 'drop', text: "بدأ النبي ﷺ غسله بـ ____.", opts: ["غسل يديه", "المسح", "التيمم"], correct: "غسل يديه" },
+                            { id: 't1q2', type: 'match', pairs: [{ a: "الكامل", b: "ما وافق الفعل" }, { a: "المجزئ", b: "ما يكفي للصحة" }] },
+                            { id: 't1q3', type: 'drop', text: "حكم استخدام المنشفة بعد الغسل ____.", opts: ["محرم", "مباح", "واجب"], correct: "مباح" }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: "النهي عن قضاء الحاجة في مرافق الناس (اللعانين)",
+                        hadith: "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «اتَّقُوا اللَّعَّانَيْنِ: الَّذِي يَتَخَلَّى فِي طَرِيقِ النَّاسِ، أَوْ ظِلِّهِمْ». (رواه مسلم). وفي رواية معاذ: «اتَّقُوا الْمَلَاعِنَ الثَّلَاثَةَ: الْبَرَازَ فِي الْمَوَارِدِ، وَقَارِعَةِ الطَّرِيقِ، وَالظِّلِّ».",
+                        image: "حديث اتقوا اللعانين.png",
+                        fullContent: [
+                            { h: "غريب الحديث", p: "اللعانين: الفعلان اللذان <span class='hl-red'>يجلبان اللعن</span> لفاعلهما. الموارد: أماكن <span class='hl-red'>استقاء الماء</span>. قارعة الطريق: <span class='hl-red'>وسطه</span> الذي يطرقه الناس." },
+                            { h: "علة النهي والحكمة", p: "العلة هي <span class='hl-navy'>أذية المسلمين</span> وإفساد مرافقهم. النهي من باب <span class='hl-gold'>سد الذرائع</span> التي تفضي للبغضاء." },
+                            { h: "الاستدلال القرآني", p: "ربط الشارع أذى الناس في طرقهم بالوعيد الشديد في قوله تعالى: <span class='hl-gold'>{وَالَّذِينَ يُؤْذُونَ الْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ بِغَيْرِ مَا اكتَسَبُوا...}</span>" }
+                        ],
+                        formative: [
+                            { id: 't2q1', type: 'drop', text: "النهي عن التخلي في الموارد سببه ____.", opts: ["الأذى", "الحرارة", "الخوف"], correct: "الأذى" },
+                            { id: 't2q2', type: 'match', pairs: [{ a: "الموارد", b: "أماكن الماء" }, { a: "قارعة الطريق", b: "وسط الطريق" }] },
+                            { id: 't2q3', type: 'drop', text: "اللعانين تعني الأفعال الجالبة لـ ____.", opts: ["اللعن", "الأجر", "النوم"], correct: "اللعن" }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: "أثر النوم على الطهارة (نواقض الوضوء)",
+                        hadith: "عَنْ أَنَسِ بْنِ مَالِكٍ رضي الله عنه قَالَ: «كَانَ أَصْحَابُ رَسُولُ اللَّهِ ﷺ يَنْتَظِرُونَ الْعِشَاءَ حَتَّى تَخْفِقَ رُؤُوسُهُمْ، ثُمَّ يُصَلُّونَ وَلَا يَتَوَضَّؤُونَ».",
+                        image: "تاثير النوم على الطهارة.png",
+                        fullContent: [
+                            { h: "تحليل الحالة", p: "خفق الرؤوس: ميلانها وسقوطها من <span class='hl-red'>شدة النعاس</span>. الحديث دليل أن النوم الخفيف لا ينقض." },
+                            { h: "نواقض الوضوء", p: "النوم ليس ناقضاً <span class='hl-navy'>بذاته</span> بل لأنه <span class='hl-navy'>مظنة الحدث</span>. القاعدة: <span class='hl-gold'>اليقين لا يزول بالشك</span>." },
+                            { h: "النوم المستغرق", p: "الذي يغيب معه الإدراك وتسترخي معه المفاصل هو الذي ينقض الوضوء يقيناً." }
+                        ],
+                        formative: [
+                            { id: 't3q1', type: 'drop', text: "النوم الخفيف ____ الوضوء.", opts: ["ينقض", "لا ينقض", "يبطئ"], correct: "لا ينقض" },
+                            { id: 't3q2', type: 'match', pairs: [{ a: "اليقين", b: "الطهارة" }, { a: "الشك", b: "النعاس" }] },
+                            { id: 't3q3', type: 'drop', text: "كان الصحابة ينتظرون صلاة ____.", opts: ["الفجر", "العشاء", "المغرب"], correct: "العشاء" }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: "باب المسح على الخفين",
+                        hadith: "عَنِ الْمُغِيرَةِ بْنِ شُعْبَةَ رضي الله عنه قَالَ: كُنْتُ مَعَ النَّبِيِّ ﷺ، فَتَوَضَّأَ، فَأَهْوَيْتُ لِأَنْزِعَ خُفَّيْهِ، فَقَالَ: «دَعْهُمَا، فَإِنِّي أَدْخَلْتُهُمَا طَاهِرَتَيْنِ» فَمَسَحَ عَلَيْهِمَا. (متفق عليه)",
+                        image: "المسح على الخفين.png",
+                        fullContent: [
+                            { h: "الخف والجورب", p: "الخف من <span class='hl-red'>الجلد</span>. الجورب من <span class='hl-red'>القطن أو الصوف</span> (الشراب). الحكمة: التيسير ورفع المشقة." },
+                            { h: "شروط الصحة", p: "لبسهما على <span class='hl-navy'>طهارة كاملة</span>. طهارة العين (لا يصح المسح على جلود السباع كالنمر). ستر محل الفرض." },
+                            { h: "جواز المعاونة", p: "فعل المغيرة دليل على <span class='hl-gold'>جواز الاستعانة بالغير</span> في الوضوء وقبول الإكرام إذا تبرع به الغير." }
+                        ],
+                        formative: [
+                            { id: 't4q1', type: 'drop', text: "يشترط للمسح لبس الخف على ____.", opts: ["برد", "طهارة", "عجلة"], correct: "طهارة" },
+                            { id: 't4q2', type: 'match', pairs: [{ a: "الخف", b: "جلد" }, { a: "الجورب", b: "صوف" }] },
+                            { id: 't4q3', type: 'drop', text: "لا يصح المسح على جلد ____ لأنه نجس.", opts: ["الغنم", "النمر", "الإبل"], correct: "النمر" }
+                        ]
+                    }
+                ],
+                flashcards: [
+                    { q: "الجنابة", a: "وصف للبدن بعد الجماع أو الإنزال يمنع من الصلاة" },
+                    { q: "الموارد", a: "مواقع استقاء الماء وشرب الناس والحيوان" },
+                    { q: "خفق الرؤوس", a: "ميلها وسقوطها من شدة النعاس (نوم خفيف)" },
+                    { q: "الخف", a: "ما يلبس على القدمين مما صنع من جلد" },
+                    { q: "التمندل", a: "استعمال المنديل (المنشفة) بعد الغسل" },
+                    { q: "الرخصة", a: "ما شرع لعذر شاق استثناءً من أصل كلي" },
+                    { q: "المجزئ", a: "القدر الذي يكفي لصحة العبادة شرعاً" },
+                    { q: "اللعانين", a: "الفعلان الجالبان لعنة الناس لفاعلهما" },
+                    { q: "طهارة العين", a: "أن يكون الخف طاهراً في أصله وليس من نجس" },
+                    { q: "الجورب", a: "ما يلبس على القدمين من صوف أو قطن" },
+                    { q: "أصول الشعر", a: "منابته التي يجب إيصال الماء إليها في الغسل" },
+                    { q: "اليقين", a: "بقاء الشيء على أصله ولا يزول بالشك" }
+                ],
+                essays: [
+                    { q: "لماذا رد النبي ﷺ المنديل في حديث ميمونة؟", a: "لعدم الحاجة، أو إبقاء للبركة، أو كراهة بلل الثياب." },
+                    { q: "ما العلة في تحريم التخلي في طرق الناس؟", a: "أذية المسلمين وإفساد مرافقهم وجلب اللعن." },
+                    { q: "متى ينتقض الوضوء بالنوم؟", a: "عندما يكون مستغرقاً يغيب معه الإدراك وتسترخي فيه المفاصل." },
+                    { q: "ما حكم الاستعانة بالغير في الوضوء؟", a: "جائزة بلا كراهة، ويشرع قبولها إكراماً." },
+                    { q: "فرق بين الخف والجورب.", a: "الخف من جلد، والجورب من صوف أو قطن (الشراب)." },
+                    { q: "ما هي الصفة المجزئة للغسل؟", a: "النية وتعميم البدن بالماء مع المضمضة والاستنشاق." },
+                    { q: "ما معنى 'اليقين لا يزول بالشك'؟", a: "أن من تيقن الطهارة وشك في الحدث فهو طاهر." },
+                    { q: "لماذا لا يصح المسح على جلود السباع؟", a: "لأنها نجسة العين ولا تطهر بالدباغ عند الراجح." },
+                    { q: "ما المقصود بقارعة الطريق؟", a: "وسط الطريق الذي يطرقه الناس بأرجلهم." },
+                    { q: "ما الفائدة من تروية أصول الشعر في الغسل؟", a: "ضمان وصول الماء لمنابت الشعر وتطهير كامل الرأس." }
+                ],
+                mcqs: [
+                    { q: "بدأ النبي ﷺ غسله بـ:", o: ["المضمضة", "غسل يديه", "غسل رجليه", "المسح"], a: "غسل يديه" },
+                    { q: "عدد حفنات الرأس في الغسل الكامل:", o: ["واحدة", "اثنتان", "ثلاث", "أربعة"], a: "ثلاث" },
+                    { q: "حكم استعمال المنشفة (التمندل) بعد الغسل:", o: ["واجب", "مباح", "محرم", "مكروه"], a: "مباح" },
+                    { q: "اللعانين هما الفعلان اللذان:", o: ["يسبان الله", "يجلبان لعن الناس", "يحرمهما العقل", "قديمان"], a: "يجلبان لعن الناس" },
+                    { q: "قارعة الطريق هي:", o: ["جانب الطريق", "وسط الطريق", "نهاية الطريق", "المكان المهجور"], a: "وسط الطريق" },
+                    { q: "معنى الموارد في حديث الملاعن:", o: ["الذهب", "أماكن استقاء الماء", "التجارة", "الأولاد"], a: "أماكن استقاء الماء" },
+                    { q: "العلة في تحريم التخلي في الظل هي:", o: ["البرودة", "أذية الناس", "الظلام", "النجاسة فقط"], a: "أذية الناس" },
+                    { q: "النوم الذي لا ينقض الوضوء هو:", o: ["المستغرق", "الخفيف مع التمكن", "نوم السكران", "الإغماء"], a: "الخفيف مع التمكن" },
+                    { q: "كان الصحابة ينتظرون صلاة ____ حتى تخفق رؤوسهم:", o: ["الفجر", "الظهر", "العشاء", "المغرب"], a: "العشاء" },
+                    { q: "خفق الرؤوس يعني ميلها من:", o: ["الألم", "النعاس", "الخشوع", "البرد"], a: "النعاس" },
+                    { q: "النوم في الوضوء يعتبر ____ للحدث وليس ناقضاً بذاته:", o: ["مانعاً", "مظنة", "يقيناً", "واجباً"], a: "مظنة" },
+                    { q: "أهويت لأنزع خفيه، قائل العبارة هو:", o: ["أبو هريرة", "المغيرة بن شعبة", "أنس بن مالك", "ابن عباس"], a: "المغيرة بن شعبة" },
+                    { q: "شرط المسح على الخفين أن يلبسهما على:", o: ["خوف", "طهارة", "عجلة", "برد"], a: "طهارة" },
+                    { q: "الخف يصنع من:", o: ["الصوف", "الجلد", "الكتان", "الحديد"], a: "الجلد" },
+                    { q: "الجورب هو ما يسمى اليوم بـ:", o: ["القميص", "الشراب", "العمامة", "السروال"], a: "الشراب" },
+                    { q: "لا يصح المسح على جلد النمر لأنه:", o: ["غالٍ", "نجس العين", "قوي", "نادر"], a: "نجس العين" },
+                    { q: "أصل الوضوء بقاؤه، وهذا تطبيق لقاعدة:", o: ["المشقة تجلب التيسير", "اليقين لا يزول بالشك", "الضرر يزال", "الضرورات تبيح المحظورات"], a: "اليقين لا يزول بالشك" },
+                    { q: "يجوز الاستعانة بالغير في الوضوء بدليل:", o: ["حديث عائشة", "فعل المغيرة مع النبي", "حديث أنس", "القرآن"], a: "فعل المغيرة مع النبي" },
+                    { q: "محل الفرض في غسل القدم هو إلى:", o: ["الكعبين", "الركبتين", "أصابع القدم", "الساق"], a: "الكعبين" },
+                    { q: "توفيت عائشة رضي الله عنها سنة:", o: ["40هـ", "58هـ", "70هـ", "90هـ"], a: "58هـ" }
+                ]
             };
 
-            const NavButton = ({ targetScreen, icon, label }) => (
-                <button onClick={() => setScreen(targetScreen)} className={`flex flex-col items-center p-2 rounded-lg transition-colors ${screen === targetScreen ? 'text-gold bg-navy' : 'text-gray-400 hover:text-navy hover:bg-gray-100'}`}>
-                    {icon}<span className="text-xs font-bold mt-1">{label}</span>
-                </button>
+            // --- Header Component ---
+            const Banner = () => (
+                <div className="bg-navy text-white p-6 shadow-2xl border-b-4 border-gold sticky top-0 z-50">
+                    <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+                        <div className="flex flex-col items-center md:items-start order-2 md:order-1">
+                            <div className="w-48 h-12 bg-white rounded-lg p-2 mb-2 flex items-center justify-center">
+                                <img src="../../logo.png" alt="شعار الجامعة" className="max-h-full object-contain" />
+                            </div>
+                            <span className="text-gold font-bold text-sm tracking-widest">{lectureData.professor}</span>
+                        </div>
+                        <div className="text-center order-1 md:order-2 mb-4 md:mb-0">
+                            <h1 className="font-amiri text-2xl md:text-3xl font-bold border-x-2 border-gold/30 px-6">
+                                {lectureData.lecture}
+                            </h1>
+                        </div>
+                        <div className="bg-gold text-navy px-6 py-2 rounded-full font-black text-sm order-3">
+                            {lectureData.course}
+                        </div>
+                    </div>
+                </div>
             );
 
-            return (
-                <div className="flex flex-col min-h-screen">
-                    {screen > 1 && (
-                        <header className="bg-white shadow-sm sticky top-0 z-50 p-4 border-b-2 border-gold flex justify-between items-center">
-                            <div className="font-amiri font-bold text-xl text-navy">البيوع المحرمة والقرض</div>
-                            <div className="text-sm bg-trait4 px-3 py-1 rounded-full border border-gold text-navy font-bold">{studentData.name.split(' ')[0]} ({studentData.section})</div>
-                        </header>
-                    )}
-                    <main className="flex-grow flex flex-col relative bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]">
-                        {screen === 1 && <WelcomeScreen onStart={handleStart} />}
-                        {screen === 2 && <StepperContentScreen onComplete={() => setScreen(3)} />}
-                        {screen === 3 && <MindMapScreen />}
-                        {screen === 4 && <ReviewScreen />}
-                        {screen === 5 && <QuizScreen studentData={studentData} startTime={startTime} />}
-                    </main>
-                    {screen > 1 && (
-                        <nav className="fixed bottom-0 w-full bg-white shadow-[0_-4px_15px_rgba(0,0,0,0.05)] border-t border-gray-100 z-50">
-                            <div className="max-w-md mx-auto flex justify-between px-6 py-2">
-                                <NavButton targetScreen={2} icon={<SVGIcons.Book />} label="المادة" />
-                                <NavButton targetScreen={3} icon={<SVGIcons.Map />} label="الخريطة" />
-                                <NavButton targetScreen={4} icon={<SVGIcons.Cards />} label="المراجعة" />
-                                <NavButton targetScreen={5} icon={<SVGIcons.Quiz />} label="التقييم" />
+            // --- Modal Component ---
+            const Modal = () => (
+                <div className={`fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy/95 backdrop-blur-xl transition-all duration-500 ${showModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                    <div className="relative max-w-7xl w-full bg-white rounded-[2rem] p-4 shadow-2xl border-8 border-gold overflow-auto max-h-[95vh]">
+                        <button onClick={() => setShowModal(false)} className="absolute top-4 left-4 bg-hlRed text-white w-12 h-12 rounded-full font-black text-2xl z-10 hover:scale-110 transition-transform">×</button>
+                        <div className="p-4 text-center">
+                            <h4 className="text-2xl font-bold text-navy mb-6">الملخص المصور للمحاضرة</h4>
+                            <img src={modalImg} className="w-full h-auto rounded-xl shadow-inner border-2 border-gold/10" alt="Summary" onError={e => e.target.src="https://placehold.co/1200x800?text=الملخص+المصور"} />
+                        </div>
+                    </div>
+                </div>
+            );
+
+            // --- Login/Welcome Screen ---
+            const WelcomeScreen = () => {
+                const [n, setN] = useState('');
+                const [s, setS] = useState('');
+                const isValid = n.trim().split(/\s+/).length >= 4 && s;
+                return (
+                    <div className="max-w-xl mx-auto mt-20 p-12 bg-white rounded-[3rem] shadow-2xl border border-gold/20 text-center fade-in relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gold opacity-10 rounded-bl-full"></div>
+                        <h2 className="text-4xl font-amiri font-bold text-navy mb-10">مرحباً بك في قاعة المحاضرات</h2>
+                        <div className="space-y-6 text-right">
+                            <div>
+                                <label className="block text-navy font-bold mb-2 pr-2">الاسم الرباعي كاملاً:</label>
+                                <input className="w-full p-4 rounded-2xl border-2 border-gold/30 focus:border-navy outline-none shadow-inner" value={n} onChange={e => setN(e.target.value)} placeholder="أدخل اسمك كما في السجل" />
                             </div>
-                        </nav>
-                    )}
+                            <div>
+                                <label className="block text-navy font-bold mb-2 pr-2">رقم الشعبة:</label>
+                                <input className="w-full p-4 rounded-2xl border-2 border-gold/30 focus:border-navy outline-none shadow-inner" value={s} onChange={e => setS(e.target.value)} placeholder="مثال: 101" />
+                            </div>
+                            <button disabled={!isValid} onClick={() => { setUser({name:n, section:s, startTime:new Date()}); setScreen('topics'); }} className={`w-full py-5 rounded-2xl font-bold text-xl transition-all shadow-xl ${isValid ? 'bg-navy text-gold hover:scale-[1.02]' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}>دخول المحاضرة</button>
+                        </div>
+                    </div>
+                );
+            };
+
+            // --- Topic Flow Component ---
+            const TopicFlow = () => {
+                const topic = lectureData.topics[currentIndex];
+                const [qStates, setQStates] = useState({});
+                const [matchStates, setMatchStates] = useState({});
+                const [activeL, setActiveL] = useState(null);
+
+                const isLocked = !topic.formative.every(q => {
+                    if (q.type === 'drop') return qStates[q.id] === q.correct;
+                    if (q.type === 'match') return Object.keys(matchStates[q.id] || {}).length === q.pairs.length;
+                    return false;
+                });
+
+                const handleMatch = (qid, l, r) => {
+                    if (!l) return;
+                    const q = topic.formative.find(x => x.id === qid);
+                    if (q.pairs.find(p => p.a === l).b === r) {
+                        setMatchStates(prev => ({...prev, [qid]: {...(prev[qid]||{}), [l]: r}}));
+                        setActiveL(null);
+                    } else {
+                        alert("محاولة خاطئة!"); setActiveL(null);
+                    }
+                };
+
+                const next = () => {
+                    setQStates({}); setMatchStates({}); setActiveL(null);
+                    if (currentIndex < 3) setCurrentIndex(prev => prev + 1);
+                    else {
+                        setFinalQuestions(shuffleArray(lectureData.mcqs.map(q => ({...q, options: shuffleArray(q.o)}))));
+                        setScreen('review');
+                    }
+                };
+
+                return (
+                    <div className="max-w-6xl mx-auto mt-10 pb-24 px-4 fade-in">
+                        <div className="bg-white rounded-[3rem] shadow-2xl border border-gold/20 overflow-hidden">
+                            <div className="bg-navy p-8 text-gold flex justify-between items-center">
+                                <h3 className="text-3xl font-amiri font-bold">{topic.title}</h3>
+                                <button onClick={() => { setModalImg(topic.image); setShowModal(true); }} className="bg-gold text-navy px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform">
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                    ملخص مصور
+                                </button>
+                            </div>
+                            <div className="p-10">
+                                <div className="verse shadow-inner">{topic.hadith}</div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                                    {topic.fullContent.map((sec, i) => (
+                                        <div key={i} className={`p-8 rounded-[2rem] border-r-8 shadow-sm transition-all hover:shadow-md ${i%2===0 ? 'bg-trait1 border-navy' : 'bg-trait3 border-gold'}`}>
+                                            <h4 className="text-xl font-black text-navy mb-4 border-b-2 border-gold/20 pb-2">{sec.h}</h4>
+                                            <p className="text-lg leading-relaxed text-gray-800" dangerouslySetInnerHTML={{__html: sec.p}}></p>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="mt-16 bg-navy/5 p-10 rounded-[3rem] border border-navy/10 space-y-8">
+                                    <h4 className="text-2xl font-bold text-navy flex items-center gap-3">التقييم التكويني (أجب للانتقال):</h4>
+                                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                        {topic.formative.map((q, i) => (
+                                            <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-gold/20">
+                                                <span className="text-xs font-black text-gold uppercase tracking-tighter mb-2 block">سؤال {i+1}</span>
+                                                {q.type === 'drop' ? (
+                                                    <div className="text-lg leading-loose">
+                                                        {q.text.split('____').map((part, pi) => (
+                                                            <React.Fragment key={pi}>
+                                                                {part}
+                                                                {pi === 0 && (
+                                                                    <select className="mx-2 p-2 border-2 border-navy rounded-lg font-bold text-navy" value={qStates[q.id]||''} onChange={e => setQStates({...qStates, [q.id]: e.target.value})}>
+                                                                        <option value="">اختر</option>
+                                                                        {q.opts.map(o => <option key={o} value={o}>{o}</option>)}
+                                                                    </select>
+                                                                )}
+                                                            </React.Fragment>
+                                                        ))}
+                                                    </div>
+                                                ) : (
+                                                    <div className="grid grid-cols-2 gap-4">
+                                                        <div className="space-y-2">
+                                                            {q.pairs.map(p => (
+                                                                <button key={p.a} disabled={!!(matchStates[q.id]||{})[p.a]} onClick={() => setActiveL(p.a)} className={`w-full p-2 text-xs rounded-lg font-bold border-2 transition-all ${ (matchStates[q.id]||{})[p.a] ? 'bg-green-100 border-green-500 text-green-700' : activeL === p.a ? 'bg-gold' : 'bg-white border-gold' }`}>{p.a}</button>
+                                                            ))}
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            {q.pairs.map(p => (
+                                                                <button key={p.b} disabled={Object.values(matchStates[q.id]||{}).includes(p.b)} onClick={() => handleMatch(q.id, activeL, p.b)} className="w-full p-2 text-xs rounded-lg font-bold bg-navy text-white hover:bg-gold hover:text-navy disabled:opacity-20 transition-all">{p.b}</button>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <button disabled={isLocked} onClick={next} className={`w-full py-6 rounded-3xl font-black text-2xl shadow-xl transition-all ${!isLocked ? 'bg-navy text-gold hover:scale-[1.02]' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>الوحدة التالية</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            // --- Smart Review Component ---
+            const ReviewScreen = () => {
+                const [openE, setOpenE] = useState(null);
+                return (
+                    <div className="max-w-7xl mx-auto mt-10 pb-32 px-4 fade-in">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-amiri font-bold text-navy mb-4">المراجعة والتقويم الذاتي</h2>
+                            <div className="h-1.5 w-32 bg-gold mx-auto rounded-full"></div>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+                            {lectureData.flashcards.map((c, i) => (
+                                <div key={i} className="flip-card">
+                                    <div className="flip-card-inner">
+                                        <div className="flip-card-front text-2xl font-amiri leading-relaxed">{c.q}</div>
+                                        <div className="flip-card-back text-lg leading-loose">{c.a}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="max-w-4xl mx-auto bg-white p-12 rounded-[3rem] shadow-2xl border border-gold/10">
+                            <h3 className="text-3xl font-bold text-navy mb-10 border-b-4 border-gold/20 pb-4">الأسئلة المقالية والتحليلية:</h3>
+                            <div className="space-y-4">
+                                {lectureData.essays.map((e, i) => (
+                                    <div key={i} className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                                        <button onClick={() => setOpenE(openE === i ? null : i)} className={`w-full p-6 flex justify-between items-center transition-all ${i%2===0 ? 'bg-navy text-gold' : 'bg-gold text-navy'}`}>
+                                            <span className="font-bold text-xl">{i+1}. {e.q}</span>
+                                            <span className={`transform transition-transform ${openE===i?'rotate-180':''}`}>▼</span>
+                                        </button>
+                                        {openE === i && <div className="p-8 bg-cream text-hlBlue font-bold text-lg leading-loose fade-in border-t-2 border-gold/20">{e.a}</div>}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="text-center mt-20">
+                            <button onClick={() => setScreen('exam')} className="bg-hlRed text-white px-24 py-8 rounded-full font-black text-3xl shadow-2xl hover:bg-navy transition-all hover:scale-105 active:scale-95">بدء الاختبار النهائي (20 سؤال)</button>
+                        </div>
+                    </div>
+                );
+            };
+
+            // --- Final Exam Component ---
+            const ExamScreen = () => {
+                const isReady = examAnswers.filter(a => a !== null).length === 20;
+                return (
+                    <div className="max-w-4xl mx-auto mt-10 pb-32 px-4 fade-in">
+                        <div className="bg-navy text-gold p-8 rounded-[2.5rem] sticky top-28 z-[40] flex justify-between items-center shadow-2xl border-4 border-gold">
+                            <div className="flex flex-col">
+                                <span className="text-xs opacity-60 uppercase tracking-widest">اسم الطالب</span>
+                                <span className="font-black text-xl">{user.name}</span>
+                            </div>
+                            <div className="text-center">
+                                <span className="text-xs opacity-60 uppercase block">التقدم</span>
+                                <span className="font-black text-3xl">{examAnswers.filter(a => a !== null).length} / 20</span>
+                            </div>
+                        </div>
+                        <div className="space-y-12 mt-16">
+                            {finalQuestions.map((q, i) => (
+                                <div key={i} className="bg-white p-10 rounded-[3rem] shadow-xl border-r-[15px] border-gold transform transition-all hover:-translate-x-2">
+                                    <h4 className="text-2xl font-black text-navy mb-8 leading-relaxed"><span className="text-gold ml-2">{i+1}.</span> {q.q}</h4>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {q.options.map((opt, oi) => (
+                                            <button key={oi} onClick={() => { const na = [...examAnswers]; na[i] = opt; setExamAnswers(na); }} className={`p-6 rounded-2xl text-right font-bold transition-all border-2 text-lg ${ examAnswers[i] === opt ? 'bg-navy text-white border-navy scale-105 shadow-xl' : 'bg-cream border-transparent hover:border-gold' }`}>{opt}</button>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <button disabled={!isReady} onClick={submitFinal} className={`w-full mt-20 py-8 rounded-[2rem] font-black text-4xl shadow-2xl transition-all ${isReady ? 'bg-green-600 text-white hover:bg-navy' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}>إرسال النتيجة فوراً</button>
+                    </div>
+                );
+            };
+
+            // --- Result Screen ---
+            const ResultScreen = () => {
+                const grade = examAnswers.reduce((acc, curr, idx) => curr === finalQuestions[idx].a ? acc + 1 : acc, 0);
+                const time = Math.floor((new Date() - user.startTime) / 60000);
+                return (
+                    <div className="max-w-2xl mx-auto mt-20 p-16 bg-white rounded-[4rem] shadow-2xl text-center fade-in border border-gold/20 relative">
+                        <div className="absolute top-0 inset-x-0 h-4 bg-navy"></div>
+                        <svg className="w-24 h-24 mx-auto text-green-500 mb-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h2 className="text-5xl font-amiri font-bold text-navy mb-4">تهانينا! تم الإرسال</h2>
+                        <p className="text-2xl text-gray-500 mb-10">الطالب: {user.name}</p>
+                        <div className="bg-navy p-12 rounded-[3rem] text-gold border-4 border-gold shadow-2xl">
+                            <span className="text-sm opacity-60 uppercase block mb-2 tracking-widest">الدرجة النهائية</span>
+                            <span className="text-9xl font-black tracking-tighter">{grade}</span>
+                            <span className="text-4xl font-bold opacity-60"> / 20</span>
+                        </div>
+                        <div className="mt-12 text-gray-400 font-bold">الوقت المستغرق: {time} دقيقة</div>
+                        <button onClick={() => window.location.reload()} className="mt-12 text-navy underline font-black hover:text-gold transition-colors">خروج وإغلاق</button>
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen transition-all duration-700">
+                    <Banner />
+                    <Modal />
+                    <div className="container mx-auto px-4">
+                        {screen === 'welcome' && <WelcomeScreen />}
+                        {screen === 'topics' && <TopicFlow />}
+                        {screen === 'review' && <ReviewScreen />}
+                        {screen === 'exam' && <ExamScreen />}
+                        {screen === 'result' && <ResultScreen />}
+                    </div>
                 </div>
             );
         };
