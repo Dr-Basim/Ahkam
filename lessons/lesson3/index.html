@@ -331,3 +331,369 @@
                                 onChange={(e) => setDropdownAnswers({...dropdownAnswers, [qKey]: e.target.value})}
                             >
                                 <option value="" disabled>اختر الإجابة...</option>
+                                {topic.dropdowns.options[qKey].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            </select>
+                        );
+                    }
+                    return <span key={i} className="leading-loose text-xl font-bold text-navy">{part}</span>;
+                });
+            };
+
+            return (
+                <div className="mt-12 p-8 bg-white rounded-3xl shadow-xl border-t-4 border-gold w-full">
+                    <h3 className="text-3xl font-amiri font-bold text-navy mb-8 text-center bg-gray-50 py-3 rounded-lg border border-gray-200">التقييم التكويني المشروط (أجب لتنتقل)</h3>
+                    
+                    <div className="mb-10 p-6 bg-blue-50 rounded-2xl border border-blue-200 shadow-sm w-full">
+                        <h4 className="font-bold text-2xl mb-6 text-blue-900 flex items-center gap-3">
+                            <span className="bg-blue-600 text-white w-8 h-8 flex justify-center items-center rounded-full text-lg">أ</span> 
+                            أكمل الفراغات بما يناسب:
+                        </h4>
+                        <div className="p-6 bg-white rounded-xl border border-gray-100">{renderDropdownText()}</div>
+                    </div>
+
+                    <div className="p-6 bg-purple-50 rounded-2xl border border-purple-200 shadow-sm w-full">
+                        <h4 className="font-bold text-2xl mb-8 text-purple-900 flex items-center gap-3">
+                            <span className="bg-purple-600 text-white w-8 h-8 flex justify-center items-center rounded-full text-lg">ب</span> 
+                            صل العبارة من القائمة (أ) بما يناسبها في (ب):
+                        </h4>
+                        <div className="flex flex-col md:flex-row gap-8">
+                            <div className="flex-1 space-y-4">
+                                {topic.matching.map((m, i) => {
+                                    const isMatched = matchedPairs.includes(m.left);
+                                    const isSelected = selectedLeft?.left === m.left;
+                                    return (
+                                        <div key={i} onClick={() => !isMatched && setSelectedLeft(m)}
+                                            className={`matching-item p-5 border-2 rounded-xl text-center font-bold text-lg shadow-sm
+                                                ${isMatched ? 'matched border-green-500' : isSelected ? 'selected' : 'border-navy bg-white hover:bg-gray-100'}`}>
+                                            {m.left}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            <div className="flex-1 space-y-4">
+                                {shuffledRight.map((r, i) => {
+                                    const isMatchedBySomeone = matchedPairs.some(left => topic.matching.find(match => match.left === left).right === r);
+                                    const isShaking = shakeRight === r;
+                                    return (
+                                        <div key={i} onClick={() => !isMatchedBySomeone && handleMatch(r)}
+                                            className={`matching-item p-5 border-2 rounded-xl text-center font-bold text-lg shadow-sm
+                                                ${isMatchedBySomeone ? 'matched border-green-500' : isShaking ? 'wrong border-red-500' : 'border-gold bg-white hover:bg-gray-100'}`}>
+                                            {r}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const WelcomeScreen = ({ onStart }) => {
+            const handleStart = (e) => {
+                e.preventDefault();
+                const name = e.target.name.value.trim();
+                const section = e.target.section.value.trim();
+                if (name.split(/\s+/).length < 4) {
+                    alert('الرجاء إدخال الاسم الرباعي كاملاً (٤ مقاطع على الأقل).'); return;
+                }
+                if (!section) {
+                    alert('الرجاء إدخال رقم الشعبة.'); return;
+                }
+                onStart({ name, section, startTime: new Date() });
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-navy">
+                    <div className="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-xl text-center border-b-8 border-gold fade-in relative overflow-hidden">
+                        <div className="w-48 h-16 mx-auto mb-4 flex items-center justify-center bg-white p-2 rounded">
+                            <img src="../../logo.png" alt="شعار الجامعة" className="w-full h-full object-contain" />
+                        </div>
+                        <h2 className="text-xl font-bold text-navy mb-2 tracking-wider mt-2">د/ باسم القرافي</h2>
+                        <div className="h-px bg-gray-300 w-1/2 mx-auto mb-6"></div>
+                        <h1 className="text-2xl font-amiri font-bold text-navy mb-4 bg-gold bg-opacity-30 inline-block px-6 py-2 rounded-full">أحاديث الأحكام ١</h1>
+                        <h3 className="text-4xl font-amiri font-bold text-navy mb-10 leading-relaxed">المحاضرة الثالثة<br/><span className="text-2xl text-gold mt-2 block">أحاديث من كتاب الطهارة</span></h3>
+                        
+                        <form onSubmit={handleStart} className="space-y-6 text-right">
+                            <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 shadow-inner">
+                                <div className="mb-6">
+                                    <label className="block text-navy font-bold mb-3 text-lg">الاسم الرباعي:</label>
+                                    <input type="text" name="name" required placeholder="أدخل اسمك الرباعي هنا" className="w-full p-4 rounded-xl border-2 border-gray-300 focus:border-gold outline-none text-lg transition-colors" />
+                                </div>
+                                <div>
+                                    <label className="block text-navy font-bold mb-3 text-lg">رقم الشعبة:</label>
+                                    <input type="text" name="section" required placeholder="مثال: YM3" className="w-full p-4 rounded-xl border-2 border-gray-300 focus:border-gold outline-none text-lg transition-colors" />
+                                </div>
+                            </div>
+                            <button type="submit" className="btn-glow w-full bg-navy text-gold font-bold py-5 rounded-2xl text-2xl hover:bg-lightNavy transition shadow-xl mt-4 border-2 border-navy">
+                                دخول للمحاضرة وبدء التعلم
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            );
+        };
+
+        const TopicsScreen = ({ student, onFinish }) => {
+            const [topicIndex, setTopicIndex] = useState(0);
+            const [isPassed, setIsPassed] = useState(false);
+            const topic = TOPICS_DATA[topicIndex];
+
+            const handleNext = () => {
+                if (topicIndex < TOPICS_DATA.length - 1) {
+                    setIsPassed(false);
+                    setTopicIndex(prev => prev + 1);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    onFinish();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+
+            let benefitCounter = 0;
+
+            return (
+                <div className="min-h-screen pb-24">
+                    <TopHeader />
+                    <div className="container mx-auto px-4 mt-8 max-w-5xl fade-in w-full">
+                        <div className="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow border border-gold w-full">
+                            <span className="font-bold text-navy bg-gray-100 px-4 py-2 rounded-lg text-lg">الوحدة {topicIndex + 1} من {TOPICS_DATA.length}</span>
+                            <span className="font-bold text-navy bg-gold bg-opacity-30 px-6 py-2 rounded-lg text-lg">{student.name}</span>
+                        </div>
+
+                        <h2 className="text-4xl md:text-5xl font-amiri font-bold text-navy mb-10 text-center leading-tight bg-white p-6 rounded-2xl shadow-sm border-b-4 border-gold w-full">
+                            {topic.title}
+                        </h2>
+
+                        {/* Flex Col for Full Width Cells */}
+                        <div className="flex flex-col gap-8 mb-12 w-full">
+                            {topic.cells.map((cell, idx) => {
+                                if (cell.type === 'verse') {
+                                    return (
+                                        <div key={idx} className="verse-card w-full p-8 rounded-2xl text-center text-3xl leading-loose font-bold content-cell shadow-lg">
+                                            {cell.content}
+                                        </div>
+                                    );
+                                }
+                                
+                                if (cell.type === 'benefit_box') {
+                                    const isNavy = benefitCounter % 2 === 0;
+                                    benefitCounter++;
+                                    return (
+                                        <div key={idx} className={`w-full p-8 rounded-2xl shadow-md content-cell flex flex-col md:flex-row gap-8 items-center border-r-8 ${isNavy ? 'bg-navy text-gold border-gold' : 'bg-gold text-navy border-navy'}`}>
+                                            <div className="md:w-1/4 text-center w-full">
+                                                <span className={`font-amiri font-bold text-2xl px-4 py-3 rounded-lg inline-block w-full shadow-inner ${isNavy ? 'bg-gold text-navy' : 'bg-navy text-gold'}`}>{cell.title}</span>
+                                            </div>
+                                            <div className="md:w-3/4 text-2xl leading-loose w-full" dangerouslySetInnerHTML={{ __html: cell.content }} />
+                                        </div>
+                                    );
+                                }
+
+                                const isWarning = cell.type === 'warning';
+                                const headerColorClass = isWarning ? 'bg-red-50 text-red-800' : 'bg-blue-50 text-navy';
+                                const borderColorClass = isWarning ? 'border-red-600' : 'border-navy';
+
+                                return (
+                                    <div key={idx} className={`w-full bg-white rounded-2xl shadow-md border-r-8 content-cell overflow-hidden ${borderColorClass}`}>
+                                        <div className={`p-4 border-b border-gray-200 ${headerColorClass}`}>
+                                            <h4 className="font-bold text-2xl font-amiri">{cell.title}</h4>
+                                        </div>
+                                        <div className="p-8 text-2xl leading-loose font-medium text-gray-800" dangerouslySetInnerHTML={{ __html: cell.content }} />
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        <div className="mb-16 w-full">
+                            <h3 className="text-4xl font-bold text-navy mb-8 text-center font-amiri border-b-2 border-gold pb-2 inline-block relative left-1/2 transform -translate-x-1/2">الخريطة الذهنية البصرية</h3>
+                            <div className="mindmap-wrapper w-full">
+                                <div className="mindmap-root">{topic.mindmap.root}</div>
+                                <div className="mindmap-branches">
+                                    {topic.mindmap.branches.map((b, i) => <div key={i} className="mindmap-node">{b}</div>)}
+                                </div>
+                            </div>
+                        </div>
+
+                        <FormativeAssessment key={topic.id} topic={topic} onPass={setIsPassed} />
+
+                        {isPassed && (
+                            <div className="mt-12 text-center fade-in bg-green-50 p-8 rounded-3xl border-2 border-green-500 shadow-lg w-full">
+                                <p className="text-green-700 font-bold text-3xl mb-6">أحسنت! الإجابات صحيحة بالكامل.</p>
+                                <button type="button" onClick={handleNext} className="btn-glow bg-navy text-gold px-16 py-5 rounded-2xl font-bold text-3xl hover:bg-lightNavy shadow-xl border-2 border-gold transition-all">
+                                    {topicIndex < TOPICS_DATA.length - 1 ? 'الانتقال للوحدة التالية' : 'الانتقال للمراجعة الذكية'}
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const ReviewScreen = ({ onNext }) => {
+            const [flipped, setFlipped] = useState({});
+            const [acc, setAcc] = useState(null);
+
+            return (
+                <div className="min-h-screen pb-24">
+                    <TopHeader />
+                    <div className="container mx-auto px-4 mt-8 max-w-6xl fade-in w-full">
+                        <div className="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-gold w-full">
+                            <h2 className="text-5xl font-amiri font-bold text-navy mb-12 text-center bg-gold bg-opacity-20 py-6 rounded-xl">المراجعة الذكية المزدوجة</h2>
+                            
+                            <h3 className="text-3xl font-bold text-navy mb-10 font-amiri flex items-center gap-3"><span className="bg-navy text-gold px-4 py-2 rounded">1</span> بطاقات المفاهيم (12 بطاقة - انقر للقلب)</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-20 w-full">
+                                {FLASHCARDS.map((c, i) => (
+                                    <div key={i} className="h-64 perspective-1000 cursor-pointer content-cell w-full" onClick={() => setFlipped({...flipped, [i]: !flipped[i]})}>
+                                        <div className={`relative w-full h-full transform-style-3d ${flipped[i] ? 'rotate-y-180' : ''}`}>
+                                            <div className="absolute w-full h-full backface-hidden bg-white border-4 border-gold rounded-2xl shadow-lg flex items-center justify-center p-6 text-center">
+                                                <h4 className="font-bold text-3xl text-navy font-amiri leading-normal">{c.front}</h4>
+                                            </div>
+                                            <div className="absolute w-full h-full backface-hidden rotate-y-180-back bg-navy text-gold rounded-2xl shadow-lg flex items-center justify-center p-6 text-center border-4 border-navy">
+                                                <p className="font-tajawal text-xl leading-relaxed font-bold">{c.back}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <h3 className="text-3xl font-bold text-navy mb-10 font-amiri flex items-center gap-3"><span className="bg-navy text-gold px-4 py-2 rounded">2</span> أسئلة مقالية تحليلية شاملة (10 أسئلة)</h3>
+                            <div className="space-y-6 max-w-5xl mx-auto mb-16 w-full">
+                                {ESSAYS.map((e, i) => {
+                                    const isNavy = i % 2 === 0;
+                                    const btnColor = isNavy ? 'bg-navy text-gold border-navy' : 'bg-gold text-navy border-gold';
+                                    const contentColor = isNavy ? 'bg-blue-50 text-navy' : 'bg-yellow-50 text-navy';
+
+                                    return (
+                                        <div key={i} className="border-2 border-gray-300 rounded-2xl overflow-hidden shadow-md w-full">
+                                            <button type="button" onClick={() => setAcc(acc === i ? null : i)} className={`w-full text-right p-6 font-bold text-2xl flex justify-between items-center transition-colors ${btnColor}`}>
+                                                <span>{i + 1}. {e.q}</span>
+                                                <span className="text-4xl font-bold">{acc === i ? '−' : '+'}</span>
+                                            </button>
+                                            {acc === i && <div className={`p-8 font-medium text-2xl leading-loose border-t-2 border-gray-300 fade-in w-full ${contentColor}`}>{e.a}</div>}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+
+                            <div className="text-center mt-16 border-t-2 border-gray-200 pt-12 w-full">
+                                <button type="button" onClick={onNext} className="btn-glow bg-red-700 text-white px-20 py-6 rounded-2xl font-bold text-4xl hover:bg-red-800 shadow-2xl transition-all border-4 border-red-900">
+                                    دخول التقييم الشامل النهائي
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const AssessmentScreen = ({ student, onFinish }) => {
+            const [answers, setAnswers] = useState({});
+            const [isSubmitting, setIsSubmitting] = useState(false);
+
+            const handleSubmit = async () => {
+                if (Object.keys(answers).length < MCQS.length) {
+                    alert("الرجاء الإجابة على جميع الأسئلة 20 قبل الإرسال."); return;
+                }
+                setIsSubmitting(true);
+                
+                let score = 0;
+                MCQS.forEach((q, i) => { if (answers[i] === q.answer) score++; });
+                
+                const timeSpentMins = Math.round((new Date() - student.startTime) / 60000);
+
+                const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAtWpsGVdYNm6qt88dhkrd_Kj2kiyWBQiejpNjLvBfsOkPzw/formResponse";
+                const formData = new FormData();
+                formData.append("entry.631676590", "الثالثة"); 
+                formData.append("entry.716230744", student.name);
+                formData.append("entry.258825401", student.section);
+                formData.append("entry.1926766466", score.toString());
+                formData.append("entry.585619026", timeSpentMins.toString());
+
+                try {
+                    await fetch(formUrl, { method: "POST", mode: "no-cors", body: formData });
+                } catch (e) { console.error(e); }
+                
+                onFinish(score);
+            };
+
+            return (
+                <div className="min-h-screen pb-24">
+                    <TopHeader />
+                    <div className="container mx-auto px-4 mt-8 max-w-5xl fade-in w-full">
+                        <div className="bg-white p-10 rounded-3xl shadow-xl border-t-4 border-gold w-full">
+                            <h2 className="text-5xl font-amiri font-bold text-navy mb-8 text-center">التقييم الشامل</h2>
+                            <div className="bg-navy text-gold p-6 rounded-2xl text-center font-bold text-2xl mb-12 shadow-md w-full">
+                                أجب عن جميع الأسئلة الـ 20 لإنهاء المهمة وإرسال نتيجتك.
+                            </div>
+
+                            <div className="space-y-8 w-full">
+                                {MCQS.map((q, qIdx) => (
+                                    <div key={qIdx} className="bg-gray-50 p-8 rounded-3xl border-2 border-gray-300 hover:border-gold transition-colors shadow-sm w-full">
+                                        <h4 className="font-bold text-3xl mb-8 text-navy font-amiri leading-normal">{qIdx + 1}. {q.q}</h4>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                                            {q.options.map((opt, optIdx) => (
+                                                <label key={optIdx} className={`flex items-center p-5 rounded-2xl border-4 cursor-pointer transition-all w-full ${answers[qIdx] === optIdx ? 'bg-navy bg-opacity-10 border-navy' : 'bg-white border-gray-200 hover:bg-gray-100'}`}>
+                                                    <input type="radio" name={`q-${qIdx}`} checked={answers[qIdx] === optIdx} onChange={() => setAnswers({...answers, [qIdx]: optIdx})} className="ml-5 h-8 w-8 text-navy accent-navy flex-shrink-0" />
+                                                    <span className="font-bold text-2xl text-navy">{opt}</span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="text-center mt-20 border-t-4 border-gray-200 pt-12 w-full">
+                                <button type="button" onClick={handleSubmit} disabled={isSubmitting} className={`btn-glow bg-navy text-gold px-24 py-8 rounded-3xl font-bold text-4xl shadow-2xl border-4 border-gold ${isSubmitting ? 'opacity-50' : 'hover:bg-lightNavy transition-all'}`}>
+                                    {isSubmitting ? 'جاري الإرسال الموثوق...' : 'إنهاء وإرسال النتيجة'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const SuccessScreen = ({ student, score }) => (
+            <div className="min-h-screen flex items-center justify-center p-4 bg-navy">
+                <div className="bg-white p-16 rounded-3xl shadow-2xl text-center max-w-2xl w-full fade-in border-8 border-gold relative">
+                    <div className="text-8xl mb-8">🎓</div>
+                    <h2 className="text-6xl font-amiri font-bold text-navy mb-10">تمت المهمة بنجاح!</h2>
+                    
+                    <div className="bg-gray-50 p-8 rounded-3xl border-2 border-gray-200 mb-10 space-y-4">
+                        <p className="text-3xl text-navy">الطالب: <span className="font-bold">{student.name}</span></p>
+                        <p className="text-3xl text-navy">الشعبة: <span className="font-bold">{student.section}</span></p>
+                    </div>
+                    
+                    <div className="inline-block bg-navy border-8 border-gold rounded-full h-64 w-64 flex items-center justify-center flex-col shadow-2xl mx-auto mb-12">
+                        <span className="text-gold font-bold text-2xl mb-2">الدرجة</span>
+                        <span className="text-8xl font-bold text-white">{score}</span>
+                        <span className="text-gold font-bold text-2xl mt-2">من 20</span>
+                    </div>
+                    
+                    <div className="bg-green-100 text-green-800 p-6 rounded-2xl border-2 border-green-300">
+                        <p className="font-bold text-2xl mb-2">تم إرسال نتيجتك للدكتور باسم القرافي بنجاح.</p>
+                        <p className="text-xl">يمكنك إغلاق هذه الصفحة الآن بأمان.</p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const [screen, setScreen] = useState('welcome'); 
+            const [student, setStudent] = useState(null);
+            const [finalScore, setFinalScore] = useState(null);
+
+            if (screen === 'welcome') return <WelcomeScreen onStart={(data) => { setStudent(data); setScreen('topics'); }} />;
+            if (screen === 'topics') return <TopicsScreen student={student} onFinish={() => setScreen('review')} />;
+            if (screen === 'review') return <ReviewScreen onNext={() => setScreen('assessment')} />;
+            if (screen === 'assessment') return <AssessmentScreen student={student} onFinish={(score) => { setFinalScore(score); setScreen('success'); }} />;
+            if (screen === 'success') return <SuccessScreen student={student} score={finalScore} />;
+
+            return null;
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
