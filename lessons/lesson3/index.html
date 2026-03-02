@@ -99,7 +99,7 @@
                     { type: 'benefit_box', title: '١- اليقين في الطهارة', content: "فيه دليل على أنه لا بد أن يكون لبس الخفين على طهارة، فإن لبسهما على غير طهارة، وأراد الوضوء بعد ذلك <span class='font-bold'>وجب عليه أن ينزعهما ويغسل قدميه</span>، فإن نسي ومسح عليهما أعاد الوضوء والصلاة إن صلى؛ لأنه لبسهما على غير طهارة، وإذا شك: هل أدخلهما طاهرتين أو لا؟ فلا يمسح عليهما؛ لأنه لا بد أن يتيقن أنه أدخلهما طاهرتين." },
                     { type: 'benefit_box', title: '٢- الأفضلية عند اللبس', content: "أن الإنسان إذا كان عليه خفان فإن <span class='font-bold'>الأفضل أن يمسح عليهما ولا يخلعهما</span>؛ لأن الرسول عليه الصلاة والسلام قال: «دعهما فإني أدخلتهما طاهرتين»، فدل ذلك على أن إبقاءهما والمسح عليهما أفضل." },
                     { type: 'benefit_box', title: '٣- جواز معاونة المتوضئ', content: "جواز معاونة المتوضئ على وضوئه؛ لأن النبي ﷺ أعانه المغيرة ولا بأس بذلك، ولكن لا ينبغي للإنسان أن يطلب من أحد أن يعينه، لأن سؤال الناس مذموم. ولكن لو كان أحد يريد أن يكرمك ويساعدك فالأفضل أن تمكنه من ذلك... وخير الهدي هدي النبي ﷺ، لكن إن خاف الإنسان على نفسه من الإعجاب والترفع إذا خدمه الناس فلا بأس أن يسد الباب." },
-                    { type: 'benefit_box', title: '٤- طهارة عين الخفين (جلود السباع)', content: "أنه لا بد من أن تكون الخفان <span class='font-bold'>طاهرين</span>، يعني: لا يصح أن يمسح على كنادر نجسة، كما يفعله بعض الجهال، حيث يشتري من الكنادر التي جلودها جلود السباع، أو جلود الحيات... وهذا لا يجوز؛ لأن هذه الجلود نجسة، وعلى القول الراجح أنها <span class='font-bold text-red-400'>لا تطهر بالدباغ</span>... لكن القول الراجح أنها تبقى على نجاستها، وأنه لا يجوز للإنسان أن يلبسها، وأنه إذا مسها وهي رطبة أو يده رطبة تنجست يده." }
+                    { type: 'benefit_box', title: '٤- طهارة عين الخفين (جلود السباع)', content: "أنه لا بد من أن تكون الخفان <span class='font-bold'>طاهرين</span>، يعني: لا يصح أن يمسح على كنادر نجسة، كما يفعله بعض الجهال، حيث يشتري من الكنادر التي جلودها جلود السباع، أو جلود الحيات... وهذا لا يجوز؛ لأن هذه الجلود نجسة، وعلى القول الراجح أنها <span class='font-bold text-red-500'>لا تطهر بالدباغ</span>... لكن القول الراجح أنها تبقى على نجاستها، وأنه لا يجوز للإنسان أن يلبسها، وأنه إذا مسها وهي رطبة أو يده رطبة تنجست يده." }
                 ],
                 mindmap: {
                     root: "أحكام المسح على الخفين",
@@ -270,8 +270,9 @@
                     </div>
 
                     <div className="flex flex-col items-center md:items-end w-full md:w-1/3 order-1 md:order-3">
-                        <div className="h-10 mb-1 w-32 flex justify-end bg-white p-1 rounded">
-                            <img src="../../logo.png" alt="شعار الجامعة" className="w-full h-full object-contain" />
+                        <div className="h-14 mb-1 w-44 flex justify-end">
+                            {/* تم تطبيق فلتر brightness-0 invert لدمج الشعار وتغيير لونه للأبيض النقي */}
+                            <img src="../../logo.png" alt="شعار الجامعة" className="w-full h-full object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity" />
                         </div>
                         <span className="font-bold text-gold text-sm tracking-wide mt-1">د/ باسم القرافي</span>
                     </div>
@@ -406,7 +407,8 @@
             return (
                 <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-navy">
                     <div className="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-xl text-center border-b-8 border-gold fade-in relative overflow-hidden">
-                        <div className="w-48 h-16 mx-auto mb-4 flex items-center justify-center bg-white p-2 rounded">
+                        {/* الشعار بألوانه الطبيعية لأن الخلفية بيضاء هنا */}
+                        <div className="w-56 h-20 mx-auto mb-4 flex items-center justify-center">
                             <img src="../../logo.png" alt="شعار الجامعة" className="w-full h-full object-contain" />
                         </div>
                         <h2 className="text-xl font-bold text-navy mb-2 tracking-wider mt-2">د/ باسم القرافي</h2>
@@ -465,7 +467,6 @@
                             {topic.title}
                         </h2>
 
-                        {/* Flex Col for Full Width Cells */}
                         <div className="flex flex-col gap-8 mb-12 w-full">
                             {topic.cells.map((cell, idx) => {
                                 if (cell.type === 'verse') {
@@ -687,13 +688,4 @@
             if (screen === 'topics') return <TopicsScreen student={student} onFinish={() => setScreen('review')} />;
             if (screen === 'review') return <ReviewScreen onNext={() => setScreen('assessment')} />;
             if (screen === 'assessment') return <AssessmentScreen student={student} onFinish={(score) => { setFinalScore(score); setScreen('success'); }} />;
-            if (screen === 'success') return <SuccessScreen student={student} score={finalScore} />;
-
-            return null;
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
+            if (screen === 'success') return <
