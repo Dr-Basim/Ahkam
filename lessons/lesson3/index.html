@@ -17,7 +17,6 @@
                     colors: {
                         navy: '#16213e',
                         gold: '#e2b96f',
-                        cream: '#faf8f3',
                         lightNavy: '#1f2f5c',
                         darkGold: '#b8860b'
                     },
@@ -36,29 +35,27 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #faf8f3; color: #16213e; margin: 0; padding: 0;}
+        body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; color: #16213e; margin: 0; padding: 0;}
         h1, h2, h3, .verse { font-family: 'Amiri', serif; }
         
         /* Animations */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         
         @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(226, 185, 111, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(226, 185, 111, 0); } 100% { box-shadow: 0 0 0 0 rgba(226, 185, 111, 0); } }
         .btn-glow:hover { animation: pulseGlow 1.5s infinite; }
 
-        /* General Cells */
+        /* Cells */
         .content-cell { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .content-cell:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(22, 33, 62, 0.1); }
-
-        /* Verse Styling */
+        .content-cell:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(22, 33, 62, 0.12); }
         .verse-card { background: #16213e; color: #e2b96f; border-right: 8px solid #e2b96f; border-left: 8px solid #e2b96f; }
 
-        /* Pure CSS Mindmap */
-        .mindmap-wrapper { display: flex; flex-direction: column; align-items: center; gap: 2rem; padding: 2.5rem; background: rgba(226, 185, 111, 0.1); border-radius: 1rem; border: 2px dashed #e2b96f; }
-        .mindmap-root { background: #16213e; color: #e2b96f; padding: 1rem 2rem; border-radius: 2rem; font-weight: bold; font-size: 1.25rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 10; border: 2px solid #e2b96f; text-align: center;}
+        /* Mindmap */
+        .mindmap-wrapper { display: flex; flex-direction: column; align-items: center; gap: 2rem; padding: 2.5rem; background: rgba(226, 185, 111, 0.05); border-radius: 1rem; border: 2px dashed #e2b96f; }
+        .mindmap-root { background: #16213e; color: #e2b96f; padding: 1.5rem 2.5rem; border-radius: 2rem; font-weight: bold; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 10; border: 2px solid #e2b96f; text-align: center;}
         .mindmap-branches { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; position: relative; width: 100%; }
-        .mindmap-branches::before { content: ''; position: absolute; top: -2.5rem; left: 50%; width: 2px; height: 2.5rem; background: #16213e; }
-        .mindmap-node { background: #fff; color: #16213e; border: 2px solid #e2b96f; padding: 1rem; border-radius: 0.75rem; width: calc(50% - 1rem); max-width: 250px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); font-weight: bold;}
+        .mindmap-branches::before { content: ''; position: absolute; top: -2.5rem; left: 50%; width: 2px; height: 2.5rem; background: #e2b96f; }
+        .mindmap-node { background: #fff; color: #16213e; border: 2px solid #e2b96f; padding: 1.5rem; border-radius: 0.75rem; width: calc(50% - 1rem); max-width: 280px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); font-weight: bold; font-size: 1.1rem;}
 
         /* Flashcards */
         .perspective-1000 { perspective: 1000px; }
@@ -74,9 +71,10 @@
         .matching-item.wrong { animation: shake 0.5s; background-color: #ef4444 !important; color: white !important; }
         @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-5px);} 75% {transform: translateX(5px);} }
         
-        /* Highlight spans */
-        .hl-red { color: #dc2626; font-weight: 800; background: rgba(220,38,38,0.1); padding: 0 4px; border-radius: 4px; }
-        .hl-blue { color: #2563eb; font-weight: 800; background: rgba(37,99,235,0.1); padding: 0 4px; border-radius: 4px; }
+        /* High Contrast Highlights */
+        .hl-red { color: #b91c1c; font-weight: 800; background-color: #fee2e2; padding: 0 6px; border-radius: 4px; border: 1px solid #fca5a5; }
+        .hl-blue { color: #1d4ed8; font-weight: 800; background-color: #dbeafe; padding: 0 6px; border-radius: 4px; border: 1px solid #93c5fd; }
+        .hl-gold { color: #92400e; font-weight: 800; background-color: #fef3c7; padding: 0 6px; border-radius: 4px; border: 1px solid #fcd34d; }
     </style>
 </head>
 <body>
@@ -86,7 +84,7 @@
         const { useState, useEffect } = React;
 
         // ==========================================
-        // DATA STRUCTURE 
+        // COMPREHENSIVE DATA STRUCTURE 
         // ==========================================
         const TOPICS_DATA = [
             {
@@ -94,48 +92,48 @@
                 title: "حديث المغيرة بن شعبة - المسح على الخفين",
                 cells: [
                     { type: 'verse', content: "«عن المغيرة بن شعبة رضي الله عنه قال: كنت مع النبي صلى الله عليه وسلم فتوضأ، فأهويت لأنزع خفيه، فقال: »دعهما، فإني أدخلتهما طاهرتين«. فمسح عليهما». متفق عليه." },
-                    { type: 'info', title: 'مفهوم المسح وسبب التيسير', content: "الخفين ما يُلبس على الرجل من جلد، والجوارب ما يُلبس من صوف أو قطن. والمسح عليهما من <span class='text-gold font-bold bg-navy px-1 rounded'>محاسن الشريعة وتيسيرها</span> لرفع المشقة ودفع أذى البرد." },
-                    { type: 'warning', title: 'الشرط الحرج والرواية الشاذة', content: "يُشترط لصحة المسح أن يلبسهما على <span class='hl-red'>طهارة تامة</span>. وأما رواية مسح (أعلى الخف وأسفله) فهي <span class='hl-red'>رواية شاذة منكرة</span> لا عبرة بها، والمسح يكون لأعلى الخف فقط." },
-                    // الفوائد المستنبطة بالتناوب
-                    { type: 'benefit_box', title: 'الفائدة الأولى', content: "دليل قاطع على أنه <span class='font-bold'>لا بد أن يكون لبس الخفين على طهارة</span>. فإن لبسهما على غير طهارة ومسح وصلى وجب عليه خلع الخفين وإعادة الوضوء والصلاة." },
-                    { type: 'benefit_box', title: 'الفائدة الثانية', content: "إذا كان الإنسان يلبس خفين على طهارة، فإن <span class='font-bold'>الأفضل أن يمسح عليهما ولا يخلعهما</span> عملاً بسنة النبي ﷺ." },
-                    { type: 'benefit_box', title: 'الفائدة الثالثة', content: "جواز <span class='font-bold'>معاونة المتوضئ</span> على وضوئه وقبول المساعدة، وخير الهدي هدي النبي ﷺ." },
-                    { type: 'benefit_box', title: 'الفائدة الرابعة', content: "اشتراط طهارة الخفين عينياً. فلا يصح المسح على جلود السباع والحيات لأنها <span class='font-bold'>نجسة ولا تطهر بالدباغ</span> على الراجح من أقوال العلماء." }
+                    { type: 'info', title: 'شرح المفردات', content: "قال المؤلف الحافظ ابن حجر رحمه الله في كتابه (بلوغ المرام: باب المسح على الخفين)، وذكر ذلك بعد أن ذكر الأحاديث الواردة في صفة الوضوء، لأن الخفين ما يلبس على الرجل من جلد أو نحوه، وإذا كان الملبوس على القدمين من صوف أو قطن أو ما أشبه ذلك يسمى جورباً ويسمى عند العامة الشراب." },
+                    { type: 'info', title: 'المسح على الخفين من محاسن الشريعة', content: "والمسح على الخفين من <span class='hl-gold'>محاسن الشريعة وتسهيلها وتيسيرها</span>، وذلك لأن القدمين -ولا سيما في الشتاء- يلحقهما البرد، ويتعب الرجل، وإذا ضربه أدنى شيء أدمى أصابعه أو عقبه أو ما أشبه ذلك، فكان من محاسن الشريعة أن يسر الله عز وجل على العباد، وأباح لهم المسح على الخفين، أو على الجوارب." },
+                    { type: 'warning', title: 'الشرط الأساسي: اللبس على طهارة', content: "ولكن يشترط لذلك أن يلبسهما على <span class='hl-red'>طهارة</span>، فلا يصح أن يمسح على الخفين إذا لبسهما على غير طهارة، ودليل ذلك حديث المغيرة بن شعبة رضي الله عنه أنه كان مع النبي صلى الله عليه وسلم، وكان النبي صلى الله عليه وسلم يتوضأ، فلما بلغ رجليه أهوى المغيرة لينزع الخفين، فقال النبي صلى الله عليه وسلم: «دعهما فإني أدخلتهما طاهرتين»، فمسح عليهما." },
+                    { type: 'warning', title: 'رواية شاذة منكرة', content: "وأما رواية أن النبي صلى الله عليه وسلم مسح أعلى الخف وأسفله فهي رواية <span class='hl-red'>شاذة منكرة لا عبرة بها</span>، والمسح إنما يكون لأعلى الخف كما في حديث علي بن أبي طالب رضي الله عنه وسيأتي إن شاء الله." },
+                    { type: 'benefit_box', title: '١- اليقين في الطهارة', content: "فيه دليل على أنه لا بد أن يكون لبس الخفين على طهارة، فإن لبسهما على غير طهارة، وأراد الوضوء بعد ذلك <span class='font-bold'>وجب عليه أن ينزعهما ويغسل قدميه</span>، فإن نسي ومسح عليهما أعاد الوضوء والصلاة إن صلى؛ لأنه لبسهما على غير طهارة، وإذا شك: هل أدخلهما طاهرتين أو لا؟ فلا يمسح عليهما؛ لأنه لا بد أن يتيقن أنه أدخلهما طاهرتين." },
+                    { type: 'benefit_box', title: '٢- الأفضلية عند اللبس', content: "أن الإنسان إذا كان عليه خفان فإن <span class='font-bold'>الأفضل أن يمسح عليهما ولا يخلعهما</span>؛ لأن الرسول عليه الصلاة والسلام قال: «دعهما فإني أدخلتهما طاهرتين»، فدل ذلك على أن إبقاءهما والمسح عليهما أفضل." },
+                    { type: 'benefit_box', title: '٣- جواز معاونة المتوضئ', content: "جواز معاونة المتوضئ على وضوئه؛ لأن النبي ﷺ أعانه المغيرة ولا بأس بذلك، ولكن لا ينبغي للإنسان أن يطلب من أحد أن يعينه، لأن سؤال الناس مذموم. ولكن لو كان أحد يريد أن يكرمك ويساعدك فالأفضل أن تمكنه من ذلك... وخير الهدي هدي النبي ﷺ، لكن إن خاف الإنسان على نفسه من الإعجاب والترفع إذا خدمه الناس فلا بأس أن يسد الباب." },
+                    { type: 'benefit_box', title: '٤- طهارة عين الخفين (جلود السباع)', content: "أنه لا بد من أن تكون الخفان <span class='font-bold'>طاهرين</span>، يعني: لا يصح أن يمسح على كنادر نجسة، كما يفعله بعض الجهال، حيث يشتري من الكنادر التي جلودها جلود السباع، أو جلود الحيات... وهذا لا يجوز؛ لأن هذه الجلود نجسة، وعلى القول الراجح أنها <span class='font-bold text-red-400'>لا تطهر بالدباغ</span>... لكن القول الراجح أنها تبقى على نجاستها، وأنه لا يجوز للإنسان أن يلبسها، وأنه إذا مسها وهي رطبة أو يده رطبة تنجست يده." }
                 ],
                 mindmap: {
                     root: "أحكام المسح على الخفين",
-                    branches: ["شرط أساسي: اللبس على طهارة", "الأفضلية: المسح أفضل من الخلع", "الجلود النجسة: لا يصح المسح عليها", "رواية مسح الأسفل: شاذة منكرة"]
+                    branches: ["محاسن الشريعة لرفع المشقة", "الشرط: اللبس على طهارة بيقين", "المسح أفضل من الخلع", "لا يصح المسح على الجلود النجسة"]
                 },
                 dropdowns: {
-                    text: "يشترط لصحة المسح أن يلبس الخفين على {q1}، وإذا نسي ومسح وصلى وجب عليه أن {q2}. والمسح على أسفل الخف يُعد رواية {q3}.",
+                    text: "يشترط لصحة المسح أن يلبس الخفين على {q1}، وإذا نسي ومسح وصلى وهو لم يلبسهما على طهارة وجب عليه أن {q2}. والمسح على أسفل الخف يُعد رواية {q3}.",
                     options: { q1: ["طهارة", "جنابة", "عجلة"], q2: ["يعيد الوضوء والصلاة", "يستغفر فقط", "يعيد الصلاة فقط"], q3: ["صحيحة", "شاذة منكرة", "متواترة"] },
                     correct: { q1: "طهارة", q2: "يعيد الوضوء والصلاة", q3: "شاذة منكرة" }
                 },
                 matching: [
                     { left: "المسح على الخفين", right: "من محاسن الشريعة وتسهيلها" },
-                    { left: "جلود السباع والحيات", right: "نجسة ولا تطهر بالدباغ" },
+                    { left: "جلود السباع والحيات", right: "نجسة ولا تطهر بالدباغ على الراجح" },
                     { left: "الشك في الطهارة قبل اللبس", right: "يمنع المسح ويوجب اليقين" },
-                    { left: "معاونة المتوضئ", right: "جائزة وخير الهدي قبولها" }
+                    { left: "الأفضل لمن لبس الخفين", right: "أن يمسح عليهما ولا يخلعهما" }
                 ]
             },
             {
                 id: 2,
                 title: "حديث أنس بن مالك - النوم ونواقض الوضوء",
                 cells: [
-                    { type: 'verse', content: "«عن أنس بن مالك رضي الله عنه قال: كان أصحاب رسول الله صلى الله عليه وسلم على عهده ينتظرون العشاء حتى تخفق رؤوسهم، ثم يصلون ولا يتوضؤون». أخرجه أبو داود، وصححه الدارقطني." },
-                    { type: 'info', title: 'نواقض الوضوء وأصحاب الأعذار', content: "نواقض الوضوء هي مفسداته كالخارج من السبيلين. ويستثنى من ذلك <span class='hl-blue'>صاحب سلس البول</span>، فإن حدثه الدائم لا ينقض، بل يتوضأ للصلاة بعد دخول وقتها ويصلي ولا يضره ما خرج." },
-                    { type: 'warning', title: 'الخارج من المرأة والشك', content: "الدم الخارج من المرأة ناقض (حيضاً أو استحاضة). لكن <span class='hl-blue'>الريح من قُبل المرأة لا ينقض الوضوء</span> لأنه ليس من البطن. ومن شَكَّ في الحدث فلا ينصرف حتى يسمع صوتاً أو يجد ريحاً." },
-                    // الفوائد المستنبطة بالتناوب
-                    { type: 'benefit_box', title: 'الفائدة الأولى: النوم العميق', content: "النوم العميق المستغرق الذي لا يحس فيه صاحبه بخروج شيء منه يُعتبر <span class='font-bold'>ناقضاً للوضوء</span>." },
-                    { type: 'benefit_box', title: 'الفائدة الثانية: النعاس الخفيف', content: "النوم الذي لا يستغرق فيه صاحبه (كخفق الرؤوس) <span class='font-bold'>لا ينقض الوضوء</span>، فالنوم بحد ذاته ليس حدثاً بل مظنة الحدث." },
-                    { type: 'benefit_box', title: 'الفائدة الثالثة: القاعدة الكبرى', content: "القاعدة الفقهية العظيمة: <span class='font-bold'>اليقين لا يزول بالشك</span>. ما ثبت بدليل شرعي (كالطهارة) لا يرتفع إلا بدليل شرعي جازم." }
+                    { type: 'verse', content: "«عن أنس بن مالك رضي الله عنه قال: كان أصحاب رسول الله صلى الله عليه وسلم على عهده ينتظرون العشاء حتى تخفق رؤوسهم، ثم يصلون ولا يتوضؤون». أخرجه أبو داود، وصححه الدارقطني، وأصله في مسلم." },
+                    { type: 'info', title: 'نواقض الوضوء', content: "قال ابن حجر رحمه الله: «باب نواقض الوضوء»، ونواقض الوضوء يعني مفسداته... يعني الأشياء التي إذا وجدت انتقض الوضوء، وصار لا بد من وضوء جديد عند إرادة الصلاة. وقد أشار الله سبحانه وتعالى في القرآن إليها فقال: {أو جاء أحد منكم من الغائط}. وثبت عن النبي ﷺ في الرجل يكون في بطنه الشيء فيشكل عليه: «لا ينصرف حتى يسمع صوتاً أو يجد ريحاً»." },
+                    { type: 'info', title: 'حكم صاحب سلس البول', content: "كل ما خرج من الدبر أو من القبل... فإنه ينقض الوضوء، <span class='hl-blue'>إلا إذا كان في الإنسان سلس</span>، يعني أن الحدث دائماً يخرج منه، فإن هذا لا ينقض الوضوء، ولكن يتوضأ صاحب السلس للصلاة إذا دخل وقتها، فإذا أراد أن يصلي فإنه يغسل فرجه، ثم يتحفظ بشيء يجعله على فرجه، ثم يتوضأ، ثم يصلي، فإن لم يخرج منه شيء واستمر إلى وقت الثانية لم يخرج منه شيء فوضوؤه على حاله، وإن خرج منه شيء انتقض وضوؤه وأعاد الوضوء لكل صلاة في وقتها." },
+                    { type: 'warning', title: 'الفرق بين النوم العميق والنعاس', content: "ولا فرق بين أن يخرج الخارج من السبيلين والإنسان في منامه أو في يقظته. ومن أجل ذلك كان <span class='hl-red'>النوم العميق</span> ناقضاً للوضوء، والنوم العميق هو الذي يكون صاحبه مستغرقاً فيه، بحيث لو خرج منه شيء لم يحس به... أما النوم الذي لا يستغرق فيه فإنه <span class='hl-gold'>لا ينتقض الوضوء ولو طال</span>، ما دام الإنسان يعرف من نفسه أنه لو أحدث لأحس. فالنوم نفسه ليس حدثاً ناقضاً، ولكنه مظنة الحدث." },
+                    { type: 'warning', title: 'الخارج من المرأة (الدم والريح)', content: "ومن نواقض الوضوء أيضاً الدم إذا خرج من قبل المرأة (حيضاً كان أو استحاضة)... <span class='hl-blue'>إلا أن الريح من قبل المرأة لا ينقض الوضوء</span>، لأن الريح الذي يأتي من قبل المرأة ليس بريح خارج من البطن، لكنه من نفس الفرج، فلا ينقض الوضوء، وأما الريح من الدبر فناقضة للوضوء؛ لأنها تخرج من البطن من نجاسات." },
+                    { type: 'benefit_box', title: 'القاعدة الكبرى: اليقين لا يزول بالشك', content: "واعلم أن الأصل أن الرجل إذا توضأ وضوءاً على الوجه الشرعي فإن وضوءه باق، ولا ينتقض إلا بدليل شرعي، ووجه هذه القاعدة: أن ما ثبت بدليل شرعي لا يمكن أن يرفع إلا بدليل شرعي، فإذا ثبت أن هذا الوضوء صح بمقتضى الدليل الشرعي فإن أي إنسان يقول لك -مثلاً-: هذا ينقض الوضوء. فقل له: أين الدليل؟ وإذا قال لك: مس المرأة بشهوة ينقض الوضوء. فقل له: أين الدليل؟ وإذا قال لك: القيء ينقض الوضوء. فقل له: أين الدليل؟ وإذا قال لك: الدم الخارج من البدن ينقض الوضوء، فقل له: أين الدليل؟ ... فإن جاء بدليل شرعي صحيح أخذنا به، وإلا فقوله مردود، ويُعمل بالأصل وهو بقاء الوضوء." }
                 ],
                 mindmap: {
                     root: "أحكام النواقض والنوم",
                     branches: ["النوم العميق المستغرق: ناقض", "النعاس وخفق الرأس: لا ينقض", "سلس البول: وضوء لكل صلاة", "ريح قُبل المرأة: لا ينقض", "القاعدة: اليقين لا يزول بالشك"]
                 },
                 dropdowns: {
-                    text: "النعاس الذي لا يستغرق فيه صاحبه فإنه {q1} الوضوء. وأما الريح الخارجة من قُبل المرأة فإنها {q2} الوضوء. والقاعدة أن اليقين لا يزول إلا بـ {q3}.",
+                    text: "النعاس الذي لا يستغرق فيه صاحبه بحيث لو أحدث لأحس فإنه {q1} الوضوء. وأما الريح الخارجة من قُبل المرأة فإنها {q2} الوضوء. والقاعدة أن اليقين لا يزول إلا بـ {q3}.",
                     options: { q1: ["ينقض", "لا ينقض", "يُكره"], q2: ["لا تنقض", "تنقض", "تنجس"], q3: ["شك أقوى منه", "دليل شرعي", "غلبة الظن"] },
                     correct: { q1: "لا ينقض", q2: "لا تنقض", q3: "دليل شرعي" }
                 },
@@ -143,7 +141,7 @@
                     { left: "النوم العميق المستغرق", right: "مظنة الحدث وينقض الوضوء" },
                     { left: "صاحب سلس البول", right: "يتوضأ لكل صلاة بعد دخول وقتها" },
                     { left: "ريح المرأة من القُبل", right: "لا تنقض لأنها ليست من البطن" },
-                    { left: "القاعدة الشرعية", right: "ما ثبت بدليل لا يرفع إلا بدليل" }
+                    { left: "القاعدة الشرعية الكبرى", right: "ما ثبت بدليل لا يرفع إلا بدليل" }
                 ]
             },
             {
@@ -151,16 +149,16 @@
                 title: "حديث أبي هريرة - اتقوا اللاعنين",
                 cells: [
                     { type: 'verse', content: "«عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: »اتقوا اللاعنين: الذي يتخلى في طريق الناس، أو ظلهم«. رواه مسلم." },
-                    { type: 'info', title: 'معنى اللاعنين', content: "المراد باللاعنين المواضع التي يجلب التخلي فيها لعنة الناس لفاعله (واللعن هو الطرد من رحمة الله). وأعظم من ذلك التخلي في أماكن الطهارة كالمساجد ومحال الوضوء." },
-                    // الفوائد المستنبطة بالتناوب
-                    { type: 'benefit_box', title: 'الموضع المحرم الأول', content: "يحرم التغوط أو البول في <span class='font-bold'>طريق الناس وممراتهم</span> لأنه ينجسهم ويؤذيهم." },
-                    { type: 'benefit_box', title: 'الموضع المحرم الثاني', content: "يحرم التخلي في <span class='font-bold'>مجالس الناس</span> (في الظل صيفاً أو الشمس شتاءً). ولا يجوز التغوط فيها حتى لو كان الجالسون على منكر بقصد تفريقهم." },
-                    { type: 'benefit_box', title: 'الموضع المحرم الثالث', content: "يحرم التغوط تحت <span class='font-bold'>الأشجار المثمرة</span> لأن الطعام محترم ولأنه يؤذي من يأتي لجني الثمار." },
-                    { type: 'benefit_box', title: 'القاعدة العامة', content: "استنبط العلماء قاعدة عامة: <span class='font-bold'>لا يجوز التغوط أو البول في أي مكان يؤذي المسلمين</span> قولاً أو فعلاً." }
+                    { type: 'info', title: 'معنى اللاعنين', content: "هذه أحاديث في بيان المواضع التي لا يجوز فيها أن يتخلى ببول أو غائط فيما يؤذي الناس، سواء كان ذلك في الطريق، أو كان ذلك في الظل أو في موارد الماء... وسماه النبي ﷺ باللاعنين أو اللعانين <span class='hl-red'>لأن هذا الفعل سبب للعنة الناس</span>، فإن الناس إذا رأوا هذا الشيء يلعنون فاعله، واللعن هو الطرد والإبعاد عن رحمة الله." },
+                    { type: 'warning', title: 'التخلي في أماكن الطهارة', content: "وأعظم من هذا أن يكون في مكان الطهارة، كما يفعله بعض الناس -والعياذ بالله- في محل الوضوء، في المساجد أو في محل المسابح محل الاغتسال تجده يتخلى بالغائط في هذه الأماكن فيبقى ويلوث المحل وإذا جاء أحد يتوضأ فإنه يلوثه." },
+                    { type: 'benefit_box', title: '١- تحريم التخلي في طريق الناس', content: "أولاً: طريق الناس، فإنه لا يجوز للإنسان أن يبول في الطريق، ولا أن يتغوط فيه؛ لأن ذلك يؤذي المسلمين، ويؤدي إلى تنجس أقدامهم وثيابهم، فلهذا جعله النبي عليه الصلاة والسلام سبباً للعن." },
+                    { type: 'benefit_box', title: '٢- تحريم التخلي في مجالس الناس', content: "وكذلك أيضاً لا يجوز للإنسان أن يبول أو أن يتغوط في مجالس الناس... سواء كان ذلك في الظل، أو كان ذلك في الشمس (مجالس الشتاء). قال بعض أهل العلم: إلا إذا كانوا يجلسون على شيء محرم كشرب الدخان... ليفرقهم. ولكن هذا فيه نظر، بل يُقال: <span class='hl-red text-white border-red-700 bg-red-700'>لا يجوز أن يتغوط أو يبول في مثل هذه المجالس</span>، وهؤلاء الذين يجلسون على المنكر يفرقون بالمعروف أو بالسلطات، وأما أن نفعل ما نهى عنه الرسول ﷺ من أجل تفريقهم فإن هذا ليس بوجه." },
+                    { type: 'benefit_box', title: '٣- تحريم التغوط تحت الأشجار المثمرة', content: "لا يجوز التغوط تحت الأشجار المثمرة... لأن هذا فيه محظوران: الأول: أنه ربما يتساقط من هذا الثمر ما هو طعام للناس، والطعام محترم. الثاني: أنه <span class='font-bold'>يتأذى بذلك من يأتي لجني هذه الثمار</span>، وإذا كانت الثمار لا تؤكل كثمار القرض الذي يدبغ به... فإنه لا يجوز أيضاً، لأنه يؤذي هذا الذي يأتي ليجنيها." },
+                    { type: 'benefit_box', title: 'القاعدة العامة الشاملة', content: "ومن هنا نأخذ قاعدة عامة، وهي أنه <span class='font-bold'>لا يجوز التغوط ببول أو غائط في أي مكان يؤذي به المسلمين</span>، سواء كان ظلاً، أو مشمساً، أو تحت الأشجار المثمرة، أو غير ذلك، لما في ذلك من أذية المسلمين. قال تعالى: {والذين يؤذون المؤمنين والمؤمنات بغير ما اكتسبوا فقد احتملوا بهتاناً وإثماً مبيناً}." }
                 ],
                 mindmap: {
-                    root: "أماكن يحرم التخلي فيها (اللاعنين)",
-                    branches: ["طريق الناس ومساراتهم", "مجالس الناس (في الظل أو الشمس)", "تحت الأشجار المثمرة", "القاعدة: أي مكان يؤذي المسلمين"]
+                    root: "المواضع المحرمة للتخلي",
+                    branches: ["طريق الناس ومساراتهم", "مجالس الناس (في الظل أو الشمس)", "أماكن الطهارة والمسابح", "تحت الأشجار المثمرة", "القاعدة: أي مكان يؤذي المسلمين"]
                 },
                 dropdowns: {
                     text: "سمي التخلي في طريق الناس وظلهم باللاعنين لأنه سبب لـ {q1} الناس لفاعله. ويشمل المنع المجالس سواء في الظل أو في {q2}. والتغوط تحت الشجرة المثمرة محرم لأنه يؤذي من يأتي لـ {q3} الثمار.",
@@ -169,7 +167,7 @@
                 },
                 matching: [
                     { left: "معنى اللعن", right: "الطرد والإبعاد عن رحمة الله" },
-                    { left: "التغوط تحت شجرة مثمرة", right: "محظور لأنه يؤذي جاني الثمر" },
+                    { left: "التغوط تحت شجرة مثمرة", right: "محظور لأنه يؤذي جاني الثمر والطعام محترم" },
                     { left: "مجالس المنكر", right: "لا يجوز التغوط فيها بحجة تفريقهم" },
                     { left: "القاعدة العامة في التخلي", right: "يحرم في أي مكان يؤذي المسلمين" }
                 ]
@@ -178,16 +176,15 @@
                 id: 4,
                 title: "حديث عائشة - غسل الجنابة",
                 cells: [
-                    { type: 'verse', content: "«عن عائشة رضي الله عنها قالت: كان رسول الله صلى الله عليه وسلم إذا اغتسل من الجنابة يبدأ فيغسل يديه، ثم يفرغ بيمينه على شماله، فيغسل فرجه، ثم يتوضأ... ثم أفاض على سائر جسده». متفق عليه." },
-                    { type: 'info', title: 'الغسل الأكمل', content: "هو الغسل الموافق لفعل النبي ﷺ: يبدأ بغسل الفرج، ثم <span class='hl-blue'>يتوضأ وضوءاً كاملاً كوضوء الصلاة</span>، ثم يعم رأسه وسائر جسده بالماء مبتدئاً بالأيمن." },
-                    // الفوائد المستنبطة بالتناوب
-                    { type: 'benefit_box', title: 'صفة الغسل الواجب (المجزئ)', content: "يكفي فيه <span class='font-bold'>النية وتعميم البدن بالماء مرة واحدة مع المضمضة والاستنشاق</span>. فالفم والأنف داخلان في قوله تعالى (فاطهروا)." },
-                    { type: 'benefit_box', title: 'حكم الوضوء قبل الغسل', content: "الوضوء قبل غسل الجنابة <span class='font-bold'>سنة وليس بواجب</span>. والغسل يكفي لرفع الحدثين الأكبر والأصغر معاً." },
-                    { type: 'benefit_box', title: 'حكم التمندل (التنشيف)', content: "الصحيح من أقوال العلماء أن <span class='font-bold'>التمندل لا بأس به ولا حرج</span> خصوصاً في أيام الشتاء. ورد النبي ﷺ للمنديل قد يكون لسبب آخر كعدم نظافتها." }
+                    { type: 'verse', content: "«عن عائشة رضي الله عنها قالت: كان رسول الله صلى الله عليه وسلم إذا اغتسل من الجنابة يبدأ فيغسل يديه، ثم يفرغ بيمينه على شماله، فيغسل فرجه، ثم يتوضأ، ثم يأخذ الماء، فيدخل أصابعه في أصول الشعر، ثم حفن على رأسه ثلاث حفنات، ثم أفاض على سائر جسده، ثم غسل رجليه». متفق عليه، واللفظ لمسلم." },
+                    { type: 'info', title: 'الصفة الواجبة (المجزئة)', content: "صفة واجبة لا بد منها، وهي أن ينوي الإنسان رفع الجنابة، ثم يعم بدنه بالماء مرة واحدة <span class='hl-red'>مع المضمضة والاستنشاق</span>، وهذا مجزئ، لقوله تعالى: {وإن كنتم جنباً فاطهروا}، وهذه الآية يشمل قوله: {فاطهروا} ذلك لأن الفم والأنف يطهران في الوضوء. فلو أن إنساناً عليه جنابة وعنده بركة فنوى أن يغتسل وسقط في الماء، وانغمس فيه ثم خرج وتمضمض واستنشق لكان غسله صحيحاً." },
+                    { type: 'info', title: 'الصفة الأكمل والأفضل', content: "بأن يغتسل كما اغتسل النبي ﷺ فيغسل أولاً يده ثلاث مرات ثم يغسل فرجه وينظفه... ثم <span class='hl-blue'>يتوضأ وضوءاً كاملاً كما يتوضأ للصلاة</span>، يعني يغسل وجهه بعد المضمضة والاستنشاق ويمسح رأسه وأذنيه بعد غسل يديه، ويغسل رجليه، ثم بعد ذلك يأخذ الماء فيروي أصول شعره، ثم يفيض على رأسه ثلاث مرات، ثم يغسل سائر جسده يبدأ بالأيمن قبل الأيسر." },
+                    { type: 'benefit_box', title: 'حكم التمندل (التنشيف بالمنديل)', content: "وفي حديث ميمونة... أن النبي ﷺ لما فرغ من غسله أتته بالمنديل، فردها وجعل ينفض الماء بيده... والصحيح: أن <span class='font-bold'>التمندل لا بأس به</span>، فيجوز للإنسان إذا اغتسل من الجنابة أو غسل الجمعة أن يستعمل المنديل، ولا سيما في أيام الشتاء؛ لأنه لو بقي الماء ثم ترطبت ثيابه تأذى به. وكون الرسول ﷺ رد المنديل فلا ندري: ما السبب؟ فربما يكون المنديل ليس بتلك النظافة، فالله أعلم." },
+                    { type: 'benefit_box', title: 'حكم الوضوء قبل الغسل', content: "وفي هذا الحديث دليل على أن الإنسان إذا اغتسل من الجنابة كفاه عن الوضوء، فالوضوء قبل الغسل <span class='font-bold text-gold'>سنة، وليس بواجب</span>، ولو اقتصر الإنسان على الغسل لارتفع عنه الحدث الأكبر والأصغر." }
                 ],
                 mindmap: {
                     root: "أحكام غسل الجنابة",
-                    branches: ["الغسل المجزئ: نية + تعميم بدن + مضمضة واستنشاق", "الغسل الأكمل: غسل فرج + وضوء + تعميم", "التمندل (التنشيف): لا بأس به", "الوضوء قبل الغسل: سنة ويكفي الغسل للحدثين"]
+                    branches: ["الغسل المجزئ: نية + تعميم + مضمضة", "الغسل الأكمل: وضوء أولاً ثم تعميم", "التمندل (التنشيف): لا بأس به", "الوضوء قبل الغسل: سنة ويكفي الغسل للحدثين"]
                 },
                 dropdowns: {
                     text: "في الغسل المجزئ يجب تعميم البدن بالماء مع {q1} والاستنشاق. أما الوضوء قبل الغسل فهو {q2} وليس بواجب. وحكم استخدام المنديل للتنشيف بعد الغسل أنه {q3}.",
@@ -203,24 +200,35 @@
             }
         ];
 
-        // Review & Assessment Data
+        // ==========================================
+        // 12 FLASHCARDS & 10 ESSAYS
+        // ==========================================
         const FLASHCARDS = [
-            { front: "الخفين", back: "ما يلبس على الرجل من جلد أو نحوه." },
+            { front: "الخفين", back: "ما يُلبس على الرجل من جلد أو نحوه للقدمين." },
+            { front: "الجوارب", back: "الملبوس على القدمين من صوف أو قطن أو ما أشبه ذلك." },
             { front: "شرط المسح", back: "أن يلبس الخفين على طهارة تامة بيقين." },
-            { front: "جلود السباع", back: "نجسة ولا تطهر بالدباغ على الراجح." },
+            { front: "جلود السباع", back: "نجسة ولا تطهر بالدباغ على الراجح، ولا يمسح عليها." },
+            { front: "نواقض الوضوء", back: "هي مفسداته، كخروج الحدث من السبيلين." },
             { front: "النوم العميق", back: "نوم مستغرق لا يحس فيه صاحبه بنفسه (ناقض للوضوء)." },
-            { front: "قاعدة اليقين", back: "ما ثبت بدليل شرعي لا يرتفع إلا بدليل شرعي." },
+            { front: "سلس البول", back: "حدث دائم، يتوضأ صاحبه لكل صلاة بعد دخول وقتها." },
+            { front: "ريح قُبل المرأة", back: "لا ينقض الوضوء لأنه ليس من البطن بل من الفرج." },
+            { front: "قاعدة اليقين", back: "ما ثبت بدليل شرعي (كالطهارة) لا يرتفع إلا بدليل شرعي." },
             { front: "اللاعنين", back: "التخلي في طريق الناس أو ظلهم أو أماكن الطهارة." },
-            { front: "الغسل المجزئ", back: "النية وتعميم البدن بالماء مع المضمضة والاستنشاق." },
-            { front: "التمندل", back: "التنشيف بالمنديل بعد الاغتسال (لا بأس به)." }
+            { front: "الغسل المجزئ", back: "النية وتعميم البدن بالماء مرة مع المضمضة والاستنشاق." },
+            { front: "التمندل", back: "التنشيف بالمنديل بعد الاغتسال (والصحيح أنه لا بأس به)." }
         ];
 
         const ESSAYS = [
-            { q: "لماذا كان المسح على الخفين من محاسن الشريعة؟", a: "لأن القدمين ولا سيما في الشتاء يلحقهما البرد ويتعب الرجل، فكان من التيسير إباحة المسح عليهما لرفع المشقة." },
-            { q: "هل الأفضل خلع الخفين عند الوضوء أم المسح عليهما؟", a: "الأفضل لمن لبسهما على طهارة أن يمسح عليهما ولا يخلعهما، اتباعاً لقوله ﷺ: «دعهما فإني أدخلتهما طاهرتين»." },
-            { q: "ما هو ضابط النوم الناقض للوضوء؟", a: "هو النوم العميق المستغرق الذي لو خرج من الإنسان شيء لم يحس به، أما النعاس الذي يشعر فيه بنفسه (كخفق الرأس) فلا ينقض." },
-            { q: "لماذا سمي التخلي في طريق الناس باللاعنين؟", a: "لأن هذا الفعل القبيح يكون سبباً في أن يلعن الناس فاعله بسبب أذيتهم وتنجيس طرقهم ومجالسهم." },
-            { q: "هل المضمضة والاستنشاق واجبان في الغسل؟ ولماذا؟", a: "نعم واجبان، لقوله تعالى {فاطهروا} والفم والأنف من البدن ويطهران في الوضوء فيشملهما الأمر الرباني." }
+            { q: "لماذا كان المسح على الخفين من محاسن الشريعة وتيسيرها؟", a: "لأن القدمين ولا سيما في الشتاء يلحقهما البرد، وإذا ضربه شيء أدمى أصابعه، فكان من التيسير والمحاسن إباحة المسح عليهما لرفع المشقة والتعب عن العباد." },
+            { q: "ما حكم من مسح على الخفين وهو قد لبسهما على غير طهارة وصلى؟", a: "المسح باطل لفقده الشرط الأساسي. ويجب عليه أن ينزعهما، ويغسل قدميه، ويعيد الوضوء، ويعيد الصلاة لأن صلاته الأولى كانت على غير طهارة صحيحة." },
+            { q: "هل الأفضل لمن لبس الخفين على طهارة أن يخلعهما عند الوضوء أم يمسح عليهما؟", a: "الأفضل أن يمسح عليهما ولا يخلعهما، اتباعاً لهدي وقول النبي ﷺ للمغيرة: «دعهما فإني أدخلتهما طاهرتين» فدل أن المسح أفضل." },
+            { q: "كيف يتصرف صاحب سلس البول (الحدث الدائم) عند إرادة الصلاة؟", a: "يغسل فرجه، ويتحفظ بشيء (عصابة أو نحوها)، ثم يتوضأ للصلاة بعد دخول وقتها ويصلي، ولا يضره ما خرج منه أثناء ذلك، ويفعل ذلك لكل صلاة." },
+            { q: "ما هو ضابط النوم الناقض للوضوء؟ والنوم غير الناقض؟", a: "النوم الناقض هو العميق المستغرق الذي لو خرج منه شيء لم يحس به. أما النوم غير الناقض فهو النعاس (كخفق الرأس) الذي يشعر فيه بنفسه لو أحدث، فالنوم بحد ذاته ليس حدثاً بل مظنة للحدث." },
+            { q: "اشرح القاعدة الفقهية: (اليقين لا يزول بالشك) مع ضرب مثال من النص.", a: "تعني أن ما ثبت بدليل شرعي لا يرتفع إلا بدليل. فمن توضأ بيقين لا ينتقض وضوؤه بمجرد الشك بخروج شيء منه أو مس امرأة أو قيء، حتى يجد دليلاً شرعياً صحيحاً ناقضاً، كأن يسمع صوتاً أو يجد ريحاً." },
+            { q: "لماذا سمي التخلي في طريق الناس وظلهم باللاعنين؟", a: "لأن هذا الفعل القبيح والمؤذي يكون سبباً مباشراً في أن يلعن الناس فاعله (بقولهم: اللهم العن من فعل هذا)، واللعن هو الطرد والإبعاد عن رحمة الله." },
+            { q: "هل يجوز التغوط في مجالس أهل المنكر (كشرب الدخان) بقصد تفريقهم؟", a: "لا يجوز مطلقاً بناءً على القول الصحيح؛ لأن المنكر لا يزال بمنكر آخر، بل يُفرقون بالمعروف والنصيحة أو بتدخل السلطات، وليس بالتغوط في المجلس." },
+            { q: "ما هي الصفة الواجبة والمجزئة لغسل الجنابة؟ وما الدليل على وجوب المضمضة؟", a: "الصفة المجزئة: النية، وتعميم كامل البدن بالماء مرة واحدة مع المضمضة والاستنشاق. الدليل قوله تعالى {فاطهروا}، والفم والأنف من البدن ويطهران في الوضوء فيشملهما الأمر الرباني بالطهارة." },
+            { q: "ما هو القول الراجح في التنشيف (التمندل) بعد الغسل؟ ولماذا رد النبي ﷺ المنديل؟", a: "الراجح أنه لا بأس به ولا حرج، خصوصاً في الشتاء دفعاً للأذى. ورد النبي ﷺ للمنديل في حديث ميمونة لا يعني التحريم، فقد يكون لسبب آخر كعدم نظافتها أو غير ذلك فالله أعلم." }
         ];
 
         const MCQS = [
@@ -251,30 +259,26 @@
         // ==========================================
 
         const TopHeader = () => (
-            <header className="bg-navy border-b-4 border-gold shadow-lg sticky top-0 z-50">
+            <header className="bg-navy border-b-2 border-gold sticky top-0 z-50 shadow-md w-full">
                 <div className="container mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
-                    {/* Left: Logo (Rectangular) & Doctor Name in Gold */}
-                    <div className="flex flex-col items-center md:items-start w-full md:w-1/3">
-                        <div className="h-12 mb-1 w-40 flex items-center justify-center">
-                            <img src="../../logo.png" alt="شعار الجامعة" className="max-w-full max-h-full object-contain" />
-                        </div>
-                        <span className="font-bold text-gold text-sm tracking-wide">د/ باسم القرافي</span>
+                    <div className="w-full md:w-1/3 text-center md:text-right order-3 md:order-1">
+                        <span className="font-bold text-lg text-navy bg-gold px-5 py-2 rounded-lg shadow-inner">أحاديث الأحكام ١</span>
                     </div>
-                    
-                    {/* Center: Lecture Title in Gold */}
-                    <div className="text-center w-full md:w-1/3">
+
+                    <div className="text-center w-full md:w-1/3 order-2">
                         <h1 className="font-amiri font-bold text-xl md:text-2xl text-gold">المحاضرة الثالثة: أحاديث من كتاب الطهارة</h1>
                     </div>
 
-                    {/* Right: Course Name in Gold */}
-                    <div className="w-full md:w-1/3 text-center md:text-right">
-                        <span className="font-bold text-lg text-navy bg-gold px-5 py-2 rounded-lg shadow-inner">أحاديث الأحكام ١</span>
+                    <div className="flex flex-col items-center md:items-end w-full md:w-1/3 order-1 md:order-3">
+                        <div className="h-10 mb-1 w-32 flex justify-end bg-white p-1 rounded">
+                            <img src="../../logo.png" alt="شعار الجامعة" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="font-bold text-gold text-sm tracking-wide mt-1">د/ باسم القرافي</span>
                     </div>
                 </div>
             </header>
         );
 
-        // State is lifted to this component to ensure it mounts/unmounts fresh based on topic Key
         const FormativeAssessment = ({ topic, onPass }) => {
             const [dropdownAnswers, setDropdownAnswers] = useState({});
             const [matchedPairs, setMatchedPairs] = useState([]);
@@ -283,27 +287,30 @@
             const [shakeRight, setShakeRight] = useState(null);
 
             useEffect(() => {
+                setDropdownAnswers({});
+                setMatchedPairs([]);
+                setSelectedLeft(null);
+                setShakeRight(null);
                 setShuffledRight([...topic.matching.map(m => m.right)].sort(() => Math.random() - 0.5));
-            }, [topic]);
+                onPass(false); 
+            }, [topic.id, onPass]);
 
             const isDropdownsCorrect = Object.keys(topic.dropdowns.correct).length > 0 && 
                 Object.keys(topic.dropdowns.correct).every(k => dropdownAnswers[k] === topic.dropdowns.correct[k]);
-            const isMatchingCorrect = matchedPairs.length === topic.matching.length;
+            const isMatchingCorrect = matchedPairs.length === topic.matching.length && topic.matching.length > 0;
 
             useEffect(() => {
                 if (isDropdownsCorrect && isMatchingCorrect) {
                     onPass(true);
-                } else {
-                    onPass(false);
                 }
-            }, [isDropdownsCorrect, isMatchingCorrect]);
+            }, [isDropdownsCorrect, isMatchingCorrect, onPass]);
 
             const handleMatch = (rightItem) => {
                 if (!selectedLeft) return;
                 const correctMatch = topic.matching.find(m => m.left === selectedLeft.left && m.right === rightItem);
                 
                 if (correctMatch) {
-                    setMatchedPairs([...matchedPairs, selectedLeft.left]);
+                    setMatchedPairs(prev => [...prev, selectedLeft.left]);
                 } else {
                     setShakeRight(rightItem);
                     setTimeout(() => setShakeRight(null), 500);
@@ -319,387 +326,8 @@
                         return (
                             <select 
                                 key={i}
-                                className={`mx-2 p-1 border-2 rounded outline-none font-bold text-base bg-white ${isCorrect ? 'border-green-500 text-green-700' : 'border-gold text-navy'}`}
+                                className={`mx-2 p-1 border-2 rounded outline-none font-bold text-lg bg-white ${isCorrect ? 'border-green-500 text-green-700' : 'border-gold text-navy'}`}
                                 value={dropdownAnswers[qKey] || ""}
                                 onChange={(e) => setDropdownAnswers({...dropdownAnswers, [qKey]: e.target.value})}
                             >
                                 <option value="" disabled>اختر الإجابة...</option>
-                                {topic.dropdowns.options[qKey].map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                            </select>
-                        );
-                    }
-                    return <span key={i} className="leading-loose text-lg font-bold text-navy">{part}</span>;
-                });
-            };
-
-            return (
-                <div className="mt-12 p-8 bg-white rounded-3xl shadow-xl border-t-8 border-gold">
-                    <h3 className="text-3xl font-amiri font-bold text-navy mb-8 text-center bg-gray-50 py-3 rounded-lg border border-gray-200">التقييم التكويني المشروط (أجب لتنتقل)</h3>
-                    
-                    <div className="mb-10 p-6 bg-blue-50 rounded-2xl border border-blue-200 shadow-sm">
-                        <h4 className="font-bold text-xl mb-4 text-blue-900 flex items-center gap-3">
-                            <span className="bg-blue-600 text-white w-8 h-8 flex justify-center items-center rounded-full text-lg">أ</span> 
-                            أكمل الفراغات بما يناسب:
-                        </h4>
-                        <div className="p-4 bg-white rounded-xl border border-gray-100">{renderDropdownText()}</div>
-                    </div>
-
-                    <div className="p-6 bg-purple-50 rounded-2xl border border-purple-200 shadow-sm">
-                        <h4 className="font-bold text-xl mb-6 text-purple-900 flex items-center gap-3">
-                            <span className="bg-purple-600 text-white w-8 h-8 flex justify-center items-center rounded-full text-lg">ب</span> 
-                            صل العبارة من القائمة (أ) بما يناسبها في (ب):
-                        </h4>
-                        <div className="flex flex-col md:flex-row gap-8">
-                            {/* Left List */}
-                            <div className="flex-1 space-y-4">
-                                {topic.matching.map((m, i) => {
-                                    const isMatched = matchedPairs.includes(m.left);
-                                    const isSelected = selectedLeft?.left === m.left;
-                                    return (
-                                        <div key={i} onClick={() => !isMatched && setSelectedLeft(m)}
-                                            className={`matching-item p-4 border-2 rounded-xl text-center font-bold shadow-sm
-                                                ${isMatched ? 'matched border-green-500' : isSelected ? 'selected' : 'border-navy bg-white hover:bg-gray-100'}`}>
-                                            {m.left}
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                            {/* Right List */}
-                            <div className="flex-1 space-y-4">
-                                {shuffledRight.map((r, i) => {
-                                    const isMatchedBySomeone = matchedPairs.some(left => topic.matching.find(match => match.left === left).right === r);
-                                    const isShaking = shakeRight === r;
-                                    return (
-                                        <div key={i} onClick={() => !isMatchedBySomeone && handleMatch(r)}
-                                            className={`matching-item p-4 border-2 rounded-xl text-center font-bold shadow-sm
-                                                ${isMatchedBySomeone ? 'matched border-green-500' : isShaking ? 'wrong border-red-500' : 'border-gold bg-white hover:bg-gray-100'}`}>
-                                            {r}
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        // ==========================================
-        // MAIN APP COMPONENT
-        // ==========================================
-        const App = () => {
-            const [screen, setScreen] = useState('welcome'); 
-            const [student, setStudent] = useState({ name: '', section: '', startTime: null });
-            
-            // Topics Flow State
-            const [topicIndex, setTopicIndex] = useState(0);
-            const [isPassed, setIsPassed] = useState(false);
-
-            // Welcome Screen
-            if (screen === 'welcome') {
-                const handleStart = (e) => {
-                    e.preventDefault();
-                    const name = e.target.name.value.trim();
-                    const section = e.target.section.value.trim();
-                    if (name.split(/\s+/).length < 4) {
-                        alert('الرجاء إدخال الاسم الرباعي كاملاً (٤ مقاطع على الأقل).'); return;
-                    }
-                    if (!section) {
-                        alert('الرجاء إدخال رقم الشعبة.'); return;
-                    }
-                    setStudent({ name, section, startTime: new Date() });
-                    setScreen('topics');
-                };
-
-                return (
-                    <div className="min-h-screen flex flex-col items-center justify-center p-4" style={{background: "linear-gradient(135deg, #16213e 0%, #1f2f5c 100%)"}}>
-                        <div className="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-xl text-center border-b-8 border-gold fade-in relative overflow-hidden">
-                            
-                            <div className="w-48 h-20 mx-auto mb-4 flex items-center justify-center">
-                                <img src="../../logo.png" alt="شعار الجامعة" className="max-w-full max-h-full object-contain" />
-                            </div>
-                            
-                            <h2 className="text-xl font-bold text-gray-500 mb-2 tracking-wider">د/ باسم القرافي</h2>
-                            <div className="h-px bg-gray-200 w-1/2 mx-auto mb-4"></div>
-                            
-                            <h1 className="text-3xl font-amiri font-bold text-navy mb-4 bg-gold bg-opacity-20 inline-block px-6 py-2 rounded-full">أحاديث الأحكام ١</h1>
-                            <h3 className="text-4xl font-amiri font-bold text-navy mb-10 leading-relaxed">المحاضرة الثالثة<br/><span className="text-2xl text-gold">أحاديث من كتاب الطهارة</span></h3>
-                            
-                            <form onSubmit={handleStart} className="space-y-6 text-right">
-                                <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 shadow-inner">
-                                    <div className="mb-6">
-                                        <label className="block text-navy font-bold mb-3 text-lg">الاسم الرباعي:</label>
-                                        <input type="text" name="name" required placeholder="أدخل اسمك الرباعي هنا" className="w-full p-4 rounded-xl border-2 border-gray-300 focus:border-gold outline-none text-lg transition-colors" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-navy font-bold mb-3 text-lg">رقم الشعبة:</label>
-                                        <input type="text" name="section" required placeholder="مثال: YM3" className="w-full p-4 rounded-xl border-2 border-gray-300 focus:border-gold outline-none text-lg transition-colors" />
-                                    </div>
-                                </div>
-                                <button type="submit" className="btn-glow w-full bg-navy text-gold font-bold py-5 rounded-2xl text-2xl hover:bg-lightNavy transition shadow-xl mt-4 border-2 border-navy">
-                                    دخول للمحاضرة وبدء التعلم
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                );
-            }
-
-            // Wrapper for TopHeader and container
-            const ScreenWrapper = ({ children }) => (
-                <div className="min-h-screen pb-24">
-                    <TopHeader />
-                    <div className="container mx-auto px-4 mt-8 max-w-5xl">
-                        {children}
-                    </div>
-                </div>
-            );
-
-            // Topics Screen
-            if (screen === 'topics') {
-                const topic = TOPICS_DATA[topicIndex];
-                
-                const handleNextTopic = () => {
-                    if (topicIndex < TOPICS_DATA.length - 1) {
-                        setIsPassed(false); // Reset parent state
-                        setTopicIndex(topicIndex + 1);
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        setScreen('review');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                };
-
-                // Counter to alternate benefit box colors
-                let benefitCounter = 0;
-
-                return (
-                    <ScreenWrapper>
-                        <div className="fade-in">
-                            <div className="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow border border-gold">
-                                <span className="font-bold text-navy bg-gray-100 px-4 py-2 rounded-lg text-lg">الوحدة {topicIndex + 1} من {TOPICS_DATA.length}</span>
-                                <span className="font-bold text-navy bg-gold bg-opacity-30 px-6 py-2 rounded-lg text-lg">{student.name}</span>
-                            </div>
-
-                            <h2 className="text-4xl md:text-5xl font-amiri font-bold text-navy mb-10 text-center leading-tight bg-white p-6 rounded-2xl shadow-sm border-b-4 border-gold">
-                                {topic.title}
-                            </h2>
-
-                            {/* Cells Layout */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                                {topic.cells.map((cell, idx) => {
-                                    if (cell.type === 'verse') {
-                                        return (
-                                            <div key={idx} className="col-span-1 md:col-span-2 verse-card p-8 rounded-2xl text-center text-2xl leading-loose font-bold content-cell shadow-lg">
-                                                {cell.content}
-                                            </div>
-                                        );
-                                    }
-                                    
-                                    if (cell.type === 'benefit_box') {
-                                        const isNavy = benefitCounter % 2 === 0;
-                                        benefitCounter++;
-                                        return (
-                                            <div key={idx} className={`col-span-1 md:col-span-2 p-6 rounded-2xl shadow-md content-cell flex flex-col md:flex-row gap-6 items-center border-l-8 ${isNavy ? 'bg-navy text-gold border-gold' : 'bg-gold text-navy border-navy'}`}>
-                                                <div className="md:w-1/4 text-center">
-                                                    <span className={`font-amiri font-bold text-2xl px-4 py-2 rounded-lg inline-block ${isNavy ? 'bg-gold text-navy' : 'bg-navy text-gold'}`}>{cell.title}</span>
-                                                </div>
-                                                <div className="md:w-3/4 text-xl leading-loose" dangerouslySetInnerHTML={{ __html: cell.content }} />
-                                            </div>
-                                        );
-                                    }
-
-                                    // Other info/warning cells
-                                    const getCellStyles = () => {
-                                        if (cell.type === 'warning') return 'bg-red-50 border-red-200 border-t-4 border-t-red-500';
-                                        return 'bg-blue-50 border-blue-200 border-t-4 border-t-blue-500';
-                                    };
-
-                                    return (
-                                        <div key={idx} className={`col-span-1 p-8 rounded-2xl shadow-sm content-cell ${getCellStyles()}`}>
-                                            <h4 className="font-bold text-navy text-2xl mb-4 font-amiri">{cell.title}</h4>
-                                            <div className="text-gray-800 text-xl leading-loose font-medium" dangerouslySetInnerHTML={{ __html: cell.content }} />
-                                        </div>
-                                    );
-                                })}
-                            </div>
-
-                            {/* Mindmap */}
-                            <div className="mb-16">
-                                <h3 className="text-3xl font-bold text-navy mb-6 text-center font-amiri border-b-2 border-gold pb-2 inline-block relative left-1/2 transform -translate-x-1/2">الخريطة الذهنية البصرية</h3>
-                                <div className="mindmap-wrapper">
-                                    <div className="mindmap-root">{topic.mindmap.root}</div>
-                                    <div className="mindmap-branches">
-                                        {topic.mindmap.branches.map((b, i) => <div key={i} className="mindmap-node">{b}</div>)}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Assessment - Key forces clean remount */}
-                            <FormativeAssessment key={topic.id} topic={topic} onPass={setIsPassed} />
-
-                            {isPassed && (
-                                <div className="mt-12 text-center fade-in bg-green-50 p-8 rounded-3xl border-2 border-green-500 shadow-lg">
-                                    <p className="text-green-700 font-bold text-2xl mb-6">أحسنت! الإجابات صحيحة بالكامل.</p>
-                                    <button type="button" onClick={handleNextTopic} className="btn-glow bg-navy text-gold px-16 py-5 rounded-2xl font-bold text-2xl hover:bg-lightNavy shadow-xl border-2 border-gold transition-all">
-                                        {topicIndex < TOPICS_DATA.length - 1 ? 'الانتقال للوحدة التالية' : 'الانتقال للمراجعة الذكية'}
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </ScreenWrapper>
-                );
-            }
-
-            // Review Screen
-            if (screen === 'review') {
-                const [flipped, setFlipped] = useState({});
-                const [acc, setAcc] = useState(null);
-
-                return (
-                    <ScreenWrapper>
-                        <div className="fade-in bg-white p-8 rounded-3xl shadow-xl border-t-8 border-navy">
-                            <h2 className="text-4xl md:text-5xl font-amiri font-bold text-navy mb-12 text-center bg-gold bg-opacity-20 py-4 rounded-xl">المراجعة الذكية المزدوجة</h2>
-                            
-                            <h3 className="text-3xl font-bold text-navy mb-8 font-amiri flex items-center gap-3"><span className="bg-navy text-gold px-4 py-1 rounded">1</span> بطاقات المفاهيم (انقر للقلب)</h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-                                {FLASHCARDS.map((c, i) => (
-                                    <div key={i} className="h-48 perspective-1000 cursor-pointer content-cell" onClick={() => setFlipped({...flipped, [i]: !flipped[i]})}>
-                                        <div className={`relative w-full h-full transform-style-3d ${flipped[i] ? 'rotate-y-180' : ''}`}>
-                                            <div className="absolute w-full h-full backface-hidden bg-white border-2 border-gold rounded-2xl shadow-lg flex items-center justify-center p-4 text-center">
-                                                <h4 className="font-bold text-2xl text-navy font-amiri">{c.front}</h4>
-                                            </div>
-                                            <div className="absolute w-full h-full backface-hidden rotate-y-180-back bg-navy text-gold rounded-2xl shadow-lg flex items-center justify-center p-4 text-center border-2 border-navy">
-                                                <p className="font-tajawal text-lg leading-relaxed">{c.back}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <h3 className="text-3xl font-bold text-navy mb-8 font-amiri flex items-center gap-3"><span className="bg-navy text-gold px-4 py-1 rounded">2</span> أسئلة مقالية تحليلية (انقر للإظهار)</h3>
-                            <div className="space-y-4 max-w-4xl mx-auto mb-16">
-                                {ESSAYS.map((e, i) => (
-                                    <div key={i} className="border-2 border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-                                        <button type="button" onClick={() => setAcc(acc === i ? null : i)} className="w-full text-right p-6 font-bold text-xl text-navy bg-gray-50 hover:bg-gray-100 flex justify-between items-center transition-colors">
-                                            <span>{i + 1}. {e.q}</span>
-                                            <span className="text-gold text-3xl font-bold">{acc === i ? '−' : '+'}</span>
-                                        </button>
-                                        {acc === i && <div className="p-6 bg-white text-navy font-medium text-xl leading-loose border-t-2 border-gray-200 fade-in">{e.a}</div>}
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="text-center mt-12 border-t-2 border-gray-100 pt-10">
-                                <button type="button" onClick={() => { setScreen('assessment'); window.scrollTo(0,0); }} className="btn-glow bg-red-700 text-white px-16 py-5 rounded-2xl font-bold text-3xl hover:bg-red-800 shadow-2xl transition-all">
-                                    دخول التقييم الشامل النهائي
-                                </button>
-                            </div>
-                        </div>
-                    </ScreenWrapper>
-                );
-            }
-
-            // Assessment Screen
-            if (screen === 'assessment') {
-                const [answers, setAnswers] = useState({});
-                const [isSubmitting, setIsSubmitting] = useState(false);
-
-                const handleSubmit = async () => {
-                    if (Object.keys(answers).length < MCQS.length) {
-                        alert("الرجاء الإجابة على جميع الأسئلة 20 قبل الإرسال."); return;
-                    }
-                    setIsSubmitting(true);
-                    
-                    let score = 0;
-                    MCQS.forEach((q, i) => { if (answers[i] === q.answer) score++; });
-                    
-                    const timeSpentMins = Math.round((new Date() - student.startTime) / 60000);
-
-                    // Form Submission
-                    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAtWpsGVdYNm6qt88dhkrd_Kj2kiyWBQiejpNjLvBfsOkPzw/formResponse";
-                    const formData = new FormData();
-                    formData.append("entry.631676590", "الثالثة"); 
-                    formData.append("entry.716230744", student.name);
-                    formData.append("entry.258825401", student.section);
-                    formData.append("entry.1926766466", score.toString());
-                    formData.append("entry.585619026", timeSpentMins.toString());
-
-                    try {
-                        await fetch(formUrl, { method: "POST", mode: "no-cors", body: formData });
-                    } catch (e) { console.error(e); }
-                    
-                    setStudent({...student, finalScore: score});
-                    setScreen('success');
-                };
-
-                return (
-                    <ScreenWrapper>
-                        <div className="fade-in bg-white p-8 rounded-3xl shadow-xl border-t-8 border-gold">
-                            <h2 className="text-5xl font-amiri font-bold text-navy mb-6 text-center">التقييم الشامل</h2>
-                            <div className="bg-navy text-gold p-4 rounded-xl text-center font-bold text-xl mb-12 shadow-md">
-                                أجب عن جميع الأسئلة الـ 20 لإنهاء المهمة وإرسال نتيجتك.
-                            </div>
-
-                            <div className="space-y-8">
-                                {MCQS.map((q, qIdx) => (
-                                    <div key={qIdx} className="bg-gray-50 p-8 rounded-2xl border-2 border-gray-200 hover:border-gold transition-colors">
-                                        <h4 className="font-bold text-2xl mb-6 text-navy font-amiri">{qIdx + 1}. {q.q}</h4>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            {q.options.map((opt, optIdx) => (
-                                                <label key={optIdx} className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${answers[qIdx] === optIdx ? 'bg-gold bg-opacity-20 border-gold' : 'bg-white border-gray-300 hover:bg-gray-100'}`}>
-                                                    <input type="radio" name={`q-${qIdx}`} checked={answers[qIdx] === optIdx} onChange={() => setAnswers({...answers, [qIdx]: optIdx})} className="ml-4 h-6 w-6 text-navy" />
-                                                    <span className="font-bold text-xl text-navy">{opt}</span>
-                                                </label>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="text-center mt-16 border-t-4 border-gray-100 pt-10">
-                                <button type="button" onClick={handleSubmit} disabled={isSubmitting} className={`btn-glow bg-navy text-gold px-20 py-6 rounded-2xl font-bold text-3xl shadow-2xl border-2 border-gold ${isSubmitting ? 'opacity-50' : 'hover:bg-lightNavy transition-all'}`}>
-                                    {isSubmitting ? 'جاري الإرسال الموثوق...' : 'إنهاء وإرسال النتيجة'}
-                                </button>
-                            </div>
-                        </div>
-                    </ScreenWrapper>
-                );
-            }
-
-            // Success Screen
-            if (screen === 'success') {
-                return (
-                    <div className="min-h-screen flex items-center justify-center p-4" style={{background: "linear-gradient(135deg, #16213e 0%, #1f2f5c 100%)"}}>
-                        <div className="bg-white p-12 rounded-3xl shadow-2xl text-center max-w-xl w-full fade-in border-4 border-gold relative">
-                            <div className="text-7xl mb-6">🎓</div>
-                            <h2 className="text-5xl font-amiri font-bold text-navy mb-8">تمت المهمة بنجاح!</h2>
-                            
-                            <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 mb-8 space-y-4">
-                                <p className="text-2xl text-navy">الطالب: <span className="font-bold">{student.name}</span></p>
-                                <p className="text-2xl text-navy">الشعبة: <span className="font-bold">{student.section}</span></p>
-                            </div>
-                            
-                            <div className="inline-block bg-navy border-8 border-gold rounded-full h-56 w-56 flex items-center justify-center flex-col shadow-2xl mx-auto mb-10">
-                                <span className="text-gold font-bold text-xl mb-2">الدرجة</span>
-                                <span className="text-7xl font-bold text-white">{student.finalScore}</span>
-                                <span className="text-gold font-bold text-xl mt-2">من 20</span>
-                            </div>
-                            
-                            <div className="bg-green-100 text-green-800 p-4 rounded-xl border border-green-300">
-                                <p className="font-bold text-xl">تم إرسال نتيجتك للدكتور باسم القرافي بنجاح.</p>
-                                <p className="mt-2 text-lg">يمكنك إغلاق هذه الصفحة الآن بأمان.</p>
-                            </div>
-                        </div>
-                    </div>
-                );
-            }
-
-            return null;
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
