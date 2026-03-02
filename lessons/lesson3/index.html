@@ -688,4 +688,13 @@
             if (screen === 'topics') return <TopicsScreen student={student} onFinish={() => setScreen('review')} />;
             if (screen === 'review') return <ReviewScreen onNext={() => setScreen('assessment')} />;
             if (screen === 'assessment') return <AssessmentScreen student={student} onFinish={(score) => { setFinalScore(score); setScreen('success'); }} />;
-            if (screen === 'success') return <
+            if (screen === 'success') return <SuccessScreen student={student} score={finalScore} />;
+
+            return null;
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
