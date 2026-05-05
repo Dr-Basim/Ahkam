@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحاديث الأحكام - المحاضرة السادسة</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#16213e',
+                        gold: '#e2b96f',
+                        cream: '#faf8f3',
+                        trait1: '#f0fdf4',
+                        trait2: '#fefce8',
+                        trait3: '#eff6ff',
+                        trait4: '#fff1f2',
+                        trait5: '#f5f3ff',
+                        hlred: '#fee2e2',
+                        hlblue: '#dbeafe',
+                        hlgold: '#fef08a',
+                        primaryBlue: '#2563eb',
+                        primaryRed: '#dc2626',
+                        primaryGreen: '#16a34a',
+                        primaryGold: '#ca8a04'
+                    },
+                    fontFamily: {
+                        amiri: ['Amiri', 'serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #faf8f3 0%, #e2e8f0 100%);
+            background-attachment: fixed;
+            font-family: 'Tajawal', sans-serif;
+            color: #16213e;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Amiri', serif; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px -10px rgba(22, 33, 62, 0.1);
+        }
+        
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(226, 185, 111, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .verse {
+            background: linear-gradient(to left, rgba(226, 185, 111, 0.15), transparent);
+            border-right: 4px solid #e2b96f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            font-family: 'Amiri', serif;
+            font-size: 1.25rem;
+            line-height: 2.2;
+            color: #16213e;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        /* Content Cells */
+        .content-cell {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            border-right-width: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        .content-cell:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.06); transform: translateX(-3px); }
+        .cell-blue { background-color: #eff6ff; border-color: #3b82f6; }
+        .cell-yellow { background-color: #fefce8; border-color: #eab308; }
+        .cell-green { background-color: #f0fdf4; border-color: #22c55e; }
+        .cell-red { background-color: #fef2f2; border-color: #ef4444; }
+        .cell-purple { background-color: #faf5ff; border-color: #a855f7; }
+
+        /* Highlights */
+        .hl-red { background-color: #fee2e2; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #991b1b; }
+        .hl-blue { background-color: #dbeafe; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #1e40af; }
+        .hl-gold { background-color: #fef08a; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #854d0e; }
+
+        /* Flip Card CSS */
+        .flip-card { perspective: 1000px; cursor: pointer; height: 180px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 1rem;
+            display: flex; align-items: center; justify-content: center; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); text-align: center;
+        }
+        .flip-card-front { background: linear-gradient(135deg, #16213e, #1e3a8a); color: #e2b96f; border: 2px solid #e2b96f; font-family: 'Amiri', serif; font-size: 1.35rem; font-weight: bold;}
+        .flip-card-back { background: linear-gradient(135deg, #e2b96f, #d97706); color: #fff; transform: rotateY(180deg); font-size: 1.1rem; font-weight: 500;}
+
+        /* CSS Grid Mindmap */
+        .mindmap-grid { display: grid; gap: 1.5rem; padding: 2rem; background: #fff; border-radius: 1rem; border: 2px dashed #e2b96f; }
+        .mm-node { background: #16213e; color: #e2b96f; padding: 1.25rem; border-radius: 0.75rem; text-align: center; font-size: 1.25rem; font-weight: bold; font-family: 'Amiri', serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .mm-sub { background: #faf8f3; color: #16213e; border: 1px solid #e2b96f; border-right: 4px solid #e2b96f; padding: 1rem; border-radius: 0.5rem; text-align: center; font-weight: bold; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #e2b96f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #16213e; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Data Definitions (Full Content, Segmented with Colored Cells) ---
+        const ALL_DATA = [
+            {
+                id: 1,
+                title: "باب صفة الصلاة (حديث المسيء صلاته)",
+                content: `
+                    <div class="verse">
+                        ٢٧٨ - وَعَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ أَنَّ النَّبِيَّ ﷺ قَالَ: «إِذَا قُمْتَ إِلَى الصَّلَاةِ فَأَسْبِغِ الْوُضُوءَ، ثُمَّ اسْتَقْبِلِ القِبْلَةَ، فَكَبِّرْ، ثُمَّ اقْرَأْ مَا تَيَسَّرَ مَعَكَ مِنَ الْقُرْآنِ، ثُمَّ ارْكَعْ حَتَّى تَطْمَئِنَّ رَاكِعًا، ثُمَّ ارْفَعْ حَتَّى تَعْتَدِلَ قَائِمًا، ثُمَّ اسْجُدْ حَتَّى تَطْمَئِنَّ سَاجِدًا، ثُمَّ ارْفَعْ حَتَّى تَطْمَئِنَّ جَالِسًا، ثُمَّ اسْجُدْ حَتَّى تَطْمَئِنَّ سَاجِدًا، ثُمَّ افْعَلْ ذَلِكَ فِي صَلَاتِكَ كُلِّهَا». أَخْرَجَهُ السَّبْعَةُ.
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">الشرح والتحليل</h3>
+                    
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">شرطا قبول العبادة: الإخلاص والمتابعة</h4>
+                        <p class="leading-loose text-gray-800">لا بد في كل عبادة حتى تصح من <span class="hl-blue">شرطين: الأول: الإخلاص لله</span>، بأن يكون الحامل للعبد على فعلها قصد وجه الله ومرضاته. فإذا فقد الإخلاص فإن العمل لا يصح ولا يقبل عند الله، لقوله ﷺ: «إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ». <span class="hl-blue">الثاني: متابعة الرسول ﷺ</span>، ولا يمكن أن تتابع النبي ﷺ إلا إذا عرفت كيف يفعل. ولهذا تجد علماء الفقه يتكلمون عن صفة الوضوء وصفة الصلاة وصفة الحج، كل ذلك من أجل تحقيق متابعة النبي ﷺ، لقوله: «صَلُّوا كَمَا رَأَيْتُمُونِي أُصَلِّي».</p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">قصة المسيء صلاته ودروسها التربوية</h4>
+                        <p class="leading-loose text-gray-800">هذا الحديث يعرف عند العلماء بـ <span class="hl-green">حديث المسيء في صلاته</span>. وذلك أن رجلاً أتى فصلى صلاة لا يطمئن فيها، ثم جاء إلى النبي ﷺ وهو في المسجد مع أصحابه فسلم، فرد عليه السلام وقال له: «ارْجِعْ فَصَلِّ، فَإِنَّكَ لَمْ تُصَلِّ». فرجع الرجل وصلى كصلاته الأولى بدون طمأنينة لأنه جاهل، ثم عاد فسلم على النبي ﷺ فرد عليه وقال: «ارْجِعْ فَصَلِّ، فَإِنَّكَ لَمْ تُصَلِّ» - ثلاث مرات - فقال الرجل: «والذي بعثك بالحق لا أحسن غير هذا فعلمني».</p>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">الحكمة التربوية في تأخير التعليم</h4>
+                        <p class="leading-loose text-gray-800">إنما رده النبي ﷺ <span class="hl-gold">للفائدة العظيمة</span>، لأجل أن يكون متشوقاً إلى معرفة الحق والصواب، لأنه كلما احتاج الإنسان إلى الشيء كان إليه أشوق وإلى استماعه وحفظه أوثق. فلما رآه النبي ﷺ أحوج ما يكون إلى التعليم وأن نفسه تتطلع إلى ذلك علمه تفصيل الصلاة. وهذا أسلوب تربوي عظيم.</p>
+                    </div>
+
+                    <div class="content-cell cell-red">
+                        <h4 class="text-xl font-bold text-primaryRed mb-2">معنى «لم تصل» وأهمية الطمأنينة</h4>
+                        <p class="leading-loose text-gray-800">قول النبي ﷺ: «إِنَّكَ لَمْ تُصَلِّ» أي: <span class="hl-red">لم تصل صلاة تبرأ ذمتك وتجزئ عن فريضتك</span>. فالذي لا يطمئن في صلاته وجودها كعدمها. وفي رواية النسائي وأبي داود: «إِنَّهَا لَنْ تَتِمَّ صَلَاةُ أَحَدِكُمْ حَتَّى يُسْبِغَ الوُضُوءَ كَمَا أَمَرَهُ اللَّهُ، ثُمَّ يُكَبِّرَ اللَّهَ، وَيَحْمَدَهُ، وَيُثْنِيَ عَلَيْهِ»، وفيها: «فَإِنْ كَانَ مَعَكَ قُرْآنٌ فَاقْرَأْ، وَإِلَّا فَاحْمَدِ اللَّهَ، وَكَبِّرْهُ، وَهَلِّلْهُ».</p>
+                    </div>
+                `,
+                mindmap: {
+                    main: "صفة الصلاة (حديث المسيء)",
+                    nodes: [
+                        "شرطا قبول العبادة: الإخلاص + المتابعة",
+                        "حديث المسيء: رده النبي ٣ مرات للتعليم",
+                        "الحكمة التربوية: التشويق للعلم قبل التعليم",
+                        "ترتيب الصلاة: وضوء، قبلة، تكبير، قراءة، ركوع، اعتدال، سجود",
+                        "الطمأنينة ركن في كل ركن من أركان الصلاة",
+                        "من لا قرآن معه: يحمد الله ويكبره ويهلله"
+                    ]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "شرطا قبول العبادة هما: [Q1] لله و [Q2] للرسول ﷺ. وحديث المسيء رده النبي ثلاثاً حتى [Q3] للعلم.",
+                        options: {
+                            Q1: ["الرياء", "الإخلاص", "السمعة"],
+                            Q2: ["المخالفة", "المتابعة", "المشاكلة"],
+                            Q3: ["ينصرف", "يتشوق", "ييأس"]
+                        },
+                        answers: { Q1: "الإخلاص", Q2: "المتابعة", Q3: "يتشوق" }
+                    },
+                    matching: [
+                        { left: "الإخلاص", right: "قصد وجه الله بالعبادة" },
+                        { left: "المتابعة", right: "فعل العبادة كما فعلها النبي ﷺ" },
+                        { left: "الطمأنينة", right: "السكون في كل ركن بقدر الذكر الواجب" }
+                    ]
+                }
+            },
+            {
+                id: 2,
+                title: "إسباغ الوضوء وكيفيته",
+                content: `
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">كيفية الوضوء الكامل</h3>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">معنى إسباغ الوضوء وفضله</h4>
+                        <p class="leading-loose text-gray-800"><span class="hl-blue">إسباغ الوضوء:</span> يعني إتمامه وإكماله. وإسباغ الوضوء من أفضل الأعمال ولا سيما في أيام المكارِه (أيام الشتاء الشديدة البرودة)، فإن إسباغه فيها يكون أكمل وأفضل، لدخوله في قوله تعالى: ﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اصْبِرُوا وَصَابِرُوا﴾، فإن الصبر على الوضوء في أيام البرد مما يرفع الله به الدرجات ويكفر به الخطايا. <span class="hl-gold">وسمي الوضوء وضوءاً</span> لأنه يحسن الأعضاء التي غسلت ويزيل عنها الوسخ، ولأنه يضيئها يوم القيامة، فإن هذه الأمة يدعون يوم القيامة غراً محجلين.</p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">الفرق بين الوضوء والاستنجاء</h4>
+                        <p class="leading-loose text-gray-800"><span class="hl-red">تنبيه مهم:</span> الوضوء هو غسل الأعضاء الأربعة: الوجه واليدين ومسح الرأس وغسل الرجلين. وليس الوضوء هو غسل الفرج كما يفهمه أكثر العوام. فغسل الفرج ليس من الوضوء، بل هو استنجاء واستبراء وتنزه من النجاسة، ولا علاقة له بالوضوء. فإذا بال الإنسان أو تغوط وجب عليه أن يغسل أثر النجاسة من فرجه، ثم إذا حصل هذا فإنه لا يعيده عند الوضوء.</p>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">صفة الوضوء الكامل خطوة بخطوة</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li><span class="hl-gold">النية:</span> بالقلب لا باللسان.</li>
+                            <li><span class="hl-gold">غسل الكفين:</span> ثلاث مرات.</li>
+                            <li><span class="hl-gold">المضمضة والاستنشاق:</span> ثلاث مرات بثلاث غرفات.</li>
+                            <li><span class="hl-gold">غسل الوجه:</span> من منابت شعر الرأس إلى أسفل اللحية طولاً، ومن الأذن إلى الأذن عرضاً.</li>
+                            <li><span class="hl-gold">غسل اليدين:</span> من أطراف الأصابع إلى المرفقين، يبدأ باليمنى ثم اليسرى.</li>
+                            <li><span class="hl-gold">مسح الرأس:</span> كله، ومسح الأذنين بإدخال السبابتين في الصماخين والإبهامين على الظاهر.</li>
+                            <li><span class="hl-gold">غسل الرجلين:</span> إلى الكعبين، يبدأ باليمنى ثم اليسرى، ثلاث مرات.</li>
+                            <li><span class="hl-gold">الدعاء بعده:</span> «أشهد أن لا إله إلا الله وحده لا شريك له وأن محمداً عبده ورسوله، اللهم اجعلني من التوابين واجعلني من المتطهرين».</li>
+                        </ul>
+                    </div>
+                `,
+                mindmap: {
+                    main: "إسباغ الوضوء وكيفيته",
+                    nodes: [
+                        "النية بالقلب (لا باللسان)",
+                        "غسل الكفين ٣ مرات",
+                        "مضمضة واستنشاق ٣ مرات",
+                        "غسل الوجه: من منابت الشعر للذقن",
+                        "غسل اليدين للمرفقين (اليمنى فليسرى)",
+                        "مسح الرأس كله مع الأذنين",
+                        "غسل الرجلين للكعبين"
+                    ]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "الوضوء هو غسل [Q1] الأربعة. وغسل الفرج يسمى [Q2] وليس من الوضوء. وإسباغ الوضوء في أيام [Q3] من أفضل الأعمال.",
+                        options: {
+                            Q1: ["الأصابع", "الأعضاء", "الأطراف"],
+                            Q2: ["الوضوء", "الاستنجاء", "الغسل"],
+                            Q3: ["الصيف", "البرد", "الربيع"]
+                        },
+                        answers: { Q1: "الأعضاء", Q2: "الاستنجاء", Q3: "البرد" }
+                    },
+                    matching: [
+                        { left: "غسل الكفين أولاً", right: "لتنظيف آلة الغسل" },
+                        { left: "النية", right: "محلها القلب لا اللسان" },
+                        { left: "مسح الرأس", right: "يشمل الأذنين" }
+                    ]
+                }
+            },
+            {
+                id: 3,
+                title: "الطمأنينة في الصلاة وأركانها",
+                content: `
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">الطمأنينة: تعريفها وحكمها</h4>
+                        <p class="leading-loose text-gray-800"><span class="hl-blue">الطمأنينة:</span> هي السكون في كل ركن من أركان الصلاة بقدر ما يؤدى به الذكر الواجب. وهي <span class="hl-red">ركن من أركان الصلاة</span>، فمن لم يطمئن في صلاته فصلاته باطلة. وقد قال النبي ﷺ للمسيء صلاته: «ارْجِعْ فَصَلِّ، فَإِنَّكَ لَمْ تُصَلِّ» ثلاث مرات لأنه كان لا يطمئن. والطمأنينة مطلوبة في كل ركن: الركوع، والاعتدال بعده، والسجود، والجلوس بين السجدتين.</p>
+                    </div>
+
+                    <div class="content-cell cell-red">
+                        <h4 class="text-xl font-bold text-primaryRed mb-2">أركان الصلاة كما بينها حديث المسيء</h4>
+                        <ul class="list-decimal list-inside space-y-3 text-gray-800">
+                            <li><span class="hl-gold">تكبيرة الإحرام:</span> «ثُمَّ اسْتَقْبِلِ القِبْلَةَ، فَكَبِّرْ».</li>
+                            <li><span class="hl-gold">قراءة القرآن:</span> «ثُمَّ اقْرَأْ مَا تَيَسَّرَ مَعَكَ مِنَ الْقُرْآنِ». وفي رواية: «ثُمَّ اقْرَأْ بِأُمِّ الْقُرْآنِ وَبِمَا شَاءَ اللَّهُ».</li>
+                            <li><span class="hl-gold">الركوع مع الطمأنينة:</span> «ثُمَّ ارْكَعْ حَتَّى تَطْمَئِنَّ رَاكِعًا».</li>
+                            <li><span class="hl-gold">الاعتدال قائماً:</span> «ثُمَّ ارْفَعْ حَتَّى تَعْتَدِلَ قَائِمًا». وفي رواية: «فَأَقِمْ صُلْبَكَ حَتَّى تَرْجِعَ العِظَامُ».</li>
+                            <li><span class="hl-gold">السجود مع الطمأنينة:</span> «ثُمَّ اسْجُدْ حَتَّى تَطْمَئِنَّ سَاجِدًا».</li>
+                            <li><span class="hl-gold">الجلوس بين السجدتين:</span> «ثُمَّ ارْفَعْ حَتَّى تَطْمَئِنَّ جَالِسًا».</li>
+                            <li><span class="hl-gold">السجدة الثانية:</span> «ثُمَّ اسْجُدْ حَتَّى تَطْمَئِنَّ سَاجِدًا».</li>
+                            <li><span class="hl-gold">فعل ذلك في الصلاة كلها:</span> «ثُمَّ افْعَلْ ذَلِكَ فِي صَلَاتِكَ كُلِّهَا».</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">حكم من لا يحسن الفاتحة</h4>
+                        <p class="leading-loose text-gray-800">في رواية النسائي وأبي داود من حديث رفاعة بن رافع: «فَإِنْ كَانَ مَعَكَ قُرْآنٌ فَاقْرَأْ، وَإِلَّا فَاحْمَدِ اللَّهَ، وَكَبِّرْهُ، وَهَلِّلْهُ». فدل ذلك على أن من لم يحسن قراءة الفاتحة أو لم يحفظها فإنه يأتي بما يقدر عليه من ذكر الله من التحميد والتكبير والتهليل حتى يتعلم الفاتحة.</p>
+                    </div>
+                `,
+                mindmap: {
+                    main: "الطمأنينة في أركان الصلاة",
+                    nodes: [
+                        "الطمأنينة: السكون في كل ركن",
+                        "حكمها: ركن تبطل الصلاة بدونه",
+                        "تكبيرة الإحرام",
+                        "قراءة الفاتحة (أو الذكر لمن لا يحسنها)",
+                        "الركوع مع الطمأنينة",
+                        "الاعتدال (إقامة الصلب حتى ترجع العظام)",
+                        "السجود على ٧ أعضاء مع الطمأنينة"
+                    ]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "الطمأنينة هي [Q1] في كل ركن، وهي [Q2] من أركان الصلاة. ومن لم يحسن الفاتحة [Q3] الله ويكبره ويهلله.",
+                        options: {
+                            Q1: ["الحركة", "السكون", "السرعة"],
+                            Q2: ["سنة", "ركن", "مستحب"],
+                            Q3: ["يسبح", "يحمد", "يستغفر"]
+                        },
+                        answers: { Q1: "السكون", Q2: "ركن", Q3: "يحمد" }
+                    },
+                    matching: [
+                        { left: "الركوع", right: "الانحناء حتى تمس الكفان الركبتين" },
+                        { left: "الاعتدال", right: "إقامة الصلب حتى ترجع العظام" },
+                        { left: "من لا قرآن معه", right: "يحمد الله ويكبره ويهلله" }
+                    ]
+                }
+            },
+            {
+                id: 4,
+                title: "باب سجود السهو وأحكامه",
+                content: `
+                    <div class="verse">
+                        ٣٥٥ - وَعَنْ أَبِي سَعِيدٍ الخُدْرِيِّ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «إِذَا شَكَّ أَحَدُكُمْ فِي صَلَاتِهِ، فَلَمْ يَدْرِ كَمْ صَلَّى أَثَلَاثًا أَوْ أَرْبَعًا؟ فَلْيَطْرَحِ الشَّكَّ وَلْيَبْنِ عَلَى مَا اسْتَيْقَنَ، ثُمَّ يَسْجُدُ سَجْدَتَيْنِ قَبْلَ أَنْ يُسَلِّمَ». رَوَاهُ مُسْلِمٌ.<br/><br/>
+                        ٣٥٦ - وَعَنِ ابْنِ مَسْعُودٍ رَضِيَ اللَّهُ عَنْهُ: صَلَّى رَسُولُ اللَّهِ ﷺ، فَلَمَّا سَلَّمَ قِيلَ لَهُ: يَا رَسُولَ اللَّهِ، أَحَدَثَ فِي الصَّلَاةِ شَيْءٌ؟ قَالَ: «وَمَا ذَلِكَ؟» قَالُوا: صَلَّيْتَ كَذَا. فَسَجَدَ سَجْدَتَيْنِ ثُمَّ سَلَّمَ، ثُمَّ قَالَ: «إِنَّمَا أَنَا بَشَرٌ أَنْسَى كَمَا تَنْسَوْنَ».
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">الشرح والتحليل</h3>
+                    
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">حالات الشك في الصلاة</h4>
+                        <p class="leading-loose text-gray-800">إذا شك الإنسان في صلاته فلا يخلو من <span class="hl-blue">ثلاث حالات</span>: <span class="hl-gold">الحال الأولى:</span> أن يكون كثير الشكوك - فهذا لا يلتفت إلى شكه لأنه وسواس. <span class="hl-gold">الحال الثانية:</span> أن يكون الشك بعد الفراغ من الصلاة - فلا يعمل بالشك لأن العبادة إذا انتهت فالأصل أنها تمت. <span class="hl-gold">الحال الثالثة:</span> أن يشك أثناء الصلاة - فهذا يطرح الشك ويبني على ما استيقن (وهو الأقل).</p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">مواضع سجود السهو</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-800">
+                            <li><span class="hl-green">قبل السلام:</span> إذا شك في عدد الركعات وبنى على اليقين (الأقل)، أو إذا نسي واجباً من واجبات الصلاة.</li>
+                            <li><span class="hl-red">بعد السلام:</span> إذا زاد في الصلاة (ركعة أو ركوع أو سجود)، أو إذا شك وتحرى الصواب. وللنبي ﷺ أنه سجد بعد السلام والكلام.</li>
+                            <li><span class="hl-gold">تنبيه:</span> يقول في سجدتي السهو كما يقول في سجود الصلاة. وأما ظن بعض العوام أنه يقول: «سبحان الذي لا ينسى» فلا أصل له.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">فوائد هامة من أحاديث سجود السهو</h4>
+                        <ul class="list-decimal list-inside space-y-3 text-lg">
+                            <li>أن النبي ﷺ بشر ينسى كما ننسى - وهذا من كمال رسالته وبيان بشريته.</li>
+                            <li>أن الشك بعد الفراغ من الصلاة لا يلتفت إليه.</li>
+                            <li>أن كثير الشكوك لا يلتفت إلى شكه لأنه وسواس.</li>
+                            <li>أن سجود السهو في الزيادة يكون بعد السلام.</li>
+                            <li>أن من شك فليتحر الصواب فليتم عليه ثم يسجد سجدتين.</li>
+                            <li>أن سجود السهو جبر للصلاة، فإن كانت تامة كانتا ترغيماً للشيطان.</li>
+                        </ul>
+                    </div>
+                `,
+                mindmap: {
+                    main: "سجود السهو وأحكامه",
+                    nodes: [
+                        "حالات الشك: كثير الشكوك، بعد الفراغ، أثناء الصلاة",
+                        "كثير الشكوك: لا يلتفت (وسواس)",
+                        "بعد الفراغ: لا يعمل بالشك",
+                        "أثناء الصلاة: يطرح الشك ويبني على اليقين",
+                        "قبل السلام: للشك مع البناء على الأقل",
+                        "بعد السلام: للزيادة في الصلاة",
+                        "لا يقال: سبحان الذي لا ينسى"
+                    ]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "من شك في صلاته فليبني على [Q1] وهو الأقل، ويسجد [Q2] قبل السلام. وكثير الشكوك [Q3] يلتفت إلى شكه.",
+                        options: {
+                            Q1: ["الظن", "اليقين", "الأكثر"],
+                            Q2: ["سجدة", "سجدتين", "ثلاثاً"],
+                            Q3: ["لا", "نعم", "قد"]
+                        },
+                        answers: { Q1: "اليقين", Q2: "سجدتين", Q3: "لا" }
+                    },
+                    matching: [
+                        { left: "الشك بعد السلام", right: "لا يلتفت إليه" },
+                        { left: "الزيادة في الصلاة", right: "سجود السهو بعد السلام" },
+                        { left: "النقص في الصلاة", right: "سجود السهو قبل السلام" }
+                    ]
+                }
+            }
+        ];
+const FLASHCARDS = [
+            { front: "شرطا قبول العبادة", back: "الإخلاص لله، والمتابعة للرسول ﷺ" },
+            { front: "الطمأنينة", back: "السكون في كل ركن من أركان الصلاة بقدر الذكر الواجب، وهي ركن" },
+            { front: "إسباغ الوضوء", back: "إتمامه وإكماله، وهو من أفضل الأعمال خاصة في أيام البرد" },
+            { front: "الفرق بين الوضوء والاستنجاء", back: "الوضوء: غسل الأعضاء الأربعة. الاستنجاء: تطهير الفرج من النجاسة" },
+            { front: "عدد مرات الغسل في الوضوء", back: "يجزي مرة واحدة، والثلاث أفضل" },
+            { front: "من لا يحسن الفاتحة", back: "يحمد الله ويكبره ويهلله حتى يتعلم" },
+            { front: "أركان الصلاة عند المالكية", back: "تكبيرة الإحرام، القيام، الفاتحة، الركوع، الرفع، السجود، الجلوس بين السجدتين، السلام..." },
+            { front: "حكم سجود السهو للشك", back: "يطرح الشك ويبني على اليقين (الأقل) ويسجد قبل السلام" },
+            { front: "سجود السهو بعد السلام", back: "يكون عند الزيادة في الصلاة" },
+            { front: "كثير الشكوك", back: "لا يلتفت إلى شكه لأنه وسواس" },
+            { front: "حديث المسيء صلاته", back: "علمه النبي ﷺ الصلاة بعد أن رده ثلاث مرات ليتشوق للعلم" },
+            { front: "قول: سبحان الذي لا ينسى في سجود السهو", back: "لا أصل له، بل يقول كما يقول في سجود الصلاة" },
+            { front: "نية الوضوء", back: "بالقلب لا باللسان" },
+            { front: "الحكمة من تسمية الوضوء", back: "لأنه يحسن الأعضاء ويزيل الوسخ ويضيئها يوم القيامة" }
+        ];
+const ACCORDIONS = [
+            { q: "ما الحكمة من رد النبي ﷺ للرجل المسيء صلاته ثلاث مرات دون أن يعلمه مباشرة؟", a: "الحكمة تربوية: جعله متشوقاً إلى معرفة الحق والصواب، فكلما احتاج الإنسان إلى الشيء كان إليه أشوق وإلى استماعه وحفظه أوثق. فلما رآه أحوج ما يكون إلى التعليم علمه بالتفصيل." },
+            { q: "ما الفرق بين الإخلاص والمتابعة؟ ولماذا كلاهما شرط لصحة العبادة؟", a: "الإخلاص: أن يكون الحامل على العبادة قصد وجه الله لا رياء ولا سمعة. والمتابعة: أن تؤدى العبادة كما أداها النبي ﷺ. وكلاهما شرط لأن العبادة لا تقبل بدون إخلاص (كما في حديث: أنا أغنى الشركاء عن الشرك)، ولا تصح بدون متابعة (لقوله: صلوا كما رأيتموني أصلي)." },
+            { q: "لماذا يعتبر إسباغ الوضوء في أيام البرد من أفضل الأعمال؟", a: "لما فيه من الصبر والمشقة، والصبر على الطاعة مع المشقة يرفع الله به الدرجات ويكفر به الخطايا، لقوله تعالى: ﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اصْبِرُوا وَصَابِرُوا﴾ وقوله ﷺ: «ألا أدلكم على ما يمحو الله به الخطايا ويرفع به الدرجات؟ قالوا: بلى يا رسول الله. قال: إسباغ الوضوء على المكاره»." },
+            { q: "هل غسل الفرج من الوضوء؟ وما الدليل؟", a: "غسل الفرج ليس من الوضوء، بل هو استنجاء واستبراء. والدليل أن الله قال في آية الوضوء: ﴿فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ وَامْسَحُوا بِرُءُوسِكُمْ وَأَرْجُلَكُمْ إِلَى الْكَعْبَيْنِ﴾ ولم يذكر غسل الفرج. فإذا استنجى الإنسان بعد البول أو الغائط ثم جاء وقت الصلاة بعد ساعات فإنه لا يعيد غسل الفرج." },
+            { q: "كيف يصلي من لا يحفظ شيئاً من القرآن؟", a: "يقول بدل القراءة: الحمد لله، الله أكبر، لا إله إلا الله، كما في حديث رفاعة بن رافع: «فَإِنْ كَانَ مَعَكَ قُرْآنٌ فَاقْرَأْ، وَإِلَّا فَاحْمَدِ اللَّهَ، وَكَبِّرْهُ، وَهَلِّلْهُ». ثم يجب عليه أن يتعلم الفاتحة لأنها ركن." },
+            { q: "ماذا يفعل من شك في صلاته ولم يدر كم صلى؟", a: "يطرح الشك ويبني على ما استيقن وهو الأقل، ثم يسجد سجدتين قبل السلام. فإن كان صلى خمساً شفعتا له صلاته، وإن كان صلى تماماً كانتا ترغيماً للشيطان." },
+            { q: "متى يكون سجود السهو قبل السلام ومتى يكون بعده؟", a: "يكون قبل السلام إذا كان السهو عن نقص (كنسيان واجب أو شك مع البناء على اليقين). ويكون بعد السلام إذا كان السهو عن زيادة (كزياة ركعة أو ركوع أو سجود). وقد ورد عن النبي ﷺ أنه سجد بعد السلام والكلام أيضاً." },
+            { q: "ما حكم قول: «سبحان الذي لا ينسى» في سجود السهو؟", a: "لا أصل له في السنة، بل هو من البدع. والمشروع أن يقول في سجدتي السهو كما يقول في سجود الصلاة: «سبحان ربي الأعلى». ولو قال ذلك جاهلاً فالصلاة صحيحة لكن ينبغي تعليمه." },
+            { q: "لماذا قال النبي ﷺ: «إِنَّمَا أَنَا بَشَرٌ أَنْسَى كَمَا تَنْسَوْنَ» بعد سجود السهو؟", a: "لبيان بشريته ﷺ وأن النسيان من طبيعة البشر، فلا ينبغي أن يظن أحد أن النبي معصوم من السهو والنسيان في أمور الدنيا والعبادات. وفي هذا تعزية للمسلمين أن النسيان يقع منهم كما وقع من النبي ﷺ، وأن الشريعة وضعت العلاج المناسب له وهو سجود السهو." },
+            { q: "ما الفرق بين كثير الشكوك ومن يطرأ عليه الشك أحياناً؟", a: "كثير الشكوك -الذي لا يكاد يصلي إلا شك- لا يلتفت إلى شكه لأنه وسواس، ولو التفت إليه لتعب. أما من يطرأ عليه الشك أحياناً فإنه يعمل بما شرع: يطرح الشك ويبني على اليقين إن لم يغلب على ظنه شيء، أو يتحرى الصواب إن غلب على ظنه أحد الاحتمالين." }
+        ];
+const QUIZ_QUESTIONS = [
+            { q: "شرطا قبول العبادة:", options: ["الإخلاص والمتابعة", "الكبر والرياء", "السمعة والجاه", "العادة والتقليد"], correct: 0 },
+            { q: "معنى قوله ﷺ: «ارْجِعْ فَصَلِّ، فَإِنَّكَ لَمْ تُصَلِّ»:", options: ["لم تصل أصلاً", "لم تصل صلاة تبرأ بها ذمتك", "لم تتم عدد الركعات", "نسيت النية"], correct: 1 },
+            { q: "الحكمة من رد النبي ﷺ المسيء ثلاث مرات:", options: ["للتشديد عليه", "ليتشوق للعلم فيحفظه", "ليعاقبه", "لينصرف"], correct: 1 },
+            { q: "إسباغ الوضوء معناه:", options: ["الإسراع فيه", "تخفيفه", "إتمامه وإكماله", "نقصانه"], correct: 2 },
+            { q: "الوضوء هو غسل:", options: ["الفرج والوجه واليدين", "الأعضاء الأربعة", "الوجه واليدين فقط", "البدن كله"], correct: 1 },
+            { q: "غسل الفرج يسمى:", options: ["الوضوء", "الغسل", "الاستنجاء", "التيمم"], correct: 2 },
+            { q: "الطمأنينة في الصلاة:", options: ["سنة مستحبة", "ركن تبطل الصلاة بدونه", "مكروهة", "جائزة"], correct: 1 },
+            { q: "من لم يحفظ شيئاً من القرآن يصلي بـ:", options: ["لا يصلي حتى يحفظ", "يسكت", "يحمد الله ويكبره ويهلله", "يقرأ من الإنجيل"], correct: 2 },
+            { q: "من شك في صلاته فإنه:", options: ["يعيد الصلاة", "يبني على الأكثر", "يبني على اليقين (الأقل) ويسجد للسهو", "يترك الصلاة"], correct: 2 },
+            { q: "سجود السهو يكون بعد السلام:", options: ["عند النقص", "عند الزيادة", "عند السفر", "دائماً"], correct: 1 },
+            { q: "كثير الشكوك في الصلاة:", options: ["يعيد صلاته", "يلتفت لكل شك", "لا يلتفت إلى شكه", "يسجد بعد كل ركعة"], correct: 2 },
+            { q: "قول «سبحان الذي لا ينسى» في سجود السهو:", options: ["سنة ثابتة", "لا أصل له", "واجب", "مستحب"], correct: 1 },
+            { q: "نية الوضوء:", options: ["باللسان", "بالقلب", "باليدين", "بالإشارة"], correct: 1 },
+            { q: "عدد غسلات أعضاء الوضوء:", options: ["واحدة فقط", "ثلاث فقط", "يجزي مرة والثلاث أفضل", "سبع مرات"], correct: 2 },
+            { q: "سجود السهو شرع من أجل:", options: ["تطويل الصلاة", "تعذيب المصلي", "جبر ما نقص من الصلاة", "إلغاء الصلاة"], correct: 2 },
+            { q: "من سها فزاد في صلاته:", options: ["بطلت صلاته", "يسجد للسهو قبل السلام", "يسجد للسهو بعد السلام", "يعيد الصلاة"], correct: 2 },
+            { q: "النبي ﷺ قال: «إِنَّمَا أَنَا بَشَرٌ أَنْسَى كَمَا تَنْسَوْنَ» ليبين:", options: ["عصمته من السهو", "جواز ترك الصلاة", "أن النسيان طبيعة بشرية", "أن الصلاة غير واجبة"], correct: 2 },
+            { q: "قراءة الفاتحة في الصلاة:", options: ["سنة", "ركن لا تصح الصلاة بدونه", "مستحبة", "مكروهة"], correct: 1 },
+            { q: "الركوع المجزئ:", options: ["الانحناء قليلاً", "الانحناء حتى تمس الكفان الركبتين", "الإشارة بالرأس", "الانحناء الكامل للسجود"], correct: 1 },
+            { q: "الاعتدال من الركوع:", options: ["سنة", "ركن", "مستحب", "غير مطلوب"], correct: 1 }
+        ];
+const ICON_COLORS = [
+            'text-primaryBlue',
+            'text-primaryRed',
+            'text-primaryGreen',
+            'text-primaryGold',
+            'text-purple-600'
+        ];
+
+        // --- Main App Component ---
+        const App = () => {
+            const [screen, setScreen] = useState(0); 
+            const [userInfo, setUserInfo] = useState({ name: '', section: '', startTime: null });
+            const [score, setScore] = useState(0);
+
+            const handleLogin = (name, section) => {
+                setUserInfo({ name, section, startTime: new Date() });
+                setScreen(1);
+            };
+
+            const finishTopics = () => setScreen(2);
+            const finishReview = () => setScreen(3);
+            const finishQuiz = (finalScore) => {
+                setScore(finalScore);
+                setScreen(4);
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Fixed Header */}
+                    <header className="bg-navy text-white shadow-lg sticky top-0 z-50">
+                        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+                            {/* Right (Start RTL): Student Info */}
+                            <div className="flex-1 text-right">
+                                {screen > 0 ? (
+                                    <div className="fade-in font-bold">
+                                        <p className="text-gold text-lg">{userInfo.name}</p>
+                                        <p className="text-gray-300 text-sm">الشعبة: {userInfo.section}</p>
+                                    </div>
+                                ) : <div/>}
+                            </div>
+
+                            {/* Center: Course Info */}
+                            <div className="flex-1 text-center border-x border-gray-600 px-4">
+                                <h1 className="text-2xl md:text-3xl font-bold font-amiri text-gold drop-shadow-md">أحاديث الأحكام</h1>
+                                <p className="text-sm md:text-md mt-1 text-gray-200">المحاضرة السادسة</p>
+                            </div>
+
+                            {/* Left (End RTL): Logo & Doctor */}
+                            <div className="flex-1 flex flex-col items-end pl-2">
+                                <div className="h-10 w-auto">
+                                    <img src="../../logo.png" alt="شعار الجامعة" className="h-full w-auto object-contain bg-transparent mix-blend-screen" />
+                                </div>
+                                <p className="text-xs md:text-sm mt-2 font-bold text-gray-300">د / باسم القرافي</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Dynamic Screens */}
+                    <main className="container mx-auto px-4 py-8 flex-grow">
+                        {screen === 0 && <WelcomeScreen onLogin={handleLogin} />}
+                        {screen === 1 && <TopicsFlow onFinish={finishTopics} />}
+                        {screen === 2 && <SmartReview onFinish={finishReview} />}
+                        {screen === 3 && <Quiz onFinish={finishQuiz} />}
+                        {screen === 4 && <ResultScreen userInfo={userInfo} score={score} />}
+                    </main>
+                </div>
+            );
+        };
+
+        // --- Screen 1: Welcome ---
+        const WelcomeScreen = ({ onLogin }) => {
+            const [name, setName] = useState('');
+            const [section, setSection] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const nameParts = name.trim().split(/\s+/);
+                if (nameParts.length < 4) {
+                    setError('الرجاء إدخال الاسم الرباعي بشكل صحيح.');
+                    return;
+                }
+                if (!section.trim()) {
+                    setError('الرجاء إدخال رقم الشعبة.');
+                    return;
+                }
+                setError('');
+                onLogin(name, section);
+            };
+
+            return (
+                <div className="max-w-md mx-auto glass-panel p-8 mt-10 fade-in border-t-4 border-gold">
+                    <h2 className="text-2xl font-bold text-center mb-6 text-navy">مرحباً بك في منصة التعلم للإتقان</h2>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">الاسم الرباعي:</label>
+                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل اسمك الرباعي هنا" />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">رقم الشعبة:</label>
+                            <input type="text" value={section} onChange={(e)=>setSection(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل رقم الشعبة" />
+                        </div>
+                        {error && <p className="text-red-500 text-sm font-bold bg-red-50 p-2 rounded">{error}</p>}
+                        <button type="submit" className="w-full bg-navy text-white py-3 rounded font-bold hover:bg-opacity-90 transition-all glow-effect">
+                            دخول وبدء التعلم
+                        </button>
+                    </form>
+                </div>
+            );
+        };
+
+        // --- Screen 2: Topics Flow ---
+        const TopicsFlow = ({ onFinish }) => {
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const topic = ALL_DATA[currentIndex];
+            
+            // State for Formative Assessment
+            const [ddAnswers, setDdAnswers] = useState({});
+            const [matches, setMatches] = useState([]); // Array of {left, right}
+            const [selectedLeft, setSelectedLeft] = useState(null);
+
+            // Synchronous state reset and progression
+            const handleNext = () => {
+                setDdAnswers({});
+                setMatches([]);
+                setSelectedLeft(null);
+                
+                if (currentIndex < ALL_DATA.length - 1) {
+                    setCurrentIndex(prev => prev + 1);
+                } else {
+                    onFinish();
+                }
+            };
+
+            const isDropdownsCorrect = () => {
+                const required = topic.exercises.dropdown.answers;
+                for (const key in required) {
+                    if (ddAnswers[key] !== required[key]) return false;
+                }
+                return Object.keys(required).length === Object.keys(ddAnswers).length;
+            };
+
+            const isMatchesCorrect = () => {
+                return matches.length === topic.exercises.matching.length;
+            };
+
+            const canProceed = isDropdownsCorrect() && isMatchesCorrect();
+
+            const renderHTML = (htmlString) => {
+                return <div dangerouslySetInnerHTML={{ __html: htmlString }} className="text-lg" />;
+            };
+
+            return (
+                <div className="fade-in space-y-8 pb-24">
+                    <div className="flex justify-between items-center glass-panel p-4 shadow-sm">
+                        <span className="font-bold text-navy text-lg">الوحدة {currentIndex + 1} من {ALL_DATA.length}</span>
+                        <div className="flex space-x-2 space-x-reverse">
+                            {ALL_DATA.map((_, idx) => (
+                                <div key={idx} className={`w-4 h-4 rounded-full shadow-inner ${idx <= currentIndex ? 'bg-gold' : 'bg-gray-300'}`}></div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8">
+                        {renderHTML(topic.content)}
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait1">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">الخريطة الذهنية</h3>
+                        <div className="mindmap-grid" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))` }}>
+                            <div className="mm-node md:col-span-full mb-2">{topic.mindmap.main}</div>
+                            {topic.mindmap.nodes.map((node, i) => (
+                                <div key={i} className="mm-sub">{node}</div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait3">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">التقييم التكويني المشروط</h3>
+                        
+                        {/* Dropdown Exercise */}
+                        <div className="mb-8 p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">أكمل الفراغات بما يناسب:</h4>
+                            <p className="leading-loose text-lg font-medium">
+                                {topic.exercises.dropdown.text.split(/(\[Q\d\])/).map((part, i) => {
+                                    if (part.startsWith('[Q')) {
+                                        const qKey = part.replace(/[\[\]]/g, '');
+                                        return (
+                                            <select key={i} value={ddAnswers[qKey] || ""} onChange={(e) => setDdAnswers({...ddAnswers, [qKey]: e.target.value})}
+                                                className={`mx-2 p-1 border-2 rounded-lg font-bold outline-none transition-colors ${ddAnswers[qKey] === topic.exercises.dropdown.answers[qKey] ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-300 bg-gray-50'}`}>
+                                                <option value="" disabled>اختر...</option>
+                                                {topic.exercises.dropdown.options[qKey].map((opt, j) => (
+                                                    <option key={j} value={opt}>{opt}</option>
+                                                ))}
+                                            </select>
+                                        );
+                                    }
+                                    return <span key={i}>{part}</span>;
+                                })}
+                            </p>
+                        </div>
+
+                        {/* Matching Exercise */}
+                        <div className="p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">صل بين القائمة (أ) وما يناسبها في (ب):</h4>
+                            <div className="grid grid-cols-2 gap-8">
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (أ)</h5>
+                                    {topic.exercises.matching.map((m, i) => {
+                                        const isMatched = matches.some(match => match.left === m.left);
+                                        const isSelected = selectedLeft === m.left;
+                                        return (
+                                            <div key={i} 
+                                                 onClick={() => !isMatched && setSelectedLeft(m.left)}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : isSelected ? 'border-navy bg-blue-50 text-navy' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.left}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (ب)</h5>
+                                    {[...topic.exercises.matching].sort((a,b)=>a.right.localeCompare(b.right)).map((m, i) => {
+                                        const isMatched = matches.some(match => match.right === m.right);
+                                        return (
+                                            <div key={i}
+                                                 onClick={() => {
+                                                    if(!selectedLeft || isMatched) return;
+                                                    const correctMatch = topic.exercises.matching.find(x => x.left === selectedLeft);
+                                                    if(correctMatch && correctMatch.right === m.right) {
+                                                        setMatches([...matches, {left: selectedLeft, right: m.right}]);
+                                                        setSelectedLeft(null);
+                                                    } else {
+                                                        setSelectedLeft(null);
+                                                    }
+                                                 }}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.right}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Navigation Button */}
+                    <div className="fixed bottom-0 left-0 w-full bg-white p-4 shadow-[0_-5px_15px_rgba(0,0,0,0.1)] flex justify-center fade-in z-50 border-t-4 border-green-500">
+                        {canProceed ? (
+                            <button onClick={handleNext} className="bg-green-600 text-white px-12 py-3 rounded-full font-bold text-xl hover:bg-green-700 transition-all glow-effect flex items-center shadow-lg">
+                                {currentIndex < ALL_DATA.length - 1 ? 'الانتقال للوحدة التالية' : 'الانتقال للمراجعة الذكية'}
+                                <span className="mr-3 text-2xl font-normal">←</span>
+                            </button>
+                        ) : (
+                            <p className="text-gray-500 font-bold flex items-center"><span className="text-red-500 mr-2 text-xl">⚠️</span> يرجى الإجابة بشكل صحيح على الأسئلة أعلاه لتفعيل زر الانتقال.</p>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 3: Smart Review ---
+        const SmartReview = ({ onFinish }) => {
+            const [openAcc, setOpenAcc] = useState(null);
+
+            return (
+                <div className="fade-in space-y-10 pb-10">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-gold">
+                        <h2 className="text-3xl font-bold font-amiri text-navy mb-2">المراجعة الذكية المزدوجة</h2>
+                        <p className="text-gray-600 text-lg">اقلب البطاقات لحفظ المصطلحات، وافتح القوائم للفهم التحليلي الشامل للمقرر</p>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3">أولاً: بطاقات المفاهيم والأحكام (14 بطاقة)</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {FLASHCARDS.map((card, i) => (
+                            <div key={i} className="flip-card">
+                                <div className="flip-card-inner">
+                                    <div className="flip-card-front">{card.front}</div>
+                                    <div className="flip-card-back">{card.back}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3 mt-12">ثانياً: التحليل المقالي والفهم العميق (10 أسئلة)</h3>
+                    <div className="space-y-4">
+                        {ACCORDIONS.map((acc, i) => (
+                            <div key={i} className="glass-panel overflow-hidden border border-gray-200">
+                                <button onClick={() => setOpenAcc(openAcc === i ? null : i)} className="w-full text-right p-5 font-bold text-navy bg-white hover:bg-blue-50 flex justify-between items-center transition-colors">
+                                    <span className="text-lg flex items-center">
+                                        <span className={`ml-3 text-2xl ${ICON_COLORS[i % ICON_COLORS.length]}`}>❖</span>
+                                        {acc.q}
+                                    </span>
+                                    <span className={`text-2xl transition-transform duration-300 ${openAcc === i ? 'rotate-45 text-red-500' : 'text-gold'}`}>+</span>
+                                </button>
+                                <div className={`px-5 transition-all duration-300 ease-in-out ${openAcc === i ? 'max-h-96 py-5 border-t border-gray-100 bg-trait2' : 'max-h-0 py-0 bg-white'}`}>
+                                    <p className="leading-loose text-gray-800 text-lg">{acc.a}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="text-center mt-12 pt-8">
+                        <button onClick={onFinish} className="bg-navy text-white px-12 py-4 rounded-full font-bold text-xl hover:bg-opacity-90 transition-all glow-effect shadow-xl">
+                            بدء التقييم الشامل
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 4: Quiz ---
+        const Quiz = ({ onFinish }) => {
+            const [answers, setAnswers] = useState({});
+            const [submitted, setSubmitted] = useState(false);
+
+            const isComplete = Object.keys(answers).length === QUIZ_QUESTIONS.length;
+
+            const handleSubmit = () => {
+                let s = 0;
+                QUIZ_QUESTIONS.forEach((q, i) => {
+                    if (answers[i] === q.correct) s++;
+                });
+                setSubmitted(true);
+                setTimeout(() => onFinish(s), 2500);
+            };
+
+            return (
+                <div className="fade-in max-w-4xl mx-auto pb-20">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-navy">
+                        <h2 className="text-4xl font-bold font-amiri text-navy">التقييم الشامل</h2>
+                        <p className="text-gray-600 mt-3 text-lg font-bold">أجب عن جميع الأسئلة التالية ({QUIZ_QUESTIONS.length} سؤال)</p>
+                    </div>
+
+                    <div className="space-y-6">
+                        {QUIZ_QUESTIONS.map((q, i) => {
+                            const iconColorClass = ICON_COLORS[i % ICON_COLORS.length];
+                            return (
+                                <div key={i} className={`glass-panel p-6 transition-all ${submitted ? (answers[i] === q.correct ? 'border-2 border-green-500 bg-green-50' : 'border-2 border-red-500 bg-red-50') : 'hover:border-gold border-2 border-transparent'}`}>
+                                    <h3 className="font-bold text-xl mb-5 text-navy flex items-start">
+                                        <span className={`ml-3 text-2xl font-black ${iconColorClass}`}>{i+1}.</span> 
+                                        {q.q}
+                                    </h3>
+                                    <div className="space-y-3">
+                                        {q.options.map((opt, j) => (
+                                            <label key={j} className={`block p-4 rounded-lg border-2 cursor-pointer transition-all ${answers[i] === j ? 'bg-navy text-white border-navy shadow-md transform scale-[1.01]' : 'bg-white hover:bg-gray-50 border-gray-200'} ${submitted && j === q.correct ? 'bg-green-500 text-white border-green-500 shadow-md' : ''} ${submitted && answers[i] === j && j !== q.correct ? 'bg-red-500 text-white border-red-500' : ''}`}>
+                                                <input type="radio" name={`q${i}`} className="hidden" 
+                                                    checked={answers[i] === j} 
+                                                    onChange={() => !submitted && setAnswers({...answers, [i]: j})} />
+                                                <span className="text-lg font-medium">{opt}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <div className="mt-12 text-center sticky bottom-6 z-50">
+                        <button onClick={handleSubmit} disabled={!isComplete || submitted} 
+                            className={`px-12 py-4 rounded-full font-bold text-xl shadow-2xl transition-all ${isComplete && !submitted ? 'bg-gold text-navy hover:bg-yellow-500 glow-effect transform hover:-translate-y-1' : 'bg-gray-300 text-gray-500 cursor-not-allowed border-2 border-gray-400'}`}>
+                            {submitted ? 'جاري حساب النتيجة وإرسالها...' : 'إنهاء وإرسال النتيجة'}
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 5: Result & Silent Submission ---
+        const ResultScreen = ({ userInfo, score }) => {
+            const [status, setStatus] = useState('جاري إرسال النتيجة صمتاً...');
+
+            useEffect(() => {
+                const duration = Math.round((new Date() - userInfo.startTime) / 60000); 
+                const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfvsMrAKL-c6fdoEvUyz83Mi0Ns4IuNp7VBL1tOrxY14P1-9Q/formResponse";
+                
+                const formData = new FormData();
+                formData.append('entry.1617589291', "المحاضرة السادسة");
+                formData.append('entry.987608423', userInfo.name);
+                formData.append('entry.992898656', userInfo.section);
+                formData.append('entry.1901145640', score);
+                formData.append('entry.1217028614', duration);
+
+                fetch(formUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                })
+                .then(() => {
+                    setStatus('تم حفظ النتيجة وتوثيق إنجازك بنجاح ✔️');
+                })
+                .catch(() => {
+                    setStatus('تم الانتهاء.');
+                });
+            }, []);
+
+            return (
+                <div className="max-w-lg mx-auto glass-panel p-12 text-center fade-in mt-10 border-t-8 border-navy shadow-2xl">
+                    <h2 className="text-4xl font-bold font-amiri text-navy mb-8">نتيجة التقييم الشامل</h2>
+                    <div className="text-6xl font-black text-gold mb-8 border-4 border-navy w-48 h-48 mx-auto flex items-center justify-center rounded-full bg-white shadow-[0_0_30px_rgba(226,185,111,0.5)]">
+                        {score} / 20
+                    </div>
+                    <div className="space-y-4 mb-10 text-xl font-bold bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <p className="text-navy flex justify-between"><span>الاسم:</span> <span>{userInfo.name}</span></p>
+                        <p className="text-navy flex justify-between border-t border-gray-200 pt-3"><span>الشعبة:</span> <span>{userInfo.section}</span></p>
+                    </div>
+                    <p className="text-green-600 font-bold mb-8 text-lg">{status}</p>
+                    <button onClick={() => window.location.reload()} className="px-10 py-4 bg-navy text-white rounded-full font-bold hover:bg-opacity-90 transition-all glow-effect shadow-lg w-full">
+                        العودة للرئيسية
+                    </button>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
