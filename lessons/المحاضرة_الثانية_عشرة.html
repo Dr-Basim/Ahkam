@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحاديث الأحكام - المحاضرة الثانية عشرة</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#16213e',
+                        gold: '#e2b96f',
+                        cream: '#faf8f3',
+                        trait1: '#f0fdf4',
+                        trait2: '#fefce8',
+                        trait3: '#eff6ff',
+                        trait4: '#fff1f2',
+                        trait5: '#f5f3ff',
+                        hlred: '#fee2e2',
+                        hlblue: '#dbeafe',
+                        hlgold: '#fef08a',
+                        primaryBlue: '#2563eb',
+                        primaryRed: '#dc2626',
+                        primaryGreen: '#16a34a',
+                        primaryGold: '#ca8a04'
+                    },
+                    fontFamily: {
+                        amiri: ['Amiri', 'serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #faf8f3 0%, #e2e8f0 100%);
+            background-attachment: fixed;
+            font-family: 'Tajawal', sans-serif;
+            color: #16213e;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Amiri', serif; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px -10px rgba(22, 33, 62, 0.1);
+        }
+        
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(226, 185, 111, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .verse {
+            background: linear-gradient(to left, rgba(226, 185, 111, 0.15), transparent);
+            border-right: 4px solid #e2b96f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            font-family: 'Amiri', serif;
+            font-size: 1.25rem;
+            line-height: 2.2;
+            color: #16213e;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        /* Content Cells */
+        .content-cell {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            border-right-width: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        .content-cell:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.06); transform: translateX(-3px); }
+        .cell-blue { background-color: #eff6ff; border-color: #3b82f6; }
+        .cell-yellow { background-color: #fefce8; border-color: #eab308; }
+        .cell-green { background-color: #f0fdf4; border-color: #22c55e; }
+        .cell-red { background-color: #fef2f2; border-color: #ef4444; }
+        .cell-purple { background-color: #faf5ff; border-color: #a855f7; }
+
+        /* Highlights */
+        .hl-red { background-color: #fee2e2; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #991b1b; }
+        .hl-blue { background-color: #dbeafe; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #1e40af; }
+        .hl-gold { background-color: #fef08a; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #854d0e; }
+
+        /* Flip Card CSS */
+        .flip-card { perspective: 1000px; cursor: pointer; height: 180px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 1rem;
+            display: flex; align-items: center; justify-content: center; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); text-align: center;
+        }
+        .flip-card-front { background: linear-gradient(135deg, #16213e, #1e3a8a); color: #e2b96f; border: 2px solid #e2b96f; font-family: 'Amiri', serif; font-size: 1.35rem; font-weight: bold;}
+        .flip-card-back { background: linear-gradient(135deg, #e2b96f, #d97706); color: #fff; transform: rotateY(180deg); font-size: 1.1rem; font-weight: 500;}
+
+        /* CSS Grid Mindmap */
+        .mindmap-grid { display: grid; gap: 1.5rem; padding: 2rem; background: #fff; border-radius: 1rem; border: 2px dashed #e2b96f; }
+        .mm-node { background: #16213e; color: #e2b96f; padding: 1.25rem; border-radius: 0.75rem; text-align: center; font-size: 1.25rem; font-weight: bold; font-family: 'Amiri', serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .mm-sub { background: #faf8f3; color: #16213e; border: 1px solid #e2b96f; border-right: 4px solid #e2b96f; padding: 1rem; border-radius: 0.5rem; text-align: center; font-weight: bold; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #e2b96f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #16213e; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Data Definitions (Full Content, Segmented with Colored Cells) ---
+        
+const ALL_DATA = [
+            {
+                id: 1,
+                title: "الوحدة الأولى: حديث عائشة - وجوه الإحرام (التمتع والقران والإفراد)",
+                content: `
+                    <div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+                        <h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-800">
+                            <li>أن يفرق بين أنواع الإحرام الثلاثة: التمتع والقران والإفراد</li>
+                            <li>أن يبين أفضل أنواع الأنساك مع ذكر الدليل</li>
+                            <li>أن يوضح حكم النبي ﷺ في حجة الوداع وعلاقته بأنواع الإحرام</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6 p-4 bg-trait2 rounded-xl border-r-4 border-gold">
+                        <h3 class="text-xl font-bold text-primaryGold mb-2">📖 تمهيد الوحدة</h3>
+                        <p class="leading-loose text-gray-800">الإحرام ركن من أركان الحج والعمرة، وله ثلاثة أوجه: التمتع والقران والإفراد. وفي حجة الوداع خرج الصحابة مع النبي ﷺ على هذه الأوجه الثلاثة. وفي هذه الوحدة نتعرف على أنواع الإحرام وأفضلها من خلال حديث عائشة رضي الله عنها.</p>
+                    </div>
+
+                    <div class="verse">
+                        ٧٤٤ - عَنْ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا قَالَتْ: خَرَجْنَا مَعَ رَسُولِ اللَّهِ ﷺ عَامَ حَجَّةِ الوَدَاعِ، فَمِنَّا مَنْ أَهَلَّ بِعُمْرَةٍ، وَمِنَّا مَنْ أَهَلَّ بِحَجٍّ وَعُمْرَةٍ، وَمِنَّا مَنْ أَهَلَّ بِحَجٍّ، وَأَهَلَّ رَسُولُ اللَّهِ ﷺ بِالْحَجِّ، فَأَمَّا مَنْ أَهَلَّ بِعُمْرَةٍ فَحَلَّ، وَأَمَّا مَنْ أَهَلَّ بِحَجٍّ، أَوْ جَمَعَ الْحَجَّ وَالعُمْرَةَ فَلَمْ يَحِلُّوا حَتَّى كَانَ يَوْمُ النَّحْرِ. مُتَّفَقٌ عَلَيْهِ.
+                    </div>
+
+                    <div class="content-cell cell-blue mt-4">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">🪪 بطاقة الراوي</h4>
+                        <ul class="space-y-2 text-gray-800">
+                            <li><span class="hl-blue">الراوي:</span> عائشة بنت أبي بكر الصديق رضي الله عنها</li>
+                            <li><span class="hl-blue">منزلتها:</span> أم المؤمنين، أفقه نساء الأمة</li>
+                            <li><span class="hl-blue">صلتها بالحديث:</span> شهدت حجة الوداع مع النبي ﷺ</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800">
+                            <li><span class="hl-blue">أهلَّ:</span> أحرم ورفع صوته بالتلبية</li>
+                            <li><span class="hl-blue">بعمرة:</span> متمتعاً (يحل بعد العمرة ثم يحرم بالحج)</li>
+                            <li><span class="hl-blue">بحج وعمرة:</span> قارناً (يجمع بينهما في إحرام واحد)</li>
+                            <li><span class="hl-blue">بحج:</span> مفرداً (يحرم بالحج فقط)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+                        <p class="leading-loose text-gray-800">تصف عائشة رضي الله عنها حال الصحابة في حجة الوداع: فمنهم من أحرم متمتعاً (بعمرة ثم يحل ثم يحرم بالحج)، ومنهم من أحرم قارناً (يجمع الحج والعمرة)، ومنهم من أحرم مفرداً (بالحج فقط). أما النبي ﷺ فأحرم بالحج قارناً لأنه ساق الهدي. والمتمتع يحل بعد العمرة، والقارن والمفرد لا يحلان حتى يوم النحر.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: أنواع الإحرام الثلاثة</h4>
+                        <p class="leading-loose text-gray-800"><span class="hl-blue">التمتع:</span> أن يحرم بالعمرة في أشهر الحج ثم يحل منها، ثم يحرم بالحج من مكة يوم التروية (٨ ذي الحجة). <span class="hl-gold">القران:</span> أن يحرم بالعمرة والحج معاً، أو يحرم بالعمرة ثم يدخل الحج عليها قبل الطواف. <span class="hl-green">الإفراد:</span> أن يحرم بالحج فقط.</p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: أفضل الأنساك</h4>
+                        <p class="leading-loose text-gray-800">اختلف العلماء في أفضل أنواع الإحرام. <span class="hl-green">والراجح أن التمتع أفضل</span> للأدلة التالية: (١) أن النبي ﷺ أمر به أصحابه. (٢) أن القرآن ذكره: ﴿فَمَن تَمَتَّعَ بِالْعُمْرَةِ إِلَى الْحَجِّ﴾. (٣) أنه أكثر عملاً. (٤) أنه أيسر على الناس. أما من ساق الهدي فالأفضل له القران، كما فعل النبي ﷺ.</p>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">ثالثاً: نسك النبي ﷺ في حجة الوداع</h4>
+                        <p class="leading-loose text-gray-800">كان النبي ﷺ قارناً، كما دل على ذلك أكثر من عشرين دليلاً. قال الإمام أحمد: «لا أشك أن النبي ﷺ كان قارناً، والمتعة أحب إلي». وإنما كان قارناً لأنه ساق الهدي. <span class="hl-gold">ولما أمر أصحابه بالتمتع قال: «لولا أن معي الهدي لأحللت معكم».</span></p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">الأحكام الفقهية</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li>أنواع الإحرام ثلاثة: تمتع وقران وإفراد</li>
+                            <li>التمتع أفضل لمن لم يسق الهدي</li>
+                            <li>القران أفضل لمن ساق الهدي</li>
+                            <li>القارن يلزمه هدي، فإن لم يجد صام ثلاثة أيام في الحج وسبعة إذا رجع</li>
+                            <li>المتمتع يحل بعد العمرة والقارن والمفرد لا يحلان حتى يوم النحر</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow mt-4">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">🗣️ مسائل الخلاف والترجيح</h4>
+                        <p class="font-bold text-navy">المسألة: أي الأنساك أفضل؟</p>
+                        <p class="text-gray-800"><span class="hl-gold">محل الخلاف:</span> التمتع أم القران أم الإفراد؟</p>
+                        <p class="text-gray-800"><span class="hl-red">الترجيح:</span> التمتع أفضل لمن لم يسق الهدي، والقران أفضل لمن ساق الهدي.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🗺️ خريطة الحديث والأحكام</h3>
+                    <div class="mindmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+                        <div class="mm-node md:col-span-full mb-2">أنواع الإحرام</div>
+                        <div class="mm-sub">التمتع: عمرة ثم حج (الأفضل)</div>
+                        <div class="mm-sub">القران: حج وعمرة معاً</div>
+                        <div class="mm-sub">الإفراد: حج فقط</div>
+                        <div class="mm-sub">النبي ﷺ: قارن (ساق الهدي)</div>
+                    </div>
+                `,
+                mindmap: {
+                    main: "أنواع الإحرام",
+                    nodes: ["التمتع: عمرة + حج (أفضل)", "القران: حج وعمرة معاً", "الإفراد: حج فقط", "النبي ﷺ قارن لسوقه الهدي"]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "أنواع الإحرام ثلاثة: [Q1] وقران و [Q2]. والأفضل لمن لم يسق الهدي: [Q3].",
+                        options: {
+                            Q1: ["إفراد", "تمتع", "إطلاق"],
+                            Q2: ["تمتع", "إفراد", "تحلل"],
+                            Q3: ["القران", "الإفراد", "التمتع"]
+                        },
+                        answers: { Q1: "تمتع", Q2: "إفراد", Q3: "التمتع" }
+                    },
+                    matching: [
+                        { left: "التمتع", right: "عمرة ثم حج (يحل بينهما)" },
+                        { left: "القران", right: "حج وعمرة معاً (لا يحل حتى النحر)" },
+                        { left: "النبي ﷺ", right: "قارن لأنه ساق الهدي" }
+                    ]
+                }
+            },
+            {
+                id: 2,
+                title: "الوحدة الثانية: حديث ابن عمر - ما يلبسه المحرم وما لا يلبسه",
+                content: `
+                    <div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+                        <h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-800">
+                            <li>أن يعدد ما يحرم على المحرم لبسه من الثياب</li>
+                            <li>أن يفرق بين (المخيط) بالمعنى الفقهي والمعنى العامي</li>
+                            <li>أن يطبق أحكام لباس الإحرام للرجال والنساء</li>
+                        </ul>
+                    </div>
+
+                    <div class="verse">
+                        ٧٤٨ - وَعَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا أَنَّ رَسُولَ اللهِ ﷺ سُئِلَ: مَا يُلْبَسُ المُحْرِمُ مِنَ الثَّيَابِ؟ قَالَ: «لَا تَلْبَسُوا القُمُصَ، وَلَا العَمَائِمَ، وَلَا السَّرَاوِيلَاتِ، وَلَا البَرَانِسَ، وَلَا الْخِفَافَ، إِلَّا أَحَدٌ لَا يَجِدُ النَّعْلَيْنِ فَلْيَلْبَسِ الْخُفَّيْنِ وَلْيَقْطَعْهُمَا أَسْفَلَ مِنَ الكَعْبَيْنِ، وَلَا تَلْبَسُوا شَيْئًا مِنَ الثِّيَابِ مَسَّهُ الزَّعْفَرَانُ، وَلَا الوَرْسُ». مُتَّفَقٌ عَلَيْهِ وَاللَّفْظُ لِمُسْلِمٍ.
+                    </div>
+
+                    <div class="content-cell cell-blue mt-4">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800">
+                            <li><span class="hl-blue">القمص:</span> ما خيط على قدر البدن وله أكمام لليدين</li>
+                            <li><span class="hl-blue">العمائم:</span> ما يلف على الرأس</li>
+                            <li><span class="hl-blue">السراويلات:</span> ما خيط على قدر أسفل الجسد وله أكمام للرجلين</li>
+                            <li><span class="hl-blue">البرانس:</span> ثياب واسعة لها غطاء للرأس</li>
+                            <li><span class="hl-blue">الخفاف:</span> ما يلبس في الرجل من شراب ونعال</li>
+                            <li><span class="hl-blue">الزعفران والورس:</span> نباتات تستخدم للتطيب</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+                        <p class="leading-loose text-gray-800">لما سئل النبي ﷺ عما يلبسه المحرم أجاب بما لا يلبسه - وهذا من الأسلوب الحكيم - لأن ما يلبسه أكثر مما لا يلبسه. فذكر ستة ممنوعات: القميص، العمائم، السراويلات، البرانس، الخفاف، والثياب المطيبة. والمحرم يلبس ما شاء من الثياب غير هذه الستة.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: الممنوعات الستة</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li><span class="hl-blue">القميص:</span> ما خيط على قدر البدن. لكن لو خلعه ولف به جسده فلا حرج.</li>
+                            <li><span class="hl-blue">السراويل:</span> سواء طال كمه أو قصر.</li>
+                            <li><span class="hl-blue">البرانس:</span> الثياب التي تغطي الرأس.</li>
+                            <li><span class="hl-blue">العمائم:</span> ما يغطى به الرأس.</li>
+                            <li><span class="hl-blue">الخفاف:</span> لا تلبس إلا لمن لم يجد نعلين، ويقطعهما أسفل الكعبين.</li>
+                            <li><span class="hl-blue">الثياب المطيبة:</span> ما مسه الزعفران أو الورس.</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: معنى (المخيط) عند الفقهاء</h4>
+                        <p class="leading-loose text-gray-800">اشتهر عند العوام أن المحرم لا يلبس ما فيه خياطة، وهذا خطأ. <span class="hl-green">فمراد الفقهاء بـ(المخيط): ما خيط على قدر الجسد أو جزء منه</span>، كالقميص والسراويل. أما النعال والخواتم والساعات والأحزمة فكلها جائزة للمحرم.</p>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">ثالثاً: مسائل معاصرة</h4>
+                        <p class="leading-loose text-gray-800">يجوز للمحرم: لبس الساعة، والنظارة، والسماعة الطبية، والحزام للنقود والمفاتيح. ويجوز عقد الرداء بمشبك واحد. <span class="hl-gold">لكن لا ينبغي الإكثار من المشابك لأنها تصير كالقميص.</span> ويجوز للمحرم أن يغير ثياب إحرامه للغسل أو الوسخ.</p>
+                    </div>
+
+                    <div class="content-cell cell-red">
+                        <h4 class="text-xl font-bold text-primaryRed mb-2">رابعاً: لباس المرأة في الإحرام</h4>
+                        <p class="leading-loose text-gray-800">هذه الممنوعات خاصة بالرجل. <span class="hl-red">أما المرأة فتلبس ما شاءت من الثياب الساترة، إلا أنها لا تلبس النقاب ولا البرقع ولا القفازين.</span> والأفضل كشف الوجه إلا إذا مرت برجال أجانب. ولا يجوز لها التطيب كالرجل.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">الأحكام الفقهية</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li>يحرم على المحرم لبس: القميص، العمامة، السراويل، البرنس، الخفاف (إلا عند فقد النعلين مع القطع)</li>
+                            <li>يحرم لبس الثياب المطيبة</li>
+                            <li>المحرم يلبس ما شاء غير هذه الستة</li>
+                            <li>المرأة تلبس ما شاءت إلا النقاب والبرقع والقفازين</li>
+                            <li>يجوز للمحرم تغيير ثياب إحرامه</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🏋️ تدريب على الاستنباط</h3>
+                    <div class="content-cell cell-blue">
+                        <p class="font-bold text-navy">التدريب:</p>
+                        <p class="text-gray-800">لماذا أجاب النبي ﷺ السائل بما (لا) يلبسه المحرم بدلاً من أن يجيبه بما يلبسه؟</p>
+                        <p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+                        <p class="text-gray-800">هذا من الأسلوب الحكيم في البلاغة: لأن ما يلبسه المحرم أكثر مما لا يلبسه، فذكر الممنوعات أسهل وأوجز. والإجابة بما لا يلبس إشارة إلى أنه ينبغي أن يكون السؤال عن الذي لا يلبس لأنه أقل.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🗺️ خريطة الحديث والأحكام</h3>
+                    <div class="mindmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+                        <div class="mm-node md:col-span-full mb-2">لباس المحرم</div>
+                        <div class="mm-sub">الممنوعات: قميص، عمامة، سراويل، برنس، خف، مطيب</div>
+                        <div class="mm-sub">المخيط = ما فصل على قدر الجسد</div>
+                        <div class="mm-sub">يجوز: الساعة، النظارة، الحزام</div>
+                        <div class="mm-sub">المرأة: تمنع من النقاب والبرقع والقفازين</div>
+                    </div>
+                `,
+                mindmap: {
+                    main: "ما يلبسه المحرم وما لا يلبسه",
+                    nodes: ["٦ ممنوعات للرجل", "المخيط = المفصل على قدر البدن", "يجوز: ساعة، نظارة، حزام", "المرأة: لا نقاب ولا برقع ولا قفازين"]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "المحرم لا يلبس [Q1] ولا العمائم ولا [Q2]. والمراد بالمخيط ما فصل على [Q3].",
+                        options: {
+                            Q1: ["النعال", "القمص", "الخواتم"],
+                            Q2: ["الإزار", "السراويلات", "الرداء"],
+                            Q3: ["الرأس", "قدر البدن", "القدم"]
+                        },
+                        answers: { Q1: "القمص", Q2: "السراويلات", Q3: "قدر البدن" }
+                    },
+                    matching: [
+                        { left: "القميص", right: "ما خيط على قدر البدن" },
+                        { left: "الخف", right: "يجوز لمن لم يجد نعلين مع القطع" },
+                        { left: "المخيط عند الفقهاء", right: "ما فصل على قدر الجسد" },
+                        { left: "المرأة المحرمة", right: "لا تلبس النقاب والبرقع" }
+                    ]
+                }
+            },
+            {
+                id: 3,
+                title: "الوحدة الثالثة: حديث عبد الله بن عمرو - تقديم الأنساك وتأخيرها (لا حرج)",
+                content: `
+                    <div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+                        <h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-800">
+                            <li>أن يبين حكم تقديم بعض أعمال يوم النحر على بعض</li>
+                            <li>أن يستنبط قاعدة (لا حرج) في المناسك</li>
+                            <li>أن يطبق أحكام الترتيب بين أعمال يوم النحر</li>
+                        </ul>
+                    </div>
+
+                    <div class="verse">
+                        ٧٦٥ - وَعَنْ عَبْدِ اللهِ بْنِ عَمْرِو بْنِ العَاصِ رَضِيَ اللَّهُ عَنْهُمَا أَنَّ رَسُولَ اللهِ ﷺ وَقَفَ فِي حَجَّةِ الوَدَاعِ، فَجَعَلُوا يَسْأَلُونَهُ، فَقَالَ رَجُلٌ: لَمْ أَشْعُرْ، فَحَلَقْتُ قَبْلَ أَنْ أَذْبَحَ. قَالَ: «اذْبَحْ وَلَا حَرَجَ». فَجَاءَ آخَرُ، فَقَالَ: لَمْ أَشْعُرْ، فَنَحَرْتُ قَبْلَ أَنْ أَرْمِيَ. قَالَ: «ارْمِ وَلَا حَرَجَ». فَمَا سُئِلَ يَوْمَئِذٍ عَنْ شَيْءٍ قُدِّمَ وَلَا أُخِّرَ إِلَّا قَالَ: «افْعَلْ وَلَا حَرَجَ». مُتَّفَقٌ عَلَيْهِ.
+                    </div>
+
+                    <div class="content-cell cell-blue mt-4">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800">
+                            <li><span class="hl-blue">لم أشعر:</span> لم أعلم، جهلت الحكم</li>
+                            <li><span class="hl-blue">فحلقت قبل أن أذبح:</span> قدم الحلق على الذبح</li>
+                            <li><span class="hl-blue">فنحرت قبل أن أرمي:</span> قدم النحر على الرمي</li>
+                            <li><span class="hl-blue">لا حرج:</span> لا إثم ولا فدية</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+                        <p class="leading-loose text-gray-800">وقف النبي ﷺ يوم العيد (يوم النحر) في حجة الوداع يجيب أسئلة الناس. فسأله رجل عن تقديم الحلق على الذبح، وآخر عن تقديم النحر على الرمي. فأجابهما بقوله: «لا حرج». ثم عمم الحكم: «فما سئل يومئذ عن شيء قدم ولا أخر إلا قال: افعل ولا حرج». وهذا يدل على التوسعة في ترتيب أعمال يوم النحر.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: الترتيب المشروع لأعمال يوم النحر</h4>
+                        <p class="leading-loose text-gray-800">الترتيب المشروع: <span class="hl-blue">الرمي، ثم النحر (الذبح)، ثم الحلق أو التقصير، ثم الطواف، ثم السعي</span> (إن لم يكن سعى مع طواف القدوم). وهذا الترتيب على سبيل الاستحباب لا الوجوب، كما دل عليه الحديث.</p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: قاعدة (لا حرج) في المناسك</h4>
+                        <p class="leading-loose text-gray-800">قوله ﷺ: «افعل ولا حرج» عام في التقديم والتأخير، سواء كان لعذر أو لغير عذر على الراجح. <span class="hl-green">ويدل على ذلك التعميم في آخر الحديث: «فما سئل يومئذ عن شيء قدم ولا أخر إلا قال: افعل ولا حرج».</span> وفي رواية للنسائي: «في أيام منى» مما يدل على امتداد الحكم لأيام التشريق.</p>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">ثالثاً: نفي الحرج يستلزم نفي الفدية</h4>
+                        <p class="leading-loose text-gray-800">قوله: «لا حرج» يستلزم أنه لا دم (فدية) على المقدم، خلافاً لمن قال إن التقديم جائز لكن مع الفدية. <span class="hl-gold">فكيف يوجب الدم والرسول يقول: «لا حرج»؟!</span> وهذا من رحمة الله بعباده ورفع الحرج عنهم.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">الأحكام الفقهية</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li>الترتيب بين أعمال يوم النحر مستحب لا واجب</li>
+                            <li>يجوز تقديم الحلق على الذبح، والنحر على الرمي</li>
+                            <li>لا فدية على من قدم أو أخر</li>
+                            <li>الحكم يشمل يوم العيد وأيام التشريق</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow mt-4">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">🗣️ مسائل الخلاف</h4>
+                        <p class="font-bold text-navy">المسألة: هل الرخصة خاصة بالجاهل والناسي أم عامة؟</p>
+                        <p class="text-gray-800"><span class="hl-blue">القول الأول:</span> الرخصة خاصة بالجاهل لقوله: «لم أشعر».</p>
+                        <p class="text-gray-800"><span class="hl-blue">القول الثاني:</span> الرخصة عامة للجميع للتعميم في آخر الحديث.</p>
+                        <p class="text-gray-800"><span class="hl-red">الترجيح:</span> القول الثاني أرجح، لأن التعميم في آخر الحديث يقتضي العموم، ولأن نفي الحرج مطلق.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🗺️ خريطة الحديث والأحكام</h3>
+                    <div class="mindmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+                        <div class="mm-node md:col-span-full mb-2">تقديم الأنساك وتأخيرها</div>
+                        <div class="mm-sub">الترتيب المشروع: رمي → نحر → حلق → طواف</div>
+                        <div class="mm-sub">قاعدة: لا حرج في التقديم والتأخير</div>
+                        <div class="mm-sub">نفي الحرج = نفي الفدية</div>
+                        <div class="mm-sub">الحكم عام للجميع (لا يختص بالجاهل)</div>
+                    </div>
+                `,
+                mindmap: {
+                    main: "تقديم الأنساك وتأخيرها (لا حرج)",
+                    nodes: ["الترتيب المشروع: رمي، نحر، حلق، طواف", "قاعدة: لا حرج في التقديم والتأخير", "نفي الحرج = نفي الفدية", "الحكم عام للجميع"]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "الترتيب المشروع يوم النحر: [Q1] ثم نحر ثم [Q2] ثم طواف. ومن قدم أو أخر: [Q3].",
+                        options: {
+                            Q1: ["حلق", "رمي", "سعي"],
+                            Q2: ["رمي", "حلق", "ذبح"],
+                            Q3: ["عليه دم", "لا حرج", "يبطل نسكه"]
+                        },
+                        answers: { Q1: "رمي", Q2: "حلق", Q3: "لا حرج" }
+                    },
+                    matching: [
+                        { left: "الترتيب المشروع", right: "رمي، نحر، حلق، طواف" },
+                        { left: "«لا حرج»", right: "لا إثم ولا فدية" },
+                        { left: "حجة الوداع", right: "الحجة التي حجها النبي بعد الهجرة" }
+                    ]
+                }
+            }
+        ];
+
+const FLASHCARDS = [
+            { front: "أنواع الإحرام", back: "تمتع (الأفضل)، قران، إفراد" },
+            { front: "التمتع", back: "عمرة ثم حج، يحل بينهما، وعليه هدي" },
+            { front: "القران", back: "حج وعمرة معاً، لا يحل حتى النحر" },
+            { front: "نسك النبي ﷺ", back: "قارن لأنه ساق الهدي" },
+            { front: "الممنوعات الستة للمحرم", back: "القميص، العمامة، السراويل، البرنس، الخف، الثوب المطيب" },
+            { front: "معنى المخيط عند الفقهاء", back: "ما فصل على قدر الجسد أو جزء منه، لا ما فيه خياطة" },
+            { front: "حكم الخفاف للمحرم", back: "لا يلبسها إلا إذا لم يجد نعلين، ويقطعهما أسفل الكعبين" },
+            { front: "لباس المرأة المحرمة", back: "تلبس ما شاءت إلا النقاب والبرقع والقفازين" },
+            { front: "الترتيب المشروع يوم النحر", back: "الرمي، ثم النحر، ثم الحلق، ثم الطواف" },
+            { front: "حكم تقديم أعمال يوم النحر", back: "يجوز ولا حرج، ولا فدية" },
+            { front: "حجة الوداع", back: "الحجة الوحيدة التي حجها النبي ﷺ بعد الهجرة سنة ١٠ﻫ" },
+            { front: "من سأل النبي ﷺ عن تقديم الحلق على الذبح", back: "قال له: «اذبح ولا حرج»" },
+            { front: "الزعفران والورس", back: "نباتات تستخدم للتطيب، يحرم على المحرم لبس ما مسه" },
+            { front: "الأسلوب الحكيم في حديث اللباس", back: "أجاب النبي ﷺ بما لا يلبس لأن ما يلبس أكثر" }
+        ];
+
+const ACCORDIONS = [
+            { q: "ما أنواع الإحرام؟ وأيها أفضل؟", a: "ثلاثة: التمتع (عمرة ثم حج)، والقران (حج وعمرة معاً)، والإفراد (حج فقط). والأفضل: التمتع لمن لم يسق الهدي، والقران لمن ساق الهدي كما فعل النبي ﷺ." },
+            { q: "لماذا كان النبي ﷺ قارناً مع أنه أمر أصحابه بالتمتع؟", a: "لأنه ساق الهدي. وقد قال: «لولا أن معي الهدي لأحللت معكم». فمن ساق الهدي فالأفضل له القران، ومن لم يسق الهدي فالأفضل له التمتع." },
+            { q: "ما الأشياء الستة التي لا يلبسها المحرم؟", a: "القميص، العمائم، السراويلات، البرانس، الخفاف (إلا عند عدم النعلين مع القطع)، والثياب التي مسها الزعفران أو الورس." },
+            { q: "ما معنى (المخيط) عند الفقهاء؟ وما خطأ العوام فيه؟", a: "المخيط عند الفقهاء: ما خيط على قدر الجسد أو جزء منه كالقميص والسراويل. وخطأ العوام أنهم يظنون أن كل ما فيه خياطة محرم، فيسألون عن النعال التي فيها خياطة. والصواب أن العبرة بما فصل على قدر البدن." },
+            { q: "ما حكم لبس الساعة والنظارة والحزام للمحرم؟", a: "يجوز لبس الساعة والنظارة والسماعة الطبية والحزام للنقود والمفاتيح، لأنها ليست مما نص عليه النبي ﷺ بالمنع، وأقرب شيء لها الخاتم الذي أجاز العلماء لبسه." },
+            { q: "ما الفرق بين لباس المحرم الرجل والمرأة؟", a: "الممنوعات الستة خاصة بالرجل. أما المرأة فتلبس ما شاءت من الثياب الساترة، ويمنع عليها: النقاب والبرقع والقفازين فقط. والمرأة والرجل سواء في منع الثياب المطيبة." },
+            { q: "ما الترتيب المشروع لأعمال يوم النحر؟ وهل هو واجب؟", a: "الترتيب المشروع: الرمي، ثم النحر، ثم الحلق أو التقصير، ثم الطواف، ثم السعي. وهذا الترتيب مستحب لا واجب، ويجوز تقديم بعضها على بعض ولا حرج." },
+            { q: "هل الرخصة في تقديم الأنساك خاصة بالجاهل أم عامة؟", a: "الراجح أنها عامة للجميع، للتعميم في آخر الحديث: «فما سئل يومئذ عن شيء قدم ولا أخر إلا قال: افعل ولا حرج». والقول بأنها خاصة بالجاهل مرجوح." },
+            { q: "ما حكم من حلق قبل أن يذبح يوم النحر جاهلاً؟", a: "لا حرج عليه، يذبح بعد ذلك ولا فدية عليه. لقوله ﷺ: «اذبح ولا حرج». ونفي الحرج يستلزم نفي الفدية." },
+            { q: "ما الفرق بين القارن والمفرد في أعمال الحج؟", a: "القارن يحصل له طواف حج وعمرة، ويلزمه هدي (فإن لم يجد صام ثلاثة أيام في الحج وسبعة إذا رجع). والمفرد لا هدي عليه. وكلاهما لا يحلان حتى يوم النحر." }
+        ];
+
+const QUIZ_QUESTIONS = [
+            { q: "أنواع الإحرام:", options: ["اثنان", "ثلاثة", "أربعة", "خمسة"], correct: 1 },
+            { q: "التمتع هو:", options: ["حج فقط", "عمرة فقط", "عمرة ثم حج", "حج وعمرة معاً"], correct: 2 },
+            { q: "الأفضل لمن لم يسق الهدي:", options: ["الإفراد", "القران", "التمتع", "كلها سواء"], correct: 2 },
+            { q: "نسك النبي ﷺ في حجة الوداع:", options: ["تمتع", "قران", "إفراد", "عمرة فقط"], correct: 1 },
+            { q: "سبب قران النبي ﷺ:", options: ["أنه الأفضل مطلقاً", "أنه ساق الهدي", "لم يكن يعلم التمتع", "أمره جبريل"], correct: 1 },
+            { q: "ما يحرم على المحرم لبسه:", options: ["كل ما فيه خياطة", "ستة أشياء محددة", "الإزار والرداء", "النعال"], correct: 1 },
+            { q: "القميص للمحرم:", options: ["جائز", "محرم", "مكروه", "مستحب"], correct: 1 },
+            { q: "حكم لبس الخفاف للمحرم:", options: ["جائز مطلقاً", "محرم مطلقاً", "يجوز لمن لم يجد نعلين مع القطع", "جائز بدون قطع"], correct: 2 },
+            { q: "المرأة المحرمة تمنع من:", options: ["العباءة", "النقاب والبرقع", "الثوب الأسود", "الجلباب"], correct: 1 },
+            { q: "الزعفران والورس:", options: ["يستحب للمحرم", "يحرم على المحرم لبس ما مسه", "يجوز للمحرم", "خاص بالنساء"], correct: 1 },
+            { q: "الترتيب المشروع يوم النحر يبدأ بـ:", options: ["الحلق", "النحر", "الرمي", "الطواف"], correct: 2 },
+            { q: "حكم تقديم الحلق على الذبح:", options: ["يبطل الحج", "عليه دم", "لا حرج", "مكروه"], correct: 2 },
+            { q: "من قدم أو أخر أعمال يوم النحر:", options: ["عليه فدية", "لا حرج ولا فدية", "يبطل نسكه", "يجب أن يعيد"], correct: 1 },
+            { q: "قول النبي: «لا حرج» يستلزم:", options: ["وجوب الدم", "نفي الإثم والفدية", "الإعادة", "الكراهة"], correct: 1 },
+            { q: "حجة الوداع كانت سنة:", options: ["٨ﻫ", "٩ﻫ", "١٠ﻫ", "١١ﻫ"], correct: 2 },
+            { q: "المخيط عند الفقهاء هو:", options: ["كل ما فيه خياطة", "ما فصل على قدر الجسد", "الإبرة", "الخيط"], correct: 1 },
+            { q: "لبس الحزام للمفاتيح والنقود:", options: ["محرم", "جائز", "مكروه", "يبطل الإحرام"], correct: 1 },
+            { q: "حكم تغيير ثياب الإحرام:", options: ["لا يجوز", "يجوز للغسل والوسخ", "يبطل الإحرام", "مكروه"], correct: 1 },
+            { q: "القارن يلزمه:", options: ["صيام فقط", "هدي", "صدقة", "لا شيء عليه"], correct: 1 },
+            { q: "الترتيب بين أعمال يوم النحر:", options: ["واجب", "مستحب", "مكروه", "محرم"], correct: 1 }
+        ];
+
+const ICON_COLORS = [
+            'text-primaryBlue',
+            'text-primaryRed',
+            'text-primaryGreen',
+            'text-primaryGold',
+            'text-purple-600'
+        ];
+
+        // --- Main App Component ---
+        const App = () => {
+            const [screen, setScreen] = useState(0); 
+            const [userInfo, setUserInfo] = useState({ name: '', section: '', startTime: null });
+            const [score, setScore] = useState(0);
+
+            const handleLogin = (name, section) => {
+                setUserInfo({ name, section, startTime: new Date() });
+                setScreen(1);
+            };
+
+            const finishTopics = () => setScreen(2);
+            const finishReview = () => setScreen(3);
+            const finishQuiz = (finalScore) => {
+                setScore(finalScore);
+                setScreen(4);
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Fixed Header */}
+                    <header className="bg-navy text-white shadow-lg sticky top-0 z-50">
+                        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+                            {/* Right (Start RTL): Student Info */}
+                            <div className="flex-1 text-right">
+                                {screen > 0 ? (
+                                    <div className="fade-in font-bold">
+                                        <p className="text-gold text-lg">{userInfo.name}</p>
+                                        <p className="text-gray-300 text-sm">الشعبة: {userInfo.section}</p>
+                                    </div>
+                                ) : <div/>}
+                            </div>
+
+                            {/* Center: Course Info */}
+                            <div className="flex-1 text-center border-x border-gray-600 px-4">
+                                <h1 className="text-2xl md:text-3xl font-bold font-amiri text-gold drop-shadow-md">أحاديث الأحكام</h1>
+                                <p className="text-sm md:text-md mt-1 text-gray-200">المحاضرة الثانية عشرة</p>
+                            </div>
+
+                            {/* Left (End RTL): Logo & Doctor */}
+                            <div className="flex-1 flex flex-col items-end pl-2">
+                                <div className="h-10 w-auto">
+                                    <img src="../../logo.png" alt="شعار الجامعة" className="h-full w-auto object-contain bg-transparent mix-blend-screen" />
+                                </div>
+                                <p className="text-xs md:text-sm mt-2 font-bold text-gray-300">د / باسم القرافي</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Dynamic Screens */}
+                    <main className="container mx-auto px-4 py-8 flex-grow">
+                        {screen === 0 && <WelcomeScreen onLogin={handleLogin} />}
+                        {screen === 1 && <TopicsFlow onFinish={finishTopics} />}
+                        {screen === 2 && <SmartReview onFinish={finishReview} />}
+                        {screen === 3 && <Quiz onFinish={finishQuiz} />}
+                        {screen === 4 && <ResultScreen userInfo={userInfo} score={score} />}
+                    </main>
+                </div>
+            );
+        };
+
+        // --- Screen 1: Welcome ---
+        const WelcomeScreen = ({ onLogin }) => {
+            const [name, setName] = useState('');
+            const [section, setSection] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const nameParts = name.trim().split(/\s+/);
+                if (nameParts.length < 4) {
+                    setError('الرجاء إدخال الاسم الرباعي بشكل صحيح.');
+                    return;
+                }
+                if (!section.trim()) {
+                    setError('الرجاء إدخال رقم الشعبة.');
+                    return;
+                }
+                setError('');
+                onLogin(name, section);
+            };
+
+            return (
+                <div className="max-w-md mx-auto glass-panel p-8 mt-10 fade-in border-t-4 border-gold">
+                    <h2 className="text-2xl font-bold text-center mb-6 text-navy">مرحباً بك في منصة التعلم للإتقان</h2>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">الاسم الرباعي:</label>
+                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل اسمك الرباعي هنا" />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">رقم الشعبة:</label>
+                            <input type="text" value={section} onChange={(e)=>setSection(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل رقم الشعبة" />
+                        </div>
+                        {error && <p className="text-red-500 text-sm font-bold bg-red-50 p-2 rounded">{error}</p>}
+                        <button type="submit" className="w-full bg-navy text-white py-3 rounded font-bold hover:bg-opacity-90 transition-all glow-effect">
+                            دخول وبدء التعلم
+                        </button>
+                    </form>
+                </div>
+            );
+        };
+
+        // --- Screen 2: Topics Flow ---
+        const TopicsFlow = ({ onFinish }) => {
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const topic = ALL_DATA[currentIndex];
+            
+            // State for Formative Assessment
+            const [ddAnswers, setDdAnswers] = useState({});
+            const [matches, setMatches] = useState([]); // Array of {left, right}
+            const [selectedLeft, setSelectedLeft] = useState(null);
+
+            // Synchronous state reset and progression
+            const handleNext = () => {
+                setDdAnswers({});
+                setMatches([]);
+                setSelectedLeft(null);
+                
+                if (currentIndex < ALL_DATA.length - 1) {
+                    setCurrentIndex(prev => prev + 1);
+                } else {
+                    onFinish();
+                }
+            };
+
+            const isDropdownsCorrect = () => {
+                const required = topic.exercises.dropdown.answers;
+                for (const key in required) {
+                    if (ddAnswers[key] !== required[key]) return false;
+                }
+                return Object.keys(required).length === Object.keys(ddAnswers).length;
+            };
+
+            const isMatchesCorrect = () => {
+                return matches.length === topic.exercises.matching.length;
+            };
+
+            const canProceed = isDropdownsCorrect() && isMatchesCorrect();
+
+            const renderHTML = (htmlString) => {
+                return <div dangerouslySetInnerHTML={{ __html: htmlString }} className="text-lg" />;
+            };
+
+            return (
+                <div className="fade-in space-y-8 pb-24">
+                    <div className="flex justify-between items-center glass-panel p-4 shadow-sm">
+                        <span className="font-bold text-navy text-lg">الوحدة {currentIndex + 1} من {ALL_DATA.length}</span>
+                        <div className="flex space-x-2 space-x-reverse">
+                            {ALL_DATA.map((_, idx) => (
+                                <div key={idx} className={`w-4 h-4 rounded-full shadow-inner ${idx <= currentIndex ? 'bg-gold' : 'bg-gray-300'}`}></div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8">
+                        {renderHTML(topic.content)}
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait1">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">الخريطة الذهنية</h3>
+                        <div className="mindmap-grid" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))` }}>
+                            <div className="mm-node md:col-span-full mb-2">{topic.mindmap.main}</div>
+                            {topic.mindmap.nodes.map((node, i) => (
+                                <div key={i} className="mm-sub">{node}</div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait3">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">التقييم التكويني المشروط</h3>
+                        
+                        {/* Dropdown Exercise */}
+                        <div className="mb-8 p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">أكمل الفراغات بما يناسب:</h4>
+                            <p className="leading-loose text-lg font-medium">
+                                {topic.exercises.dropdown.text.split(/(\[Q\d\])/).map((part, i) => {
+                                    if (part.startsWith('[Q')) {
+                                        const qKey = part.replace(/[\[\]]/g, '');
+                                        return (
+                                            <select key={i} value={ddAnswers[qKey] || ""} onChange={(e) => setDdAnswers({...ddAnswers, [qKey]: e.target.value})}
+                                                className={`mx-2 p-1 border-2 rounded-lg font-bold outline-none transition-colors ${ddAnswers[qKey] === topic.exercises.dropdown.answers[qKey] ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-300 bg-gray-50'}`}>
+                                                <option value="" disabled>اختر...</option>
+                                                {topic.exercises.dropdown.options[qKey].map((opt, j) => (
+                                                    <option key={j} value={opt}>{opt}</option>
+                                                ))}
+                                            </select>
+                                        );
+                                    }
+                                    return <span key={i}>{part}</span>;
+                                })}
+                            </p>
+                        </div>
+
+                        {/* Matching Exercise */}
+                        <div className="p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">صل بين القائمة (أ) وما يناسبها في (ب):</h4>
+                            <div className="grid grid-cols-2 gap-8">
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (أ)</h5>
+                                    {topic.exercises.matching.map((m, i) => {
+                                        const isMatched = matches.some(match => match.left === m.left);
+                                        const isSelected = selectedLeft === m.left;
+                                        return (
+                                            <div key={i} 
+                                                 onClick={() => !isMatched && setSelectedLeft(m.left)}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : isSelected ? 'border-navy bg-blue-50 text-navy' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.left}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (ب)</h5>
+                                    {[...topic.exercises.matching].sort((a,b)=>a.right.localeCompare(b.right)).map((m, i) => {
+                                        const isMatched = matches.some(match => match.right === m.right);
+                                        return (
+                                            <div key={i}
+                                                 onClick={() => {
+                                                    if(!selectedLeft || isMatched) return;
+                                                    const correctMatch = topic.exercises.matching.find(x => x.left === selectedLeft);
+                                                    if(correctMatch && correctMatch.right === m.right) {
+                                                        setMatches([...matches, {left: selectedLeft, right: m.right}]);
+                                                        setSelectedLeft(null);
+                                                    } else {
+                                                        setSelectedLeft(null);
+                                                    }
+                                                 }}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.right}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Navigation Button */}
+                    <div className="fixed bottom-0 left-0 w-full bg-white p-4 shadow-[0_-5px_15px_rgba(0,0,0,0.1)] flex justify-center fade-in z-50 border-t-4 border-green-500">
+                        {canProceed ? (
+                            <button onClick={handleNext} className="bg-green-600 text-white px-12 py-3 rounded-full font-bold text-xl hover:bg-green-700 transition-all glow-effect flex items-center shadow-lg">
+                                {currentIndex < ALL_DATA.length - 1 ? 'الانتقال للوحدة التالية' : 'الانتقال للمراجعة الذكية'}
+                                <span className="mr-3 text-2xl font-normal">←</span>
+                            </button>
+                        ) : (
+                            <p className="text-gray-500 font-bold flex items-center"><span className="text-red-500 mr-2 text-xl">⚠️</span> يرجى الإجابة بشكل صحيح على الأسئلة أعلاه لتفعيل زر الانتقال.</p>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 3: Smart Review ---
+        const SmartReview = ({ onFinish }) => {
+            const [openAcc, setOpenAcc] = useState(null);
+
+            return (
+                <div className="fade-in space-y-10 pb-10">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-gold">
+                        <h2 className="text-3xl font-bold font-amiri text-navy mb-2">المراجعة الذكية المزدوجة</h2>
+                        <p className="text-gray-600 text-lg">اقلب البطاقات لحفظ المصطلحات، وافتح القوائم للفهم التحليلي الشامل للمقرر</p>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3">أولاً: بطاقات المفاهيم والأحكام (14 بطاقة)</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {FLASHCARDS.map((card, i) => (
+                            <div key={i} className="flip-card">
+                                <div className="flip-card-inner">
+                                    <div className="flip-card-front">{card.front}</div>
+                                    <div className="flip-card-back">{card.back}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3 mt-12">ثانياً: التحليل المقالي والفهم العميق (10 أسئلة)</h3>
+                    <div className="space-y-4">
+                        {ACCORDIONS.map((acc, i) => (
+                            <div key={i} className="glass-panel overflow-hidden border border-gray-200">
+                                <button onClick={() => setOpenAcc(openAcc === i ? null : i)} className="w-full text-right p-5 font-bold text-navy bg-white hover:bg-blue-50 flex justify-between items-center transition-colors">
+                                    <span className="text-lg flex items-center">
+                                        <span className={`ml-3 text-2xl ${ICON_COLORS[i % ICON_COLORS.length]}`}>❖</span>
+                                        {acc.q}
+                                    </span>
+                                    <span className={`text-2xl transition-transform duration-300 ${openAcc === i ? 'rotate-45 text-red-500' : 'text-gold'}`}>+</span>
+                                </button>
+                                <div className={`px-5 transition-all duration-300 ease-in-out ${openAcc === i ? 'max-h-96 py-5 border-t border-gray-100 bg-trait2' : 'max-h-0 py-0 bg-white'}`}>
+                                    <p className="leading-loose text-gray-800 text-lg">{acc.a}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="text-center mt-12 pt-8">
+                        <button onClick={onFinish} className="bg-navy text-white px-12 py-4 rounded-full font-bold text-xl hover:bg-opacity-90 transition-all glow-effect shadow-xl">
+                            بدء التقييم الشامل
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 4: Quiz ---
+        const Quiz = ({ onFinish }) => {
+            const [answers, setAnswers] = useState({});
+            const [submitted, setSubmitted] = useState(false);
+
+            const isComplete = Object.keys(answers).length === QUIZ_QUESTIONS.length;
+
+            const handleSubmit = () => {
+                let s = 0;
+                QUIZ_QUESTIONS.forEach((q, i) => {
+                    if (answers[i] === q.correct) s++;
+                });
+                setSubmitted(true);
+                setTimeout(() => onFinish(s), 2500);
+            };
+
+            return (
+                <div className="fade-in max-w-4xl mx-auto pb-20">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-navy">
+                        <h2 className="text-4xl font-bold font-amiri text-navy">التقييم الشامل</h2>
+                        <p className="text-gray-600 mt-3 text-lg font-bold">أجب عن جميع الأسئلة التالية ({QUIZ_QUESTIONS.length} سؤال)</p>
+                    </div>
+
+                    <div className="space-y-6">
+                        {QUIZ_QUESTIONS.map((q, i) => {
+                            const iconColorClass = ICON_COLORS[i % ICON_COLORS.length];
+                            return (
+                                <div key={i} className={`glass-panel p-6 transition-all ${submitted ? (answers[i] === q.correct ? 'border-2 border-green-500 bg-green-50' : 'border-2 border-red-500 bg-red-50') : 'hover:border-gold border-2 border-transparent'}`}>
+                                    <h3 className="font-bold text-xl mb-5 text-navy flex items-start">
+                                        <span className={`ml-3 text-2xl font-black ${iconColorClass}`}>{i+1}.</span> 
+                                        {q.q}
+                                    </h3>
+                                    <div className="space-y-3">
+                                        {q.options.map((opt, j) => (
+                                            <label key={j} className={`block p-4 rounded-lg border-2 cursor-pointer transition-all ${answers[i] === j ? 'bg-navy text-white border-navy shadow-md transform scale-[1.01]' : 'bg-white hover:bg-gray-50 border-gray-200'} ${submitted && j === q.correct ? 'bg-green-500 text-white border-green-500 shadow-md' : ''} ${submitted && answers[i] === j && j !== q.correct ? 'bg-red-500 text-white border-red-500' : ''}`}>
+                                                <input type="radio" name={`q${i}`} className="hidden" 
+                                                    checked={answers[i] === j} 
+                                                    onChange={() => !submitted && setAnswers({...answers, [i]: j})} />
+                                                <span className="text-lg font-medium">{opt}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <div className="mt-12 text-center sticky bottom-6 z-50">
+                        <button onClick={handleSubmit} disabled={!isComplete || submitted} 
+                            className={`px-12 py-4 rounded-full font-bold text-xl shadow-2xl transition-all ${isComplete && !submitted ? 'bg-gold text-navy hover:bg-yellow-500 glow-effect transform hover:-translate-y-1' : 'bg-gray-300 text-gray-500 cursor-not-allowed border-2 border-gray-400'}`}>
+                            {submitted ? 'جاري حساب النتيجة وإرسالها...' : 'إنهاء وإرسال النتيجة'}
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 5: Result & Silent Submission ---
+        const ResultScreen = ({ userInfo, score }) => {
+            const [status, setStatus] = useState('جاري إرسال النتيجة صمتاً...');
+
+            useEffect(() => {
+                const duration = Math.round((new Date() - userInfo.startTime) / 60000); 
+                const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAtWpsGVdYNm6qt88dhkrd_Kj2kiyWBQiejpNjLvBfsOkPzw/formResponse";
+                
+                const formData = new FormData();
+                formData.append('entry.631676590', "المحاضرة الثانية عشرة");
+                formData.append('entry.716230744', userInfo.name);
+                formData.append('entry.258825401', userInfo.section);
+                formData.append('entry.1926766466', score);
+                formData.append('entry.585619026', duration);
+
+                fetch(formUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                })
+                .then(() => {
+                    setStatus('تم حفظ النتيجة وتوثيق إنجازك بنجاح ✔️');
+                })
+                .catch(() => {
+                    setStatus('تم الانتهاء.');
+                });
+            }, []);
+
+            return (
+                <div className="max-w-lg mx-auto glass-panel p-12 text-center fade-in mt-10 border-t-8 border-navy shadow-2xl">
+                    <h2 className="text-4xl font-bold font-amiri text-navy mb-8">نتيجة التقييم الشامل</h2>
+                    <div className="text-6xl font-black text-gold mb-8 border-4 border-navy w-48 h-48 mx-auto flex items-center justify-center rounded-full bg-white shadow-[0_0_30px_rgba(226,185,111,0.5)]">
+                        {score} / 20
+                    </div>
+                    <div className="space-y-4 mb-10 text-xl font-bold bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <p className="text-navy flex justify-between"><span>الاسم:</span> <span>{userInfo.name}</span></p>
+                        <p className="text-navy flex justify-between border-t border-gray-200 pt-3"><span>الشعبة:</span> <span>{userInfo.section}</span></p>
+                    </div>
+                    <p className="text-green-600 font-bold mb-8 text-lg">{status}</p>
+                    <button onClick={() => window.location.reload()} className="px-10 py-4 bg-navy text-white rounded-full font-bold hover:bg-opacity-90 transition-all glow-effect shadow-lg w-full">
+                        العودة للرئيسية
+                    </button>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
