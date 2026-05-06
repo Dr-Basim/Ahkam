@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أحاديث الأحكام - المحاضرة التاسعة</title>
+
+<!-- React & ReactDOM -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<!-- Babel -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- Tailwind Configuration -->
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+navy: '#16213e',
+gold: '#e2b96f',
+cream: '#faf8f3',
+trait1: '#f0fdf4',
+trait2: '#fefce8',
+trait3: '#eff6ff',
+trait4: '#fff1f2',
+trait5: '#f5f3ff',
+hlred: '#fee2e2',
+hlblue: '#dbeafe',
+hlgold: '#fef08a',
+primaryBlue: '#2563eb',
+primaryRed: '#dc2626',
+primaryGreen: '#16a34a',
+primaryGold: '#ca8a04'
+},
+fontFamily: {
+amiri: ['Amiri', 'serif'],
+tajawal: ['Tajawal', 'sans-serif'],
+}
+}
+}
+}
+</script>
+
+<!-- Custom CSS -->
+<style>
+body {
+background: linear-gradient(135deg, #faf8f3 0%, #e2e8f0 100%);
+background-attachment: fixed;
+font-family: 'Tajawal', sans-serif;
+color: #16213e;
+}
+h1, h2, h3, h4, h5, h6 { font-family: 'Amiri', serif; }
+
+.glass-panel {
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.5);
+border-radius: 1rem;
+box-shadow: 0 10px 40px -10px rgba(22, 33, 62, 0.1);
+}
+
+.glow-effect:hover {
+box-shadow: 0 0 20px rgba(226, 185, 111, 0.5);
+transform: translateY(-2px);
+}
+
+.fade-in { animation: fadeIn 0.6s ease-out forwards; }
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(15px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.verse {
+background: linear-gradient(to left, rgba(226, 185, 111, 0.15), transparent);
+border-right: 4px solid #e2b96f;
+padding: 1.5rem;
+margin: 1.5rem 0;
+border-radius: 0.5rem;
+font-family: 'Amiri', serif;
+font-size: 1.25rem;
+line-height: 2.2;
+color: #16213e;
+box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+}
+
+/* Content Cells */
+.content-cell {
+padding: 1.5rem;
+margin-bottom: 1.5rem;
+border-radius: 0.75rem;
+border-right-width: 4px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+transition: all 0.3s ease;
+}
+.content-cell:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.06); transform: translateX(-3px); }
+.cell-blue { background-color: #eff6ff; border-color: #3b82f6; }
+.cell-yellow { background-color: #fefce8; border-color: #eab308; }
+.cell-green { background-color: #f0fdf4; border-color: #22c55e; }
+.cell-red { background-color: #fef2f2; border-color: #ef4444; }
+.cell-purple { background-color: #faf5ff; border-color: #a855f7; }
+
+/* Highlights */
+.hl-red { background-color: #fee2e2; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #991b1b; }
+.hl-blue { background-color: #dbeafe; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #1e40af; }
+.hl-gold { background-color: #fef08a; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #854d0e; }
+
+/* Flip Card CSS */
+.flip-card { perspective: 1000px; cursor: pointer; height: 180px; }
+.flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back {
+position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 1rem;
+display: flex; align-items: center; justify-content: center; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); text-align: center;
+}
+.flip-card-front { background: linear-gradient(135deg, #16213e, #1e3a8a); color: #e2b96f; border: 2px solid #e2b96f; font-family: 'Amiri', serif; font-size: 1.35rem; font-weight: bold;}
+.flip-card-back { background: linear-gradient(135deg, #e2b96f, #d97706); color: #fff; transform: rotateY(180deg); font-size: 1.1rem; font-weight: 500;}
+
+/* CSS Grid Mindmap */
+.mindmap-grid { display: grid; gap: 1.5rem; padding: 2rem; background: #fff; border-radius: 1rem; border: 2px dashed #e2b96f; }
+.mm-node { background: #16213e; color: #e2b96f; padding: 1.25rem; border-radius: 0.75rem; text-align: center; font-size: 1.25rem; font-weight: bold; font-family: 'Amiri', serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.mm-sub { background: #faf8f3; color: #16213e; border: 1px solid #e2b96f; border-right: 4px solid #e2b96f; padding: 1rem; border-radius: 0.5rem; text-align: center; font-weight: bold; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #e2e8f0; }
+::-webkit-scrollbar-thumb { background: #e2b96f; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #16213e; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+// --- Data Definitions (Full Content, Segmented with Colored Cells) ---
+
+const ALL_DATA = [
+{
+id: 1,
+title: "الوحدة الأولى: حديث أنس - الاستسقاء في خطبة الجمعة",
+content: `
+<div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+<h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+<ul class="list-disc list-inside space-y-1 text-gray-800">
+<li>أن يبين مشروعية الاستسقاء في خطبة الجمعة</li>
+<li>أن يستخرج الأحكام المتعلقة برفع اليدين في الدعاء</li>
+<li>أن يطبق آداب طلب الدعاء من الغير</li>
+</ul>
+</div>
+
+<div class="verse">
+٥٣٨ - وَعَنْ أَنَسٍ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَجُلًا دَخَلَ الْمَسْجِدَ يَوْمَ الْجُمُعَةِ، وَالنَّبِيُّ ﷺ قَائِمٌ يَخْطُبُ، فَقَالَ: يَا رَسُولَ اللهِ، هَلَكَتِ الأَمْوَالُ، وَانْقَطَعَتِ السُّبُلُ، فَادْعُ اللهَ يُغِيثُنَا. فَرَفَعَ يَدَيْهِ، ثُمَّ قَالَ: «اللَّهُمَّ أَغِثْنَا، اللَّهُمَّ أَغِثْنَا...». فَذَكَرَ الْحَدِيثَ، وَفِيهِ الدُّعَاءُ بِإِمْسَاكِهَا. مُتَّفَقٌ عَلَيْهِ.
+</div>
+
+<div class="content-cell cell-blue mt-4">
+<h4 class="text-xl font-bold text-primaryBlue mb-2">📝 معاني المفردات</h4>
+<ul class="space-y-1 text-gray-800">
+<li><span class="hl-blue">هلكت الأموال:</span> ماتت المواشي من الجدب</li>
+<li><span class="hl-blue">انقطعت السبل:</span> تعطلت الطرق لضعف الدواب</li>
+<li><span class="hl-blue">أغثنا:</span> أنزل علينا الغيث (المطر)</li>
+<li><span class="hl-blue">سلع:</span> جبل معروف في المدينة</li>
+</ul>
+</div>
+
+<div class="content-cell cell-yellow">
+<h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+<p class="leading-loose text-gray-800">دخل رجل المسجد والنبي ﷺ يخطب الجمعة، فشكا القحط والجدب وطلب من النبي ﷺ أن يدعو الله. فاستجاب النبي ﷺ ورفع يديه ودعا ثلاثاً: «اللهم أغثنا». فأنشأ الله سحابة من وراء جبل سلع، فأمطرت أسبوعاً كاملاً. ثم في الجمعة التالية طلب منه رجل أن يدعو بإمساكها، فدعا: «اللهم حوالينا ولا علينا». فانجابت السماء.</p>
+</div>
+
+<h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+<div class="content-cell cell-blue">
+<h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: دلائل قدرة الله وصدق النبي ﷺ</h4>
+<p class="leading-loose text-gray-800">من فوائد الحديث: <span class="hl-blue">قدرة الله تعالى</span> وأنه إذا أراد شيئاً فإنما يقول له كن فيكون. <span class="hl-gold">وآية صدق النبي ﷺ</span>، فإن إجابة الله لدعوته بهذه الفورية البالغة دليل على صدقه، ولو كان كاذباً ما أجاب الله دعوته.</p>
+</div>
+
+<div class="content-cell cell-green">
+<h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: رفع اليدين في الاستسقاء</h4>
+<p class="leading-loose text-gray-800">الخطيب إذا دعا للاستسقاء خاصة فإنه يرفع يديه، ولا يرفع يديه في غير هذا من أدعية الخطبة. والناس كذلك يرفعون أيديهم تبعاً للخطيب. <span class="hl-green">ورفع اليدين من أسباب إجابة الدعاء</span>، إلا في المواضع التي لم ترد السنة بالرفع فيها.</p>
+</div>
+
+<div class="content-cell cell-yellow">
+<h4 class="text-xl font-bold text-primaryGold mb-2">ثالثاً: جواز كلام الخطيب للمصلحة</h4>
+<p class="leading-loose text-gray-800">يجوز للإنسان أن يكلم الخطيب إذا كان لمصلحة، لأن الرجل دخل وكلم النبي ﷺ ولم ينكر عليه. <span class="hl-gold">أما إذا تكلم أحد مع الناس أثناء الخطبة بغير مصلحة فهذا حرام ويحرم من أجر الجمعة.</span></p>
+</div>
+
+<div class="content-cell cell-red">
+<h4 class="text-xl font-bold text-primaryRed mb-2">رابعاً: آداب طلب الدعاء من الغير</h4>
+<p class="leading-loose text-gray-800">يجوز سؤال الغير أن يدعو للمسلمين على وجه العموم، كما سأل الرجل النبي ﷺ أن يغيث المسلمين. <span class="hl-red">أما طلب الدعاء الخاص كقول: «ادع الله لي» فلا ينبغي</span>، لأنه ليس من سنة النبي ﷺ، وفيه اتكال على دعاء الغير، وقد يؤدي إلى عجب المدعو له بنفسه. لكن إن طلب الدعاء على وجه العموم كما في حديث أنس فلا بأس.</p>
+</div>
+
+<div class="content-cell cell-blue">
+<h4 class="text-xl font-bold text-primaryBlue mb-2">خامساً: التوسل بدعاء الغير</h4>
+<p class="leading-loose text-gray-800">في الحديث دليل على جواز التوسل بدعاء الغير. فالصحابة توسلوا إلى الله بدعاء النبي ﷺ، وعمر رضي الله عنه توسل بدعاء العباس بن عبد المطلب. <span class="hl-blue">والتوسل المشروع هو التوسل بدعاء الحي الصالح، لا بذاته أو جاهه.</span></p>
+</div>
+
+<h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+<div class="content-cell cell-green">
+<ul class="list-decimal list-inside space-y-2 text-gray-800">
+<li>مشروعية الاستسقاء في خطبة الجمعة</li>
+<li>رفع اليدين في دعاء الاستسقاء خاصة دون غيره من أدعية الخطبة</li>
+<li>جواز كلام الخطيب للمصلحة</li>
+<li>جواز طلب الدعاء من الغير على وجه العموم</li>
+<li>جواز التوسل بدعاء الحي الصالح</li>
+<li>ينبغي بيان السبب عند الطلب ليطمئن المطلوب</li>
+</ul>
+</div>
+
+<div class="content-cell cell-red mt-4">
+<h4 class="text-xl font-bold text-primaryRed mb-2">⚠️ تنبيهات</h4>
+<ul class="space-y-2 text-gray-800">
+<li><span class="hl-red">تنبيه:</span> لا يرفع الخطيب يديه في غير الاستسقاء من أدعية الخطبة.</li>
+<li><span class="hl-red">تنبيه:</span> طلب الدعاء الخاص (ادع الله لي) لا ينبغي، بخلاف العموم (ادع الله للمسلمين).</li>
+</ul>
+</div>
+
+<h3 class="text-2xl font-bold text-navy mt-8 mb-4">🏋️ تدريب على الاستنباط</h3>
+<div class="content-cell cell-blue">
+<p class="font-bold text-navy">التدريب:</p>
+<p class="text-gray-800">استنبط من قول الرجل للنبي ﷺ: «هلكت الأموال وانقطعت السبل» أدباً من آداب الطلب.</p>
+<p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+<p class="text-gray-800">ينبغي للإنسان إذا طلب شيئاً أن يبين السبب حتى يقتنع المطلوب. فالرجل بين سبب طلبه بقوله: «هلكت الأموال وانقطعت السبل».</p>
+</div>
+
+<h3 class="text-2xl font-bold text-navy mt-8 mb-4">🗺️ خريطة الحديث والأحكام</h3>
+<div class="mindmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+<div class="mm-node md:col-span-full mb-2">حديث أنس - الاستسقاء</div>
+<div class="mm-sub">قدرة الله تعالى</div>
+<div class="mm-sub">صدق النبي ﷺ</div>
+<div class="mm-sub">مشروعية رفع اليدين في الاستسقاء</div>
+<div class="mm-sub">جواز كلام الخطيب للمصلحة</div>
+<div class="mm-sub">آداب طلب الدعاء</div>
+</div>
+`,
+mindmap: {
+main: "الاستسقاء في خطبة الجمعة",
+nodes: ["قدرة الله وصدق النبي ﷺ", "رفع اليدين في الاستسقاء", "جواز كلام الخطيب للمصلحة", "آداب طلب الدعاء", "التوسل بدعاء الحي الصالح"]
+},
+exercises: {
+dropdown: {
+text: "يرفع الخطيب يديه في [Q1] خاصة. ويكلم الخطيب للمصلحة [Q2]. وطلب الدعاء الخاص [Q3].",
+options: {
+Q1: ["الاستسقاء", "الدعاء للمسلمين", "كل خطبة"],
+Q2: ["يجوز", "لا يجوز", "مكروه"],
+Q3: ["لا ينبغي", "مستحب", "واجب"]
+},
+answers: { Q1: "الاستسقاء", Q2: "يجوز", Q3: "لا ينبغي" }
+},
+matching: [
+{ left: "رفع اليدين", right: "من أسباب إجابة الدعاء" },
+{ left: "كلام الخطيب للمصلحة", right: "جائز" },
+{ left: "طلب الدعاء على وجه العموم", right: "لا بأس به" }
+]
+}
+},
+{
+id: 2,
+title: "الوحدة الثانية: حديث أبي موسى - تحريم الذهب والحرير على ذكور الأمة",
+content: `
+<div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+<h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+<ul class="list-disc list-inside space-y-1 text-gray-800">
+<li>أن يبين حكم لبس الذهب والحرير للرجال والنساء</li>
+<li>أن يستدل على تحريم الذهب والحرير على الذكور</li>
+</ul>
+</div>
+
+<div class="verse">
+٥٥٠ - وَعَنْ أَبِي مُوسَى رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ: «أُحِلَّ الذَّهَبُ وَالْحَرِيرُ لِإِنَاثِ أُمَّتِي، وَحُرِّمَ عَلَى ذُكُورِهَا». رَوَاهُ أَحْمَدُ وَالتِّرْمِذِيُّ وَصَحَّحَهُ.
+</div>
+
+<div class="content-cell cell-blue mt-4">
+<h4 class="text-xl font-bold text-primaryBlue mb-2">📝 معاني المفردات</h4>
+<ul class="space-y-1 text-gray-800">
+<li><span class="hl-blue">الذهب:</span> المعدن النفيس المعروف</li>
+<li><span class="hl-blue">الحرير:</span> نوع من الأقمشة الفاخرة</li>
+<li><span class="hl-blue">لإناث أمتي:</span> لنساء أمة محمد ﷺ</li>
+</ul>
+</div>
+
+<div class="content-cell cell-yellow">
+<h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+<p class="leading-loose text-gray-800">يبين النبي ﷺ في هذا الحديث حكماً واضحاً: أن الذهب والحرير حل (حلال) لنساء الأمة، وحرام على رجالها. وهذا من الأحكام التي تميزت بها الشريعة الإسلامية في الفصل بين زينة الرجال وزينة النساء.</p>
+</div>
+
+<h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+<div class="content-cell cell-green">
+<ul class="list-decimal list-inside space-y-2 text-gray-800">
+<li>يحرم على الرجال لبس الذهب والحرير</li>
+<li>يباح للنساء لبس الذهب والحرير</li>
+<li>الحكمة: الفصل بين زينة الرجال والنساء، وعدم التشبه</li>
+</ul>
+</div>
+
+<div class="content-cell cell-red mt-4">
+<h4 class="text-xl font-bold text-primaryRed mb-2">⚠️ تنبيهات</h4>
+<p class="text-gray-800">يحرم على الرجال الذهب مطلقاً، ويحرم عليهم الحرير الطبيعي. أما الذهب الأبيض والبلاتين فليسا من الذهب المحرم. ويجوز للرجل لبس الحرير للحاجة كالحكة والمرض.</p>
+</div>
+
+<h3 class="text-2xl font-bold text-navy mt-8 mb-4">🔗 صل الحديث بالحكم</h3>
+<div class="content-cell cell-purple">
+<ul class="space-y-2 text-gray-800">
+<li>الذهب والحرير = حلال للإناث، حرام على الذكور</li>
+<li>تحريم الذهب على الرجال = من خصائص الشريعة الإسلامية</li>
+</ul>
+</div>
+`,
+mindmap: {
+main: "تحريم الذهب والحرير على الذكور",
+nodes: ["الذهب: حرام على الرجال، حلال للنساء", "الحرير: حرام على الرجال، حلال للنساء", "الحكمة: عدم التشبه بالنساء"]
+},
+exercises: {
+dropdown: {
+text: "أحل الذهب والحرير [Q1] أمتي، وحرم على [Q2].",
+options: {
+Q1: ["لذكور", "لإناث", "لجميع"],
+Q2: ["النساء", "ذكورها", "الأطفال"]
+},
+answers: { Q1: "لإناث", Q2: "ذكورها" }
+},
+matching: [
+{ left: "الذهب للرجال", right: "حرام (الذهب)" },
+{ left: "الحرير للرجال", right: "حرام (الحرير)" },
+{ left: "الذهب والحرير للنساء", right: "حلال" }
+]
+}
+},
+{
+id: 3,
+title: "الوحدة الثالثة: حديث أنس - النهي عن تمني الموت",
+content: `
+<div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+<h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+<ul class="list-disc list-inside space-y-1 text-gray-800">
+<li>أن يبين حكم تمني الموت عند نزول الضر</li>
+<li>أن يوضح الدعاء المشروع عند الشدة</li>
+</ul>
+</div>
+
+<div class="verse">
+٥٥٣ - وَعَنْ أَنَسٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللهِ ﷺ: «لَا يَتَمَنَّيَنَّ أَحَدُكُمُ الْمَوْتَ لِضُرٍّ نَزَلَ بِهِ، فَإِنْ كَانَ لَا بُدَّ مُتَمَنِّيًا فَلْيَقُلْ: اللَّهُمَّ أَحْيِنِي مَا كَانَتِ الْحَيَاةُ خَيْرًا لِي، وَتَوَفَّنِي إِذَا كَانَتِ الْوَفَاةُ خَيْرًا لِي». مُتَّفَقٌ عَلَيْهِ.
+</div>
+
+<div class="content-cell cell-yellow mt-4">
+<h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+<p class="leading-loose text-gray-800">ينهى النبي ﷺ عن تمني الموت بسبب ضر نزل بالإنسان من مرض أو فقر أو هم. فإن كان ولا بد متمنياً فليدع بهذا الدعاء الجامع الذي يفوض الأمر إلى الله: «اللهم أحيني ما كانت الحياة خيراً لي، وتوفني إذا كانت الوفاة خيراً لي». فهذا تفويض لله وتوكل عليه.</p>
+</div>
+
+<h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+<div class="content-cell cell-green">
+<ul class="list-decimal list-inside space-y-2 text-gray-800">
+<li>يحرم تمني الموت لضر نزل بالإنسان</li>
+<li>المشروع عند الشدة الدعاء المأثور بتفويض الأمر إلى الله</li>
+<li>فيه تعليم حسن الظن بالله والرضا بقضائه</li>
+</ul>
+</div>
+`,
+mindmap: {
+main: "النهي عن تمني الموت",
+nodes: ["لا يتمنين أحدكم الموت لضر", "الدعاء المشروع: تفويض الأمر لله", "حسن الظن بالله والرضا بقضائه"]
+},
+exercises: {
+dropdown: {
+text: "لا يتمنين أحدكم [Q1] لضر نزل به. فإن كان لا بد فليقل: اللهم [Q2] ما كانت الحياة خيراً لي، وتوفني إذا كانت [Q3] خيراً لي.",
+options: {
+Q1: ["النوم", "الموت", "السفر"],
+Q2: ["أمتني", "أحيني", "اشفني"],
+Q3: ["الصحة", "الوفاة", "الحياة"]
+},
+answers: { Q1: "الموت", Q2: "أحيني", Q3: "الوفاة" }
+},
+matching: [
+{ left: "تمني الموت للضر", right: "منهي عنه" },
+{ left: "الدعاء المشروع", right: "تفويض الأمر لله" }
+]
+}
+}
+];
+
+const FLASHCARDS = [
+{ front: "الاستسقاء في خطبة الجمعة", back: "مشروع، ويرفع الخطيب يديه خاصة في دعاء الاستسقاء فقط" },
+{ front: "حكم رفع اليدين في خطبة الجمعة", back: "يرفع الخطيب في الاستسقاء فقط، ولا يرفع في غيره من الأدعية" },
+{ front: "حكم كلام الخطيب للمصلحة", back: "جائز، كما كلم الرجل النبي ﷺ لطلب الاستسقاء" },
+{ front: "طلب الدعاء من الغير", back: "يجوز على وجه العموم (للمسلمين)، ولا ينبغي على وجه الخصوص (لي شخصياً)" },
+{ front: "التوسل المشروع", back: "التوسل بدعاء الحي الصالح، لا بذاته أو جاهه" },
+{ front: "حكم لبس الذهب للرجال", back: "حرام" },
+{ front: "حكم لبس الحرير للرجال", back: "حرام (الحرير الطبيعي)" },
+{ front: "حكم الذهب والحرير للنساء", back: "حلال" },
+{ front: "حكم تمني الموت لضر نزل", back: "منهي عنه، والمشروع تفويض الأمر لله" },
+{ front: "الدعاء المشروع عند الشدة", back: "«اللهم أحيني ما كانت الحياة خيراً لي، وتوفني إذا كانت الوفاة خيراً لي»" },
+{ front: "قصة استسقاء النبي ﷺ", back: "دعا فأمطرت السماء أسبوعاً، ثم دعا بالإمساك فانجابت" },
+{ front: "سبب نزول المطر استجابة لدعاء النبي", back: "قدرة الله وصدق النبي ﷺ" },
+{ front: "الذهب الأبيض (البلاتين)", back: "ليس من الذهب المحرم على الرجال" },
+{ front: "الحرير للرجال للحاجة", back: "يجوز للحاجة كالمرض والحكة" }
+];
+
+const ACCORDIONS = [
+{ q: "هل يرفع الخطيب يديه في كل دعاء في خطبة الجمعة؟", a: "لا، يرفع الخطيب يديه في دعاء الاستسقاء خاصة. أما الدعاء للمسلمين وإصلاح الأمور في خطبة الجمعة فلا يرفع يديه فيه. والناس يرفعون أيديهم تبعاً للخطيب في الاستسقاء." },
+{ q: "ما الفرق بين طلب الدعاء على وجه العموم وطلب الدعاء الخاص؟", a: "طلب الدعاء على وجه العموم كقول: ادع الله للمسلمين - وهذا جائز. وطلب الدعاء الخاص كقول: ادع الله لي - وهذا لا ينبغي، لأنه ليس من سنة النبي ﷺ وقد يؤدي إلى عجب المدعو له بنفسه." },
+{ q: "ما هو التوسل المشروع والتوسل الممنوع؟", a: "المشروع: التوسل إلى الله بدعاء الحي الصالح، كما توسل عمر بدعاء العباس. والممنوع: التوسل بذات الميت أو جاهه، كقول: أسألك بجاه فلان." },
+{ q: "ما حكم لبس الرجل للذهب؟ وهل يدخل الذهب الأبيض؟", a: "يحرم على الرجل لبس الذهب مطلقاً. والذهب الأبيض (البلاتين) ليس من الذهب المحرم فيجوز للرجال." },
+{ q: "ما حكم لبس الرجل للحرير؟", a: "يحرم لبس الحرير الطبيعي على الرجال. ويجوز للحاجة كالمرض والحكة. ويجوز لبس الحرير الصناعي." },
+{ q: "لماذا نهى النبي ﷺ عن تمني الموت عند الضر؟", a: "لأن فيه تسخطاً من قدر الله وضعفاً في الصبر. والمشروع أن يفوض الإنسان أمره لله ويسأله الخير حيث كان." },
+{ q: "كيف نجمع بين كون الذهب والحرير محرمين على الرجال وبين كونهما من نعيم الجنة؟", a: "نعيم الجنة لا يقاس بنعيم الدنيا. وما حرم في الدنيا لحكمة قد يكون مباحاً في الجنة. والتحريم في الدنيا للابتلاء وحفظ الرجولة وعدم التشبه." },
+{ q: "ما الدليل على أن استجابة الله لدعاء النبي ﷺ دليل على صدقه؟", a: "لأن الله لا يجيب دعوة الكاذب. ولو كان النبي ﷺ كاذباً ما أجاب الله دعوته وأمطر السماء استجابة لدعائه بهذه الفورية." }
+];
+
+const QUIZ_QUESTIONS = [
+{ q: "يرفع الخطيب يديه في خطبة الجمعة:", options: ["في كل دعاء", "في الاستسقاء فقط", "في الدعاء للمسلمين", "لا يرفع مطلقاً"], correct: 1 },
+{ q: "كلام الخطيب:", options: ["حرام مطلقاً", "يجوز للمصلحة", "مكروه", "يلغي الجمعة"], correct: 1 },
+{ q: "طلب الدعاء من الغير:", options: ["حرام مطلقاً", "يجوز على وجه العموم", "لا يجوز إلا من النبي", "واجب"], correct: 1 },
+{ q: "التوسل بدعاء الحي الصالح:", options: ["شرك", "مشروع", "بدعة", "مكروه"], correct: 1 },
+{ q: "حكم لبس الذهب للرجال:", options: ["مباح", "مكروه", "حرام", "سنة"], correct: 2 },
+{ q: "حكم لبس الحرير للرجال:", options: ["مباح", "حرام", "مكروه", "مستحب"], correct: 1 },
+{ q: "الذهب والحرير للنساء:", options: ["حرام", "مكروه", "حلال", "خاص بالمحرمات"], correct: 2 },
+{ q: "تمني الموت لضر نزل:", options: ["مستحب", "مباح", "منهي عنه", "واجب"], correct: 2 },
+{ q: "الدعاء المشروع عند الشدة:", options: ["اللهم أمتني", "اللهم أحيني ما كانت الحياة خيراً لي", "اللهم عجل بموتي", "لا أدعو"], correct: 1 },
+{ q: "الذهب الأبيض (البلاتين) للرجال:", options: ["حرام كالذهب الأصفر", "جائز", "مكروه", "لا يلبس"], correct: 1 },
+{ q: "قوله ﷺ: «أحل الذهب والحرير لإناث أمتي»:", options: ["دليل الوجوب", "دليل الإباحة", "دليل الكراهة", "خاص بالصحابيات"], correct: 1 },
+{ q: "رفع اليدين في الدعاء:", options: ["بدعة", "من أسباب الإجابة", "مكروه", "لا أثر له"], correct: 1 },
+{ q: "استجابة الله لدعاء النبي ﷺ في الاستسقاء:", options: ["مصادفة", "دليل صدقه", "أمر عادي", "لا دلالة فيه"], correct: 1 },
+{ q: "قول: ادع الله لي:", options: ["لا ينبغي", "مستحب", "واجب", "سنة"], correct: 0 },
+{ q: "توسل عمر بدعاء العباس:", options: ["شرك", "بدعة", "توسل مشروع", "غير جائز"], correct: 2 },
+{ q: "حكم الحرير الصناعي للرجال:", options: ["حرام", "جائز", "مكروه", "لا يلبس"], correct: 1 },
+{ q: "الاستسقاء معناه:", options: ["طلب الشفاء", "طلب المطر", "طلب الرزق", "طلب النصر"], correct: 1 },
+{ q: "الحكمة من تحريم الذهب والحرير على الرجال:", options: ["لا حكمة", "التشبه بالنساء", "عدم التشبه وحفظ الرجولة", "لغلاء ثمنه"], correct: 2 },
+{ q: "قوله: «هلكت الأموال وانقطعت السبل» فيه:", options: ["شكوى لله", "بيان سبب الطلب", "اعتراض على القدر", "مبالغة"], correct: 1 },
+{ q: "من تكلم أثناء خطبة الجمعة بغير مصلحة:", options: ["لا شيء عليه", "يحرم من أجر الجمعة", "له أجر", "يجب عليه كفارة"], correct: 1 }
+];
+
+const ICON_COLORS = [
+'text-primaryBlue',
+'text-primaryRed',
+'text-primaryGreen',
+'text-primaryGold',
+'text-purple-600'
+];
+
+// --- Main App Component ---
+const App = () => {
+const [screen, setScreen] = useState(0); 
+const [userInfo, setUserInfo] = useState({ name: '', section: '', startTime: null });
+const [score, setScore] = useState(0);
+
+const handleLogin = (name, section) => {
+setUserInfo({ name, section, startTime: new Date() });
+setScreen(1);
+};
+
+const finishTopics = () => setScreen(2);
+const finishReview = () => setScreen(3);
+const finishQuiz = (finalScore) => {
+setScore(finalScore);
+setScreen(4);
+};
+
+return (
+<div className="min-h-screen flex flex-col">
+{/* Fixed Header */}
+<header className="bg-navy text-white shadow-lg sticky top-0 z-50">
+<div className="container mx-auto px-4 py-3 flex items-center justify-between">
+{/* Right (Start RTL): Student Info */}
+<div className="flex-1 text-right">
+{screen > 0 ? (
+<div className="fade-in font-bold">
+<p className="text-gold text-lg">{userInfo.name}</p>
+<p className="text-gray-300 text-sm">الشعبة: {userInfo.section}</p>
+</div>
+) : <div/>}
+</div>
+
+{/* Center: Course Info */}
+<div className="flex-1 text-center border-x border-gray-600 px-4">
+<h1 className="text-2xl md:text-3xl font-bold font-amiri text-gold drop-shadow-md">أحاديث الأحكام</h1>
+<p className="text-sm md:text-md mt-1 text-gray-200">المحاضرة التاسعة</p>
+</div>
+
+{/* Left (End RTL): Logo & Doctor */}
+<div className="flex-1 flex flex-col items-end pl-2">
+<div className="h-10 w-auto">
+<img src="../../logo.png" alt="شعار الجامعة" className="h-full w-auto object-contain bg-transparent mix-blend-screen" />
+</div>
+<p className="text-xs md:text-sm mt-2 font-bold text-gray-300">د / باسم القرافي</p>
+</div>
+</div>
+</header>
+
+{/* Dynamic Screens */}
+<main className="container mx-auto px-4 py-8 flex-grow">
+{screen === 0 && <WelcomeScreen onLogin={handleLogin} />}
+{screen === 1 && <TopicsFlow onFinish={finishTopics} />}
+{screen === 2 && <SmartReview onFinish={finishReview} />}
+{screen === 3 && <Quiz onFinish={finishQuiz} />}
+{screen === 4 && <ResultScreen userInfo={userInfo} score={score} />}
+</main>
+</div>
+);
+};
+
+// --- Screen 1: Welcome ---
+const WelcomeScreen = ({ onLogin }) => {
+const [name, setName] = useState('');
+const [section, setSection] = useState('');
+const [error, setError] = useState('');
+
+const handleSubmit = (e) => {
+e.preventDefault();
+const nameParts = name.trim().split(/\s+/);
+if (nameParts.length < 4) {
+setError('الرجاء إدخال الاسم الرباعي بشكل صحيح.');
+return;
+}
+if (!section.trim()) {
+setError('الرجاء إدخال رقم الشعبة.');
+return;
+}
+setError('');
+onLogin(name, section);
+};
+
+return (
+<div className="max-w-md mx-auto glass-panel p-8 mt-10 fade-in border-t-4 border-gold">
+<h2 className="text-2xl font-bold text-center mb-6 text-navy">مرحباً بك في منصة التعلم للإتقان</h2>
+<form onSubmit={handleSubmit} className="space-y-4">
+<div>
+<label className="block text-sm font-bold mb-2 text-navy">الاسم الرباعي:</label>
+<input type="text" value={name} onChange={(e)=>setName(e.target.value)}
+className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+placeholder="أدخل اسمك الرباعي هنا" />
+</div>
+<div>
+<label className="block text-sm font-bold mb-2 text-navy">رقم الشعبة:</label>
+<input type="text" value={section} onChange={(e)=>setSection(e.target.value)}
+className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+placeholder="أدخل رقم الشعبة" />
+</div>
+{error && <p className="text-red-500 text-sm font-bold bg-red-50 p-2 rounded">{error}</p>}
+<button type="submit" className="w-full bg-navy text-white py-3 rounded font-bold hover:bg-opacity-90 transition-all glow-effect">
+دخول وبدء التعلم
+</button>
+</form>
+</div>
+);
+};
+
+// --- Screen 2: Topics Flow ---
+const TopicsFlow = ({ onFinish }) => {
+const [currentIndex, setCurrentIndex] = useState(0);
+const topic = ALL_DATA[currentIndex];
+
+// State for Formative Assessment
+const [ddAnswers, setDdAnswers] = useState({});
+const [matches, setMatches] = useState([]); // Array of {left, right}
+const [selectedLeft, setSelectedLeft] = useState(null);
+
+// Synchronous state reset and progression
+const handleNext = () => {
+setDdAnswers({});
+setMatches([]);
+setSelectedLeft(null);
+
+if (currentIndex < ALL_DATA.length - 1) {
+setCurrentIndex(prev => prev + 1);
+} else {
+onFinish();
+}
+};
+
+const isDropdownsCorrect = () => {
+const required = topic.exercises.dropdown.answers;
+for (const key in required) {
+if (ddAnswers[key] !== required[key]) return false;
+}
+return Object.keys(required).length === Object.keys(ddAnswers).length;
+};
+
+const isMatchesCorrect = () => {
+return matches.length === topic.exercises.matching.length;
+};
+
+const canProceed = isDropdownsCorrect() && isMatchesCorrect();
+
+const renderHTML = (htmlString) => {
+return <div dangerouslySetInnerHTML={{ __html: htmlString }} className="text-lg" />;
+};
+
+return (
+<div className="fade-in space-y-8 pb-24">
+<div className="flex justify-between items-center glass-panel p-4 shadow-sm">
+<span className="font-bold text-navy text-lg">الوحدة {currentIndex + 1} من {ALL_DATA.length}</span>
+<div className="flex space-x-2 space-x-reverse">
+{ALL_DATA.map((_, idx) => (
+<div key={idx} className={`w-4 h-4 rounded-full shadow-inner ${idx <= currentIndex ? 'bg-gold' : 'bg-gray-300'}`}></div>
+))}
+</div>
+</div>
+
+<div className="glass-panel p-8">
+{renderHTML(topic.content)}
+</div>
+
+<div className="glass-panel p-8 bg-trait1">
+<h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">الخريطة الذهنية</h3>
+<div className="mindmap-grid" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))` }}>
+<div className="mm-node md:col-span-full mb-2">{topic.mindmap.main}</div>
+{topic.mindmap.nodes.map((node, i) => (
+<div key={i} className="mm-sub">{node}</div>
+))}
+</div>
+</div>
+
+<div className="glass-panel p-8 bg-trait3">
+<h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">التقييم التكويني المشروط</h3>
+
+{/* Dropdown Exercise */}
+<div className="mb-8 p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+<h4 className="font-bold text-lg mb-4 text-primaryBlue">أكمل الفراغات بما يناسب:</h4>
+<p className="leading-loose text-lg font-medium">
+{topic.exercises.dropdown.text.split(/(\[Q\d\])/).map((part, i) => {
+if (part.startsWith('[Q')) {
+const qKey = part.replace(/[\[\]]/g, '');
+return (
+<select key={i} value={ddAnswers[qKey] || ""} onChange={(e) => setDdAnswers({...ddAnswers, [qKey]: e.target.value})}
+className={`mx-2 p-1 border-2 rounded-lg font-bold outline-none transition-colors ${ddAnswers[qKey] === topic.exercises.dropdown.answers[qKey] ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-300 bg-gray-50'}`}>
+<option value="" disabled>اختر...</option>
+{topic.exercises.dropdown.options[qKey].map((opt, j) => (
+<option key={j} value={opt}>{opt}</option>
+))}
+</select>
+);
+}
+return <span key={i}>{part}</span>;
+})}
+</p>
+</div>
+
+{/* Matching Exercise */}
+<div className="p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+<h4 className="font-bold text-lg mb-4 text-primaryBlue">صل بين القائمة (أ) وما يناسبها في (ب):</h4>
+<div className="grid grid-cols-2 gap-8">
+<div className="space-y-3">
+<h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (أ)</h5>
+{topic.exercises.matching.map((m, i) => {
+const isMatched = matches.some(match => match.left === m.left);
+const isSelected = selectedLeft === m.left;
+return (
+<div key={i} 
+onClick={() => !isMatched && setSelectedLeft(m.left)}
+className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : isSelected ? 'border-navy bg-blue-50 text-navy' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+{m.left}
+</div>
+)
+})}
+</div>
+<div className="space-y-3">
+<h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (ب)</h5>
+{[...topic.exercises.matching].sort((a,b)=>a.right.localeCompare(b.right)).map((m, i) => {
+const isMatched = matches.some(match => match.right === m.right);
+return (
+<div key={i}
+onClick={() => {
+if(!selectedLeft || isMatched) return;
+const correctMatch = topic.exercises.matching.find(x => x.left === selectedLeft);
+if(correctMatch && correctMatch.right === m.right) {
+setMatches([...matches, {left: selectedLeft, right: m.right}]);
+setSelectedLeft(null);
+} else {
+setSelectedLeft(null);
+}
+}}
+className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+{m.right}
+</div>
+)
+})}
+</div>
+</div>
+</div>
+
+</div>
+
+{/* Navigation Button */}
+<div className="fixed bottom-0 left-0 w-full bg-white p-4 shadow-[0_-5px_15px_rgba(0,0,0,0.1)] flex justify-center fade-in z-50 border-t-4 border-green-500">
+{canProceed ? (
+<button onClick={handleNext} className="bg-green-600 text-white px-12 py-3 rounded-full font-bold text-xl hover:bg-green-700 transition-all glow-effect flex items-center shadow-lg">
+{currentIndex < ALL_DATA.length - 1 ? 'الانتقال للوحدة التالية' : 'الانتقال للمراجعة الذكية'}
+<span className="mr-3 text-2xl font-normal">←</span>
+</button>
+) : (
+<p className="text-gray-500 font-bold flex items-center"><span className="text-red-500 mr-2 text-xl">⚠️</span> يرجى الإجابة بشكل صحيح على الأسئلة أعلاه لتفعيل زر الانتقال.</p>
+)}
+</div>
+</div>
+);
+};
+
+// --- Screen 3: Smart Review ---
+const SmartReview = ({ onFinish }) => {
+const [openAcc, setOpenAcc] = useState(null);
+
+return (
+<div className="fade-in space-y-10 pb-10">
+<div className="text-center mb-10 glass-panel p-6 border-b-4 border-gold">
+<h2 className="text-3xl font-bold font-amiri text-navy mb-2">المراجعة الذكية المزدوجة</h2>
+<p className="text-gray-600 text-lg">اقلب البطاقات لحفظ المصطلحات، وافتح القوائم للفهم التحليلي الشامل للمقرر</p>
+</div>
+
+<h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3">أولاً: بطاقات المفاهيم والأحكام (14 بطاقة)</h3>
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+{FLASHCARDS.map((card, i) => (
+<div key={i} className="flip-card">
+<div className="flip-card-inner">
+<div className="flip-card-front">{card.front}</div>
+<div className="flip-card-back">{card.back}</div>
+</div>
+</div>
+))}
+</div>
+
+<h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3 mt-12">ثانياً: التحليل المقالي والفهم العميق (10 أسئلة)</h3>
+<div className="space-y-4">
+{ACCORDIONS.map((acc, i) => (
+<div key={i} className="glass-panel overflow-hidden border border-gray-200">
+<button onClick={() => setOpenAcc(openAcc === i ? null : i)} className="w-full text-right p-5 font-bold text-navy bg-white hover:bg-blue-50 flex justify-between items-center transition-colors">
+<span className="text-lg flex items-center">
+<span className={`ml-3 text-2xl ${ICON_COLORS[i % ICON_COLORS.length]}`}>❖</span>
+{acc.q}
+</span>
+<span className={`text-2xl transition-transform duration-300 ${openAcc === i ? 'rotate-45 text-red-500' : 'text-gold'}`}>+</span>
+</button>
+<div className={`px-5 transition-all duration-300 ease-in-out ${openAcc === i ? 'max-h-96 py-5 border-t border-gray-100 bg-trait2' : 'max-h-0 py-0 bg-white'}`}>
+<p className="leading-loose text-gray-800 text-lg">{acc.a}</p>
+</div>
+</div>
+))}
+</div>
+
+<div className="text-center mt-12 pt-8">
+<button onClick={onFinish} className="bg-navy text-white px-12 py-4 rounded-full font-bold text-xl hover:bg-opacity-90 transition-all glow-effect shadow-xl">
+بدء التقييم الشامل
+</button>
+</div>
+</div>
+);
+};
+
+// --- Screen 4: Quiz ---
+const Quiz = ({ onFinish }) => {
+const [answers, setAnswers] = useState({});
+const [submitted, setSubmitted] = useState(false);
+
+const isComplete = Object.keys(answers).length === QUIZ_QUESTIONS.length;
+
+const handleSubmit = () => {
+let s = 0;
+QUIZ_QUESTIONS.forEach((q, i) => {
+if (answers[i] === q.correct) s++;
+});
+setSubmitted(true);
+setTimeout(() => onFinish(s), 2500);
+};
+
+return (
+<div className="fade-in max-w-4xl mx-auto pb-20">
+<div className="text-center mb-10 glass-panel p-6 border-b-4 border-navy">
+<h2 className="text-4xl font-bold font-amiri text-navy">التقييم الشامل</h2>
+<p className="text-gray-600 mt-3 text-lg font-bold">أجب عن جميع الأسئلة التالية ({QUIZ_QUESTIONS.length} سؤال)</p>
+</div>
+
+<div className="space-y-6">
+{QUIZ_QUESTIONS.map((q, i) => {
+const iconColorClass = ICON_COLORS[i % ICON_COLORS.length];
+return (
+<div key={i} className={`glass-panel p-6 transition-all ${submitted ? (answers[i] === q.correct ? 'border-2 border-green-500 bg-green-50' : 'border-2 border-red-500 bg-red-50') : 'hover:border-gold border-2 border-transparent'}`}>
+<h3 className="font-bold text-xl mb-5 text-navy flex items-start">
+<span className={`ml-3 text-2xl font-black ${iconColorClass}`}>{i+1}.</span> 
+{q.q}
+</h3>
+<div className="space-y-3">
+{q.options.map((opt, j) => (
+<label key={j} className={`block p-4 rounded-lg border-2 cursor-pointer transition-all ${answers[i] === j ? 'bg-navy text-white border-navy shadow-md transform scale-[1.01]' : 'bg-white hover:bg-gray-50 border-gray-200'} ${submitted && j === q.correct ? 'bg-green-500 text-white border-green-500 shadow-md' : ''} ${submitted && answers[i] === j && j !== q.correct ? 'bg-red-500 text-white border-red-500' : ''}`}>
+<input type="radio" name={`q${i}`} className="hidden" 
+checked={answers[i] === j} 
+onChange={() => !submitted && setAnswers({...answers, [i]: j})} />
+<span className="text-lg font-medium">{opt}</span>
+</label>
+))}
+</div>
+</div>
+);
+})}
+</div>
+
+<div className="mt-12 text-center sticky bottom-6 z-50">
+<button onClick={handleSubmit} disabled={!isComplete || submitted} 
+className={`px-12 py-4 rounded-full font-bold text-xl shadow-2xl transition-all ${isComplete && !submitted ? 'bg-gold text-navy hover:bg-yellow-500 glow-effect transform hover:-translate-y-1' : 'bg-gray-300 text-gray-500 cursor-not-allowed border-2 border-gray-400'}`}>
+{submitted ? 'جاري حساب النتيجة وإرسالها...' : 'إنهاء وإرسال النتيجة'}
+</button>
+</div>
+</div>
+);
+};
+
+// --- Screen 5: Result & Silent Submission ---
+const ResultScreen = ({ userInfo, score }) => {
+const [status, setStatus] = useState('جاري إرسال النتيجة صمتاً...');
+
+useEffect(() => {
+const duration = Math.round((new Date() - userInfo.startTime) / 60000); 
+const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAtWpsGVdYNm6qt88dhkrd_Kj2kiyWBQiejpNjLvBfsOkPzw/formResponse";
+
+const formData = new FormData();
+formData.append('entry.631676590', "المحاضرة التاسعة");
+formData.append('entry.716230744', userInfo.name);
+formData.append('entry.258825401', userInfo.section);
+formData.append('entry.1926766466', score);
+formData.append('entry.585619026', duration);
+
+fetch(formUrl, {
+method: 'POST',
+mode: 'no-cors',
+body: formData
+})
+.then(() => {
+setStatus('تم حفظ النتيجة وتوثيق إنجازك بنجاح ✔️');
+})
+.catch(() => {
+setStatus('تم الانتهاء.');
+});
+}, []);
+
+return (
+<div className="max-w-lg mx-auto glass-panel p-12 text-center fade-in mt-10 border-t-8 border-navy shadow-2xl">
+<h2 className="text-4xl font-bold font-amiri text-navy mb-8">نتيجة التقييم الشامل</h2>
+<div className="text-6xl font-black text-gold mb-8 border-4 border-navy w-48 h-48 mx-auto flex items-center justify-center rounded-full bg-white shadow-[0_0_30px_rgba(226,185,111,0.5)]">
+{score} / 20
+</div>
+<div className="space-y-4 mb-10 text-xl font-bold bg-gray-50 p-6 rounded-xl border border-gray-200">
+<p className="text-navy flex justify-between"><span>الاسم:</span> <span>{userInfo.name}</span></p>
+<p className="text-navy flex justify-between border-t border-gray-200 pt-3"><span>الشعبة:</span> <span>{userInfo.section}</span></p>
+</div>
+<p className="text-green-600 font-bold mb-8 text-lg">{status}</p>
+<button onClick={() => window.location.reload()} className="px-10 py-4 bg-navy text-white rounded-full font-bold hover:bg-opacity-90 transition-all glow-effect shadow-lg w-full">
+العودة للرئيسية
+</button>
+</div>
+);
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>
