@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحاديث الأحكام - المحاضرة العاشرة</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#16213e',
+                        gold: '#e2b96f',
+                        cream: '#faf8f3',
+                        trait1: '#f0fdf4',
+                        trait2: '#fefce8',
+                        trait3: '#eff6ff',
+                        trait4: '#fff1f2',
+                        trait5: '#f5f3ff',
+                        hlred: '#fee2e2',
+                        hlblue: '#dbeafe',
+                        hlgold: '#fef08a',
+                        primaryBlue: '#2563eb',
+                        primaryRed: '#dc2626',
+                        primaryGreen: '#16a34a',
+                        primaryGold: '#ca8a04'
+                    },
+                    fontFamily: {
+                        amiri: ['Amiri', 'serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #faf8f3 0%, #e2e8f0 100%);
+            background-attachment: fixed;
+            font-family: 'Tajawal', sans-serif;
+            color: #16213e;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Amiri', serif; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px -10px rgba(22, 33, 62, 0.1);
+        }
+        
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(226, 185, 111, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .verse {
+            background: linear-gradient(to left, rgba(226, 185, 111, 0.15), transparent);
+            border-right: 4px solid #e2b96f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            font-family: 'Amiri', serif;
+            font-size: 1.25rem;
+            line-height: 2.2;
+            color: #16213e;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        /* Content Cells */
+        .content-cell {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            border-right-width: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        .content-cell:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.06); transform: translateX(-3px); }
+        .cell-blue { background-color: #eff6ff; border-color: #3b82f6; }
+        .cell-yellow { background-color: #fefce8; border-color: #eab308; }
+        .cell-green { background-color: #f0fdf4; border-color: #22c55e; }
+        .cell-red { background-color: #fef2f2; border-color: #ef4444; }
+        .cell-purple { background-color: #faf5ff; border-color: #a855f7; }
+
+        /* Highlights */
+        .hl-red { background-color: #fee2e2; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #991b1b; }
+        .hl-blue { background-color: #dbeafe; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #1e40af; }
+        .hl-gold { background-color: #fef08a; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #854d0e; }
+
+        /* Flip Card CSS */
+        .flip-card { perspective: 1000px; cursor: pointer; height: 180px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 1rem;
+            display: flex; align-items: center; justify-content: center; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); text-align: center;
+        }
+        .flip-card-front { background: linear-gradient(135deg, #16213e, #1e3a8a); color: #e2b96f; border: 2px solid #e2b96f; font-family: 'Amiri', serif; font-size: 1.35rem; font-weight: bold;}
+        .flip-card-back { background: linear-gradient(135deg, #e2b96f, #d97706); color: #fff; transform: rotateY(180deg); font-size: 1.1rem; font-weight: 500;}
+
+        /* CSS Grid Mindmap */
+        .mindmap-grid { display: grid; gap: 1.5rem; padding: 2rem; background: #fff; border-radius: 1rem; border: 2px dashed #e2b96f; }
+        .mm-node { background: #16213e; color: #e2b96f; padding: 1.25rem; border-radius: 0.75rem; text-align: center; font-size: 1.25rem; font-weight: bold; font-family: 'Amiri', serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .mm-sub { background: #faf8f3; color: #16213e; border: 1px solid #e2b96f; border-right: 4px solid #e2b96f; padding: 1rem; border-radius: 0.5rem; text-align: center; font-weight: bold; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #e2b96f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #16213e; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Data Definitions (Full Content, Segmented with Colored Cells) ---
+        
+const ALL_DATA = [
+            {
+                id: 1,
+                title: "الوحدة الأولى: حديث قبيصة - من تحل له المسألة (أصناف ثلاثة)",
+                content: `
+                    <div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+                        <h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-800">
+                            <li>أن يعدد الأصناف الثلاثة الذين تحل لهم المسألة</li>
+                            <li>أن يفرق بين السؤال العلني والسؤال الخفي</li>
+                            <li>أن يطبق شروط قبول دعوى الفقر</li>
+                        </ul>
+                    </div>
+
+                    <div class="verse">
+                        ٦٤٥ - وَعَنْ قَبِيصَةَ بْنِ مُحَارِقٍ الْهِلَالِيِّ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللهِ ﷺ: «إِنَّ الْمَسْأَلَةَ لَا تَحِلُّ إِلَّا لِأَحَدٍ ثَلَاثَةٍ: رَجُلٍ تَحَمَّلَ حَمَالَةً فَحَلَّتْ لَهُ الْمَسْأَلَةُ حَتَّى يُصِيبَهَا ثُمَّ يُمْسِكْ، وَرَجُلٍ أَصَابَتْهُ جَائِحَةٌ اجْتَاحَتْ مَالَهُ فَحَلَّتْ لَهُ الْمَسْأَلَةُ حَتَّى يُصِيبَ قَوَامًا مِنْ عَيْشٍ، وَرَجُلٍ أَصَابَتْهُ فَاقَةٌ حَتَّى يَقُومَ ثَلَاثَةٌ مِنْ ذَوِي الْحِجَى مِنْ قَوْمِهِ: لَقَدْ أَصَابَتْ فُلَانًا فَاقَةٌ فَحَلَّتْ لَهُ الْمَسْأَلَةُ حَتَّى يُصِيبَ قَوَامًا مِنْ عَيْشٍ، فَمَا سِوَاهُنَّ مِنَ الْمَسْأَلَةِ يَا قَبِيصَةُ سُحْتٌ يَأْكُلُهَا صَاحِبُهَا سُحْتًا». رَوَاهُ مُسْلِمٌ.
+                    </div>
+
+                    <div class="content-cell cell-blue mt-4"><h4 class="text-xl font-bold text-primaryBlue mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800"><li><span class="hl-blue">المسألة:</span> طلب المال من الناس</li><li><span class="hl-blue">حمالة:</span> دين يتحمله لإصلاح ذات البين</li><li><span class="hl-blue">جائحة:</span> مصيبة تهلك المال</li><li><span class="hl-blue">قواماً من عيش:</span> ما تقوم به حياة الإنسان</li><li><span class="hl-blue">ذوي الحجى:</span> أصحاب العقول الراجحة</li><li><span class="hl-blue">سحت:</span> مال حرام يمحق البركة</li></ul></div>
+
+                    <div class="content-cell cell-yellow"><h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+                        <p class="leading-loose text-gray-800">يبين النبي ﷺ أن سؤال الناس للمال لا يحل إلا لثلاثة أصناف: (١) من تحمل حمالة (ديناً) لإصلاح ذات البين، (٢) من أصابته جائحة أتلفت ماله، (٣) من أصابته فاقة (فقر) خفي بشرط شهادة ثلاثة عقلاء من قومه. وما عدا ذلك من المسألة سحت (حرام).</p></div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue"><h4 class="text-xl font-bold text-primaryBlue mb-2">الصنف الأول: متحمل الحمالة</h4>
+                        <p class="leading-loose text-gray-800">الغارم لإصلاح ذات البين: رجل تحمل ديناً للإصلاح بين قبيلتين متخاصمتين. <span class="hl-blue">تحل له المسألة ولو كان غنياً</span>، تشجيعاً على فعل المعروف. ويأخذ حتى يصيب الحمالة ثم يمسك.</p></div>
+
+                    <div class="content-cell cell-green"><h4 class="text-xl font-bold text-primaryGreen mb-2">الصنف الثاني: من أصابته جائحة</h4>
+                        <p class="leading-loose text-gray-800">الجائحة: مصيبة ظاهرة كحريق أو غرق أو سلب. <span class="hl-green">وهذا لم يشترط النبي ﷺ فيه بينة لأن الجائحة ظاهرة.</span> ويأخذ حتى يصيب قواماً من عيش.</p></div>
+
+                    <div class="content-cell cell-yellow"><h4 class="text-xl font-bold text-primaryGold mb-2">الصنف الثالث: من أصابته فاقة (فقر خفي)</h4>
+                        <p class="leading-loose text-gray-800">رجل كان غنياً معروفاً بالغنى ثم افتقر فقراً خفياً. <span class="hl-gold">اشترط النبي ﷺ ثلاثة شروط:</span> (١) ثلاثة شهود، (٢) من ذوي الحجى (العقل)، (٣) من قومه (أهل الخبرة بحاله).</p></div>
+
+                    <div class="content-cell cell-red"><h4 class="text-xl font-bold text-primaryRed mb-2">تحريم المسألة في غير هذه الأحوال</h4>
+                        <p class="leading-loose text-gray-800">ما عدا هذه الثلاثة <span class="hl-red">سحت يأكله صاحبه سحتاً</span>. والسحت يمحق بركة المال ويمحق بركة الدعاء. والمسألة فيها ذل لصاحبها، والإسلام حريص على كرامة بنيه.</p></div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد</h3>
+                    <div class="content-cell cell-green"><ul class="list-decimal list-inside space-y-2 text-gray-800">
+                        <li>تحرم مسألة المال إلا في ثلاثة أحوال</li>
+                        <li>متحمل الحمالة تحل له ولو كان غنياً</li>
+                        <li>من أصابته جائحة لا يشترط فيه شهود لظهورها</li>
+                        <li>من ادعى الفقر وكان معروفاً بالغنى يحتاج ثلاثة شهود عقلاء من قومه</li>
+                        <li>المال الحرام يمحق البركة</li>
+                    </ul></div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🏋️ تدريب على الاستنباط</h3>
+                    <div class="content-cell cell-blue"><p class="font-bold text-navy">التدريب:</p><p class="text-gray-800">لماذا اشترط النبي ﷺ ثلاثة شهود في الفاقة ولم يشترطهم في الجائحة؟</p><p class="text-green-700 font-bold mt-1">الإجابة:</p><p class="text-gray-800">لأن الجائحة ظاهرة بيّنة يعرفها الناس. أما الفاقة فخفية لا يعلمها إلا الخاصة، فاحتاجت إلى بينة لئلا يدعيها من ليس بمستحق.</p></div>
+                `,
+                mindmap: {
+                    main: "من تحل له المسألة",
+                    nodes: ["١- متحمل الحمالة (إصلاح ذات البين)", "٢- من أصابته جائحة ظاهرة", "٣- من أصابته فاقة (بشهادة ثلاثة)", "ما عدا ذلك سحت (حرام)"]
+                },
+                exercises: {
+                    dropdown: { text: "المسألة لا تحل إلا لـ [Q1]: متحمل حمالة، ومن أصابته [Q2]، ومن أصابته [Q3].", options: { Q1: ["اثنين", "ثلاثة", "أربعة"], Q2: ["جائحة", "سرقة", "غنى"], Q3: ["فاقة", "صحة", "قوة"] }, answers: { Q1: "ثلاثة", Q2: "جائحة", Q3: "فاقة" } },
+                    matching: [{ left: "متحمل الحمالة", right: "تحل له ولو كان غنياً" }, { left: "الجائحة", right: "لا تحتاج شهوداً لظهورها" }, { left: "الفاقة", right: "تحتاج ثلاثة شهود عقلاء" }]
+                }
+            },
+            {
+                id: 2,
+                title: "الوحدة الثانية: حديث حكيم بن حزام - اليد العليا خير من اليد السفلى",
+                content: `
+                    <div class="verse">٦٥٣ - وَعَنْ حَكِيمِ بْنِ حِزَامٍ رَضِيَ اللَّهُ عَنْهُ عَنِ النَّبِيِّ ﷺ قَالَ: «الْيَدُ العُلْيَا خَيْرٌ مِنَ الْيَدِ السُّفْلَى، وَابْدَأْ بِمَنْ تَعُولُ، وَخَيْرُ الصَّدَقَةِ مَا كَانَ عَنْ ظَهْرِ غِنًى، وَمَنْ يَسْتَعْفِفْ يُعِفَّهُ اللَّهُ، وَمَنْ يَسْتَغْنِ يُغْنِهِ اللَّهُ». مُتَّفَقٌ عَلَيْهِ.</div>
+
+                    <div class="content-cell cell-blue mt-4"><h4 class="text-xl font-bold text-primaryBlue mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800"><li><span class="hl-blue">اليد العليا:</span> يد المعطي المنفق</li><li><span class="hl-blue">اليد السفلى:</span> يد السائل الآخذ</li><li><span class="hl-blue">بمن تعول:</span> بمن تلزمك نفقته</li><li><span class="hl-blue">عن ظهر غنى:</span> بعد كفاية النفس والعيال</li><li><span class="hl-blue">يستعفف:</span> يطلب العفة والكفاف</li></ul></div>
+
+                    <div class="content-cell cell-yellow"><h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4><p class="leading-loose text-gray-800">حديث جامع في آداب الصدقة والإنفاق: (١) اليد المنفقة أفضل من اليد السائلة. (٢) ابدأ بالإنفاق على أهلك ومن تعول. (٣) أفضل الصدقة ما كان بعد الكفاية. (٤) من طلب العفة أعفه الله. (٥) من استغنى بالله أغناه الله.</p></div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد</h3>
+                    <div class="content-cell cell-green"><ul class="list-decimal list-inside space-y-2 text-gray-800">
+                        <li>فضل اليد المنفقة على اليد السائلة</li>
+                        <li>وجوب البدء بالإنفاق على الأهل والعيال</li>
+                        <li>لا صدقة إلا بعد كفاية النفس والعيال</li>
+                        <li>الاستعفاف سبب لعفة الله للعبد</li>
+                        <li>الاستغناء بالله سبب للغنى</li>
+                    </ul></div>
+                `,
+                mindmap: {
+                    main: "اليد العليا خير من اليد السفلى",
+                    nodes: ["اليد العليا: المعطي", "اليد السفلى: الآخذ", "ابدأ بمن تعول", "خير الصدقة عن ظهر غنى", "من يستعفف يعفه الله"]
+                },
+                exercises: {
+                    dropdown: { text: "اليد [Q1] خير من اليد السفلى. وخير الصدقة ما كان عن ظهر [Q2].", options: { Q1: ["اليمنى", "العليا", "اليسرى"], Q2: ["فقر", "غنى", "حاجة"] }, answers: { Q1: "العليا", Q2: "غنى" } },
+                    matching: [{ left: "اليد العليا", right: "يد المعطي" }, { left: "اليد السفلى", right: "يد السائل" }, { left: "ابدأ بمن تعول", right: "أهلك وعيالك أولاً" }]
+                }
+            },
+            {
+                id: 3,
+                title: "الوحدة الثالثة: حديث ابن عمر - إثبات رمضان برؤية الهلال",
+                content: `
+                    <div class="verse">٦٧١ - وَعَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: «إِذَا رَأَيْتُمُوهُ فَصُومُوا، وَإِذَا رَأَيْتُمُوهُ فَأَفْطِرُوا، فَإِنْ غُمَّ عَلَيْكُمْ فَاقْدُرُوا لَهُ». مُتَّفَقٌ عَلَيْهِ.</div>
+
+                    <div class="content-cell cell-yellow"><h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4><p class="leading-loose text-gray-800">بين النبي ﷺ أن دخول شهر رمضان يثبت بأحد أمرين: رؤية هلال رمضان، أو إكمال شعبان ثلاثين يوماً إذا حال دون الرؤية غيم أو قتر. وخروجه يثبت برؤية هلال شوال أو إكمال رمضان ثلاثين.</p></div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+                    <div class="content-cell cell-blue"><h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: إثبات الشهر بالرؤية</h4><p class="leading-loose text-gray-800">دخول رمضان <span class="hl-blue">يثبت بشهادة واحد عدل</span> لحديث ابن عمر أنه رأى الهلال فأخبر النبي ﷺ فصام وأمر الناس بالصيام. وأما خروج رمضان <span class="hl-red">فلا يثبت إلا بشهادة اثنين</span>.</p></div>
+                    <div class="content-cell cell-green"><h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: إذا حال غيم أو قتر</h4><p class="leading-loose text-gray-800">إذا حال دون رؤية الهلال غيم أو قتر، <span class="hl-green">فإنه يكمل العدة ثلاثين</span>، ولا يصام يوم الشك. لقوله ﷺ: «فإن غم عليكم فاقدروا له» وفي رواية: «فأكملوا العدة ثلاثين».</p></div>
+                    <div class="content-cell cell-red"><h4 class="text-xl font-bold text-primaryRed mb-2">ثالثاً: النهي عن صوم يوم الشك</h4><p class="leading-loose text-gray-800">لا يجوز صوم يوم الثلاثين من شعبان احتياطاً لرمضان. <span class="hl-red">لقول عمار بن ياسر: «من صام اليوم الذي يشك فيه فقد عصى أبا القاسم ﷺ».</span> إلا إن وافق عادة له كصوم الاثنين.</p></div>
+
+                    <div class="content-cell cell-purple mt-4"><h4 class="text-xl font-bold text-purple-700 mb-2">⚠️ تنبيهات</h4><p class="text-gray-800">لا يتقدم رمضان بصوم يوم أو يومين احتياطاً، لقوله ﷺ: «لا تقدموا رمضان بصوم يوم ولا يومين، إلا رجل كان يصوم صوماً فليصمه».</p></div>
+                `,
+                mindmap: {
+                    main: "إثبات دخول رمضان",
+                    nodes: ["برؤية هلال رمضان", "بإكمال شعبان ٣٠ يوماً", "دخوله بشهادة واحد", "خروجه بشهادة اثنين", "لا يصام يوم الشك"]
+                },
+                exercises: {
+                    dropdown: { text: "يثبت رمضان برؤية [Q1] أو إكمال [Q2] ثلاثين. ولا يصام يوم [Q3].", options: { Q1: ["الشمس", "الهلال", "النجم"], Q2: ["رمضان", "شعبان", "شوال"], Q3: ["العيد", "الشك", "الجمعة"] }, answers: { Q1: "الهلال", Q2: "شعبان", Q3: "الشك" } },
+                    matching: [{ left: "دخول رمضان", right: "بشهادة واحد عدل" }, { left: "خروج رمضان", right: "بشهادة اثنين" }, { left: "يوم الشك", right: "لا يصام" }]
+                }
+            },
+            {
+                id: 4,
+                title: "الوحدة الرابعة: حديث أبي قتادة - فضل صوم عرفة وعاشوراء والاثنين",
+                content: `
+                    <div class="verse">٦٩٨-١ - عَنْ أَبِي قَتَادَةَ الْأَنْصَارِيِّ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ ﷺ سُئِلَ عَنْ صَوْمِ يَوْمِ عَرَفَةَ، قَالَ: «يُكَفِّرُ السَّنَةَ الْمَاضِيَةَ وَالْبَاقِيَةَ»، وَسُئِلَ عَنْ صِيَامِ يَوْمِ عَاشُورَاءَ، فَقَالَ: «يُكَفِّرُ السَّنَةَ الْمَاضِيَةَ»، وَسُئِلَ عَنْ صَوْمِ يَوْمِ الِاثْنَيْنِ، قَالَ: «ذَاكَ يَوْمٌ وُلِدْتُ فِيهِ، وَبُعِثْتُ فِيهِ، أَوْ أُنْزِلَ عَلَيَّ فِيهِ». رَوَاهُ مُسْلِمٌ.</div>
+
+                    <div class="content-cell cell-blue mt-4"><h4 class="text-xl font-bold text-primaryBlue mb-2">📝 معاني المفردات</h4><ul class="space-y-1 text-gray-800"><li><span class="hl-blue">يوم عرفة:</span> التاسع من ذي الحجة</li><li><span class="hl-blue">عاشوراء:</span> العاشر من محرم</li><li><span class="hl-blue">يكفر:</span> يستر ويمحو الذنوب</li></ul></div>
+
+                    <div class="content-cell cell-yellow"><h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4><p class="leading-loose text-gray-800">يبين النبي ﷺ فضل ثلاثة أيام من الصيام: (١) صوم يوم عرفة يكفر سنتين (الماضية والباقية). (٢) صوم عاشوراء يكفر سنة ماضية. (٣) صوم يوم الاثنين لأنه يوم ولادته وبعثته.</p></div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue"><h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: صوم يوم عرفة</h4><p class="leading-loose text-gray-800">يكفر السنة الماضية والباقية. <span class="hl-blue">ويستثنى الحاج الواقف بعرفة</span> فالأفضل له الفطر ليتقوى على الدعاء. والجمهور: التكفير للصغائر فقط. <span class="hl-gold">صوم عرفة أفضل من صوم عاشوراء لأنه يكفر سنتين.</span></p></div>
+
+                    <div class="content-cell cell-green"><h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: صوم عاشوراء</h4><p class="leading-loose text-gray-800">يكفر السنة الماضية. وسبب صيامه: أن الله أنجى فيه موسى وقومه وأغرق فرعون. <span class="hl-green">ويستحب صيام يوم قبله أو بعده لمخالفة اليهود.</span></p></div>
+
+                    <div class="content-cell cell-yellow"><h4 class="text-xl font-bold text-primaryGold mb-2">ثالثاً: صوم الاثنين</h4><p class="leading-loose text-gray-800">لما سئل النبي ﷺ عن صوم الاثنين قال: «ذاك يوم ولدت فيه وبعثت فيه». <span class="hl-gold">وهذا لا يعني مشروعية الاحتفال بالمولد</span>، فالنبي ﷺ حدد اليوم من الأسبوع لا من الشهر، والمشروع فيه الصوم فقط.</p></div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد</h3>
+                    <div class="content-cell cell-green"><ul class="list-decimal list-inside space-y-2 text-gray-800">
+                        <li>صوم عرفة: يكفر سنتين (للصغائر عند الجمهور)</li>
+                        <li>الحاج بعرفة: الأفضل له الفطر</li>
+                        <li>صوم عاشوراء: يكفر سنة ماضية، ويستحب صوم يوم معه</li>
+                        <li>صوم الاثنين: مستحب، ولا يدل على مشروعية المولد</li>
+                        <li>التكفير للصغائر عند الجمهور، والكبائر تحتاج توبة</li>
+                    </ul></div>
+
+                    <div class="content-cell cell-red mt-4"><h4 class="text-xl font-bold text-primaryRed mb-2">⚠️ تنبيهات وفهوم خاطئة</h4>
+                        <ul class="space-y-2 text-gray-800">
+                            <li><span class="hl-red">الفهم الخاطئ:</span> أن صوم عرفة يكفر الكبائر. <br/><span class="hl-green">التصحيح:</span> الجمهور على أن التكفير للصغائر فقط.</li>
+                            <li><span class="hl-red">الفهم الخاطئ:</span> أن الحديث دليل على الاحتفال بالمولد النبوي. <br/><span class="hl-green">التصحيح:</span> النبي حدد اليوم الأسبوعي (الاثنين) لا اليوم الشهري، والمشروع فيه الصوم فقط.</li>
+                        </ul></div>
+                `,
+                mindmap: {
+                    main: "فضل صوم التطوع",
+                    nodes: ["صوم عرفة: يكفر سنتين", "صوم عاشوراء: سنة ماضية", "صوم الاثنين: يوم ولد وبعث فيه", "التكفير للصغائر عند الجمهور"]
+                },
+                exercises: {
+                    dropdown: { text: "صوم عرفة يكفر [Q1]. وصوم عاشوراء يكفر [Q2]. والأفضل للحاج بعرفة [Q3].", options: { Q1: ["سنة", "سنتين", "ثلاث سنين"], Q2: ["السنة الماضية", "سنتين", "شهراً"], Q3: ["الصوم", "الفطر", "الاعتكاف"] }, answers: { Q1: "سنتين", Q2: "السنة الماضية", Q3: "الفطر" } },
+                    matching: [{ left: "صوم عرفة", right: "يكفر سنتين" }, { left: "صوم عاشوراء", right: "يكفر سنة ماضية" }, { left: "صوم الاثنين", right: "يوم ولد وبعث فيه" }]
+                }
+            }
+        ];
+
+const FLASHCARDS = [
+            { front: "من تحل له المسألة", back: "ثلاثة: متحمل حمالة، من أصابته جائحة، من أصابته فاقة (بشهادة ثلاثة)" },
+            { front: "متحمل الحمالة", back: "تحل له المسألة ولو كان غنياً" },
+            { front: "الجائحة", back: "مصيبة ظاهرة لا تحتاج شهوداً" },
+            { front: "الفاقة", back: "فقر خفي يحتاج شهادة ثلاثة عقلاء من قومه" },
+            { front: "اليد العليا", back: "يد المعطي المنفق" },
+            { front: "خير الصدقة", back: "ما كان عن ظهر غنى (بعد كفاية النفس والعيال)" },
+            { front: "إثبات دخول رمضان", back: "برؤية الهلال أو إكمال شعبان ٣٠ يوماً" },
+            { front: "شهادة دخول رمضان", back: "يكفي فيها شاهد واحد عدل" },
+            { front: "يوم الشك", back: "يوم ٣٠ شعبان إذا غم، لا يصام" },
+            { front: "صوم عرفة", back: "يكفر سنتين (الماضية والباقية)" },
+            { front: "صوم عاشوراء", back: "يكفر سنة ماضية، ويستحب صوم يوم معه" },
+            { front: "صوم الاثنين", back: "يوم ولد النبي وبعث فيه" },
+            { front: "الحاج يوم عرفة", back: "الأفضل له الفطر ليتقوى على الدعاء" },
+            { front: "حكم المال المأخوذ بالمسألة في غير الأحوال الثلاثة", back: "سحت (حرام) يمحق البركة" }
+        ];
+
+const ACCORDIONS = [
+            { q: "ما الأصناف الثلاثة التي تحل لهم المسألة؟", a: "(١) متحمل حمالة لإصلاح ذات البين - ولو كان غنياً. (٢) من أصابته جائحة أتلفت ماله. (٣) من أصابته فاقة بشرط شهادة ثلاثة عقلاء من قومه." },
+            { q: "لماذا اشترط النبي ﷺ ثلاثة شهود في الفاقة ولم يشترطهم في الجائحة؟", a: "لأن الجائحة ظاهرة بيّنة يعرفها الناس (كحريق أو غرق)، فلا تحتاج إلى بينة. أما الفاقة فخفية لا يعلمها إلا الخاصة، فاحتاجت إلى بينة لئلا يدعيها من ليس بمستحق." },
+            { q: "ما معنى (ابدأ بمن تعول)؟", a: "أي ابدأ بالإنفاق على نفسك وأهلك ومن تلزمك نفقته، ثم تصدق بعد ذلك. فلا تصدق وأنت محتاج لمن تعول." },
+            { q: "كيف يثبت دخول شهر رمضان؟", a: "يثبت بأحد أمرين: (١) رؤية هلال رمضان بشهادة عدل واحد. (٢) إكمال شهر شعبان ثلاثين يوماً إذا حال دون الرؤية غيم أو قتر." },
+            { q: "ما حكم صوم يوم الشك (٣٠ شعبان)؟", a: "لا يجوز صومه احتياطاً لرمضان، لقوله ﷺ: «لا تقدموا رمضان بصوم يوم ولا يومين». ومن صامه فقد عصى أبا القاسم ﷺ. إلا إن وافق عادة كصوم الاثنين." },
+            { q: "ما فضل صوم يوم عرفة؟ ومن يستثنى؟", a: "يكفر السنة الماضية والباقية. ويستثنى الحاج الواقف بعرفة فالأفضل له الفطر ليتقوى على الدعاء والذكر." },
+            { q: "هل صوم عرفة يكفر الكبائر؟", a: "الجمهور على أنه لا يكفر إلا الصغائر. أما الكبائر فلا بد لها من توبة. والدليل: حديث «الصلوات الخمس... مكفرات لما بينهن ما اجتنبت الكبائر»." },
+            { q: "ما سبب صيام يوم عاشوراء؟", a: "لأن الله أنجى فيه موسى وقومه وأغرق فرعون وقومه. فلما قدم النبي ﷺ المدينة وجد اليهود يصومونه، فقال: «نحن أولى بموسى منكم» فصامه وأمر بصيامه." },
+            { q: "هل يدل حديث صوم الاثنين على مشروعية الاحتفال بالمولد؟", a: "لا، لعدة وجوه: (١) النبي حدد اليوم الأسبوعي لا الشهري. (٢) المشروع فيه الصوم فقط لا الاحتفال. (٣) لم يفعله الصحابة ولا التابعون. فقياس المولد عليه قياس مع الفارق." },
+            { q: "ما الفرق بين السؤال العلني والخفي؟", a: "العلني: يسأل أمام الناس في المسجد أو المجتمعات. والخفي: يكتب أو يذهب إلى من يتوسم فيه الخير ويسأله سراً. العلني أشد لأنه يذل نفسه أمام الجميع." }
+        ];
+
+const QUIZ_QUESTIONS = [
+            { q: "عدد الأصناف التي تحل لهم المسألة:", options: ["اثنان", "ثلاثة", "أربعة", "خمسة"], correct: 1 },
+            { q: "متحمل الحمالة:", options: ["لا تحل له المسألة", "تحل له ولو كان غنياً", "تحل له إن كان فقيراً", "يأخذ من الزكاة فقط"], correct: 1 },
+            { q: "شهادة الفاقة تحتاج:", options: ["شاهداً واحداً", "شاهدين", "ثلاثة شهود", "لا تحتاج شهوداً"], correct: 2 },
+            { q: "ما عدا الأحوال الثلاثة من المسألة:", options: ["مكروه", "سحت (حرام)", "جائز", "مباح"], correct: 1 },
+            { q: "اليد العليا هي:", options: ["اليد اليمنى", "يد المعطي", "يد السائل", "يد القوي"], correct: 1 },
+            { q: "خير الصدقة ما كان:", options: ["في السر", "عن ظهر غنى", "في العلن", "كثيراً"], correct: 1 },
+            { q: "يثبت دخول رمضان:", options: ["بحساب الفلك", "برؤية الهلال أو إكمال شعبان", "بالتقويم", "بالصوم قبله بيوم"], correct: 1 },
+            { q: "دخول رمضان يثبت بشهادة:", options: ["اثنين", "واحد عدل", "ثلاثة", "جماعة"], correct: 1 },
+            { q: "يوم الشك (٣٠ شعبان):", options: ["يصام احتياطاً", "لا يصام", "يستحب صومه", "يجب صومه"], correct: 1 },
+            { q: "صوم عرفة يكفر:", options: ["سنة", "سنتين", "شهراً", "كل الذنوب"], correct: 1 },
+            { q: "صوم عاشوراء يكفر:", options: ["سنة ماضية", "سنتين", "أسبوعاً", "شهراً"], correct: 0 },
+            { q: "الحاج بعرفة:", options: ["يجب عليه الصوم", "الأفضل له الفطر", "يخير", "لا يصح صومه"], correct: 1 },
+            { q: "صوم الاثنين:", options: ["حرام", "مستحب", "مكروه", "واجب"], correct: 1 },
+            { q: "التكفير في صوم عرفة:", options: ["يشمل الكبائر", "للصغائر فقط عند الجمهور", "لا يكفر شيئاً", "خاص بالصغائر والكبائر"], correct: 1 },
+            { q: "السؤال العلني:", options: ["أخف", "أشد من الخفي", "مستحب", "لا فرق"], correct: 1 },
+            { q: "الجائحة معناها:", options: ["الغنى", "مصيبة تهلك المال", "المرض", "السفر"], correct: 1 },
+            { q: "من يستعفف:", options: ["يعفه الله", "يفتقر", "يذل", "لا أثر"], correct: 0 },
+            { q: "لا تقدموا رمضان بصوم:", options: ["يوم أو يومين", "أسبوع", "ثلاثة أيام", "شهر"], correct: 0 },
+            { q: "شهود الفاقة يشترط فيهم:", options: ["الغنى فقط", "العقل والخبرة", "القرابة فقط", "لا شروط"], correct: 1 },
+            { q: "قوله ﷺ «ذاك يوم ولدت فيه»:", options: ["دليل الاحتفال بالمولد", "بيان فضل صوم الاثنين فقط", "دليل العيد", "لا معنى له"], correct: 1 }
+        ];
+
+const ICON_COLORS = [
+            'text-primaryBlue',
+            'text-primaryRed',
+            'text-primaryGreen',
+            'text-primaryGold',
+            'text-purple-600'
+        ];
+
+        // --- Main App Component ---
+        const App = () => {
+            const [screen, setScreen] = useState(0); 
+            const [userInfo, setUserInfo] = useState({ name: '', section: '', startTime: null });
+            const [score, setScore] = useState(0);
+
+            const handleLogin = (name, section) => {
+                setUserInfo({ name, section, startTime: new Date() });
+                setScreen(1);
+            };
+
+            const finishTopics = () => setScreen(2);
+            const finishReview = () => setScreen(3);
+            const finishQuiz = (finalScore) => {
+                setScore(finalScore);
+                setScreen(4);
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Fixed Header */}
+                    <header className="bg-navy text-white shadow-lg sticky top-0 z-50">
+                        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+                            {/* Right (Start RTL): Student Info */}
+                            <div className="flex-1 text-right">
+                                {screen > 0 ? (
+                                    <div className="fade-in font-bold">
+                                        <p className="text-gold text-lg">{userInfo.name}</p>
+                                        <p className="text-gray-300 text-sm">الشعبة: {userInfo.section}</p>
+                                    </div>
+                                ) : <div/>}
+                            </div>
+
+                            {/* Center: Course Info */}
+                            <div className="flex-1 text-center border-x border-gray-600 px-4">
+                                <h1 className="text-2xl md:text-3xl font-bold font-amiri text-gold drop-shadow-md">أحاديث الأحكام</h1>
+                                <p className="text-sm md:text-md mt-1 text-gray-200">المحاضرة العاشرة</p>
+                            </div>
+
+                            {/* Left (End RTL): Logo & Doctor */}
+                            <div className="flex-1 flex flex-col items-end pl-2">
+                                <div className="h-10 w-auto">
+                                    <img src="../../logo.png" alt="شعار الجامعة" className="h-full w-auto object-contain bg-transparent mix-blend-screen" />
+                                </div>
+                                <p className="text-xs md:text-sm mt-2 font-bold text-gray-300">د / باسم القرافي</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Dynamic Screens */}
+                    <main className="container mx-auto px-4 py-8 flex-grow">
+                        {screen === 0 && <WelcomeScreen onLogin={handleLogin} />}
+                        {screen === 1 && <TopicsFlow onFinish={finishTopics} />}
+                        {screen === 2 && <SmartReview onFinish={finishReview} />}
+                        {screen === 3 && <Quiz onFinish={finishQuiz} />}
+                        {screen === 4 && <ResultScreen userInfo={userInfo} score={score} />}
+                    </main>
+                </div>
+            );
+        };
+
+        // --- Screen 1: Welcome ---
+        const WelcomeScreen = ({ onLogin }) => {
+            const [name, setName] = useState('');
+            const [section, setSection] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const nameParts = name.trim().split(/\s+/);
+                if (nameParts.length < 4) {
+                    setError('الرجاء إدخال الاسم الرباعي بشكل صحيح.');
+                    return;
+                }
+                if (!section.trim()) {
+                    setError('الرجاء إدخال رقم الشعبة.');
+                    return;
+                }
+                setError('');
+                onLogin(name, section);
+            };
+
+            return (
+                <div className="max-w-md mx-auto glass-panel p-8 mt-10 fade-in border-t-4 border-gold">
+                    <h2 className="text-2xl font-bold text-center mb-6 text-navy">مرحباً بك في منصة التعلم للإتقان</h2>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">الاسم الرباعي:</label>
+                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل اسمك الرباعي هنا" />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">رقم الشعبة:</label>
+                            <input type="text" value={section} onChange={(e)=>setSection(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل رقم الشعبة" />
+                        </div>
+                        {error && <p className="text-red-500 text-sm font-bold bg-red-50 p-2 rounded">{error}</p>}
+                        <button type="submit" className="w-full bg-navy text-white py-3 rounded font-bold hover:bg-opacity-90 transition-all glow-effect">
+                            دخول وبدء التعلم
+                        </button>
+                    </form>
+                </div>
+            );
+        };
+
+        // --- Screen 2: Topics Flow ---
+        const TopicsFlow = ({ onFinish }) => {
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const topic = ALL_DATA[currentIndex];
+            
+            // State for Formative Assessment
+            const [ddAnswers, setDdAnswers] = useState({});
+            const [matches, setMatches] = useState([]); // Array of {left, right}
+            const [selectedLeft, setSelectedLeft] = useState(null);
+
+            // Synchronous state reset and progression
+            const handleNext = () => {
+                setDdAnswers({});
+                setMatches([]);
+                setSelectedLeft(null);
+                
+                if (currentIndex < ALL_DATA.length - 1) {
+                    setCurrentIndex(prev => prev + 1);
+                } else {
+                    onFinish();
+                }
+            };
+
+            const isDropdownsCorrect = () => {
+                const required = topic.exercises.dropdown.answers;
+                for (const key in required) {
+                    if (ddAnswers[key] !== required[key]) return false;
+                }
+                return Object.keys(required).length === Object.keys(ddAnswers).length;
+            };
+
+            const isMatchesCorrect = () => {
+                return matches.length === topic.exercises.matching.length;
+            };
+
+            const canProceed = isDropdownsCorrect() && isMatchesCorrect();
+
+            const renderHTML = (htmlString) => {
+                return <div dangerouslySetInnerHTML={{ __html: htmlString }} className="text-lg" />;
+            };
+
+            return (
+                <div className="fade-in space-y-8 pb-24">
+                    <div className="flex justify-between items-center glass-panel p-4 shadow-sm">
+                        <span className="font-bold text-navy text-lg">الوحدة {currentIndex + 1} من {ALL_DATA.length}</span>
+                        <div className="flex space-x-2 space-x-reverse">
+                            {ALL_DATA.map((_, idx) => (
+                                <div key={idx} className={`w-4 h-4 rounded-full shadow-inner ${idx <= currentIndex ? 'bg-gold' : 'bg-gray-300'}`}></div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8">
+                        {renderHTML(topic.content)}
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait1">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">الخريطة الذهنية</h3>
+                        <div className="mindmap-grid" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))` }}>
+                            <div className="mm-node md:col-span-full mb-2">{topic.mindmap.main}</div>
+                            {topic.mindmap.nodes.map((node, i) => (
+                                <div key={i} className="mm-sub">{node}</div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait3">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">التقييم التكويني المشروط</h3>
+                        
+                        {/* Dropdown Exercise */}
+                        <div className="mb-8 p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">أكمل الفراغات بما يناسب:</h4>
+                            <p className="leading-loose text-lg font-medium">
+                                {topic.exercises.dropdown.text.split(/(\[Q\d\])/).map((part, i) => {
+                                    if (part.startsWith('[Q')) {
+                                        const qKey = part.replace(/[\[\]]/g, '');
+                                        return (
+                                            <select key={i} value={ddAnswers[qKey] || ""} onChange={(e) => setDdAnswers({...ddAnswers, [qKey]: e.target.value})}
+                                                className={`mx-2 p-1 border-2 rounded-lg font-bold outline-none transition-colors ${ddAnswers[qKey] === topic.exercises.dropdown.answers[qKey] ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-300 bg-gray-50'}`}>
+                                                <option value="" disabled>اختر...</option>
+                                                {topic.exercises.dropdown.options[qKey].map((opt, j) => (
+                                                    <option key={j} value={opt}>{opt}</option>
+                                                ))}
+                                            </select>
+                                        );
+                                    }
+                                    return <span key={i}>{part}</span>;
+                                })}
+                            </p>
+                        </div>
+
+                        {/* Matching Exercise */}
+                        <div className="p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">صل بين القائمة (أ) وما يناسبها في (ب):</h4>
+                            <div className="grid grid-cols-2 gap-8">
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (أ)</h5>
+                                    {topic.exercises.matching.map((m, i) => {
+                                        const isMatched = matches.some(match => match.left === m.left);
+                                        const isSelected = selectedLeft === m.left;
+                                        return (
+                                            <div key={i} 
+                                                 onClick={() => !isMatched && setSelectedLeft(m.left)}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : isSelected ? 'border-navy bg-blue-50 text-navy' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.left}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (ب)</h5>
+                                    {[...topic.exercises.matching].sort((a,b)=>a.right.localeCompare(b.right)).map((m, i) => {
+                                        const isMatched = matches.some(match => match.right === m.right);
+                                        return (
+                                            <div key={i}
+                                                 onClick={() => {
+                                                    if(!selectedLeft || isMatched) return;
+                                                    const correctMatch = topic.exercises.matching.find(x => x.left === selectedLeft);
+                                                    if(correctMatch && correctMatch.right === m.right) {
+                                                        setMatches([...matches, {left: selectedLeft, right: m.right}]);
+                                                        setSelectedLeft(null);
+                                                    } else {
+                                                        setSelectedLeft(null);
+                                                    }
+                                                 }}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.right}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Navigation Button */}
+                    <div className="fixed bottom-0 left-0 w-full bg-white p-4 shadow-[0_-5px_15px_rgba(0,0,0,0.1)] flex justify-center fade-in z-50 border-t-4 border-green-500">
+                        {canProceed ? (
+                            <button onClick={handleNext} className="bg-green-600 text-white px-12 py-3 rounded-full font-bold text-xl hover:bg-green-700 transition-all glow-effect flex items-center shadow-lg">
+                                {currentIndex < ALL_DATA.length - 1 ? 'الانتقال للوحدة التالية' : 'الانتقال للمراجعة الذكية'}
+                                <span className="mr-3 text-2xl font-normal">←</span>
+                            </button>
+                        ) : (
+                            <p className="text-gray-500 font-bold flex items-center"><span className="text-red-500 mr-2 text-xl">⚠️</span> يرجى الإجابة بشكل صحيح على الأسئلة أعلاه لتفعيل زر الانتقال.</p>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 3: Smart Review ---
+        const SmartReview = ({ onFinish }) => {
+            const [openAcc, setOpenAcc] = useState(null);
+
+            return (
+                <div className="fade-in space-y-10 pb-10">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-gold">
+                        <h2 className="text-3xl font-bold font-amiri text-navy mb-2">المراجعة الذكية المزدوجة</h2>
+                        <p className="text-gray-600 text-lg">اقلب البطاقات لحفظ المصطلحات، وافتح القوائم للفهم التحليلي الشامل للمقرر</p>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3">أولاً: بطاقات المفاهيم والأحكام (14 بطاقة)</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {FLASHCARDS.map((card, i) => (
+                            <div key={i} className="flip-card">
+                                <div className="flip-card-inner">
+                                    <div className="flip-card-front">{card.front}</div>
+                                    <div className="flip-card-back">{card.back}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3 mt-12">ثانياً: التحليل المقالي والفهم العميق (10 أسئلة)</h3>
+                    <div className="space-y-4">
+                        {ACCORDIONS.map((acc, i) => (
+                            <div key={i} className="glass-panel overflow-hidden border border-gray-200">
+                                <button onClick={() => setOpenAcc(openAcc === i ? null : i)} className="w-full text-right p-5 font-bold text-navy bg-white hover:bg-blue-50 flex justify-between items-center transition-colors">
+                                    <span className="text-lg flex items-center">
+                                        <span className={`ml-3 text-2xl ${ICON_COLORS[i % ICON_COLORS.length]}`}>❖</span>
+                                        {acc.q}
+                                    </span>
+                                    <span className={`text-2xl transition-transform duration-300 ${openAcc === i ? 'rotate-45 text-red-500' : 'text-gold'}`}>+</span>
+                                </button>
+                                <div className={`px-5 transition-all duration-300 ease-in-out ${openAcc === i ? 'max-h-96 py-5 border-t border-gray-100 bg-trait2' : 'max-h-0 py-0 bg-white'}`}>
+                                    <p className="leading-loose text-gray-800 text-lg">{acc.a}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="text-center mt-12 pt-8">
+                        <button onClick={onFinish} className="bg-navy text-white px-12 py-4 rounded-full font-bold text-xl hover:bg-opacity-90 transition-all glow-effect shadow-xl">
+                            بدء التقييم الشامل
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 4: Quiz ---
+        const Quiz = ({ onFinish }) => {
+            const [answers, setAnswers] = useState({});
+            const [submitted, setSubmitted] = useState(false);
+
+            const isComplete = Object.keys(answers).length === QUIZ_QUESTIONS.length;
+
+            const handleSubmit = () => {
+                let s = 0;
+                QUIZ_QUESTIONS.forEach((q, i) => {
+                    if (answers[i] === q.correct) s++;
+                });
+                setSubmitted(true);
+                setTimeout(() => onFinish(s), 2500);
+            };
+
+            return (
+                <div className="fade-in max-w-4xl mx-auto pb-20">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-navy">
+                        <h2 className="text-4xl font-bold font-amiri text-navy">التقييم الشامل</h2>
+                        <p className="text-gray-600 mt-3 text-lg font-bold">أجب عن جميع الأسئلة التالية ({QUIZ_QUESTIONS.length} سؤال)</p>
+                    </div>
+
+                    <div className="space-y-6">
+                        {QUIZ_QUESTIONS.map((q, i) => {
+                            const iconColorClass = ICON_COLORS[i % ICON_COLORS.length];
+                            return (
+                                <div key={i} className={`glass-panel p-6 transition-all ${submitted ? (answers[i] === q.correct ? 'border-2 border-green-500 bg-green-50' : 'border-2 border-red-500 bg-red-50') : 'hover:border-gold border-2 border-transparent'}`}>
+                                    <h3 className="font-bold text-xl mb-5 text-navy flex items-start">
+                                        <span className={`ml-3 text-2xl font-black ${iconColorClass}`}>{i+1}.</span> 
+                                        {q.q}
+                                    </h3>
+                                    <div className="space-y-3">
+                                        {q.options.map((opt, j) => (
+                                            <label key={j} className={`block p-4 rounded-lg border-2 cursor-pointer transition-all ${answers[i] === j ? 'bg-navy text-white border-navy shadow-md transform scale-[1.01]' : 'bg-white hover:bg-gray-50 border-gray-200'} ${submitted && j === q.correct ? 'bg-green-500 text-white border-green-500 shadow-md' : ''} ${submitted && answers[i] === j && j !== q.correct ? 'bg-red-500 text-white border-red-500' : ''}`}>
+                                                <input type="radio" name={`q${i}`} className="hidden" 
+                                                    checked={answers[i] === j} 
+                                                    onChange={() => !submitted && setAnswers({...answers, [i]: j})} />
+                                                <span className="text-lg font-medium">{opt}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <div className="mt-12 text-center sticky bottom-6 z-50">
+                        <button onClick={handleSubmit} disabled={!isComplete || submitted} 
+                            className={`px-12 py-4 rounded-full font-bold text-xl shadow-2xl transition-all ${isComplete && !submitted ? 'bg-gold text-navy hover:bg-yellow-500 glow-effect transform hover:-translate-y-1' : 'bg-gray-300 text-gray-500 cursor-not-allowed border-2 border-gray-400'}`}>
+                            {submitted ? 'جاري حساب النتيجة وإرسالها...' : 'إنهاء وإرسال النتيجة'}
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 5: Result & Silent Submission ---
+        const ResultScreen = ({ userInfo, score }) => {
+            const [status, setStatus] = useState('جاري إرسال النتيجة صمتاً...');
+
+            useEffect(() => {
+                const duration = Math.round((new Date() - userInfo.startTime) / 60000); 
+                const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAtWpsGVdYNm6qt88dhkrd_Kj2kiyWBQiejpNjLvBfsOkPzw/formResponse";
+                
+                const formData = new FormData();
+                formData.append('entry.631676590', "المحاضرة العاشرة");
+                formData.append('entry.716230744', userInfo.name);
+                formData.append('entry.258825401', userInfo.section);
+                formData.append('entry.1926766466', score);
+                formData.append('entry.585619026', duration);
+
+                fetch(formUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                })
+                .then(() => {
+                    setStatus('تم حفظ النتيجة وتوثيق إنجازك بنجاح ✔️');
+                })
+                .catch(() => {
+                    setStatus('تم الانتهاء.');
+                });
+            }, []);
+
+            return (
+                <div className="max-w-lg mx-auto glass-panel p-12 text-center fade-in mt-10 border-t-8 border-navy shadow-2xl">
+                    <h2 className="text-4xl font-bold font-amiri text-navy mb-8">نتيجة التقييم الشامل</h2>
+                    <div className="text-6xl font-black text-gold mb-8 border-4 border-navy w-48 h-48 mx-auto flex items-center justify-center rounded-full bg-white shadow-[0_0_30px_rgba(226,185,111,0.5)]">
+                        {score} / 20
+                    </div>
+                    <div className="space-y-4 mb-10 text-xl font-bold bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <p className="text-navy flex justify-between"><span>الاسم:</span> <span>{userInfo.name}</span></p>
+                        <p className="text-navy flex justify-between border-t border-gray-200 pt-3"><span>الشعبة:</span> <span>{userInfo.section}</span></p>
+                    </div>
+                    <p className="text-green-600 font-bold mb-8 text-lg">{status}</p>
+                    <button onClick={() => window.location.reload()} className="px-10 py-4 bg-navy text-white rounded-full font-bold hover:bg-opacity-90 transition-all glow-effect shadow-lg w-full">
+                        العودة للرئيسية
+                    </button>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
