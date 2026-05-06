@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحاديث الأحكام - المحاضرة الحادية عشرة</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#16213e',
+                        gold: '#e2b96f',
+                        cream: '#faf8f3',
+                        trait1: '#f0fdf4',
+                        trait2: '#fefce8',
+                        trait3: '#eff6ff',
+                        trait4: '#fff1f2',
+                        trait5: '#f5f3ff',
+                        hlred: '#fee2e2',
+                        hlblue: '#dbeafe',
+                        hlgold: '#fef08a',
+                        primaryBlue: '#2563eb',
+                        primaryRed: '#dc2626',
+                        primaryGreen: '#16a34a',
+                        primaryGold: '#ca8a04'
+                    },
+                    fontFamily: {
+                        amiri: ['Amiri', 'serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #faf8f3 0%, #e2e8f0 100%);
+            background-attachment: fixed;
+            font-family: 'Tajawal', sans-serif;
+            color: #16213e;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Amiri', serif; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px -10px rgba(22, 33, 62, 0.1);
+        }
+        
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(226, 185, 111, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .verse {
+            background: linear-gradient(to left, rgba(226, 185, 111, 0.15), transparent);
+            border-right: 4px solid #e2b96f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            font-family: 'Amiri', serif;
+            font-size: 1.25rem;
+            line-height: 2.2;
+            color: #16213e;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        /* Content Cells */
+        .content-cell {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            border-right-width: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        .content-cell:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.06); transform: translateX(-3px); }
+        .cell-blue { background-color: #eff6ff; border-color: #3b82f6; }
+        .cell-yellow { background-color: #fefce8; border-color: #eab308; }
+        .cell-green { background-color: #f0fdf4; border-color: #22c55e; }
+        .cell-red { background-color: #fef2f2; border-color: #ef4444; }
+        .cell-purple { background-color: #faf5ff; border-color: #a855f7; }
+
+        /* Highlights */
+        .hl-red { background-color: #fee2e2; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #991b1b; }
+        .hl-blue { background-color: #dbeafe; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #1e40af; }
+        .hl-gold { background-color: #fef08a; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #854d0e; }
+
+        /* Flip Card CSS */
+        .flip-card { perspective: 1000px; cursor: pointer; height: 180px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 1rem;
+            display: flex; align-items: center; justify-content: center; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); text-align: center;
+        }
+        .flip-card-front { background: linear-gradient(135deg, #16213e, #1e3a8a); color: #e2b96f; border: 2px solid #e2b96f; font-family: 'Amiri', serif; font-size: 1.35rem; font-weight: bold;}
+        .flip-card-back { background: linear-gradient(135deg, #e2b96f, #d97706); color: #fff; transform: rotateY(180deg); font-size: 1.1rem; font-weight: 500;}
+
+        /* CSS Grid Mindmap */
+        .mindmap-grid { display: grid; gap: 1.5rem; padding: 2rem; background: #fff; border-radius: 1rem; border: 2px dashed #e2b96f; }
+        .mm-node { background: #16213e; color: #e2b96f; padding: 1.25rem; border-radius: 0.75rem; text-align: center; font-size: 1.25rem; font-weight: bold; font-family: 'Amiri', serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .mm-sub { background: #faf8f3; color: #16213e; border: 1px solid #e2b96f; border-right: 4px solid #e2b96f; padding: 1rem; border-radius: 0.5rem; text-align: center; font-weight: bold; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #e2b96f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #16213e; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Data Definitions (Full Content, Segmented with Colored Cells) ---
+        
+const ALL_DATA = [
+            {
+                id: 1,
+                title: "الوحدة الأولى: حديث أبي هريرة - فضل العمرة والحج",
+                content: `
+                    <div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+                        <h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-800">
+                            <li>أن يبين فضل العمرة وأنها كفارة لما بينهما</li>
+                            <li>أن يستدل على وجوب العمرة من السنة النبوية</li>
+                            <li>أن يوضح معنى الحج المبرور وجزاءه</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6 p-4 bg-trait2 rounded-xl border-r-4 border-gold">
+                        <h3 class="text-xl font-bold text-primaryGold mb-2">📖 تمهيد الوحدة</h3>
+                        <p class="leading-loose text-gray-800">الحج والعمرة من أفضل العبادات التي يتقرب بها المسلم إلى ربه. وفي هذه الوحدة نتعرف على فضل العمرة والحج من خلال حديث أبي هريرة رضي الله عنه، وبيان أن العمرة إلى العمرة كفارة لما بينهما، وأن الحج المبرور جزاؤه الجنة.</p>
+                    </div>
+
+                    <div class="verse">
+                        ٧٢٦ - عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ: «العُمْرَةُ إِلَى العُمْرَةِ كَفَّارَةٌ لِمَا بَيْنَهُمَا، وَالْحَجُّ المُبْرُورُ لَيْسَ لَهُ جَزَاءً إِلَّا الْجَنَّةَ». مُتَّفَقٌ عَلَيْهِ.
+                    </div>
+
+                    <div class="content-cell cell-blue mt-4">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">🪪 بطاقة الراوي</h4>
+                        <ul class="space-y-2 text-gray-800">
+                            <li><span class="hl-blue">الراوي:</span> أبو هريرة الدوسي رضي الله عنه</li>
+                            <li><span class="hl-blue">منزلته:</span> أكثر الصحابة رواية للحديث، أسلم سنة ٧ﻫ</li>
+                            <li><span class="hl-blue">صلته بالحديث:</span> راوي الحديث عن النبي ﷺ في فضل العمرة والحج</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800">
+                            <li><span class="hl-blue">العمرة:</span> الزيارة، وشرعاً: التعبد لله بالطواف بالبيت والسعي بين الصفا والمروة</li>
+                            <li><span class="hl-blue">كفارة:</span> ساترة وماحية للذنوب</li>
+                            <li><span class="hl-blue">الحج المبرور:</span> الذي لا يخالطه إثم، وقيل: المقبول، وقيل: الذي لا رياء فيه</li>
+                            <li><span class="hl-blue">ليس له جزاء إلا الجنة:</span> لا يقتصر ثوابه على تكفير الذنوب بل يوجب الجنة</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+                        <p class="leading-loose text-gray-800">يبين النبي ﷺ في هذا الحديث فضل العمرة والحج: فالعمرة إذا تكررت كانت مكفرة للذنوب التي تقع بين العمرتين، وهذا من سعة رحمة الله بعباده. أما الحج إذا وقع مبروراً خالصاً لله موافقاً للسنة، فليس له ثواب دون الجنة، وهذا من أعظم البشارات للحاج.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: فضل تكرار العمرة</h4>
+                        <p class="leading-loose text-gray-800">قوله ﷺ: «العمرة إلى العمرة كفارة لما بينهما» يدل على فضل عظيم لتكرار العمرة. <span class="hl-blue">وظاهر الحديث أن التكفير يشمل الصغائر والكبائر</span> لإطلاق النبي ﷺ، لكن الجمهور على أنها تكفر الصغائر فقط، أما الكبائر فلا بد لها من توبة.</p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: وجوب العمرة</h4>
+                        <p class="leading-loose text-gray-800">استدل بهذا الحديث وبحديث عائشة: «عَلَيْهِنَّ جِهَادٌ لَا قِتَالَ فِيهِ: الحَجُّ وَالعُمْرَةُ» على وجوب العمرة. <span class="hl-green">والراجح أن العمرة واجبة مرة في العمر</span> كالحج، خلافاً لمن قال إنها سنة. و(على) في حديث عائشة ظاهرة في الوجوب.</p>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">ثالثاً: معنى الحج المبرور وفضله</h4>
+                        <p class="leading-loose text-gray-800"><span class="hl-gold">الحج المبرور:</span> هو الذي لا يخالطه إثم، بأن يكون خالصاً لله موافقاً للسنة، من مال حلال. وقوله: «ليس له جزاء إلا الجنة» أي أن ثوابه لا يقتصر على تكفير الذنوب فقط، بل الجزاء الأعظم هو دخول الجنة. وهذا من أعظم البشارات.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">أولاً: الأحكام الفقهية</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li>العمرة إلى العمرة تكفر الذنوب التي بينهما</li>
+                            <li>العمرة واجبة مرة في العمر على الراجح</li>
+                            <li>الحج المبرور جزاؤه الجنة</li>
+                        </ul>
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2 mt-4">ثانياً: وجه الدلالة</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-800">
+                            <li>قوله: «العمرة إلى العمرة كفارة»: دليل فضل العمرة والحث على تكرارها</li>
+                            <li>قوله: «ليس له جزاء إلا الجنة»: دليل عظم أجر الحج المبرور</li>
+                        </ul>
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2 mt-4">ثالثاً: الفوائد الإيمانية</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-800">
+                            <li>سعة رحمة الله بعباده حيث جعل العمرة مكفرة للذنوب</li>
+                            <li>الحث على الإخلاص في العبادة ليكون العمل مبروراً</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🏋️ تدريب على الاستنباط</h3>
+                    <div class="content-cell cell-blue">
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-bold text-navy">التدريب:</p>
+                                <p class="text-gray-800">استنبط من حديث عائشة رضي الله عنها: «عَلَيْهِنَّ جِهَادٌ لَا قِتَالَ فِيهِ: الحَجُّ وَالعُمْرَةُ» حكم العمرة.</p>
+                                <p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+                                <p class="text-gray-800">لفظة (على) ظاهرة في الوجوب، فالعمرة واجبة على النساء كما هي واجبة على الرجال، وهو جهاد لا قتال فيه.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🗺️ خريطة الحديث والأحكام</h3>
+                    <div class="mindmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+                        <div class="mm-node md:col-span-full mb-2">حديث أبي هريرة - فضل العمرة والحج</div>
+                        <div class="mm-sub">العمرة إلى العمرة كفارة لما بينهما</div>
+                        <div class="mm-sub">العمرة واجبة مرة في العمر</div>
+                        <div class="mm-sub">الحج المبرور جزاؤه الجنة</div>
+                        <div class="mm-sub">التكفير يشمل الصغائر (عند الجمهور)</div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">❓ أسئلة فهم الحديث</h3>
+                    <div class="content-cell cell-yellow">
+                        <ol class="list-decimal list-inside space-y-3 text-gray-800">
+                            <li>ما معنى (الحج المبرور)؟ وما جزاؤه؟</li>
+                            <li>هل العمرة واجبة أم سنة؟ مع ذكر الدليل.</li>
+                            <li>هل تكفر العمرة الكبائر؟ وضح المسألة.</li>
+                        </ol>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🔗 صل الحديث بالحكم</h3>
+                    <div class="content-cell cell-purple">
+                        <ul class="space-y-2 text-gray-800">
+                            <li>العمرة إلى العمرة = كفارة لما بينهما من الذنوب</li>
+                            <li>الحج المبرور = جزاؤه الجنة</li>
+                            <li>حديث عائشة (عليهن جهاد) = وجوب العمرة</li>
+                        </ul>
+                    </div>
+                `,
+                mindmap: {
+                    main: "فضل العمرة والحج",
+                    nodes: ["العمرة كفارة لما بينهما", "العمرة واجبة مرة", "الحج المبرور جزاؤه الجنة", "التكفير للصغائر عند الجمهور"]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "العمرة إلى العمرة [Q1] لما بينهما. والحج [Q2] ليس له جزاء إلا [Q3].",
+                        options: {
+                            Q1: ["كفارة", "زيادة", "نقصان"],
+                            Q2: ["المقبول", "المبرور", "الميسور"],
+                            Q3: ["الجنة", "المغفرة", "العتق"]
+                        },
+                        answers: { Q1: "كفارة", Q2: "المبرور", Q3: "الجنة" }
+                    },
+                    matching: [
+                        { left: "العمرة إلى العمرة", right: "كفارة لما بينهما" },
+                        { left: "الحج المبرور", right: "جزاؤه الجنة" },
+                        { left: "حديث عائشة", right: "دليل وجوب العمرة" }
+                    ]
+                }
+            },
+            {
+                id: 2,
+                title: "الوحدة الثانية: حديث ابن عباس - المحرم للمرأة في السفر",
+                content: `
+                    <div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+                        <h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-800">
+                            <li>أن يبين حكم سفر المرأة بدون محرم</li>
+                            <li>أن يوضح حكم الخلوة بالمرأة الأجنبية</li>
+                            <li>أن يستخرج الأحكام المتعلقة بصيانة المرأة في الإسلام</li>
+                        </ul>
+                    </div>
+
+                    <div class="verse">
+                        ٧٣٥ - عَنِ ابْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَخْطُبُ يَقُولُ: «لَا يَخْلُوَنَّ رَجُلٌ بِامْرَأَةٍ إِلَّا وَمَعَهَا ذُو مَحْرَمٍ، وَلَا تُسَافِرُ امْرَأَةٌ إِلَّا مَعَ ذِي مَحْرَمٍ». فَقَامَ رَجُلٌ فَقَالَ: يَا رَسُولَ اللَّهِ، إِنَّ امْرَأَتِي خَرَجَتْ حَاجَّةً، وَإِنِّي اكْتُتِبْتُ فِي غَزْوَةِ كَذَا وَكَذَا. قَالَ: «انْطَلِقْ فَحُجَّ مَعَ امْرَأَتِكَ». مُتَّفَقٌ عَلَيْهِ.
+                    </div>
+
+                    <div class="content-cell cell-blue mt-4">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">🪪 بطاقة الراوي</h4>
+                        <ul class="space-y-2 text-gray-800">
+                            <li><span class="hl-blue">الراوي:</span> عبد الله بن عباس رضي الله عنهما</li>
+                            <li><span class="hl-blue">منزلته:</span> حبر الأمة وترجمان القرآن</li>
+                            <li><span class="hl-blue">صلته بالحديث:</span> سمع النبي ﷺ يخطب بهذا الحديث</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800">
+                            <li><span class="hl-blue">لا يخلون:</span> لا ينفردن، والخلوة: الانفراد</li>
+                            <li><span class="hl-blue">ذو محرم:</span> من يحرم عليه نكاحها على التأبيد</li>
+                            <li><span class="hl-blue">اكتتبت:</span> كتب اسمي في جيش الغزو</li>
+                            <li><span class="hl-blue">انطلق فحج:</span> اترك الغزو واذهب للحج مع امرأتك</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+                        <p class="leading-loose text-gray-800">ينهى النبي ﷺ عن أمرين: الخلوة بالمرأة الأجنبية بدون محرم، وسفر المرأة بدون محرم. ثم يعرض رجل حالته: امرأته خرجت للحج وهو مسجل في غزوة، فيأمره النبي ﷺ بترك الغزو والذهاب للحج مع امرأته. وهذا يدل على أهمية وجود المحرم مع المرأة.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: تحريم الخلوة بالمرأة الأجنبية</h4>
+                        <p class="leading-loose text-gray-800">الخلوة بالمرأة الأجنبية محرمة، وهي من أبواب الفتنة والشر. والمراد بالخلوة: انفراد الرجل بالمرأة في مكان لا يراهما فيه أحد. <span class="hl-blue">واستثنى النبي ﷺ وجود ذي محرم معها.</span></p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: حكم سفر المرأة بدون محرم</h4>
+                        <p class="leading-loose text-gray-800">نهى النبي ﷺ أن تسافر المرأة إلا مع ذي محرم. <span class="hl-green">والمحرم هو من يحرم عليه نكاحها على التأبيد</span> بنسب أو رضاع أو مصاهرة. والحكمة: صيانة المرأة وحفظها، لأن السفر مظنة الضعف والحاجة إلى من يحميها.</p>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">ثالثاً: تقديم الحج مع المرأة على الغزو</h4>
+                        <p class="leading-loose text-gray-800">أمر النبي ﷺ الرجل أن ينطلق ليحج مع امرأته مع أنه اكتتب في الغزو. <span class="hl-gold">وهذا يدل على أن وجود المحرم مع المرأة في سفر الحج آكد من خروجه للغزو</span> -مع فضل الجهاد- لأن الجهاد فرض كفاية، وصيانة المرأة واجب متعين عليه.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">الأحكام الفقهية</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li>تحرم الخلوة بالمرأة الأجنبية بدون محرم</li>
+                            <li>لا يجوز للمرأة أن تسافر بدون محرم</li>
+                            <li>وجوب المحرم في سفر الحج للمرأة</li>
+                            <li>صيانة المرأة مقدمة على فرض الكفاية (الجهاد)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-red mt-4">
+                        <h4 class="text-xl font-bold text-primaryRed mb-2">⚠️ تنبيهات</h4>
+                        <ul class="space-y-2 text-gray-800">
+                            <li><span class="hl-red">تنبيه:</span> ذهب بعض العلماء إلى جواز سفر المرأة دون محرم للحج الواجب مع الرفقة المأمونة، لكن الجمهور على اشتراط المحرم مطلقاً.</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🏋️ تدريب على الاستنباط</h3>
+                    <div class="content-cell cell-blue">
+                        <p class="font-bold text-navy">التدريب:</p>
+                        <p class="text-gray-800">استنبط من أمر النبي ﷺ للرجل بترك الغزو والذهاب للحج مع امرأته حكماً فقهياً.</p>
+                        <p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+                        <p class="text-gray-800">صيانة المرأة وحفظها واجب متعين على وليها، وهو مقدم على فروض الكفايات كالجهاد. فإذا تعارض واجب عيني وواجب كفائي قدم العيني.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🗺️ خريطة الحديث والأحكام</h3>
+                    <div class="mindmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+                        <div class="mm-node md:col-span-full mb-2">حديث ابن عباس - المحرم للمرأة</div>
+                        <div class="mm-sub">تحريم الخلوة بالأجنبية</div>
+                        <div class="mm-sub">لا تسافر المرأة إلا بمحرم</div>
+                        <div class="mm-sub">المحرم: من تحرم عليه على التأبيد</div>
+                        <div class="mm-sub">صيانة المرأة مقدمة على الجهاد</div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">❓ أسئلة فهم الحديث</h3>
+                    <div class="content-cell cell-yellow">
+                        <ol class="list-decimal list-inside space-y-3 text-gray-800">
+                            <li>ما الحكمة من تحريم سفر المرأة بدون محرم؟</li>
+                            <li>لماذا أمر النبي ﷺ الرجل بترك الغزو والذهاب للحج مع امرأته؟</li>
+                        </ol>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🔗 صل الحديث بالحكم</h3>
+                    <div class="content-cell cell-purple">
+                        <ul class="space-y-2 text-gray-800">
+                            <li>لا يخلون رجل بامرأة = تحريم الخلوة بالأجنبية</li>
+                            <li>لا تسافر امرأة إلا مع ذي محرم = وجوب المحرم للمرأة</li>
+                            <li>انطلق فحج مع امرأتك = صيانة المرأة واجب عيني</li>
+                        </ul>
+                    </div>
+                `,
+                mindmap: {
+                    main: "المحرم للمرأة في السفر",
+                    nodes: ["تحريم الخلوة", "اشتراط المحرم للسفر", "المحرم: من تحرم عليه على التأبيد", "صيانة المرأة مقدمة على الجهاد"]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "لا تسافر المرأة إلا مع [Q1]. وصيانة المرأة [Q2] على الجهاد.",
+                        options: {
+                            Q1: ["أخيها", "ذي محرم", "صديق"],
+                            Q2: ["مقدمة", "مؤخرة", "مساوية"]
+                        },
+                        answers: { Q1: "ذي محرم", Q2: "مقدمة" }
+                    },
+                    matching: [
+                        { left: "الخلوة بالأجنبية", right: "محرمة" },
+                        { left: "سفر المرأة بلا محرم", right: "لا يجوز" },
+                        { left: "الحج مع المرأة", right: "مقدم على الغزو" }
+                    ]
+                }
+            },
+            {
+                id: 3,
+                title: "الوحدة الثالثة: حديث ابن عباس - مواقيت الإحرام",
+                content: `
+                    <div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+                        <h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-800">
+                            <li>أن يعدد مواقيت الإحرام المكانية لأهل الآفاق</li>
+                            <li>أن يبين حكم من كان دون المواقيت</li>
+                            <li>أن يطبق أحكام الإحرام من الميقات</li>
+                        </ul>
+                    </div>
+
+                    <div class="verse">
+                        ٧٣٩ - عَنِ ابْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا أَنَّ النَّبِيَّ ﷺ وَقَّتَ لِأَهْلِ المَدِينَةِ: ذَا الْحُلَيْفَةِ، وَلِأَهْلِ الشَّامِ: الْجُحْفَةَ، وَلِأَهْلِ نَجْدٍ: قَرْنَ المَنَازِلِ، وَلِأَهْلِ اليَمَنِ: يَلَمْلَمَ، هُنَّ لَهُنَّ وَلِمَنْ أَتَى عَلَيْهِنَّ مِنْ غَيْرِهِنَّ مِمَّنْ أَرَادَ الحَجَّ وَالعُمْرَةَ، وَمَنْ كَانَ دُونَ ذَلِكَ فَمِنْ حَيْثُ أَنْشَأَ، حَتَّى أَهْلُ مَكَّةَ مِنْ مَكَّةَ. مُتَّفَقٌ عَلَيْهِ.
+                    </div>
+
+                    <div class="content-cell cell-blue mt-4">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800">
+                            <li><span class="hl-blue">وقَّت:</span> حدد وجعل ميقاتاً</li>
+                            <li><span class="hl-blue">ذا الحليفة:</span> ميقات أهل المدينة (أبعد المواقيت)</li>
+                            <li><span class="hl-blue">الجحفة:</span> ميقات أهل الشام</li>
+                            <li><span class="hl-blue">قرن المنازل:</span> ميقات أهل نجد</li>
+                            <li><span class="hl-blue">يلملم:</span> ميقات أهل اليمن</li>
+                            <li><span class="hl-blue">دون ذلك:</span> أقرب إلى مكة من هذه المواقيت</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+                        <p class="leading-loose text-gray-800">حدد النبي ﷺ مواقيت مكانية للإحرام بالحج والعمرة، فلا يجوز لمن أراد الحج أو العمرة أن يتجاوزها بدون إحرام. وهذه المواقيت لأهلها ولمن مر عليها من غير أهلها. ومن كان داخل هذه المواقيت (أقرب إلى مكة) فإحرامه من حيث أنشأ.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: المواقيت المكانية الخمسة</h4>
+                        <p class="leading-loose text-gray-800"><span class="hl-blue">المواقيت خمسة:</span> ذو الحليفة (لأهل المدينة)، الجحفة (للشام)، قرن المنازل (لنجد)، يلملم (لليمـن)، وذات عرق (لأهل العراق - ثبت في حديث آخر). وهذه المواقيت لأهلها ولكل من مر عليها من غير أهلها ممن يريد الحج أو العمرة.</p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: حكم من كان دون المواقيت</h4>
+                        <p class="leading-loose text-gray-800">من كان منزله دون هذه المواقيت (أي أقرب إلى مكة) فإنه يحرم من حيث أنشأ سفره. <span class="hl-green">وأهل مكة يحرمون من مكة</span> نفسها للحج، أما للعمرة فيخرجون إلى الحل (التنعيم مثلاً) ويحرمون منه.</p>
+                    </div>
+
+                    <div class="content-cell cell-red">
+                        <h4 class="text-xl font-bold text-primaryRed mb-2">ثالثاً: حكم تجاوز الميقات بدون إحرام</h4>
+                        <p class="leading-loose text-gray-800"><span class="hl-red">لا يجوز</span> لمن أراد الحج أو العمرة أن يتجاوز الميقات بدون إحرام. فإن تجاوزه فعليه أن يرجع إليه ويحرم منه، فإن لم يرجع فعليه دم عند الجمهور.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">الأحكام الفقهية</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li>المواقيت المكانية خمسة حددها النبي ﷺ</li>
+                            <li>لا يجوز تجاوز الميقات بدون إحرام لمن أراد النسك</li>
+                            <li>من كان دون الميقات فإحرامه من حيث أنشأ</li>
+                            <li>أهل مكة يحرمون من مكة</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🏋️ تدريب على الاستنباط</h3>
+                    <div class="content-cell cell-blue">
+                        <p class="font-bold text-navy">التدريب:</p>
+                        <p class="text-gray-800">رجل من أهل الرياض (نجد) سافر إلى جدة للعمل ثم أراد العمرة. من أين يحرم؟</p>
+                        <p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+                        <p class="text-gray-800">بما أنه دون الميقات (جدة داخل المواقيت)، فإنه يحرم من حيث أنشأ - أي من جدة - لقوله ﷺ: «ومن كان دون ذلك فمن حيث أنشأ».</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🗺️ خريطة الحديث والأحكام</h3>
+                    <div class="mindmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+                        <div class="mm-node md:col-span-full mb-2">مواقيت الإحرام</div>
+                        <div class="mm-sub">ذو الحليفة: لأهل المدينة</div>
+                        <div class="mm-sub">الجحفة: لأهل الشام</div>
+                        <div class="mm-sub">قرن المنازل: لأهل نجد</div>
+                        <div class="mm-sub">يلملم: لأهل اليمن</div>
+                        <div class="mm-sub">من كان دونها: يحرم من حيث أنشأ</div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">❓ أسئلة فهم الحديث</h3>
+                    <div class="content-cell cell-yellow">
+                        <ol class="list-decimal list-inside space-y-3 text-gray-800">
+                            <li>ما حكم تجاوز الميقات بدون إحرام؟</li>
+                            <li>رجل من المدينة سافر للرياض ثم أراد الحج، من أين يحرم؟</li>
+                        </ol>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🔗 صل الحديث بالحكم</h3>
+                    <div class="content-cell cell-purple">
+                        <ul class="space-y-2 text-gray-800">
+                            <li>ذو الحليفة = ميقات أهل المدينة</li>
+                            <li>من كان دون المواقيت = يحرم من حيث أنشأ</li>
+                            <li>أهل مكة = من مكة</li>
+                        </ul>
+                    </div>
+                `,
+                mindmap: {
+                    main: "مواقيت الإحرام",
+                    nodes: ["ذو الحليفة - المدينة", "الجحفة - الشام", "قرن المنازل - نجد", "يلملم - اليمن", "من كان دونها: من حيث أنشأ"]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "ميقات أهل المدينة [Q1]، وميقات أهل اليمن [Q2]، وأهل مكة يحرمون [Q3].",
+                        options: {
+                            Q1: ["الجحفة", "ذو الحليفة", "قرن المنازل"],
+                            Q2: ["ذو الحليفة", "قرن المنازل", "يلملم"],
+                            Q3: ["من جدة", "من مكة", "من عرفة"]
+                        },
+                        answers: { Q1: "ذو الحليفة", Q2: "يلملم", Q3: "من مكة" }
+                    },
+                    matching: [
+                        { left: "ذو الحليفة", right: "ميقات أهل المدينة" },
+                        { left: "الجحفة", right: "ميقات أهل الشام" },
+                        { left: "يلملم", right: "ميقات أهل اليمن" },
+                        { left: "من كان دون المواقيت", right: "يحرم من حيث أنشأ" }
+                    ]
+                }
+            }
+        ];
+
+const FLASHCARDS = [
+            { front: "العمرة إلى العمرة", back: "كفارة لما بينهما من الذنوب" },
+            { front: "الحج المبرور", back: "ليس له جزاء إلا الجنة" },
+            { front: "حكم العمرة", back: "واجبة مرة في العمر على الراجح" },
+            { front: "حكم الخلوة بالمرأة الأجنبية", back: "محرمة إلا مع ذي محرم" },
+            { front: "حكم سفر المرأة بدون محرم", back: "لا يجوز" },
+            { front: "المحرم للمرأة", back: "من يحرم عليه نكاحها على التأبيد" },
+            { front: "ميقات أهل المدينة", back: "ذو الحليفة" },
+            { front: "ميقات أهل الشام", back: "الجحفة" },
+            { front: "ميقات أهل نجد", back: "قرن المنازل" },
+            { front: "ميقات أهل اليمن", back: "يلملم" },
+            { front: "من كان دون المواقيت", back: "يحرم من حيث أنشأ" },
+            { front: "أهل مكة", back: "يحرمون من مكة" },
+            { front: "تقديم الحج مع المرأة على الغزو", back: "دليل أن صيانة المرأة واجب عيني مقدم على فرض الكفاية" },
+            { front: "تجاوز الميقات بدون إحرام", back: "لا يجوز، ومن فعله فعليه دم إن لم يرجع" }
+        ];
+
+const ACCORDIONS = [
+            { q: "ما معنى (الحج المبرور)؟ وما جزاؤه؟", a: "الحج المبرور: الذي لا يخالطه إثم، بأن يكون خالصاً لله موافقاً للسنة من مال حلال. وجزاؤه الجنة كما قال ﷺ: «ليس له جزاء إلا الجنة»." },
+            { q: "هل العمرة واجبة أم سنة؟", a: "الراجح أنها واجبة مرة في العمر كالحج. والدليل حديث عائشة: «عَلَيْهِنَّ جِهَادٌ لَا قِتَالَ فِيهِ: الحَجُّ وَالعُمْرَةُ» و(على) ظاهرة في الوجوب." },
+            { q: "لماذا أمر النبي ﷺ الرجل بترك الغزو والذهاب للحج مع امرأته؟", a: "لأن صيانة المرأة وحفظها واجب متعين على زوجها، والجهاد فرض كفاية. وعند التعارض يقدم الواجب العيني على الكفائي." },
+            { q: "ما هي المواقيت المكانية للإحرام؟", a: "خمسة: ذو الحليفة لأهل المدينة، الجحفة لأهل الشام، قرن المنازل لأهل نجد، يلملم لأهل اليمن، وذات عرق لأهل العراق." },
+            { q: "رجل سافر من الرياض إلى جدة للعمل ثم أراد العمرة، من أين يحرم؟", a: "من جدة، لأنه دون المواقيت (جدة أقرب إلى مكة)، فيحرم من حيث أنشأ لقوله ﷺ: «ومن كان دون ذلك فمن حيث أنشأ»." },
+            { q: "ما حكم من تجاوز الميقات بدون إحرام وهو يريد الحج أو العمرة؟", a: "لا يجوز، وعليه أن يرجع إلى الميقات ويحرم منه. فإن لم يفعل وأحرم من مكان آخر فعليه دم (ذبيحة) عند جمهور العلماء." },
+            { q: "ما حكم الخلوة بالمرأة الأجنبية؟", a: "محرمة، وهي من أبواب الفتنة والشر. وقد نهى النبي ﷺ عنها إلا مع وجود ذي محرم." },
+            { q: "هل يجوز للمرأة أن تسافر للحج بدون محرم؟", a: "الجمهور على أنه لا يجوز لها السفر بدون محرم ولو للحج الواجب. وذهب بعض العلماء إلى جوازه مع الرفقة المأمونة للحج الواجب فقط." },
+            { q: "هل العمرة تكفر الكبائر؟", a: "ظاهر الحديث: «العمرة إلى العمرة كفارة لما بينهما» يشمل الجميع. لكن الجمهور على أنها تكفر الصغائر فقط، أما الكبائر فلا بد لها من توبة." },
+            { q: "ما الفرق بين الحج المبرور والحج المقبول؟", a: "الحج المبرور: الذي لا يخالطه إثم. وقيل: المقبول الذي قبلت توبته. وعلامة الحج المبرور أن يكون صاحبه بعد الحج خيراً مما كان قبله." }
+        ];
+
+const QUIZ_QUESTIONS = [
+            { q: "العمرة إلى العمرة:", options: ["تزيد في العمر", "كفارة لما بينهما", "توجب صدقة", "تسقط الحج"], correct: 1 },
+            { q: "الحج المبرور جزاؤه:", options: ["المغفرة", "العتق من النار", "الجنة", "تكفير الذنوب"], correct: 2 },
+            { q: "حكم العمرة على الراجح:", options: ["سنة", "واجبة مرة", "مباحة", "فرض كفاية"], correct: 1 },
+            { q: "حكم الخلوة بالمرأة الأجنبية:", options: ["مباحة", "محرمة", "مكروهة", "جائزة للضرورة"], correct: 1 },
+            { q: "تسافر المرأة:", options: ["وحدها", "مع صديقاتها", "مع ذي محرم", "مع أي رجل"], correct: 2 },
+            { q: "المحرم للمرأة هو:", options: ["زوجها", "من تحرم عليه على التأبيد", "أخوها فقط", "أي رجل"], correct: 1 },
+            { q: "ميقات أهل المدينة:", options: ["الجحفة", "قرن المنازل", "ذو الحليفة", "يلملم"], correct: 2 },
+            { q: "ميقات أهل اليمن:", options: ["ذو الحليفة", "يلملم", "الجحفة", "قرن المنازل"], correct: 1 },
+            { q: "ميقات أهل الشام:", options: ["يلملم", "ذو الحليفة", "قرن المنازل", "الجحفة"], correct: 3 },
+            { q: "من كان دون المواقيت:", options: ["يرجع لأقرب ميقات", "يحرم من حيث أنشأ", "يحرم من مكة", "لا يحرم"], correct: 1 },
+            { q: "أهل مكة يحرمون:", options: ["من جدة", "من التنعيم", "من مكة", "من عرفة"], correct: 2 },
+            { q: "تجاوز الميقات بدون إحرام:", options: ["جائز", "لا يجوز", "مكروه", "مستحب"], correct: 1 },
+            { q: "أمر النبي الرجل بترك الغزو والحج مع امرأته دليل على:", options: ["أن الحج أفضل من الجهاد", "أن صيانة المرأة واجب عيني", "أن الجهاد ليس بواجب", "أن الحج يغني عن الجهاد"], correct: 1 },
+            { q: "عدد المواقيت المكانية:", options: ["ثلاثة", "أربعة", "خمسة", "ستة"], correct: 2 },
+            { q: "ميقات أهل نجد:", options: ["الجحفة", "يلملم", "ذو الحليفة", "قرن المنازل"], correct: 3 },
+            { q: "الحج المبرور هو:", options: ["الحج المتكرر", "الذي لا يخالطه إثم", "الحج الذي يعقبه عمرة", "الحج بالطائرة"], correct: 1 },
+            { q: "من تجاوز الميقات بدون إحرام:", options: ["لا شيء عليه", "عليه دم إن لم يرجع", "يبطل حجه", "يكفر"], correct: 1 },
+            { q: "الخلوة تكون:", options: ["في المسجد فقط", "في مكان لا يراهما فيه أحد", "في السوق", "في الطريق العام"], correct: 1 },
+            { q: "دليل وجوب العمرة:", options: ["حديث: «العمرة إلى العمرة كفارة»", "حديث: «عليهن جهاد لا قتال فيه»", "حديث: «الحج المبرور»", "حديث: «بني الإسلام على خمس»"], correct: 1 },
+            { q: "المحرم يحرم عليه نكاح المرأة:", options: ["مؤقتاً", "على التأبيد", "حتى تسافر", "في الحج فقط"], correct: 1 }
+        ];
+
+const ICON_COLORS = [
+            'text-primaryBlue',
+            'text-primaryRed',
+            'text-primaryGreen',
+            'text-primaryGold',
+            'text-purple-600'
+        ];
+
+        // --- Main App Component ---
+        const App = () => {
+            const [screen, setScreen] = useState(0); 
+            const [userInfo, setUserInfo] = useState({ name: '', section: '', startTime: null });
+            const [score, setScore] = useState(0);
+
+            const handleLogin = (name, section) => {
+                setUserInfo({ name, section, startTime: new Date() });
+                setScreen(1);
+            };
+
+            const finishTopics = () => setScreen(2);
+            const finishReview = () => setScreen(3);
+            const finishQuiz = (finalScore) => {
+                setScore(finalScore);
+                setScreen(4);
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Fixed Header */}
+                    <header className="bg-navy text-white shadow-lg sticky top-0 z-50">
+                        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+                            {/* Right (Start RTL): Student Info */}
+                            <div className="flex-1 text-right">
+                                {screen > 0 ? (
+                                    <div className="fade-in font-bold">
+                                        <p className="text-gold text-lg">{userInfo.name}</p>
+                                        <p className="text-gray-300 text-sm">الشعبة: {userInfo.section}</p>
+                                    </div>
+                                ) : <div/>}
+                            </div>
+
+                            {/* Center: Course Info */}
+                            <div className="flex-1 text-center border-x border-gray-600 px-4">
+                                <h1 className="text-2xl md:text-3xl font-bold font-amiri text-gold drop-shadow-md">أحاديث الأحكام</h1>
+                                <p className="text-sm md:text-md mt-1 text-gray-200">المحاضرة الحادية عشرة</p>
+                            </div>
+
+                            {/* Left (End RTL): Logo & Doctor */}
+                            <div className="flex-1 flex flex-col items-end pl-2">
+                                <div className="h-10 w-auto">
+                                    <img src="../../logo.png" alt="شعار الجامعة" className="h-full w-auto object-contain bg-transparent mix-blend-screen" />
+                                </div>
+                                <p className="text-xs md:text-sm mt-2 font-bold text-gray-300">د / باسم القرافي</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Dynamic Screens */}
+                    <main className="container mx-auto px-4 py-8 flex-grow">
+                        {screen === 0 && <WelcomeScreen onLogin={handleLogin} />}
+                        {screen === 1 && <TopicsFlow onFinish={finishTopics} />}
+                        {screen === 2 && <SmartReview onFinish={finishReview} />}
+                        {screen === 3 && <Quiz onFinish={finishQuiz} />}
+                        {screen === 4 && <ResultScreen userInfo={userInfo} score={score} />}
+                    </main>
+                </div>
+            );
+        };
+
+        // --- Screen 1: Welcome ---
+        const WelcomeScreen = ({ onLogin }) => {
+            const [name, setName] = useState('');
+            const [section, setSection] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const nameParts = name.trim().split(/\s+/);
+                if (nameParts.length < 4) {
+                    setError('الرجاء إدخال الاسم الرباعي بشكل صحيح.');
+                    return;
+                }
+                if (!section.trim()) {
+                    setError('الرجاء إدخال رقم الشعبة.');
+                    return;
+                }
+                setError('');
+                onLogin(name, section);
+            };
+
+            return (
+                <div className="max-w-md mx-auto glass-panel p-8 mt-10 fade-in border-t-4 border-gold">
+                    <h2 className="text-2xl font-bold text-center mb-6 text-navy">مرحباً بك في منصة التعلم للإتقان</h2>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">الاسم الرباعي:</label>
+                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل اسمك الرباعي هنا" />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">رقم الشعبة:</label>
+                            <input type="text" value={section} onChange={(e)=>setSection(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل رقم الشعبة" />
+                        </div>
+                        {error && <p className="text-red-500 text-sm font-bold bg-red-50 p-2 rounded">{error}</p>}
+                        <button type="submit" className="w-full bg-navy text-white py-3 rounded font-bold hover:bg-opacity-90 transition-all glow-effect">
+                            دخول وبدء التعلم
+                        </button>
+                    </form>
+                </div>
+            );
+        };
+
+        // --- Screen 2: Topics Flow ---
+        const TopicsFlow = ({ onFinish }) => {
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const topic = ALL_DATA[currentIndex];
+            
+            // State for Formative Assessment
+            const [ddAnswers, setDdAnswers] = useState({});
+            const [matches, setMatches] = useState([]); // Array of {left, right}
+            const [selectedLeft, setSelectedLeft] = useState(null);
+
+            // Synchronous state reset and progression
+            const handleNext = () => {
+                setDdAnswers({});
+                setMatches([]);
+                setSelectedLeft(null);
+                
+                if (currentIndex < ALL_DATA.length - 1) {
+                    setCurrentIndex(prev => prev + 1);
+                } else {
+                    onFinish();
+                }
+            };
+
+            const isDropdownsCorrect = () => {
+                const required = topic.exercises.dropdown.answers;
+                for (const key in required) {
+                    if (ddAnswers[key] !== required[key]) return false;
+                }
+                return Object.keys(required).length === Object.keys(ddAnswers).length;
+            };
+
+            const isMatchesCorrect = () => {
+                return matches.length === topic.exercises.matching.length;
+            };
+
+            const canProceed = isDropdownsCorrect() && isMatchesCorrect();
+
+            const renderHTML = (htmlString) => {
+                return <div dangerouslySetInnerHTML={{ __html: htmlString }} className="text-lg" />;
+            };
+
+            return (
+                <div className="fade-in space-y-8 pb-24">
+                    <div className="flex justify-between items-center glass-panel p-4 shadow-sm">
+                        <span className="font-bold text-navy text-lg">الوحدة {currentIndex + 1} من {ALL_DATA.length}</span>
+                        <div className="flex space-x-2 space-x-reverse">
+                            {ALL_DATA.map((_, idx) => (
+                                <div key={idx} className={`w-4 h-4 rounded-full shadow-inner ${idx <= currentIndex ? 'bg-gold' : 'bg-gray-300'}`}></div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8">
+                        {renderHTML(topic.content)}
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait1">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">الخريطة الذهنية</h3>
+                        <div className="mindmap-grid" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))` }}>
+                            <div className="mm-node md:col-span-full mb-2">{topic.mindmap.main}</div>
+                            {topic.mindmap.nodes.map((node, i) => (
+                                <div key={i} className="mm-sub">{node}</div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait3">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">التقييم التكويني المشروط</h3>
+                        
+                        {/* Dropdown Exercise */}
+                        <div className="mb-8 p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">أكمل الفراغات بما يناسب:</h4>
+                            <p className="leading-loose text-lg font-medium">
+                                {topic.exercises.dropdown.text.split(/(\[Q\d\])/).map((part, i) => {
+                                    if (part.startsWith('[Q')) {
+                                        const qKey = part.replace(/[\[\]]/g, '');
+                                        return (
+                                            <select key={i} value={ddAnswers[qKey] || ""} onChange={(e) => setDdAnswers({...ddAnswers, [qKey]: e.target.value})}
+                                                className={`mx-2 p-1 border-2 rounded-lg font-bold outline-none transition-colors ${ddAnswers[qKey] === topic.exercises.dropdown.answers[qKey] ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-300 bg-gray-50'}`}>
+                                                <option value="" disabled>اختر...</option>
+                                                {topic.exercises.dropdown.options[qKey].map((opt, j) => (
+                                                    <option key={j} value={opt}>{opt}</option>
+                                                ))}
+                                            </select>
+                                        );
+                                    }
+                                    return <span key={i}>{part}</span>;
+                                })}
+                            </p>
+                        </div>
+
+                        {/* Matching Exercise */}
+                        <div className="p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">صل بين القائمة (أ) وما يناسبها في (ب):</h4>
+                            <div className="grid grid-cols-2 gap-8">
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (أ)</h5>
+                                    {topic.exercises.matching.map((m, i) => {
+                                        const isMatched = matches.some(match => match.left === m.left);
+                                        const isSelected = selectedLeft === m.left;
+                                        return (
+                                            <div key={i} 
+                                                 onClick={() => !isMatched && setSelectedLeft(m.left)}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : isSelected ? 'border-navy bg-blue-50 text-navy' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.left}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (ب)</h5>
+                                    {[...topic.exercises.matching].sort((a,b)=>a.right.localeCompare(b.right)).map((m, i) => {
+                                        const isMatched = matches.some(match => match.right === m.right);
+                                        return (
+                                            <div key={i}
+                                                 onClick={() => {
+                                                    if(!selectedLeft || isMatched) return;
+                                                    const correctMatch = topic.exercises.matching.find(x => x.left === selectedLeft);
+                                                    if(correctMatch && correctMatch.right === m.right) {
+                                                        setMatches([...matches, {left: selectedLeft, right: m.right}]);
+                                                        setSelectedLeft(null);
+                                                    } else {
+                                                        setSelectedLeft(null);
+                                                    }
+                                                 }}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.right}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Navigation Button */}
+                    <div className="fixed bottom-0 left-0 w-full bg-white p-4 shadow-[0_-5px_15px_rgba(0,0,0,0.1)] flex justify-center fade-in z-50 border-t-4 border-green-500">
+                        {canProceed ? (
+                            <button onClick={handleNext} className="bg-green-600 text-white px-12 py-3 rounded-full font-bold text-xl hover:bg-green-700 transition-all glow-effect flex items-center shadow-lg">
+                                {currentIndex < ALL_DATA.length - 1 ? 'الانتقال للوحدة التالية' : 'الانتقال للمراجعة الذكية'}
+                                <span className="mr-3 text-2xl font-normal">←</span>
+                            </button>
+                        ) : (
+                            <p className="text-gray-500 font-bold flex items-center"><span className="text-red-500 mr-2 text-xl">⚠️</span> يرجى الإجابة بشكل صحيح على الأسئلة أعلاه لتفعيل زر الانتقال.</p>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 3: Smart Review ---
+        const SmartReview = ({ onFinish }) => {
+            const [openAcc, setOpenAcc] = useState(null);
+
+            return (
+                <div className="fade-in space-y-10 pb-10">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-gold">
+                        <h2 className="text-3xl font-bold font-amiri text-navy mb-2">المراجعة الذكية المزدوجة</h2>
+                        <p className="text-gray-600 text-lg">اقلب البطاقات لحفظ المصطلحات، وافتح القوائم للفهم التحليلي الشامل للمقرر</p>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3">أولاً: بطاقات المفاهيم والأحكام (14 بطاقة)</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {FLASHCARDS.map((card, i) => (
+                            <div key={i} className="flip-card">
+                                <div className="flip-card-inner">
+                                    <div className="flip-card-front">{card.front}</div>
+                                    <div className="flip-card-back">{card.back}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3 mt-12">ثانياً: التحليل المقالي والفهم العميق (10 أسئلة)</h3>
+                    <div className="space-y-4">
+                        {ACCORDIONS.map((acc, i) => (
+                            <div key={i} className="glass-panel overflow-hidden border border-gray-200">
+                                <button onClick={() => setOpenAcc(openAcc === i ? null : i)} className="w-full text-right p-5 font-bold text-navy bg-white hover:bg-blue-50 flex justify-between items-center transition-colors">
+                                    <span className="text-lg flex items-center">
+                                        <span className={`ml-3 text-2xl ${ICON_COLORS[i % ICON_COLORS.length]}`}>❖</span>
+                                        {acc.q}
+                                    </span>
+                                    <span className={`text-2xl transition-transform duration-300 ${openAcc === i ? 'rotate-45 text-red-500' : 'text-gold'}`}>+</span>
+                                </button>
+                                <div className={`px-5 transition-all duration-300 ease-in-out ${openAcc === i ? 'max-h-96 py-5 border-t border-gray-100 bg-trait2' : 'max-h-0 py-0 bg-white'}`}>
+                                    <p className="leading-loose text-gray-800 text-lg">{acc.a}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="text-center mt-12 pt-8">
+                        <button onClick={onFinish} className="bg-navy text-white px-12 py-4 rounded-full font-bold text-xl hover:bg-opacity-90 transition-all glow-effect shadow-xl">
+                            بدء التقييم الشامل
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 4: Quiz ---
+        const Quiz = ({ onFinish }) => {
+            const [answers, setAnswers] = useState({});
+            const [submitted, setSubmitted] = useState(false);
+
+            const isComplete = Object.keys(answers).length === QUIZ_QUESTIONS.length;
+
+            const handleSubmit = () => {
+                let s = 0;
+                QUIZ_QUESTIONS.forEach((q, i) => {
+                    if (answers[i] === q.correct) s++;
+                });
+                setSubmitted(true);
+                setTimeout(() => onFinish(s), 2500);
+            };
+
+            return (
+                <div className="fade-in max-w-4xl mx-auto pb-20">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-navy">
+                        <h2 className="text-4xl font-bold font-amiri text-navy">التقييم الشامل</h2>
+                        <p className="text-gray-600 mt-3 text-lg font-bold">أجب عن جميع الأسئلة التالية ({QUIZ_QUESTIONS.length} سؤال)</p>
+                    </div>
+
+                    <div className="space-y-6">
+                        {QUIZ_QUESTIONS.map((q, i) => {
+                            const iconColorClass = ICON_COLORS[i % ICON_COLORS.length];
+                            return (
+                                <div key={i} className={`glass-panel p-6 transition-all ${submitted ? (answers[i] === q.correct ? 'border-2 border-green-500 bg-green-50' : 'border-2 border-red-500 bg-red-50') : 'hover:border-gold border-2 border-transparent'}`}>
+                                    <h3 className="font-bold text-xl mb-5 text-navy flex items-start">
+                                        <span className={`ml-3 text-2xl font-black ${iconColorClass}`}>{i+1}.</span> 
+                                        {q.q}
+                                    </h3>
+                                    <div className="space-y-3">
+                                        {q.options.map((opt, j) => (
+                                            <label key={j} className={`block p-4 rounded-lg border-2 cursor-pointer transition-all ${answers[i] === j ? 'bg-navy text-white border-navy shadow-md transform scale-[1.01]' : 'bg-white hover:bg-gray-50 border-gray-200'} ${submitted && j === q.correct ? 'bg-green-500 text-white border-green-500 shadow-md' : ''} ${submitted && answers[i] === j && j !== q.correct ? 'bg-red-500 text-white border-red-500' : ''}`}>
+                                                <input type="radio" name={`q${i}`} className="hidden" 
+                                                    checked={answers[i] === j} 
+                                                    onChange={() => !submitted && setAnswers({...answers, [i]: j})} />
+                                                <span className="text-lg font-medium">{opt}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <div className="mt-12 text-center sticky bottom-6 z-50">
+                        <button onClick={handleSubmit} disabled={!isComplete || submitted} 
+                            className={`px-12 py-4 rounded-full font-bold text-xl shadow-2xl transition-all ${isComplete && !submitted ? 'bg-gold text-navy hover:bg-yellow-500 glow-effect transform hover:-translate-y-1' : 'bg-gray-300 text-gray-500 cursor-not-allowed border-2 border-gray-400'}`}>
+                            {submitted ? 'جاري حساب النتيجة وإرسالها...' : 'إنهاء وإرسال النتيجة'}
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 5: Result & Silent Submission ---
+        const ResultScreen = ({ userInfo, score }) => {
+            const [status, setStatus] = useState('جاري إرسال النتيجة صمتاً...');
+
+            useEffect(() => {
+                const duration = Math.round((new Date() - userInfo.startTime) / 60000); 
+                const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAtWpsGVdYNm6qt88dhkrd_Kj2kiyWBQiejpNjLvBfsOkPzw/formResponse";
+                
+                const formData = new FormData();
+                formData.append('entry.631676590', "المحاضرة الحادية عشرة");
+                formData.append('entry.716230744', userInfo.name);
+                formData.append('entry.258825401', userInfo.section);
+                formData.append('entry.1926766466', score);
+                formData.append('entry.585619026', duration);
+
+                fetch(formUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                })
+                .then(() => {
+                    setStatus('تم حفظ النتيجة وتوثيق إنجازك بنجاح ✔️');
+                })
+                .catch(() => {
+                    setStatus('تم الانتهاء.');
+                });
+            }, []);
+
+            return (
+                <div className="max-w-lg mx-auto glass-panel p-12 text-center fade-in mt-10 border-t-8 border-navy shadow-2xl">
+                    <h2 className="text-4xl font-bold font-amiri text-navy mb-8">نتيجة التقييم الشامل</h2>
+                    <div className="text-6xl font-black text-gold mb-8 border-4 border-navy w-48 h-48 mx-auto flex items-center justify-center rounded-full bg-white shadow-[0_0_30px_rgba(226,185,111,0.5)]">
+                        {score} / 20
+                    </div>
+                    <div className="space-y-4 mb-10 text-xl font-bold bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <p className="text-navy flex justify-between"><span>الاسم:</span> <span>{userInfo.name}</span></p>
+                        <p className="text-navy flex justify-between border-t border-gray-200 pt-3"><span>الشعبة:</span> <span>{userInfo.section}</span></p>
+                    </div>
+                    <p className="text-green-600 font-bold mb-8 text-lg">{status}</p>
+                    <button onClick={() => window.location.reload()} className="px-10 py-4 bg-navy text-white rounded-full font-bold hover:bg-opacity-90 transition-all glow-effect shadow-lg w-full">
+                        العودة للرئيسية
+                    </button>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
