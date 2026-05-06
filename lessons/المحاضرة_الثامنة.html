@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحاديث الأحكام - المحاضرة الثامنة</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#16213e',
+                        gold: '#e2b96f',
+                        cream: '#faf8f3',
+                        trait1: '#f0fdf4',
+                        trait2: '#fefce8',
+                        trait3: '#eff6ff',
+                        trait4: '#fff1f2',
+                        trait5: '#f5f3ff',
+                        hlred: '#fee2e2',
+                        hlblue: '#dbeafe',
+                        hlgold: '#fef08a',
+                        primaryBlue: '#2563eb',
+                        primaryRed: '#dc2626',
+                        primaryGreen: '#16a34a',
+                        primaryGold: '#ca8a04'
+                    },
+                    fontFamily: {
+                        amiri: ['Amiri', 'serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #faf8f3 0%, #e2e8f0 100%);
+            background-attachment: fixed;
+            font-family: 'Tajawal', sans-serif;
+            color: #16213e;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Amiri', serif; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px -10px rgba(22, 33, 62, 0.1);
+        }
+        
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(226, 185, 111, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .verse {
+            background: linear-gradient(to left, rgba(226, 185, 111, 0.15), transparent);
+            border-right: 4px solid #e2b96f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            font-family: 'Amiri', serif;
+            font-size: 1.25rem;
+            line-height: 2.2;
+            color: #16213e;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        /* Content Cells */
+        .content-cell {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            border-right-width: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        .content-cell:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.06); transform: translateX(-3px); }
+        .cell-blue { background-color: #eff6ff; border-color: #3b82f6; }
+        .cell-yellow { background-color: #fefce8; border-color: #eab308; }
+        .cell-green { background-color: #f0fdf4; border-color: #22c55e; }
+        .cell-red { background-color: #fef2f2; border-color: #ef4444; }
+        .cell-purple { background-color: #faf5ff; border-color: #a855f7; }
+
+        /* Highlights */
+        .hl-red { background-color: #fee2e2; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #991b1b; }
+        .hl-blue { background-color: #dbeafe; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #1e40af; }
+        .hl-gold { background-color: #fef08a; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #854d0e; }
+
+        /* Flip Card CSS */
+        .flip-card { perspective: 1000px; cursor: pointer; height: 180px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 1rem;
+            display: flex; align-items: center; justify-content: center; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); text-align: center;
+        }
+        .flip-card-front { background: linear-gradient(135deg, #16213e, #1e3a8a); color: #e2b96f; border: 2px solid #e2b96f; font-family: 'Amiri', serif; font-size: 1.35rem; font-weight: bold;}
+        .flip-card-back { background: linear-gradient(135deg, #e2b96f, #d97706); color: #fff; transform: rotateY(180deg); font-size: 1.1rem; font-weight: 500;}
+
+        /* CSS Grid Mindmap */
+        .mindmap-grid { display: grid; gap: 1.5rem; padding: 2rem; background: #fff; border-radius: 1rem; border: 2px dashed #e2b96f; }
+        .mm-node { background: #16213e; color: #e2b96f; padding: 1.25rem; border-radius: 0.75rem; text-align: center; font-size: 1.25rem; font-weight: bold; font-family: 'Amiri', serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .mm-sub { background: #faf8f3; color: #16213e; border: 1px solid #e2b96f; border-right: 4px solid #e2b96f; padding: 1rem; border-radius: 0.5rem; text-align: center; font-weight: bold; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #e2b96f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #16213e; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Data Definitions (Full Content, Segmented with Colored Cells) ---
+        
+const ALL_DATA = [
+            {
+                id: 1,
+                title: "الوحدة الأولى: حديث ابن عمر - صلاة العيدين (تقديم الصلاة على الخطبة)",
+                content: `
+                    <div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+                        <h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-800">
+                            <li>أن يميز الطالب بين صلاة العيد وصلاة الجمعة في ترتيب الصلاة والخطبة</li>
+                            <li>أن يعدد الأحكام المتعلقة بصلاة العيدين (الأكل، التكبيرات، حضور النساء)</li>
+                            <li>أن يطبق أحكام صلاة العيدين في ضوء السنة النبوية</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6 p-4 bg-trait2 rounded-xl border-r-4 border-gold">
+                        <h3 class="text-xl font-bold text-primaryGold mb-2">📖 تمهيد الوحدة</h3>
+                        <p class="leading-loose text-gray-800">صلاة العيدين من شعائر الإسلام الظاهرة التي يجتمع فيها المسلمون. وقد أورد الحافظ ابن حجر هذه الأحاديث في باب صلاة العيدين لبيان بقية الأحكام المتعلقة بهذه الصلاة المباركة. وفي هذه الوحدة نتعرف على الأحكام التفصيلية لصلاة العيدين من خلال حديث ابن عمر رضي الله عنهما.</p>
+                    </div>
+
+                    <div class="verse">
+                        ٥١٤ - وَعَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: «كَانَ النَّبِيُّ ﷺ وَأَبُو بَكْرٍ، وَعُمَرُ: يُصَلُّونَ العِيدَيْنِ قَبْلَ الخُطْبَةِ». مُتَّفَقٌ عَلَيْهِ.
+                    </div>
+
+                    <div class="mb-6 p-4 bg-white rounded-xl border border-gray-200">
+                        <h3 class="text-xl font-bold text-navy mb-2">🪪 بطاقة الراوي</h3>
+                        <ul class="space-y-2 text-gray-800">
+                            <li><span class="hl-blue">الراوي:</span> عبد الله بن عمر بن الخطاب رضي الله عنهما</li>
+                            <li><span class="hl-blue">منزلته:</span> من فقهاء الصحابة والمكثرين من رواية الحديث</li>
+                            <li><span class="hl-blue">صلته بالحديث:</span> شهد صلاة العيدين مع النبي ﷺ وأبي بكر وعمر</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800">
+                            <li><span class="hl-blue">العيدان:</span> عيد الفطر وعيد الأضحى</li>
+                            <li><span class="hl-blue">الخطبة:</span> الموعظة التي تقال بعد صلاة العيد</li>
+                            <li><span class="hl-blue">متَّفق عليه:</span> رواه البخاري ومسلم</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+                        <p class="leading-loose text-gray-800">يخبر ابن عمر رضي الله عنه أن النبي ﷺ وخليفتيه أبا بكر وعمر كانوا يبدؤون بصلاة العيد قبل الخطبة، خلافاً لصلاة الجمعة التي تقدم فيها الخطبة على الصلاة. وهذا يدل على أن صلاة العيد تخالف صلاة الجمعة في هذا الترتيب.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: تقديم الصلاة على الخطبة في العيد</h4>
+                        <p class="leading-loose text-gray-800">من الأحكام المستفادة أن النبي ﷺ كان يبدأ بالصلاة قبل الخطبة، ثم يقوم مقابل الناس والناس على صفوفهم فيعظهم ويذكرهم. وفيه دليل على أن العيد يخالف الجمعة في هذا، <span class="hl-blue">فالجمعة تتقدم الخطبتان على الصلاة، وأما العيد فالصلاة قبل الخطبة</span>.</p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: عدد خطب العيد</h4>
+                        <p class="leading-loose text-gray-800">ظاهر هذا الحديث وغيره أن العيد ليس له إلا خطبة واحدة، لكن ذكر الفقهاء رحمهم الله أن العيد له خطبتان، واستدلوا بحديث في صحته نظر. <span class="hl-green">فمن اقتصر على خطبة واحدة فلا حرج، ومن خطب خطبتين فأرجو ألا يكون به بأس.</span></p>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">ثالثاً: الأكل قبل صلاة عيد الفطر</h4>
+                        <p class="leading-loose text-gray-800">كان النبي ﷺ يوم الفطر لا يخرج إلى الصلاة حتى يأكل تمرات وتراً: ثلاثاً، أو خمساً، أو سبعاً، أو تسعاً، أو إحدى عشرة، حسب ما يشتهي، لكن يقطعها على وتر. <span class="hl-gold">فيستحب في عيد الفطر ألا يخرج إلى الصلاة حتى يأكل هذه التمرات.</span> وأما في عيد الأضحى فإنه لا يأكل إلا إذا رجع، فيذبح أضحيته ويأكل منها.</p>
+                    </div>
+
+                    <div class="content-cell cell-red">
+                        <h4 class="text-xl font-bold text-primaryRed mb-2">رابعاً: التكبيرات الزوائد في صلاة العيد</h4>
+                        <p class="leading-loose text-gray-800">في صلاة العيد تكبيرات زوائد: <span class="hl-red">فالركعة الأولى فيها ست زوائد، ومع تكبيرة الإحرام سبع، والثانية فيها خمس إذا قام، فتكون التكبيرات الزوائد إحدى عشرة تكبيرة.</span> هذه التكبيرات يجهر بها الإمام، أما المأمومون فلا يجهرون بها بل يكبرونها سراً. ويستحب أن يحمد الله ويصلي على النبي ﷺ بين التكبيرتين.</p>
+                    </div>
+
+                    <div class="content-cell cell-purple">
+                        <h4 class="text-xl font-bold text-purple-700 mb-2">خامساً: حضور النساء صلاة العيد</h4>
+                        <p class="leading-loose text-gray-800">يسن للنساء حضور صلاة العيد. أما غير صلاة العيد فالأفضل أن يصلين في بيوتهن، لكن في العيد ينبغي أن يخرجن غير متطيبات ولا متبرجات، ويلبسن العباءة. <span class="hl-gold">لقوله ﷺ لما قلن: المرأة ليس لها جلباب فكيف تخرج؟ قال: «لتلبسها أختها من جلبابها».</span></p>
+                    </div>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">سادساً: السنة القبلية والبعدية لصلاة العيد</h4>
+                        <p class="leading-loose text-gray-800">ليس لصلاة العيد سنة قبلها ولا بعدها، فلا يصلي الإنسان قبلها ولا بعدها. <span class="hl-blue">إلا إذا جاء قبل مجيء الإمام فإنه لا يجلس حتى يصلي ركعتين، لأن مصلى العيد مسجد.</span></p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">أولاً: الأحكام الفقهية</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li>صلاة العيد تقدم فيها الصلاة على الخطبة خلافاً للجمعة</li>
+                            <li>يستحب الأكل قبل صلاة عيد الفطر بتمرات وتراً</li>
+                            <li>في عيد الأضحى يؤخر الأكل حتى يرجع فيأكل من أضحيته</li>
+                            <li>التكبيرات الزوائد: ٦ في الأولى + تكبيرة الإحرام = ٧، و٥ في الثانية = المجموع ١١</li>
+                            <li>المأموم يكبر التكبيرات الزوائد سراً</li>
+                            <li>يسن للنساء حضور صلاة العيد بغير تطيب ولا تبرج</li>
+                            <li>ليس لصلاة العيد سنة قبلها ولا بعدها</li>
+                        </ul>
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2 mt-4">ثانياً: وجه الدلالة</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-800">
+                            <li>قوله: «يصلون العيدين قبل الخطبة»: دليل على أن الترتيب المشروع في العيد عكس الجمعة</li>
+                            <li>الأكل قبل الخروج: دليل استحباب وليس وجوب</li>
+                            <li>التكبيرات الزوائد: دليل على مخالفة صلاة العيد لغيرها من الصلوات</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow mt-4">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">🗣️ مسائل الخلاف والترجيح</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="font-bold text-navy">المسألة: عدد خطب صلاة العيد</p>
+                                <p class="text-gray-800"><span class="hl-gold">محل الخلاف:</span> هل لصلاة العيد خطبة واحدة أم خطبتان؟</p>
+                                <p class="text-gray-800"><span class="hl-blue">القول الأول:</span> خطبة واحدة – لظاهر حديث ابن عمر.</p>
+                                <p class="text-gray-800"><span class="hl-blue">القول الثاني:</span> خطبتان – قال به الفقهاء واستدلوا بحديث في صحته نظر.</p>
+                                <p class="text-gray-800"><span class="hl-red">الترجيح:</span> الأمر واسع، فمن اقتصر على واحدة فلا حرج، ومن خطب خطبتين فلا بأس.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-cell cell-red mt-4">
+                        <h4 class="text-xl font-bold text-primaryRed mb-2">⚠️ تنبيهات وفهوم خاطئة</h4>
+                        <ul class="space-y-2 text-gray-800">
+                            <li><span class="hl-red">الفهم الخاطئ:</span> أن المأمومين يجهرون بالتكبيرات الزوائد كما يفعل الإمام.<br/><span class="hl-green">التصحيح:</span> المأموم يكبر التكبيرات الزوائد سراً، والجهر للإمام فقط.</li>
+                            <li><span class="hl-red">الفهم الخاطئ:</span> أن لصلاة العيد سنة قبلية وبعدية.<br/><span class="hl-green">التصحيح:</span> ليس لصلاة العيد سنة قبلها ولا بعدها، لكن من جاء قبل مجيء الإمام يصلي ركعتين تحية المسجد.</li>
+                            <li><span class="hl-red">الفهم الخاطئ:</span> أن صلاة العيد كالجمعة في كل شيء.<br/><span class="hl-green">التصحيح:</span> صلاة العيد تخالف الجمعة في عدة أحكام منها: تقديم الصلاة على الخطبة، وعدد التكبيرات.</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🏋️ تدريب على الاستنباط</h3>
+                    <div class="content-cell cell-blue">
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-bold text-navy">التدريب الأول:</p>
+                                <p class="text-gray-800">رجل صلى العيد مع الإمام، وبعد الصلاة قام ليصلي ركعتين سنة للعيد. ما الحكم؟</p>
+                                <p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+                                <p class="text-gray-800">عمله غير مشروع، لأن صلاة العيد ليس لها سنة قبلية ولا بعدية. يكتفي بالصلاة مع الإمام.</p>
+                            </div>
+                            <div class="border-t pt-3">
+                                <p class="font-bold text-navy">التدريب الثاني:</p>
+                                <p class="text-gray-800">استنبط من قوله ﷺ للنساء: «لتلبسها أختها من جلبابها» حكماً فقهياً.</p>
+                                <p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+                                <p class="text-gray-800">يدل على وجوب ستر المرأة عند خروجها لصلاة العيد، وعلى مشروعية تعاون النساء في الستر، وأن العباءة (الجلباب) هي اللباس المشروع للمرأة عند الخروج.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🗺️ خريطة الحديث والأحكام</h3>
+                    <div class="mindmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+                        <div class="mm-node md:col-span-full mb-2">حديث ابن عمر - صلاة العيدين</div>
+                        <div class="mm-sub">الصلاة قبل الخطبة (خلافاً للجمعة)</div>
+                        <div class="mm-sub">عدد الخطب: واحدة أو اثنتان</div>
+                        <div class="mm-sub">الأكل قبل عيد الفطر (تمرات وتراً)</div>
+                        <div class="mm-sub">التكبيرات الزوائد: ١١ تكبيرة</div>
+                        <div class="mm-sub">المأموم يكبر سراً</div>
+                        <div class="mm-sub">حضور النساء غير متطيبات</div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">❓ أسئلة فهم الحديث</h3>
+                    <div class="content-cell cell-yellow">
+                        <ol class="list-decimal list-inside space-y-3 text-gray-800">
+                            <li>ما الفرق بين صلاة العيد وصلاة الجمعة في ترتيب الصلاة والخطبة؟</li>
+                            <li>كم عدد التكبيرات الزوائد في صلاة العيد؟ وكيف يؤديها المأموم؟</li>
+                            <li>ما الحكمة من الأكل قبل صلاة عيد الفطر وتأخير الأكل في عيد الأضحى؟</li>
+                            <li>هل لصلاة العيد سنة قبلية أو بعدية؟ مع ذكر الدليل.</li>
+                        </ol>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🔗 صل الحديث بالحكم</h3>
+                    <div class="content-cell cell-purple">
+                        <ul class="space-y-2 text-gray-800">
+                            <li>تقديم الصلاة على الخطبة = صلاة العيد تخالف الجمعة في الترتيب</li>
+                            <li>الأكل قبل الخروج يوم الفطر = استحباب وليس وجوباً</li>
+                            <li>التكبيرات الزوائد (١١ تكبيرة) = من خصائص صلاة العيد</li>
+                            <li>حضور النساء للصلاة = مشروع مع الالتزام بالحجاب وعدم التطيب</li>
+                        </ul>
+                    </div>
+                `,
+                mindmap: {
+                    main: "صلاة العيدين (حديث ابن عمر)",
+                    nodes: [
+                        "الصلاة قبل الخطبة (خلافاً للجمعة)",
+                        "عدد الخطب: واحدة أو اثنتان",
+                        "الأكل قبل عيد الفطر (تمرات وتراً)",
+                        "تأخير الأكل في عيد الأضحى",
+                        "التكبيرات الزوائد: ١١ تكبيرة",
+                        "المأموم يكبر التكبيرات سراً",
+                        "حضور النساء بغير تطيب ولا تبرج",
+                        "ليس للعيد سنة قبلية ولا بعدية"
+                    ]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "صلاة العيد تقدم فيها [Q1] على [Q2]. والتكبيرات الزوائد عددها [Q3] تكبيرة.",
+                        options: {
+                            Q1: ["الخطبة", "الصلاة", "الأذان"],
+                            Q2: ["الخطبة", "الصلاة", "الإقامة"],
+                            Q3: ["سبع", "تسع", "إحدى عشرة"]
+                        },
+                        answers: { Q1: "الصلاة", Q2: "الخطبة", Q3: "إحدى عشرة" }
+                    },
+                    matching: [
+                        { left: "صلاة العيد", right: "الصلاة قبل الخطبة" },
+                        { left: "صلاة الجمعة", right: "الخطبة قبل الصلاة" },
+                        { left: "التكبيرات الزوائد", right: "إحدى عشرة تكبيرة" },
+                        { left: "المأموم والتكبيرات", right: "يكبر سراً" }
+                    ]
+                }
+            },
+            {
+                id: 2,
+                title: "الوحدة الثانية: حديث المغيرة بن شعبة - صلاة الكسوف",
+                content: `
+                    <div class="mb-6 p-4 bg-trait3 rounded-xl border-r-4 border-primaryBlue">
+                        <h3 class="text-xl font-bold text-primaryBlue mb-2">🎯 مخرجات التعلم</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-800">
+                            <li>أن يبين الطالب حقيقة الكسوف والحكمة الشرعية منه</li>
+                            <li>أن يصف صفة صلاة الكسوف كما وردت عن النبي ﷺ</li>
+                            <li>أن يفرق بين السبب الشرعي والسبب الطبيعي للكسوف</li>
+                            <li>أن يستخرج الأحكام الفقهية المتعلقة بصلاة الكسوف</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6 p-4 bg-trait2 rounded-xl border-r-4 border-gold">
+                        <h3 class="text-xl font-bold text-primaryGold mb-2">📖 تمهيد الوحدة</h3>
+                        <p class="leading-loose text-gray-800">الكسوف من آيات الله الكونية التي يخوف الله بها عباده. وقد وقع كسوف الشمس في عهد النبي ﷺ يوم مات إبراهيم ابنه، فظن الناس أن الشمس انكسفت لموت إبراهيم، فبين النبي ﷺ أن الشمس والقمر آيتان من آيات الله لا ينكسفان لموت أحد ولا لحياته. وفي هذه الوحدة نتعرف على أحكام صلاة الكسوف وفضلها.</p>
+                    </div>
+
+                    <div class="verse">
+                        ٥٢٦ - عَنِ المُغِيرَةِ بْنِ شُعْبَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: انْكَسَفَتِ الشَّمْسُ عَلَى عَهْدِ رَسُولِ اللَّهِ ﷺ يَوْمَ مَاتَ إِبْرَاهِيمُ، فَقَالَ النَّاسُ: انْكَسَفَتِ الشَّمْسُ لِمَوْتِ إِبْرَاهِيمَ، فَقَالَ رَسُولُ اللَّهِ ﷺ: «إِنَّ الشَّمْسَ وَالقَمَرَ آيَتَانِ مِنْ آيَاتِ اللَّهِ، لَا يَنْكَسِفَانِ لِمَوْتِ أَحَدٍ، وَلَا لِحَيَاتِهِ، فَإِذَا رَأَيْتُمُوهُمَا، فَادْعُوا اللَّهَ وَصَلُّوا، حَتَّى تَنْكَشِفَ». مُتَّفَقٌ عَلَيْهِ. وَفِي رَوَايَةٍ لِلْبُخَارِيِّ: «حَتَّى تَنْجَلِيَ».
+                    </div>
+
+                    <div class="content-cell cell-blue mt-4">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">🪪 بطاقة الراوي</h4>
+                        <ul class="space-y-2 text-gray-800">
+                            <li><span class="hl-blue">الراوي:</span> المغيرة بن شعبة الثقفي رضي الله عنه</li>
+                            <li><span class="hl-blue">منزلته:</span> صحابي جليل، أسلم قبل الحديبية، ولي إمارة الكوفة</li>
+                            <li><span class="hl-blue">صلته بالحديث:</span> شهد حادثة كسوف الشمس يوم مات إبراهيم ابن النبي ﷺ</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">📝 معاني المفردات</h4>
+                        <ul class="space-y-1 text-gray-800">
+                            <li><span class="hl-blue">انكسفت:</span> ذهب ضوء الشمس أو بعضه</li>
+                            <li><span class="hl-blue">آيتان:</span> علامتان دالتان على عظمة الخالق</li>
+                            <li><span class="hl-blue">لا ينكسفان لموت أحد:</span> لا علاقة بين الحوادث الأرضية والظواهر الفلكية</li>
+                            <li><span class="hl-blue">حتى تنجلي:</span> حتى تزول وتذهب</li>
+                            <li><span class="hl-blue">إبراهيم:</span> ابن النبي ﷺ من مارية القبطية، توفي وعمره ١٦ شهراً</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">💡 المعنى الإجمالي</h4>
+                        <p class="leading-loose text-gray-800">وقع كسوف كلي للشمس في اليوم الذي مات فيه إبراهيم ابن النبي ﷺ، فظن الناس أن الكسوف سببه موت إبراهيم - كما كان أهل الجاهلية يعتقدون. فبين النبي ﷺ أن الشمس والقمر آيتان من خلق الله، لا علاقة لموت البشر أو حياتهم بكسوفهما. وإنما الحكمة من الكسوف تخويف العباد، والواجب عند حدوثه الفزع إلى الصلاة والدعاء والذكر والصدقة والاستغفار.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">📚 شرح الحديث المنظم</h3>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">أولاً: سببا الكسوف: شرعي وطبيعي</h4>
+                        <p class="leading-loose text-gray-800">للكسوف سببان: <span class="hl-blue">سبب شرعي</span> لا يعلم إلا بالوحي، وهو أن الله يخوف به عباده إذا ارتكبوا محارمه. <span class="hl-gold">وسبب طبيعي</span> يعرف بعلم الفلك. والمؤمن يوقن أن السبب الطبيعي لا ينافي السبب الشرعي، بل يجتمعان، فالسبب الشرعي هو الأصل والحكمة من الكسوف. <span class="hl-red">بخلاف المنافق أو الكافر أو الجاهل فإن قلبه لا يسع السببين جميعاً.</span></p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">ثانياً: قصة موت إبراهيم وكسوف الشمس</h4>
+                        <p class="leading-loose text-gray-800">كان كسوف الشمس الذي وقع في عهد النبي ﷺ كسوفاً كلياً، كسفت الشمس بعد أن ارتفعت مقدار رمح في الأفق، فاحمرت واسودت وغاب ضوؤها نهائياً. وحصل فزع عظيم حتى إن النبي ﷺ خرج يجر رداءه من شدة الفزع. وكان يوماً عظيماً حاراً، فأمر أن ينادى: «الصلاة جامعة»، فاجتمع الناس رجالاً ونساءً.</p>
+                    </div>
+
+                    <div class="content-cell cell-yellow">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">ثالثاً: صفة صلاة الكسوف</h4>
+                        <p class="leading-loose text-gray-800">صلى النبي ﷺ صلاة غريبة ليس لها نظير: <span class="hl-gold">ركعتان، في كل ركعة ركوعان وسجودان.</span> الصفة: يكبر تكبيرة الإحرام، يقرأ الفاتحة ثم سورة طويلة بقدر البقرة، يركع ركوعاً طويلاً، يرفع: سمع الله لمن حمده، يقرأ الفاتحة وسورة طويلة دون الأولى، يركع ركوعاً طويلاً دون الأول، يرفع ويقف يحمد الله ويثني عليه ويطيل القيام (لا يقرأ قرآناً)، يسجد سجوداً طويلاً، يجلس بين السجدتين جلوساً طويلاً، يسجد الثانية، ثم يقوم للركعة الثانية ويفعل مثل الأولى لكن دونها في الطول. <span class="hl-red">كل ركعة دون التي قبلها.</span></p>
+                    </div>
+
+                    <div class="content-cell cell-red">
+                        <h4 class="text-xl font-bold text-primaryRed mb-2">رابعاً: ما رآه النبي ﷺ في صلاة الكسوف</h4>
+                        <p class="leading-loose text-gray-800">في هذه الصلاة الطويلة عُرضت على النبي ﷺ الجنة والنار. <span class="hl-gold">عُرضت عليه الجنة فتقدم ليتناول منها عنقوداً</span> ثم بدا له ألا يأخذ. ورأى النار وتأخر خوفاً من لهجها وحرها. ورأى فيها عمرو بن لحي الخزاعي يجر قصبه (أمعاءه) في النار - وهو أول من أدخل عبادة الأوثان على العرب. ورأى امرأة تعذب في هرة حبستها لا أطعمتها ولا أرسلتها. ورأى صاحب المحجن يسرق الحجاج بمحجنه.</p>
+                    </div>
+
+                    <div class="content-cell cell-purple">
+                        <h4 class="text-xl font-bold text-purple-700 mb-2">خامساً: الجهر بالقراءة في صلاة الكسوف</h4>
+                        <p class="leading-loose text-gray-800">جهر النبي ﷺ بالقراءة في صلاة الكسوف مع أنها في النهار، <span class="hl-gold">لأنها تشبه الجمعة حيث يجتمع الناس في مكان واحد.</span> ولذلك قال العلماء: الأفضل أن تصلى في الجوامع فقط ليجتمع الناس جميعاً يتضرعون إلى الله.</p>
+                    </div>
+
+                    <div class="content-cell cell-blue">
+                        <h4 class="text-xl font-bold text-primaryBlue mb-2">سادساً: الخطبة بعد صلاة الكسوف</h4>
+                        <p class="leading-loose text-gray-800">إذا فرغ من الصلاة فإنه ينبغي أن يخطب الناس ويذكرهم بالله. <span class="hl-blue">واختلف العلماء: هل هذه الخطبة مشروعة كخطبة العيد والجمعة، أو أنها كالخطب العوارض؟</span> والراجح أنها سنة، وينبغي للإمام أن يخطب لأن الأصل التأسي بالنبي ﷺ، ولأن الناس بحاجة إلى التذكير والموعظة مع وجود سببها وهو الكسوف.</p>
+                    </div>
+
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">سابعاً: إدراك الركوع في صلاة الكسوف</h4>
+                        <p class="leading-loose text-gray-800">إذا جاء الإنسان ووجد الناس يصلون وأدرك الركوع الثاني دون الأول، فقد فاتته الركعة. <span class="hl-green">فإن كان في الركعة الأولى فإذا سلم الإمام قضاها، وإن كان في الركعة الثانية قضى كل الصلاة.</span> ويقضي كما صلى الإمام لعموم قوله ﷺ: «إنما جعل الإمام ليؤتم به»، و«ما أدركتم فصلوا، وما فاتكم فأتموا».</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">⚖️ الأحكام والفوائد ووجه الدلالة</h3>
+                    <div class="content-cell cell-green">
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2">أولاً: الأحكام الفقهية</h4>
+                        <ul class="list-decimal list-inside space-y-2 text-gray-800">
+                            <li>صلاة الكسوف سنة مؤكدة، وتصلى ركعتين في كل ركعة ركوعان</li>
+                            <li>يشرع عند الكسوف: الصلاة، والدعاء، والذكر، والاستغفار، والتكبير، والصدقة، والعتق</li>
+                            <li>يجهر بالقراءة في صلاة الكسوف نهاراً</li>
+                            <li>الأفضل أن تصلى في الجوامع</li>
+                            <li>تشرع الخطبة بعد صلاة الكسوف</li>
+                            <li>من فاته الركوع الأول من الركعة فقد فاتته الركعة</li>
+                            <li>تصلى في البيوت لمن لم يستطع الخروج كالنساء والمرضى</li>
+                            <li>لا فرق في الحكم بين كسوف الشمس وخسوف القمر</li>
+                        </ul>
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2 mt-4">ثانياً: وجه الدلالة</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-800">
+                            <li>قوله: «لا ينكسفان لموت أحد»: دليل على بطلان ربط الحوادث الأرضية بالفلكية</li>
+                            <li>قوله: «فادعوا الله وصلوا»: أمر يقتضي الوجوب على الصحيح، والأمر للاستحباب عند الجمهور</li>
+                            <li>قوله: «حتى تنجلي»: غاية الصلاة زوال الكسوف</li>
+                        </ul>
+                        <h4 class="text-xl font-bold text-primaryGreen mb-2 mt-4">ثالثاً: الفوائد الإيمانية والتربوية</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-800">
+                            <li>تعظيم آيات الله الكونية والاعتبار بها</li>
+                            <li>الخوف من الله والإنابة إليه عند رؤية الكسوف</li>
+                            <li>أن المؤمن يجمع بين الأخذ بالأسباب الطبيعية والإيمان بالأسباب الشرعية</li>
+                            <li>بطلان التنجيم وربط الحوادث الأرضية بالنجوم</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-cell cell-yellow mt-4">
+                        <h4 class="text-xl font-bold text-primaryGold mb-2">🗣️ مسائل الخلاف والترجيح</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="font-bold text-navy">المسألة: حكم الخطبة بعد صلاة الكسوف</p>
+                                <p class="text-gray-800"><span class="hl-gold">محل الخلاف:</span> هل هي مشروعة كخطبة الجمعة والعيد أم كالخطب العوارض؟</p>
+                                <p class="text-gray-800"><span class="hl-blue">القول الأول:</span> خطبة عارضة لإزالة العقيدة الجاهلية فقط، فلا تشرع بعد ذلك.</p>
+                                <p class="text-gray-800"><span class="hl-blue">القول الثاني:</span> خطبة مشروعة كخطبة العيد.</p>
+                                <p class="text-gray-800"><span class="hl-red">الترجيح:</span> الراجح أنها سنة، للأصل في التأسي بالنبي ﷺ، ولحاجة الناس للتذكير.</p>
+                            </div>
+                            <div class="border-t pt-3">
+                                <p class="font-bold text-navy">المسألة: زيادة عدد الركوعات بحسب طول الكسوف</p>
+                                <p class="text-gray-800"><span class="hl-gold">محل الخلاف:</span> هل تزاد الركوعات إلى ثلاث أو أربع أو خمس إذا طال الكسوف؟</p>
+                                <p class="text-gray-800"><span class="hl-blue">القول الأول:</span> يجوز زيادة الركوعات بحسب طول الكسوف، لقوله: «حتى تنجلي».</p>
+                                <p class="text-gray-800"><span class="hl-blue">القول الثاني:</span> لا تزاد على ركوعين.</p>
+                                <p class="text-gray-800"><span class="hl-red">الترجيح:</span> القول الأول أقرب لأن «حتى» للغاية، وقد تطول مدة الكسوف ساعات.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-cell cell-red mt-4">
+                        <h4 class="text-xl font-bold text-primaryRed mb-2">⚠️ تنبيهات وفهوم خاطئة</h4>
+                        <ul class="space-y-2 text-gray-800">
+                            <li><span class="hl-red">الفهم الخاطئ:</span> أن الكسوف يحدث لموت عظيم أو لحياته.<br/><span class="hl-green">التصحيح:</span> الكسوف آية من آيات الله لا علاقة لها بموت البشر أو حياتهم، كما بين النبي ﷺ.</li>
+                            <li><span class="hl-red">الفهم الخاطئ:</span> الاعتقاد بأن النجوم تؤثر في الحوادث الأرضية (التنجيم).<br/><span class="hl-green">التصحيح:</span> لا علاقة بين ما يحدث في السماء وما يحدث في الأرض، وهذا من علم التنجيم الباطل.</li>
+                            <li><span class="hl-red">الفهم الخاطئ:</span> أن صلاة الكسوف لا تصلى إلا في المسجد.<br/><span class="hl-green">التصحيح:</span> تصلى في البيوت أيضاً للنساء والمرضى ونحوهم لعموم الأمر بالصلاة.</li>
+                            <li><span class="hl-red">الفهم الخاطئ:</span> أن العتق مشروع في كسوف الشمس فقط دون القمر.<br/><span class="hl-green">التصحيح:</span> الصحيح العموم، لأن كسوف الشمس والقمر كلاهما يخوف الله به عباده.</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🏋️ تدريب على الاستنباط</h3>
+                    <div class="content-cell cell-blue">
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-bold text-navy">التدريب الأول:</p>
+                                <p class="text-gray-800">استنبط من قوله ﷺ: «لا ينكسفان لموت أحد ولا لحياته» حكماً يتعلق بعلم التنجيم.</p>
+                                <p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+                                <p class="text-gray-800">يدل على بطلان علم التنجيم الذي يزعم أصحابه أن للحوادث الفلكية تأثيراً في الحوادث الأرضية، فالنبي ﷺ قطع الصلة بين الظواهر الفلكية والحوادث الأرضية.</p>
+                            </div>
+                            <div class="border-t pt-3">
+                                <p class="font-bold text-navy">التدريب الثاني:</p>
+                                <p class="text-gray-800">رجل حضر صلاة الكسوف متأخراً، فوجد الإمام في الركوع الثاني من الركعة الأولى. هل يعتد بهذه الركعة؟</p>
+                                <p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+                                <p class="text-gray-800">لا يعتد بها، لأن الركوع الأول من الركعة هو المعتبر. فإذا سلم الإمام يقوم فيأتي بركعة كاملة بركوعين وسجودين.</p>
+                            </div>
+                            <div class="border-t pt-3">
+                                <p class="font-bold text-navy">التدريب الثالث:</p>
+                                <p class="text-gray-800">لماذا كانت صلاة الكسوف بهذه الصفة الغريبة (ركوعان في كل ركعة)؟</p>
+                                <p class="text-green-700 font-bold mt-1">الإجابة/التوجيه:</p>
+                                <p class="text-gray-800">لأن الكسوف حدث غير معتاد، فمن الحكمة أن تكون صلاته غير معتادة أيضاً، كما أن الصلوات المعتادة جعلت لأسباب معتادة، والكسوف ليس معتاداً فجعلت له صلاة غير عادية.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🗺️ خريطة الحديث والأحكام</h3>
+                    <div class="mindmap-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+                        <div class="mm-node md:col-span-full mb-2">حديث المغيرة - صلاة الكسوف</div>
+                        <div class="mm-sub">الكسوف: آية من آيات الله للتخويف</div>
+                        <div class="mm-sub">سببان: شرعي وطبيعي (يجتمعان)</div>
+                        <div class="mm-sub">صفة الصلاة: ركعتان، في كل ركعة ركوعان</div>
+                        <div class="mm-sub">الجهر بالقراءة نهاراً</div>
+                        <div class="mm-sub">الخطبة بعد الصلاة سنة</div>
+                        <div class="mm-sub">من فاته الركوع الأول: فاتته الركعة</div>
+                        <div class="mm-sub">تشرع الصدقة والذكر والاستغفار</div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">❓ أسئلة فهم الحديث</h3>
+                    <div class="content-cell cell-yellow">
+                        <ol class="list-decimal list-inside space-y-3 text-gray-800">
+                            <li>ما الفرق بين السبب الشرعي والسبب الطبيعي للكسوف؟ وكيف يجتمعان عند المؤمن؟</li>
+                            <li>صف صلاة الكسوف كما صلاها النبي ﷺ، مع بيان مواضع الإطالة فيها.</li>
+                            <li>ما حكم الخطبة بعد صلاة الكسوف؟ وما سبب الخلاف فيها؟</li>
+                            <li>رجل أدرك الإمام في الركوع الثاني من الركعة الثانية في صلاة الكسوف، ماذا يفعل؟</li>
+                        </ol>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-navy mt-8 mb-4">🔗 صل الحديث بالحكم</h3>
+                    <div class="content-cell cell-purple">
+                        <ul class="space-y-2 text-gray-800">
+                            <li>الكسوف = آية من آيات الله يخوف بها عباده</li>
+                            <li>«لا ينكسفان لموت أحد» = بطلان ربط الحوادث الأرضية بالفلكية</li>
+                            <li>«فادعوا الله وصلوا» = مشروعية الصلاة والدعاء عند الكسوف</li>
+                            <li>ركوعان في كل ركعة = صلاة غير عادية لحدث غير عادي</li>
+                        </ul>
+                    </div>
+                `,
+                mindmap: {
+                    main: "صلاة الكسوف (حديث المغيرة بن شعبة)",
+                    nodes: [
+                        "الكسوف آية للتخويف",
+                        "سببان: شرعي وطبيعي",
+                        "صفة الصلاة: ركعتان بركوعين",
+                        "الجهر بالقراءة",
+                        "الخطبة بعد الصلاة",
+                        "إدراك الركوع الأول",
+                        "الذكر والصدقة والاستغفار",
+                        "لا فرق بين كسوف الشمس وخسوف القمر"
+                    ]
+                },
+                exercises: {
+                    dropdown: {
+                        text: "الكسوف له سببان: [Q1] وطبيعي. وصلاة الكسوف [Q2]، في كل ركعة [Q3].",
+                        options: {
+                            Q1: ["شرعي", "تاريخي", "جغرافي"],
+                            Q2: ["ركعة واحدة", "ركعتان", "أربع ركعات"],
+                            Q3: ["ركوع واحد", "ركوعان", "ثلاثة ركوعات"]
+                        },
+                        answers: { Q1: "شرعي", Q2: "ركعتان", Q3: "ركوعان" }
+                    },
+                    matching: [
+                        { left: "الكسوف", right: "آية من آيات الله للتخويف" },
+                        { left: "ركعتان في كل ركعة ركوعان", right: "صفة صلاة الكسوف" },
+                        { left: "«حتى تنجلي»", right: "غاية الصلاة زوال الكسوف" },
+                        { left: "من فاته الركوع الأول", right: "فاتته الركعة" }
+                    ]
+                }
+            }
+        ];
+
+const FLASHCARDS = [
+            { front: "ترتيب الصلاة والخطبة في العيد", back: "الصلاة قبل الخطبة، خلافاً للجمعة التي تقدم فيها الخطبة على الصلاة" },
+            { front: "عدد التكبيرات الزوائد في صلاة العيد", back: "١١ تكبيرة: ٦ في الأولى + تكبيرة الإحرام = ٧، و٥ في الثانية" },
+            { front: "حكم جهر المأموم بالتكبيرات الزوائد", back: "لا يجهر، بل يكبر سراً، والجهر للإمام فقط" },
+            { front: "الأكل يوم عيد الفطر", back: "يستحب أكل تمرات وتراً قبل الخروج للصلاة" },
+            { front: "الأكل يوم عيد الأضحى", back: "يؤخر الأكل حتى يرجع من الصلاة فيأكل من أضحيته" },
+            { front: "حضور النساء صلاة العيد", back: "يسن لهن الحضور غير متطيبات ولا متبرجات" },
+            { front: "السنة القبلية والبعدية لصلاة العيد", back: "ليس لصلاة العيد سنة قبلها ولا بعدها" },
+            { front: "سببا الكسوف", back: "سبب شرعي (تخويف العباد)، وسبب طبيعي (يعرف بعلم الفلك)، وهما يجتمعان" },
+            { front: "صفة صلاة الكسوف", back: "ركعتان، في كل ركعة ركوعان وسجودان، ويجهر بالقراءة" },
+            { front: "ما يشرع عند الكسوف", back: "الصلاة، الدعاء، الذكر، الاستغفار، التكبير، الصدقة، العتق" },
+            { front: "حكم الخطبة بعد صلاة الكسوف", back: "سنة على الراجح، للأصل في التأسي بالنبي ﷺ" },
+            { front: "إدراك الركوع في صلاة الكسوف", back: "من فاته الركوع الأول من الركعة فقد فاتته الركعة" },
+            { front: "بطلان التنجيم", back: "لا علاقة بين الحوادث الفلكية والأرضية، كما قال ﷺ: «لا ينكسفان لموت أحد»" },
+            { front: "عدد خطب العيد", back: "ظاهر الحديث خطبة واحدة، والفقهاء قالوا خطبتان، والأمر واسع" }
+        ];
+
+const ACCORDIONS = [
+            { q: "ما الفرق بين صلاة العيد وصلاة الجمعة في ترتيب الصلاة والخطبة؟", a: "في صلاة العيد: الصلاة قبل الخطبة. وفي صلاة الجمعة: الخطبة قبل الصلاة. والدليل حديث ابن عمر: «كان النبي ﷺ وأبو بكر وعمر يصلون العيدين قبل الخطبة»." },
+            { q: "كم عدد التكبيرات الزوائد في صلاة العيد؟ وكيف يؤديها المأموم؟", a: "التكبيرات الزوائد إحدى عشرة: ست في الركعة الأولى (ومع تكبيرة الإحرام سبع)، وخمس في الركعة الثانية. يجهر بها الإمام فقط، أما المأموم فيكبر سراً، ولا يجهر كما يفعل بعض الناس." },
+            { q: "ما الحكمة من الأكل قبل صلاة عيد الفطر وتركه في عيد الأضحى؟", a: "في عيد الفطر: إظهار الفطر بعد صوم رمضان امتثالاً لأمر الله. في عيد الأضحى: ليكون أول طعام يأكله من أضحيته امتثالاً لقوله تعالى: «فكلوا منها وأطعموا البائس الفقير»." },
+            { q: "لماذا كانت صلاة الكسوف بهذه الصفة الغريبة (ركوعان في كل ركعة)؟", a: "لأن الكسوف حدث غير معتاد، فمن الحكمة الإلهية أن تكون صلاته غير معتادة، بخلاف الصلوات المعتادة التي جعلت لأسباب معتادة." },
+            { q: "كيف تجمع بين السبب الطبيعي والسبب الشرعي للكسوف؟", a: "المؤمن يوقن أن السبب الطبيعي لا ينافي السبب الشرعي، بل يجتمعان. فالسبب الشرعي هو الأصل (تخويف العباد)، والله يقدر الأسباب الكونية الطبيعية لأجل المصلحة الشرعية. ولهذا قال ﷺ: «إن الشمس والقمر آيتان من آيات الله»." },
+            { q: "ما الذي رآه النبي ﷺ في صلاة الكسوف؟", a: "عُرضت عليه الجنة والنار. رأى في الجنة عنقوداً ولو أخذه لأكلت منه الأمة ما بقيت الدنيا. ورأى في النار عمرو بن لحي يجر أمعاءه (أول من أدخل عبادة الأوثان)، وامرأة تعذب في هرة، وصاحب المحجن يسرق الحجاج." },
+            { q: "رجل حضر صلاة العيد وأراد أن يصلي بعدها ركعتين سنة للعيد، ما حكم فعله؟", a: "عمله غير مشروع، لأنه ليس لصلاة العيد سنة قبلية ولا بعدية. لكن لو جاء قبل مجيء الإمام فله أن يصلي ركعتين تحية المسجد." },
+            { q: "ما حكم الخطبة بعد صلاة الكسوف عند العلماء؟ وما الراجح؟", a: "اختلف العلماء: فمنهم من قال إنها خطبة عارضة خاصة بتلك الحادثة، ومنهم من قال إنها مشروعة كخطبة العيد. والراجح أنها سنة للأصل في التأسي بالنبي ﷺ، ولأن الناس بحاجة إلى التذكير والموعظة مع وجود سببها." },
+            { q: "كيف يرد على من يحتج بكسوف الشمس يوم موت إبراهيم على أن للنجوم تأثيراً في الحوادث؟", a: "النبي ﷺ نفسه رد هذا الفهم وبين بطلانه بقوله: «إن الشمس والقمر آيتان من آيات الله، لا ينكسفان لموت أحد ولا لحياته». فالكسوف وقع في ذلك اليوم بتقدير الله، لا لأن إبراهيم مات. مصادفة لا علاقة سببية." },
+            { q: "ما حكم من أدرك الإمام في الركوع الثاني من الركعة الأولى في صلاة الكسوف؟", a: "فاتته الركعة، فإذا سلم الإمام يقوم فيأتي بركعة كاملة بركوعين وسجودين. ويقضي كما صلى الإمام لعموم قوله ﷺ: «وما فاتكم فأتموا»." }
+        ];
+
+const QUIZ_QUESTIONS = [
+            { q: "صلاة العيد تختلف عن صلاة الجمعة في:", options: ["عدد الركعات", "تقديم الصلاة على الخطبة", "وجوب الجماعة", "وقت الصلاة"], correct: 1 },
+            { q: "عدد التكبيرات الزوائد في صلاة العيد:", options: ["سبع تكبيرات", "تسع تكبيرات", "إحدى عشرة تكبيرة", "ثلاث عشرة تكبيرة"], correct: 2 },
+            { q: "حكم الأكل قبل صلاة عيد الفطر:", options: ["واجب", "مستحب", "مكروه", "محرم"], correct: 1 },
+            { q: "يستحب الأكل في عيد الفطر:", options: ["قبل الصلاة", "بعد الصلاة", "أثناء الخطبة", "في المسجد"], correct: 0 },
+            { q: "المأموم في صلاة العيد يكبر التكبيرات الزوائد:", options: ["جهراً", "سراً", "لا يكبر", "يخير"], correct: 1 },
+            { q: "عدد خطب العيد:", options: ["خطبة واحدة فقط", "خطبتان فقط", "ثلاث خطب", "واحدة أو اثنتان على الخلاف"], correct: 3 },
+            { q: "ليس لصلاة العيد:", options: ["تكبيرات", "خطبة", "سنة قبلية ولا بعدية", "جماعة"], correct: 2 },
+            { q: "حكم حضور النساء صلاة العيد:", options: ["حرام", "مكروه", "سنة", "فرض"], correct: 2 },
+            { q: "الكسوف له سببان:", options: ["فلكي وتاريخي", "شرعي وطبيعي", "مناخي وجغرافي", "سياسي واجتماعي"], correct: 1 },
+            { q: "صفة صلاة الكسوف:", options: ["ركعة واحدة", "ركعتان كالصبح", "ركعتان في كل ركعة ركوعان", "أربع ركعات"], correct: 2 },
+            { q: "حكم الجهر بالقراءة في صلاة الكسوف:", options: ["يسر مطلقاً", "يجهر مطلقاً", "يسر نهاراً ويجهر ليلاً", "لا قراءة فيها"], correct: 1 },
+            { q: "يشرع عند الكسوف:", options: ["الصلاة فقط", "الصلاة والدعاء والصدقة", "الصمت فقط", "النوم"], correct: 1 },
+            { q: "إذا فات الإنسان الركوع الأول من الركعة:", options: ["فاتته الركعة", "صحت ركعته", "يسجد للسهو", "يعيد الصلاة كلها"], correct: 0 },
+            { q: "قول النبي ﷺ: «لا ينكسفان لموت أحد» يدل على:", options: ["تأثير النجوم", "صحة التنجيم", "بطلان ربط الحوادث الأرضية بالفلكية", "أن الكسوف لا يحدث أصلاً"], correct: 2 },
+            { q: "كيف يجمع المؤمن بين السببين الشرعي والطبيعي للكسوف؟", options: ["يأخذ بالطبيعي فقط", "يوقن بأنهما يجتمعان", "ينكر السبب الطبيعي", "يأخذ بالشرعي فقط"], correct: 1 },
+            { q: "الذي رآه النبي ﷺ يعذب في النار بسببه:", options: ["المرأة التي حبست الهرة", "الرجل الذي نام عن الصلاة", "الذي أفطر في رمضان", "السارق"], correct: 0 },
+            { q: "صلاة الكسوف تصلى:", options: ["في المسجد فقط", "في البيوت فقط", "في المسجد والبيوت", "في المصلى فقط"], correct: 2 },
+            { q: "هل تشرع صلاة الخسوف للقمر كما تشرع للشمس؟", options: ["لا تشرع", "تشرع للشمس فقط", "تشرع بنفس الحكم", "تشرع بدون جماعة"], correct: 2 },
+            { q: "يستحب بين التكبيرتين في صلاة العيد:", options: ["السكوت", "حمد الله والصلاة على النبي", "قراءة الفاتحة", "التشهد"], correct: 1 },
+            { q: "في عيد الأضحى:", options: ["يؤخر الأكل حتى يرجع من الصلاة", "يأكل قبل الصلاة", "يصوم يوم العيد", "لا يأكل شيئاً"], correct: 0 }
+        ];
+
+const ICON_COLORS = [
+            'text-primaryBlue',
+            'text-primaryRed',
+            'text-primaryGreen',
+            'text-primaryGold',
+            'text-purple-600'
+        ];
+
+        // --- Main App Component ---
+        const App = () => {
+            const [screen, setScreen] = useState(0); 
+            const [userInfo, setUserInfo] = useState({ name: '', section: '', startTime: null });
+            const [score, setScore] = useState(0);
+
+            const handleLogin = (name, section) => {
+                setUserInfo({ name, section, startTime: new Date() });
+                setScreen(1);
+            };
+
+            const finishTopics = () => setScreen(2);
+            const finishReview = () => setScreen(3);
+            const finishQuiz = (finalScore) => {
+                setScore(finalScore);
+                setScreen(4);
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Fixed Header */}
+                    <header className="bg-navy text-white shadow-lg sticky top-0 z-50">
+                        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+                            {/* Right (Start RTL): Student Info */}
+                            <div className="flex-1 text-right">
+                                {screen > 0 ? (
+                                    <div className="fade-in font-bold">
+                                        <p className="text-gold text-lg">{userInfo.name}</p>
+                                        <p className="text-gray-300 text-sm">الشعبة: {userInfo.section}</p>
+                                    </div>
+                                ) : <div/>}
+                            </div>
+
+                            {/* Center: Course Info */}
+                            <div className="flex-1 text-center border-x border-gray-600 px-4">
+                                <h1 className="text-2xl md:text-3xl font-bold font-amiri text-gold drop-shadow-md">أحاديث الأحكام</h1>
+                                <p className="text-sm md:text-md mt-1 text-gray-200">المحاضرة الثامنة</p>
+                            </div>
+
+                            {/* Left (End RTL): Logo & Doctor */}
+                            <div className="flex-1 flex flex-col items-end pl-2">
+                                <div className="h-10 w-auto">
+                                    <img src="../../logo.png" alt="شعار الجامعة" className="h-full w-auto object-contain bg-transparent mix-blend-screen" />
+                                </div>
+                                <p className="text-xs md:text-sm mt-2 font-bold text-gray-300">د / باسم القرافي</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Dynamic Screens */}
+                    <main className="container mx-auto px-4 py-8 flex-grow">
+                        {screen === 0 && <WelcomeScreen onLogin={handleLogin} />}
+                        {screen === 1 && <TopicsFlow onFinish={finishTopics} />}
+                        {screen === 2 && <SmartReview onFinish={finishReview} />}
+                        {screen === 3 && <Quiz onFinish={finishQuiz} />}
+                        {screen === 4 && <ResultScreen userInfo={userInfo} score={score} />}
+                    </main>
+                </div>
+            );
+        };
+
+        // --- Screen 1: Welcome ---
+        const WelcomeScreen = ({ onLogin }) => {
+            const [name, setName] = useState('');
+            const [section, setSection] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const nameParts = name.trim().split(/\s+/);
+                if (nameParts.length < 4) {
+                    setError('الرجاء إدخال الاسم الرباعي بشكل صحيح.');
+                    return;
+                }
+                if (!section.trim()) {
+                    setError('الرجاء إدخال رقم الشعبة.');
+                    return;
+                }
+                setError('');
+                onLogin(name, section);
+            };
+
+            return (
+                <div className="max-w-md mx-auto glass-panel p-8 mt-10 fade-in border-t-4 border-gold">
+                    <h2 className="text-2xl font-bold text-center mb-6 text-navy">مرحباً بك في منصة التعلم للإتقان</h2>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">الاسم الرباعي:</label>
+                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل اسمك الرباعي هنا" />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold mb-2 text-navy">رقم الشعبة:</label>
+                            <input type="text" value={section} onChange={(e)=>setSection(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all bg-white bg-opacity-80"
+                                placeholder="أدخل رقم الشعبة" />
+                        </div>
+                        {error && <p className="text-red-500 text-sm font-bold bg-red-50 p-2 rounded">{error}</p>}
+                        <button type="submit" className="w-full bg-navy text-white py-3 rounded font-bold hover:bg-opacity-90 transition-all glow-effect">
+                            دخول وبدء التعلم
+                        </button>
+                    </form>
+                </div>
+            );
+        };
+
+        // --- Screen 2: Topics Flow ---
+        const TopicsFlow = ({ onFinish }) => {
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const topic = ALL_DATA[currentIndex];
+            
+            // State for Formative Assessment
+            const [ddAnswers, setDdAnswers] = useState({});
+            const [matches, setMatches] = useState([]); // Array of {left, right}
+            const [selectedLeft, setSelectedLeft] = useState(null);
+
+            // Synchronous state reset and progression
+            const handleNext = () => {
+                setDdAnswers({});
+                setMatches([]);
+                setSelectedLeft(null);
+                
+                if (currentIndex < ALL_DATA.length - 1) {
+                    setCurrentIndex(prev => prev + 1);
+                } else {
+                    onFinish();
+                }
+            };
+
+            const isDropdownsCorrect = () => {
+                const required = topic.exercises.dropdown.answers;
+                for (const key in required) {
+                    if (ddAnswers[key] !== required[key]) return false;
+                }
+                return Object.keys(required).length === Object.keys(ddAnswers).length;
+            };
+
+            const isMatchesCorrect = () => {
+                return matches.length === topic.exercises.matching.length;
+            };
+
+            const canProceed = isDropdownsCorrect() && isMatchesCorrect();
+
+            const renderHTML = (htmlString) => {
+                return <div dangerouslySetInnerHTML={{ __html: htmlString }} className="text-lg" />;
+            };
+
+            return (
+                <div className="fade-in space-y-8 pb-24">
+                    <div className="flex justify-between items-center glass-panel p-4 shadow-sm">
+                        <span className="font-bold text-navy text-lg">الوحدة {currentIndex + 1} من {ALL_DATA.length}</span>
+                        <div className="flex space-x-2 space-x-reverse">
+                            {ALL_DATA.map((_, idx) => (
+                                <div key={idx} className={`w-4 h-4 rounded-full shadow-inner ${idx <= currentIndex ? 'bg-gold' : 'bg-gray-300'}`}></div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8">
+                        {renderHTML(topic.content)}
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait1">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">الخريطة الذهنية</h3>
+                        <div className="mindmap-grid" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))` }}>
+                            <div className="mm-node md:col-span-full mb-2">{topic.mindmap.main}</div>
+                            {topic.mindmap.nodes.map((node, i) => (
+                                <div key={i} className="mm-sub">{node}</div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="glass-panel p-8 bg-trait3">
+                        <h3 className="text-2xl font-bold text-navy mb-6 border-b-2 border-gold pb-2 w-max">التقييم التكويني المشروط</h3>
+                        
+                        {/* Dropdown Exercise */}
+                        <div className="mb-8 p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">أكمل الفراغات بما يناسب:</h4>
+                            <p className="leading-loose text-lg font-medium">
+                                {topic.exercises.dropdown.text.split(/(\[Q\d\])/).map((part, i) => {
+                                    if (part.startsWith('[Q')) {
+                                        const qKey = part.replace(/[\[\]]/g, '');
+                                        return (
+                                            <select key={i} value={ddAnswers[qKey] || ""} onChange={(e) => setDdAnswers({...ddAnswers, [qKey]: e.target.value})}
+                                                className={`mx-2 p-1 border-2 rounded-lg font-bold outline-none transition-colors ${ddAnswers[qKey] === topic.exercises.dropdown.answers[qKey] ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-300 bg-gray-50'}`}>
+                                                <option value="" disabled>اختر...</option>
+                                                {topic.exercises.dropdown.options[qKey].map((opt, j) => (
+                                                    <option key={j} value={opt}>{opt}</option>
+                                                ))}
+                                            </select>
+                                        );
+                                    }
+                                    return <span key={i}>{part}</span>;
+                                })}
+                            </p>
+                        </div>
+
+                        {/* Matching Exercise */}
+                        <div className="p-6 bg-white rounded-xl border border-blue-100 shadow-sm">
+                            <h4 className="font-bold text-lg mb-4 text-primaryBlue">صل بين القائمة (أ) وما يناسبها في (ب):</h4>
+                            <div className="grid grid-cols-2 gap-8">
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (أ)</h5>
+                                    {topic.exercises.matching.map((m, i) => {
+                                        const isMatched = matches.some(match => match.left === m.left);
+                                        const isSelected = selectedLeft === m.left;
+                                        return (
+                                            <div key={i} 
+                                                 onClick={() => !isMatched && setSelectedLeft(m.left)}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : isSelected ? 'border-navy bg-blue-50 text-navy' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.left}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <div className="space-y-3">
+                                    <h5 className="text-center font-bold mb-3 text-navy bg-gray-100 py-2 rounded">القائمة (ب)</h5>
+                                    {[...topic.exercises.matching].sort((a,b)=>a.right.localeCompare(b.right)).map((m, i) => {
+                                        const isMatched = matches.some(match => match.right === m.right);
+                                        return (
+                                            <div key={i}
+                                                 onClick={() => {
+                                                    if(!selectedLeft || isMatched) return;
+                                                    const correctMatch = topic.exercises.matching.find(x => x.left === selectedLeft);
+                                                    if(correctMatch && correctMatch.right === m.right) {
+                                                        setMatches([...matches, {left: selectedLeft, right: m.right}]);
+                                                        setSelectedLeft(null);
+                                                    } else {
+                                                        setSelectedLeft(null);
+                                                    }
+                                                 }}
+                                                 className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-center font-bold ${isMatched ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-200 hover:border-gold hover:bg-yellow-50'}`}>
+                                                {m.right}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Navigation Button */}
+                    <div className="fixed bottom-0 left-0 w-full bg-white p-4 shadow-[0_-5px_15px_rgba(0,0,0,0.1)] flex justify-center fade-in z-50 border-t-4 border-green-500">
+                        {canProceed ? (
+                            <button onClick={handleNext} className="bg-green-600 text-white px-12 py-3 rounded-full font-bold text-xl hover:bg-green-700 transition-all glow-effect flex items-center shadow-lg">
+                                {currentIndex < ALL_DATA.length - 1 ? 'الانتقال للوحدة التالية' : 'الانتقال للمراجعة الذكية'}
+                                <span className="mr-3 text-2xl font-normal">←</span>
+                            </button>
+                        ) : (
+                            <p className="text-gray-500 font-bold flex items-center"><span className="text-red-500 mr-2 text-xl">⚠️</span> يرجى الإجابة بشكل صحيح على الأسئلة أعلاه لتفعيل زر الانتقال.</p>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 3: Smart Review ---
+        const SmartReview = ({ onFinish }) => {
+            const [openAcc, setOpenAcc] = useState(null);
+
+            return (
+                <div className="fade-in space-y-10 pb-10">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-gold">
+                        <h2 className="text-3xl font-bold font-amiri text-navy mb-2">المراجعة الذكية المزدوجة</h2>
+                        <p className="text-gray-600 text-lg">اقلب البطاقات لحفظ المصطلحات، وافتح القوائم للفهم التحليلي الشامل للمقرر</p>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3">أولاً: بطاقات المفاهيم والأحكام (14 بطاقة)</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {FLASHCARDS.map((card, i) => (
+                            <div key={i} className="flip-card">
+                                <div className="flip-card-inner">
+                                    <div className="flip-card-front">{card.front}</div>
+                                    <div className="flip-card-back">{card.back}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-navy border-r-4 border-gold pr-3 mt-12">ثانياً: التحليل المقالي والفهم العميق (10 أسئلة)</h3>
+                    <div className="space-y-4">
+                        {ACCORDIONS.map((acc, i) => (
+                            <div key={i} className="glass-panel overflow-hidden border border-gray-200">
+                                <button onClick={() => setOpenAcc(openAcc === i ? null : i)} className="w-full text-right p-5 font-bold text-navy bg-white hover:bg-blue-50 flex justify-between items-center transition-colors">
+                                    <span className="text-lg flex items-center">
+                                        <span className={`ml-3 text-2xl ${ICON_COLORS[i % ICON_COLORS.length]}`}>❖</span>
+                                        {acc.q}
+                                    </span>
+                                    <span className={`text-2xl transition-transform duration-300 ${openAcc === i ? 'rotate-45 text-red-500' : 'text-gold'}`}>+</span>
+                                </button>
+                                <div className={`px-5 transition-all duration-300 ease-in-out ${openAcc === i ? 'max-h-96 py-5 border-t border-gray-100 bg-trait2' : 'max-h-0 py-0 bg-white'}`}>
+                                    <p className="leading-loose text-gray-800 text-lg">{acc.a}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="text-center mt-12 pt-8">
+                        <button onClick={onFinish} className="bg-navy text-white px-12 py-4 rounded-full font-bold text-xl hover:bg-opacity-90 transition-all glow-effect shadow-xl">
+                            بدء التقييم الشامل
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 4: Quiz ---
+        const Quiz = ({ onFinish }) => {
+            const [answers, setAnswers] = useState({});
+            const [submitted, setSubmitted] = useState(false);
+
+            const isComplete = Object.keys(answers).length === QUIZ_QUESTIONS.length;
+
+            const handleSubmit = () => {
+                let s = 0;
+                QUIZ_QUESTIONS.forEach((q, i) => {
+                    if (answers[i] === q.correct) s++;
+                });
+                setSubmitted(true);
+                setTimeout(() => onFinish(s), 2500);
+            };
+
+            return (
+                <div className="fade-in max-w-4xl mx-auto pb-20">
+                    <div className="text-center mb-10 glass-panel p-6 border-b-4 border-navy">
+                        <h2 className="text-4xl font-bold font-amiri text-navy">التقييم الشامل</h2>
+                        <p className="text-gray-600 mt-3 text-lg font-bold">أجب عن جميع الأسئلة التالية ({QUIZ_QUESTIONS.length} سؤال)</p>
+                    </div>
+
+                    <div className="space-y-6">
+                        {QUIZ_QUESTIONS.map((q, i) => {
+                            const iconColorClass = ICON_COLORS[i % ICON_COLORS.length];
+                            return (
+                                <div key={i} className={`glass-panel p-6 transition-all ${submitted ? (answers[i] === q.correct ? 'border-2 border-green-500 bg-green-50' : 'border-2 border-red-500 bg-red-50') : 'hover:border-gold border-2 border-transparent'}`}>
+                                    <h3 className="font-bold text-xl mb-5 text-navy flex items-start">
+                                        <span className={`ml-3 text-2xl font-black ${iconColorClass}`}>{i+1}.</span> 
+                                        {q.q}
+                                    </h3>
+                                    <div className="space-y-3">
+                                        {q.options.map((opt, j) => (
+                                            <label key={j} className={`block p-4 rounded-lg border-2 cursor-pointer transition-all ${answers[i] === j ? 'bg-navy text-white border-navy shadow-md transform scale-[1.01]' : 'bg-white hover:bg-gray-50 border-gray-200'} ${submitted && j === q.correct ? 'bg-green-500 text-white border-green-500 shadow-md' : ''} ${submitted && answers[i] === j && j !== q.correct ? 'bg-red-500 text-white border-red-500' : ''}`}>
+                                                <input type="radio" name={`q${i}`} className="hidden" 
+                                                    checked={answers[i] === j} 
+                                                    onChange={() => !submitted && setAnswers({...answers, [i]: j})} />
+                                                <span className="text-lg font-medium">{opt}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <div className="mt-12 text-center sticky bottom-6 z-50">
+                        <button onClick={handleSubmit} disabled={!isComplete || submitted} 
+                            className={`px-12 py-4 rounded-full font-bold text-xl shadow-2xl transition-all ${isComplete && !submitted ? 'bg-gold text-navy hover:bg-yellow-500 glow-effect transform hover:-translate-y-1' : 'bg-gray-300 text-gray-500 cursor-not-allowed border-2 border-gray-400'}`}>
+                            {submitted ? 'جاري حساب النتيجة وإرسالها...' : 'إنهاء وإرسال النتيجة'}
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen 5: Result & Silent Submission ---
+        const ResultScreen = ({ userInfo, score }) => {
+            const [status, setStatus] = useState('جاري إرسال النتيجة صمتاً...');
+
+            useEffect(() => {
+                const duration = Math.round((new Date() - userInfo.startTime) / 60000); 
+                const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAtWpsGVdYNm6qt88dhkrd_Kj2kiyWBQiejpNjLvBfsOkPzw/formResponse";
+                
+                const formData = new FormData();
+                formData.append('entry.631676590', "المحاضرة الثامنة");
+                formData.append('entry.716230744', userInfo.name);
+                formData.append('entry.258825401', userInfo.section);
+                formData.append('entry.1926766466', score);
+                formData.append('entry.585619026', duration);
+
+                fetch(formUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                })
+                .then(() => {
+                    setStatus('تم حفظ النتيجة وتوثيق إنجازك بنجاح ✔️');
+                })
+                .catch(() => {
+                    setStatus('تم الانتهاء.');
+                });
+            }, []);
+
+            return (
+                <div className="max-w-lg mx-auto glass-panel p-12 text-center fade-in mt-10 border-t-8 border-navy shadow-2xl">
+                    <h2 className="text-4xl font-bold font-amiri text-navy mb-8">نتيجة التقييم الشامل</h2>
+                    <div className="text-6xl font-black text-gold mb-8 border-4 border-navy w-48 h-48 mx-auto flex items-center justify-center rounded-full bg-white shadow-[0_0_30px_rgba(226,185,111,0.5)]">
+                        {score} / 20
+                    </div>
+                    <div className="space-y-4 mb-10 text-xl font-bold bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <p className="text-navy flex justify-between"><span>الاسم:</span> <span>{userInfo.name}</span></p>
+                        <p className="text-navy flex justify-between border-t border-gray-200 pt-3"><span>الشعبة:</span> <span>{userInfo.section}</span></p>
+                    </div>
+                    <p className="text-green-600 font-bold mb-8 text-lg">{status}</p>
+                    <button onClick={() => window.location.reload()} className="px-10 py-4 bg-navy text-white rounded-full font-bold hover:bg-opacity-90 transition-all glow-effect shadow-lg w-full">
+                        العودة للرئيسية
+                    </button>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
